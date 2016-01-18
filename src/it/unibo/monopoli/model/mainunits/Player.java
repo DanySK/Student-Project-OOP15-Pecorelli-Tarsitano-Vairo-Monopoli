@@ -1,4 +1,4 @@
-package it.unibo.monopoli.model.mainUnits;
+package it.unibo.monopoli.model.mainunits;
 
 import java.util.Set;
 

@@ -1,6 +1,6 @@
 package it.unibo.monopoli.model.table;
 
-import it.unibo.monopoli.model.mainUnits.Player;
+import it.unibo.monopoli.model.mainunits.Player;
 
 public interface Ownership extends Box{
     

@@ -1,5 +1,14 @@
 package it.unibo.monopoli.model.cards;
 
+import java.util.Set;
+
 public interface Deck {
+    
+    /**
+     * Return a {@link Set} of {@link Deck}'s {@link Card}s.
+     * 
+     * @return a {@link Set} of {@link Card}s
+     */
+    Set<Card> getCards();
 
 }

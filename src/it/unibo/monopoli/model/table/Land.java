@@ -1,5 +1,10 @@
 package it.unibo.monopoli.model.table;
 
-public interface Land extends Ownership{
-    
+/**
+ * This interface represent all the lands. 
+ * Lands are {@link Ownership}s on which you can build {@link Building}s.
+ *
+ */
+public interface Land extends Ownership {
+
 }

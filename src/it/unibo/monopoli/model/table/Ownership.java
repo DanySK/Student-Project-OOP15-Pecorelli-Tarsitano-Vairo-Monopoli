@@ -29,7 +29,6 @@ public interface Ownership extends Box {
 
 //    /**
 //     * Return true if the {@link Ownership} is mortgaged, else false.
-//     * 
 //     * @return true if the {@link Ownership} is mortgaged
 //     */
 //    boolean isMortgaged(); //oppure isDisable

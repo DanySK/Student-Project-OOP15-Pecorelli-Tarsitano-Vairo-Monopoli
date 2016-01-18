@@ -13,7 +13,6 @@ public interface Player {
 
     /**
      * Return the name of the {@link Player}.
-     * 
      * @return the name of the {@link Player}
      */
     String getName();
@@ -21,7 +20,6 @@ public interface Player {
     /**
      * Return the {@link Pawn} of the {@link Player}.
      * Each {@link Player} can have only one {@link Pawn}.
-     * 
      * @return the {@link Pawn} of the {@link Player}
      */
     Pawn getPawn();
@@ -34,28 +32,24 @@ public interface Player {
     /**
      * Return the {@link Set} of {@link Ownership} belonging to the {@link Player}.
      * This {@link Set} can be empty.
-     * 
      * @return a {@link Set} of {@link Ownership}
      */
     Set<Ownership> getOwnerships();
 
     /**
      * Add a new {@link Ownership}.
-     * 
      * @param ownership - the one to add
      */
     void addOwnership(Ownership ownership);
 
     /**
      * Remove a {@link Ownership} of this {@link Player}.
-     * 
      * @param ownership - the one to remove
      */
     void removeOwnership(Ownership ownership);
 
     /**
      * Return the money belonging to the {@link Player}.
-     * 
      * @return the money belonging to the {@link Player}
      */
     int getMoney();

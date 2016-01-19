@@ -1,8 +1,10 @@
 package it.unibo.monopoli.model.mainunits;
 
-//import java.util.Optional;
+import java.util.Optional;
 import java.util.Set;
 
+import it.unibo.monopoli.model.cards.Card;
+import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Ownership;
 /**
  * This interface represent all the players. They all have a name that identifies them, 
@@ -36,6 +38,12 @@ public interface Player {
      * @return a {@link Set} of {@link Ownership}
      */
     Set<Ownership> getOwnerships();
+
+    /**
+     * Return an {@link Optional}'s {@link Deck} of player's {@link Card}s.
+     * @return an {@link Optional}'s {@link Deck}
+     */
+    Optional<Deck> getCards();
 
 //    /**
 //     * If the {@link Ownership} request belongs to the {@link Player}, 

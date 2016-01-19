@@ -1,5 +1,6 @@
 package it.unibo.monopoli.model.mainunits;
 
+//import java.util.Optional;
 import java.util.Set;
 
 import it.unibo.monopoli.model.table.Ownership;
@@ -36,6 +37,15 @@ public interface Player {
      */
     Set<Ownership> getOwnerships();
 
+//    /**
+//     * If the {@link Ownership} request belongs to the {@link Player}, 
+//     * the method return an {@link Optional} of {@link Ownership}, else return 
+//     * an {@link Optional} of null.
+//     * @return an {@link Optional} of {@link Ownership}
+//     * @param ownership - the {@link Ownership} to find the return
+//     */
+//    Optional<Ownership> getOwnership(Ownership ownership);
+
     /**
      * Add a new {@link Ownership}.
      * @param ownership - the one to add
@@ -56,7 +66,8 @@ public interface Player {
 
     /**
      * Set the money belonging to the {@link Player}.
+     * @param amount - the amount of money to set
      */
-    void setMoney();
+    void setMoney(int amount);
 
 }

@@ -9,51 +9,67 @@ import it.unibo.monopoli.model.table.LandGroup;
 import it.unibo.monopoli.model.table.Ownership;
 
 /**
- * This class represent one of the {@link Action}s of the game.
- * This one allows to buy {@link Ownership}s and/or {@link Building}s.
+ * This class represent one of the {@link Action}s of the game. This one allows
+ * to buy {@link Ownership}s and/or {@link Building}s.
  *
  */
 public class ToBuyProperties extends ToBuyAndSellProperties {
 
+    private final Ownership ownership;
+
     private ToBuyProperties(final int amount, final Ownership ownership) {
-        super(amount, Objects.requireNonNull(ownership));
+        super(amount);
+        this.ownership = ownership;
     }
 
     private ToBuyProperties(final int amount, final Land land, final Building building) {
-        super(amount, Objects.requireNonNull(land), Objects.requireNonNull(building));
+        super(amount, building);
+        this.ownership = land;
     }
 
     /**
-     * This is a static method that can be used to create a new instance of this class.
-     * @param amount - the amount necessary to buy something
-     * @param ownership - the {@link Ownership} to buy
+     * This is a static method that can be used to create a new instance of this
+     * class.
+     * 
+     * @param amount
+     *            - the amount necessary to buy something
+     * @param ownership
+     *            - the {@link Ownership} to buy
      * @return an instance of this class
-     * @throws NullPointerException - if instead of an {@link Ownership} there is null
+     * @throws NullPointerException
+     *             - if instead of an {@link Ownership} there is null
      */
     public static ToBuyProperties buyAOwnership(final int amount, final Ownership ownership) {
-        return new ToBuyProperties(amount, Objects.requireNonNull(ownership));
+        return new ToBuyProperties(-amount, Objects.requireNonNull(ownership));
     }
 
     /**
-     * This is a static method that can be used to create a new instance of this class.
-     * @param amount - the amount necessary to buy something
-     * @param land - the {@link Land} on which the {@link Building} will be built 
-     * @param building - the {@link Building} to buy
+     * This is a static method that can be used to create a new instance of this
+     * class.
+     * 
+     * @param amount
+     *            - the amount necessary to buy something
+     * @param land
+     *            - the {@link Land} on which the {@link Building} will be built
+     * @param building
+     *            - the {@link Building} to buy
      * @return an instance of this class
-     * @throws NullPointerException - if instead of an {@link Land} and/or a {@link Building} there are some null
+     * @throws NullPointerException
+     *             - if instead of an {@link Land} and/or a {@link Building}
+     *             there are some null
      */
     public static ToBuyProperties buyABuilding(final int amount, final Land land, final Building building) {
-        return new ToBuyProperties(amount, Objects.requireNonNull(land), Objects.requireNonNull(building));
+        return new ToBuyProperties(-amount, Objects.requireNonNull(land), Objects.requireNonNull(building));
     }
 
     @Override
-    protected void whatToDoWithBuilding(final Land land, final Building building) {
-        ((LandGroup) land.getGroup()).addBuilding(building);
+    protected void whatToDoWithBuilding(final Building building) {
+        ((LandGroup) this.ownership.getGroup()).addBuilding(building);
     }
 
     @Override
-    protected void whatToDoWithOwnership(final Ownership ownership, final Player player) {
-        player.addOwnership(ownership);
+    protected void whatToDoWithOwnership(final Player player) {
+        player.addOwnership(this.ownership);
     }
 
 }

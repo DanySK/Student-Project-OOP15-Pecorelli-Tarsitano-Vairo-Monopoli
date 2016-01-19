@@ -9,9 +9,7 @@ import it.unibo.monopoli.model.mainunits.Player;
  * buy or sell {@link Card}s.
  *
  */
-public abstract class ToBuyAndSellCards implements Action {
-
-    private final int amount;
+public abstract class ToBuyAndSellCards extends MoneyAction {
 
     /**
      * This constructor serves to get the amount of the {@link Card} to
@@ -21,14 +19,13 @@ public abstract class ToBuyAndSellCards implements Action {
      *            - of the {@link Card}
      */
     protected ToBuyAndSellCards(final int amount) {
-        this.amount = amount;
+        super(amount);
     }
 
     @Override
-    public void play(final Player player) {
-        player.setMoney(player.getMoney() + this.amount);
+    protected void strategy(final Player player) {
         player.getCards().ifPresent(d -> {
-            this.strategy(d);
+            this.cardsStrategy(d);
         });
     }
 
@@ -41,6 +38,6 @@ public abstract class ToBuyAndSellCards implements Action {
      *            - the {@link Deck} where the {@link Card} have to be add or
      *            remove
      */
-    protected abstract void strategy(final Deck deck);
+    protected abstract void cardsStrategy(final Deck deck);
 
 }

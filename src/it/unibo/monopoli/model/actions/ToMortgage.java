@@ -3,8 +3,8 @@ package it.unibo.monopoli.model.actions;
 import it.unibo.monopoli.model.table.Ownership;
 
 /**
- * This class represent one of the {@link Action}s of the game. This one allows
- * to mortgage on {@link Ownership}s.
+ * This class represent one of the {@link MoneyAction}s of the game. This one
+ * allows to mortgage on {@link Ownership}s.
  *
  */
 public class ToMortgage extends ToMortgageAndRevoke {

@@ -8,9 +8,8 @@ import it.unibo.monopoli.model.table.Ownership;
  * mortgage or revoke a mortgage on a {@link Ownership}.
  *
  */
-public abstract class ToMortgageAndRevoke implements Action {
+public abstract class ToMortgageAndRevoke extends MoneyAction {
 
-    private final int amount;
 
     /**
      * This constructor serves to get the amount of the mortgage or the revoke.
@@ -19,12 +18,11 @@ public abstract class ToMortgageAndRevoke implements Action {
      *            - of the of the mortgage or the revoke
      */
     protected ToMortgageAndRevoke(final int amount) {
-        this.amount = amount;
+        super(amount);
     }
 
     @Override
-    public void play(final Player player) {
-        player.setMoney(player.getMoney() + this.amount);
+    protected void strategy(final Player player) {
         this.strategyOfMortgaging();
     }
 

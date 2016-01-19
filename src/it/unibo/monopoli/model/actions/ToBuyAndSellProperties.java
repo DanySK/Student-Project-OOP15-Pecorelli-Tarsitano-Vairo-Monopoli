@@ -11,9 +11,8 @@ import it.unibo.monopoli.model.table.Ownership;
  * buy or sell {@link Ownership}s and/or {@link Building}s.
  *
  */
-public abstract class ToBuyAndSellProperties implements Action {
+public abstract class ToBuyAndSellProperties extends MoneyAction {
 
-    private final int amount;
     private final Optional<Building> building;
 
     /**
@@ -23,7 +22,7 @@ public abstract class ToBuyAndSellProperties implements Action {
      *            - of the {@link Ownership}
      */
     protected ToBuyAndSellProperties(final int amount) {
-        this.amount = amount;
+        super(amount);
         this.building = Optional.empty();
     }
 
@@ -37,20 +36,19 @@ public abstract class ToBuyAndSellProperties implements Action {
      *            - the {@link Building} to buy/sell
      */
     protected ToBuyAndSellProperties(final int amount, final Building building) {
-        this.amount = amount;
+        super(amount);
         this.building = Optional.of(building);
     }
 
     @Override
-    public void play(final Player player) {
-        player.setMoney(player.getMoney() + this.amount);
-        if (this.building.isPresent()) {
-            this.whatToDoWithBuilding(this.building.get());
-        } else {
-            this.whatToDoWithOwnership(player);
-        }
-        // this.building.isPresent() ? this.whatToDoWithBuilding() :
-        // this.whatToDoWithOwnership();
+    protected void strategy(final Player player) {
+      if (this.building.isPresent()) {
+          this.whatToDoWithBuilding(this.building.get());
+      } else {
+          this.whatToDoWithOwnership(player);
+      }
+//      // this.building.isPresent() ? this.whatToDoWithBuilding() :
+//      // this.whatToDoWithOwnership();
     }
 
     /**

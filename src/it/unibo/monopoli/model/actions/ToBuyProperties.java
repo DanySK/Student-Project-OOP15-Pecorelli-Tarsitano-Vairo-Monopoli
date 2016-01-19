@@ -9,8 +9,8 @@ import it.unibo.monopoli.model.table.LandGroup;
 import it.unibo.monopoli.model.table.Ownership;
 
 /**
- * This class represent one of the {@link Action}s of the game. This one allows
- * to buy {@link Ownership}s and/or {@link Building}s.
+ * This class represent one of the {@link MoneyAction}s of the game. This one
+ * allows to buy {@link Ownership}s and/or {@link Building}s.
  *
  */
 public class ToBuyProperties extends ToBuyAndSellProperties {

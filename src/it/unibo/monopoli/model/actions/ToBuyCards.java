@@ -20,9 +20,14 @@ public class ToBuyCards extends ToBuyAndSellCards {
      *            - the {@link Card} to buy
      * @param amount
      *            - the amount of the {@link Card}
+     * @throws IllegalArgumentException
+     *             - if the amount is less than or equal to zero
      */
     public ToBuyCards(final Card card, final int amount) {
         super(-amount);
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Only positive amount different of zero!");
+        }
         this.card = card;
     }
 

@@ -38,8 +38,13 @@ public class ToSellProperties extends ToBuyAndSellProperties {
      * @return an instance of this class
      * @throws NullPointerException
      *             - if instead of an {@link Ownership} there is null
+     * @throws IllegalArgumentException
+     *             - if the amount is less than or equal to zero
      */
     public static ToSellProperties buyAOwnership(final int amount, final Ownership ownership) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Only positive amount different of zero!");
+        }
         return new ToSellProperties(amount, Objects.requireNonNull(ownership));
     }
 
@@ -57,8 +62,13 @@ public class ToSellProperties extends ToBuyAndSellProperties {
      * @throws NullPointerException
      *             - if instead of an {@link Land} and/or a {@link Building}
      *             there are some null
+     * @throws IllegalArgumentException
+     *             - if the amount is less than or equal to zero
      */
     public static ToSellProperties buyABuilding(final int amount, final Land land, final Building building) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Only positive amount different of zero!");
+        }
         return new ToSellProperties(amount, Objects.requireNonNull(land), Objects.requireNonNull(building));
     }
 

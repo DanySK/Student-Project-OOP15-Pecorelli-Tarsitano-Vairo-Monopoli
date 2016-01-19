@@ -30,18 +30,21 @@ public interface Ownership extends Box {
      */
     Group getGroup();
 
-    // /**
-    // * Return true if the {@link Ownership} is mortgaged, else false.
-    // * @return true if the {@link Ownership} is mortgaged
-    // */
-    // boolean isMortgaged(); //oppure isDisable
-    //
-    // /**
-    // * Set true if the {@link Ownership} has been mortgage, else set false if
-    // the {@link Ownership} isn't longer mortgaged
-    // * @param mortgage - is a {@link Boolean} that indicates whether the
-    // {@link Ownership} is mortgaged (true) or not (false)
-    // */
-    // void setMortgage(boolean mortgage);
+    /**
+     * Return true if the {@link Ownership} is mortgaged, else false.
+     * 
+     * @return true if the {@link Ownership} is mortgaged
+     */
+    boolean isMortgaged();
+
+    /**
+     * Set true if the {@link Ownership} has been mortgage, else set false if
+     * the {@link Ownership} isn't longer mortgaged.
+     * 
+     * @param mortgage
+     *            - is a {@link Boolean} that indicates whether the
+     *            {@link Ownership} is mortgaged (true) or not (false)
+     */
+    void setMortgage(boolean mortgage);
 
 }

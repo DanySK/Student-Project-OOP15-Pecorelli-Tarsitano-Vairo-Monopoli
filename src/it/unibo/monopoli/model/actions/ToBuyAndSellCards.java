@@ -5,8 +5,8 @@ import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.mainunits.Player;
 
 /**
- * This abstract class represent the common contract of classes
- * {@link ToBuyCards} and {@link ToSellCards}.
+ * This abstract class represent the common contract of sub-classes that want to
+ * buy or sell {@link Card}s.
  *
  */
 public abstract class ToBuyAndSellCards implements Action {
@@ -20,7 +20,7 @@ public abstract class ToBuyAndSellCards implements Action {
      * @param amount
      *            - of the {@link Card}
      */
-    public ToBuyAndSellCards(final int amount) {
+    protected ToBuyAndSellCards(final int amount) {
         this.amount = amount;
     }
 

@@ -7,8 +7,8 @@ import it.unibo.monopoli.model.table.Building;
 import it.unibo.monopoli.model.table.Ownership;
 
 /**
- * This abstract class represent the common contract of classes
- * {@link ToBuyProperties} and {@link ToSellProperties}.
+ * This abstract class represent the common contract of sub-classes that want to
+ * buy or sell {@link Ownership}s and/or {@link Building}s.
  *
  */
 public abstract class ToBuyAndSellProperties implements Action {

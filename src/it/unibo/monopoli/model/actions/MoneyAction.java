@@ -4,7 +4,7 @@ import it.unibo.monopoli.model.mainunits.Player;
 
 /**
  * This abstract class represent the common contract for all the {@link Action}
- * that needs money.
+ * that uses money.
  *
  */
 public abstract class MoneyAction implements Action {

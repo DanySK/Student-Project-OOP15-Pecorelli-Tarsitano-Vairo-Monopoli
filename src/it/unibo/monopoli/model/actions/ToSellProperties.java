@@ -64,10 +64,23 @@ public class ToSellProperties extends ToBuyAndSellProperties {
      *             there are some null
      * @throws IllegalArgumentException
      *             - if the amount is less than or equal to zero
+     * @throws IllegalArgumentException
+     *             - if the {@link Land} is mortgage]
+     * @throws IllegalArgumentException
+     *             - if the {@link Player} doesn't own all the {@link Land}s of
+     *             this specific {@link LandGroup}
      */
     public static ToSellProperties buyABuilding(final int amount, final Land land, final Building building) {
         if (amount <= 0) {
             throw new IllegalArgumentException("Only positive amount different of zero!");
+        }
+        for (final Ownership o : land.getGroup().getMembers()) {
+            if (o.isMortgaged()) {
+                throw new IllegalArgumentException("Can build only in a NOT mortgage group of land");
+            }
+        }
+        if (!land.getOwner().getOwnerships().containsAll(land.getGroup().getMembers())) {
+            throw new IllegalArgumentException("Can build only if the Player has ALL the lands of this land's group");
         }
         return new ToSellProperties(amount, Objects.requireNonNull(land), Objects.requireNonNull(building));
     }

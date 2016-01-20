@@ -25,7 +25,7 @@ public interface GameVersion {
 
     /**
      * This method return all the {@link Box}es required for the specific
-     * version. This {@link Box}es bring with them also the informations about
+     * version. These {@link Box}es bring with them also the informations about
      * {@link Contract}s, {@link Action}s and {@link Group}s.
      * 
      * @return a {@link Set} of {@link Box}es

@@ -1,5 +1,6 @@
 package it.unibo.monopoli.model.mainunits;
 
+import java.util.Collection;
 import java.util.Set;
 
 import it.unibo.monopoli.model.actions.Action;
@@ -21,7 +22,7 @@ public interface GameVersion {
      * 
      * @return a {@link Set} of {@link Building}s
      */
-    Set<Building> getBuildings();
+    Collection<Building> getBuildings();
 
     /**
      * This method return all the {@link Box}es required for the specific

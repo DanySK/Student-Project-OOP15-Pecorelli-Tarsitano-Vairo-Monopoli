@@ -25,4 +25,15 @@ public interface Pawn {
      */
     int getActualPos();
 
+    /**
+     * Set the new position of the {@link Pawn} in the table of play. This
+     * position is represented by the ID of the {@link Box} in witch the
+     * {@link Pawn} is located.
+     * 
+     * @param newPosizion
+     *            - the new ID of the {@link Box} in witch the {@link Pawn} is
+     *            located.
+     */
+    void setPos(int newPosizion);
+
 }

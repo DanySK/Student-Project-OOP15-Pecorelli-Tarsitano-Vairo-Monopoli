@@ -30,10 +30,10 @@ public interface Player {
      */
     Pawn getPawn();
 
-    /**
-     * Set the {@link Pawn} that will belong to the {@link Player}.
-     */
-    void setPawn();
+//    /**
+//     * Set the {@link Pawn} that will belong to the {@link Player}.
+//     */
+//    void setPawn();
 
     /**
      * Return the {@link Set} of {@link Ownership} belonging to the
@@ -49,6 +49,10 @@ public interface Player {
      * @return an {@link Optional}'s {@link Deck}
      */
     Optional<Deck> getCards();
+    
+    boolean dicesAlreadyRolled();
+    
+    void setDicesRoll(boolean alreadyRolled);
 
     // /**
     // * If the {@link Ownership} request belongs to the {@link Player},

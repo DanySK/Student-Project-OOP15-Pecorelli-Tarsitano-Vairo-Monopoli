@@ -41,7 +41,9 @@ public interface GameVersion {
      */
     Bank getBank();
 
-    Player getNextPlayer();
+//    Player getNextPlayer();
+    
+    public Player endOfTurnAndNextPlayer(Player player);
 //    /**
 //     * This method return all the {@link Action}s required for the specific
 //     * version.

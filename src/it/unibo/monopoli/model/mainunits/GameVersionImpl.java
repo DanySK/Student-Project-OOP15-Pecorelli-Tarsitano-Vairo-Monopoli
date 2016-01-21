@@ -49,13 +49,18 @@ public class GameVersionImpl implements GameVersion {
         return this.strategy.getBank();
     }
 
-    @Override
-    public Player getNextPlayer() {
+//    @Override
+    private Player getNextPlayer() {
         if (!this.iter.hasNext()) {
             this.iter = this.players.iterator();
         }
         this.actualPlayer = (Player) this.iter.next();
         return this.actualPlayer;
+    }
+
+    @Override
+    public Player endOfTurnAndNextPlayer(Player player) {
+        return player.dicesAlreadyRolled() ? this.getNextPlayer() : player;
     }
 
 //    @Override

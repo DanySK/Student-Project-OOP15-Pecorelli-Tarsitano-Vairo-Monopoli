@@ -26,9 +26,23 @@ public class ClassicDicesStrategy implements DicesStrategy {
         if (dices.size() != 2) {
             throw new IllegalArgumentException("This version needs two dices");
         }
-        if (dices.get(0).getLastNumberObtained() == dices.get(1).getLastNumberObtained()) {
+        player.isInPrison() 
+            ? this.prisonStrategy(this.twice(dices), player) 
+            : player.getPawn().setPos(player.getPawn().getActualPos() + this.dices.get(0).getLastNumberObtained() + this.dices.get(1).getLastNumberObtained());
+    }
+
+    private void prisonStrategy(final boolean isTwiceNumber, final Player player) {
+        if (isTwiceNumber) {
             player.setDicesRoll(false);
+            player.setPrison(false);
         }
+    }
+
+    private boolean twice(final List<Dice> dices) {
+        if (dices.get(0).getLastNumberObtained() == dices.get(1).getLastNumberObtained()) {
+            return true;
+        }
+        return false;
     }
 
 }

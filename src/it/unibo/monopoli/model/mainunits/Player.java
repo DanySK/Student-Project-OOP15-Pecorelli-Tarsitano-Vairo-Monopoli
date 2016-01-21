@@ -67,6 +67,21 @@ public interface Player {
      */
     void setDicesRoll(boolean alreadyRolled);
 
+    /**
+     * Returns true if the {@link Player} is in prison, false if he isn't.
+     * 
+     * @return true if the {@link Player} is in prison
+     */
+    boolean isInPrison();
+
+    /**
+     * Sets if the {@link Player} is going to prison (true) or not (false).
+     * 
+     * @param isGoingToPrison
+     *            - true if {@link Player} is going to prison, otherwise, false
+     */
+    void setPrison(boolean isGoingToPrison);
+
     // /**
     // * If the {@link Ownership} request belongs to the {@link Player},
     // * the method return an {@link Optional} of {@link Ownership}, else return

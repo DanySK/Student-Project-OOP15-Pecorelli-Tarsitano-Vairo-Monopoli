@@ -52,6 +52,9 @@ public interface GameVersion {
      * @return the {@link Player} which have to play
      */
     Player endOfTurnAndNextPlayer(Player player);
+
+//    void rollDices(Player player);
+
     // /**
     // * This method return all the {@link Action}s required for the specific
     // * version.

@@ -3,6 +3,10 @@ package it.unibo.monopoli.model.mainunits;
 import java.util.Iterator;
 import java.util.List;
 
+import it.unibo.monopoli.model.actions.Action;
+import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
+import it.unibo.monopoli.model.actions.ToRollDices;
+
 /**
  * This class implements the contract of {@link GameVersion} to bring back the
  * right game's version.
@@ -61,6 +65,7 @@ public class GameVersionImpl implements GameVersion {
     public Player endOfTurnAndNextPlayer(final Player player) {
         if (player.dicesAlreadyRolled()) {
             player.setDicesRoll(false);
+            new ToRollDices(new ClassicDicesStrategy()).play(this.getNextPlayer());
             return this.getNextPlayer();
         }
         return player;

@@ -29,10 +29,9 @@ public class ToRollDices implements Action {
 
     @Override
     public void play(final Player player) {
-        this.dices.stream().forEach(d -> d.roll());
+        this.dices.stream()
+                  .forEach(d -> d.roll());
         player.setDicesRoll(true);
-        final int index = this.dices.get(0).getLastNumberObtained() + this.dices.get(1).getLastNumberObtained();
-        player.getPawn().setPos(player.getPawn().getActualPos() + index);
         this.strategy.strategy(this.dices, player);
     }
 

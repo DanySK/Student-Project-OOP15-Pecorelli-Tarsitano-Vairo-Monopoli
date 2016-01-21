@@ -13,7 +13,7 @@ public class GameVersionImpl implements GameVersion {
     private final GameStrategy strategy;
     private final List<Player> players;
     private Iterator<Player> iter;
-//    private  Player actualPlayer;
+    // private Player actualPlayer;
 
     /**
      * Constructs an instance that will be able to give back the right version
@@ -29,27 +29,27 @@ public class GameVersionImpl implements GameVersion {
         this.iter = this.players.iterator();
     }
 
-//    @Override
-//    public List<Building> getBuildings() {
-//        final List<Building> buildings = new LinkedList<>();
-//        for (int i = 0; i < this.strategy.howManyBuildings(); i++) {
-//            buildings.add(this.strategy.getBuilding());
-//        }
-//        return Collections.unmodifiableList(buildings);
-//    }
+    // @Override
+    // public List<Building> getBuildings() {
+    // final List<Building> buildings = new LinkedList<>();
+    // for (int i = 0; i < this.strategy.howManyBuildings(); i++) {
+    // buildings.add(this.strategy.getBuilding());
+    // }
+    // return Collections.unmodifiableList(buildings);
+    // }
 
-//    @Override
-//    public Set<Box> getBoxes() {
-//        // TODO Auto-generated method stub
-//        return null;
-//    }
+    // @Override
+    // public Set<Box> getBoxes() {
+    // // TODO Auto-generated method stub
+    // return null;
+    // }
 
     @Override
     public Bank getBank() {
         return this.strategy.getBank();
     }
 
-//    @Override
+    // @Override
     private Player getNextPlayer() {
         if (!this.iter.hasNext()) {
             this.iter = this.players.iterator();
@@ -59,13 +59,17 @@ public class GameVersionImpl implements GameVersion {
 
     @Override
     public Player endOfTurnAndNextPlayer(final Player player) {
-        return player.dicesAlreadyRolled() ? this.getNextPlayer() : player;
+        if (player.dicesAlreadyRolled()) {
+            player.setDicesRoll(false);
+            return this.getNextPlayer();
+        }
+        return player;
     }
 
-//    @Override
-//    public Set<Action> getAllActions() {
-//        // TODO Auto-generated method stub
-//        return null;
-//    }
+    // @Override
+    // public Set<Action> getAllActions() {
+    // // TODO Auto-generated method stub
+    // return null;
+    // }
 
 }

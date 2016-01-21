@@ -1,5 +1,6 @@
 package it.unibo.monopoli.model.mainunits;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -8,6 +9,7 @@ import java.util.Set;
 import it.unibo.monopoli.model.cards.Chance;
 import it.unibo.monopoli.model.cards.CommunityChest;
 import it.unibo.monopoli.model.cards.Deck;
+import it.unibo.monopoli.model.table.Building;
 import it.unibo.monopoli.model.table.Ownership;
 
 /**
@@ -19,6 +21,7 @@ public class ClassicStrategy implements GameStrategy {
 
     private final List<Player> players;
     private final List<Ownership> ownerships;
+    private final List<Building> buildings;
     private final Bank bank;
     private final Set<Deck> decks;
 
@@ -31,11 +34,13 @@ public class ClassicStrategy implements GameStrategy {
      */
     public ClassicStrategy(final List<Player> players) {
         this.players = players;
-        this.ownerships = this.inizializesOwnerships();
         this.inizializesPlayers(players);
+        this.ownerships = this.inizializesOwnerships();
+        this.buildings = this.inizializesBuildings();
         this.decks = new HashSet<>();
         this.decks.add(new CommunityChest());
         this.decks.add(new Chance());
+        this.bank = new ClassicBank(this.ownerships, this.buildings);
     }
 
     private void inizializesPlayers(final List<Player> players) {
@@ -77,8 +82,8 @@ public class ClassicStrategy implements GameStrategy {
         this.ownerships.add(new );
     }
 
-    private List<Ownership> inizializesDecks() {
-        this.ownerships.add(new );
+    private List<Building> inizializesBuildings() {
+        this.buildings.add(new );
     }
 
     // @Override
@@ -95,14 +100,11 @@ public class ClassicStrategy implements GameStrategy {
 
     @Override
     public List<Player> getPlayers() {
-        return this.players;
+        return Collections.unmodifiableList(this.players);
     }
 
     @Override
     public Bank getBank() {
-        if (bank == null) {
-            bank = new Classicbank(this.ownerships);
-        }
-        return bank;
+        return this.bank;
     }
 }

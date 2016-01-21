@@ -17,6 +17,13 @@ public interface Contract {
     String getname();
 
     /**
+     * Returns the {@link Ownership} to which it belongs.
+     * 
+     * @return the {@link Ownership} to which it belongs
+     */
+    Ownership getOwnership();
+
+    /**
      * Return the cost to buy the {@link Ownership} to which the
      * {@link Contract} belongs.
      * 

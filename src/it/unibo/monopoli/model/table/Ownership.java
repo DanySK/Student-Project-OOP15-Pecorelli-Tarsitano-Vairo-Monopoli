@@ -1,5 +1,7 @@
 package it.unibo.monopoli.model.table;
 
+import java.awt.Color;
+
 import it.unibo.monopoli.model.mainunits.Player;
 
 /**
@@ -29,6 +31,13 @@ public interface Ownership extends Box {
      * @return a {@link Group}
      */
     Group getGroup();
+
+    /**
+     * return the {@link Ownership}'s {@link Color}.
+     * 
+     * @return {@link Ownership}'s {@link Color}
+     */
+    Color getColor();
 
     /**
      * Return true if the {@link Ownership} is mortgaged, else false.

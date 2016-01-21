@@ -1,11 +1,8 @@
 package it.unibo.monopoli.model.actions;
 
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
 
+import it.unibo.monopoli.model.mainunits.Dice;
 import it.unibo.monopoli.model.mainunits.Player;
 
 /**
@@ -14,28 +11,29 @@ import it.unibo.monopoli.model.mainunits.Player;
  *
  */
 public class ToRollDices implements Action {
-    
+
     private final DicesStrategy strategy;
-    private final Set<Random> dices;
-    
+    private final List<Dice> dices;
+
+    /**
+     * Constructs a new instance of {@link ToRollDices}'s {@link Action}. The
+     * {@link DicesStrategy} in input specifies how to use this dices.
+     * 
+     * @param strategy
+     *            - the {@link DicesStrategy} to use
+     */
     public ToRollDices(final DicesStrategy strategy) {
         this.strategy = strategy;
-        this.dices = new HashSet<>();
+        this.dices = strategy.getDices();
     }
 
     @Override
-    public void play(Player player) {
-        final List<Integer> numbers = new LinkedList<>();
-        for (int i = 0; i < this.strategy.howManyDices(); i++) {
-            this.dices.add(new Random());
-        }
-        this.dices.stream()
-                  .forEach(r -> {
-                      numbers.add(r.nextInt(6) + 1);
-                  });
+    public void play(final Player player) {
+        this.dices.stream().forEach(d -> d.roll());
         player.setDicesRoll(true);
-        final int index = this.strategy.whatToDoWhitDicesNumbers(numbers, player);
+        final int index = this.dices.get(0).getLastNumberObtained() + this.dices.get(1).getLastNumberObtained();
         player.getPawn().setPos(player.getPawn().getActualPos() + index);
+        this.strategy.strategy(this.dices, player);
     }
 
 }

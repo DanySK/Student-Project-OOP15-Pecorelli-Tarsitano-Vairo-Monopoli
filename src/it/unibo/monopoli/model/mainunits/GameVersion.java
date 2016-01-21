@@ -43,7 +43,7 @@ public interface GameVersion {
 
 //    Player getNextPlayer();
     
-    public Player endOfTurnAndNextPlayer(Player player);
+    Player endOfTurnAndNextPlayer(Player player);
 //    /**
 //     * This method return all the {@link Action}s required for the specific
 //     * version.

@@ -11,10 +11,12 @@ import it.unibo.monopoli.model.table.Building;
  */
 public interface GameStrategy {
     
-    public int howManyBuildings();
-    
-    public Building getBuilding();
-    
+//    public int howManyBuildings();
+//    
+//    public Building getBuilding();
+//    
     List<Player> getPlayers();
+    
+    Bank getBank();
 
 }

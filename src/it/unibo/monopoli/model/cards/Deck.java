@@ -24,7 +24,7 @@ public interface Deck {
     List<Card> getCards();
 
     /**
-     * This method add to the {@link Deck} a new {@link Card}.
+     * This method add to the {@link Deck} a new {@link Card} randomly.
      * 
      * @param card
      *            - the {@link Card} to add
@@ -32,11 +32,19 @@ public interface Deck {
     void addCard(Card card);
 
     /**
-     * This method remove from the {@link Deck} this {@link Card}.
+     * This method remove from the {@link Deck} this specific {@link Card}.
      * 
      * @param card
      *            - the {@link Card} to remove
      */
     void removeCard(Card card);
+
+    /**
+     * Return the topmost {@link Card} of the {@link Deck}, that is the one in
+     * the last position.
+     * 
+     * @return the topmost {@link Card}
+     */
+    Card getFirstCard();
 
 }

@@ -12,7 +12,7 @@ public class GameVersionImpl implements GameVersion {
 
     private final GameStrategy strategy;
     private final List<Player> players;
-    private Iterator iter;
+    private Iterator<Player> iter;
     private  Player actualPlayer;
 
     /**
@@ -46,8 +46,7 @@ public class GameVersionImpl implements GameVersion {
 
     @Override
     public Bank getBank() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.strategy.getBank();
     }
 
     @Override

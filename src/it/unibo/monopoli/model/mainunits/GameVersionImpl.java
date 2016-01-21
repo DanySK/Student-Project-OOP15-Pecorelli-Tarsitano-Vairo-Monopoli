@@ -1,13 +1,7 @@
 package it.unibo.monopoli.model.mainunits;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
-import it.unibo.monopoli.model.actions.Action;
-import it.unibo.monopoli.model.table.Box;
-import it.unibo.monopoli.model.table.Building;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * This class implements the contract of {@link GameVersion} to bring back the
@@ -17,6 +11,9 @@ import it.unibo.monopoli.model.table.Building;
 public class GameVersionImpl implements GameVersion {
 
     private final GameStrategy strategy;
+    private final List<Player> players;
+    private Iterator iter;
+    private  Player actualPlayer;
 
     /**
      * Constructs an instance that will be able to give back the right version
@@ -28,22 +25,24 @@ public class GameVersionImpl implements GameVersion {
      */
     public GameVersionImpl(final GameStrategy strategy) {
         this.strategy = strategy;
+        this.players = strategy.getPlayers();
+        this.iter = this.players.iterator();
     }
 
-    @Override
-    public Collection<Building> getBuildings() {
-        Set<Building> buildings = new HashSet<>();
-        for (int i = 0; i < this.strategy.howManyBuildings(); i++) {
-            buildings.add(this.strategy.getBuilding());
-        }
-        return Collections.unmodifiableCollection(buildings);
-    }
+//    @Override
+//    public Collection<Building> getBuildings() {
+//        final Set<Building> buildings = new HashSet<>();
+//        for (int i = 0; i < this.strategy.howManyBuildings(); i++) {
+//            buildings.add(this.strategy.getBuilding());
+//        }
+//        return Collections.unmodifiableCollection(buildings);
+//    }
 
-    @Override
-    public Set<Box> getBoxes() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+//    @Override
+//    public Set<Box> getBoxes() {
+//        // TODO Auto-generated method stub
+//        return null;
+//    }
 
     @Override
     public Bank getBank() {
@@ -52,9 +51,18 @@ public class GameVersionImpl implements GameVersion {
     }
 
     @Override
-    public Set<Action> getAllActions() {
-        // TODO Auto-generated method stub
-        return null;
+    public Player getNextPlayer() {
+        if (!this.iter.hasNext()) {
+            this.iter = this.players.iterator();
+        }
+        this.actualPlayer = (Player) this.iter.next();
+        return this.actualPlayer;
     }
+
+//    @Override
+//    public Set<Action> getAllActions() {
+//        // TODO Auto-generated method stub
+//        return null;
+//    }
 
 }

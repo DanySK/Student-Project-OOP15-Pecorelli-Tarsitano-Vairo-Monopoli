@@ -16,22 +16,22 @@ import it.unibo.monopoli.model.table.Group;
  */
 public interface GameVersion {
 
-    /**
-     * This method return all the {@link Building}s required for the specific
-     * version.
-     * 
-     * @return a {@link Set} of {@link Building}s
-     */
-    Collection<Building> getBuildings();
-
-    /**
-     * This method return all the {@link Box}es required for the specific
-     * version. These {@link Box}es bring with them also the informations about
-     * {@link Contract}s, {@link Action}s and {@link Group}s.
-     * 
-     * @return a {@link Set} of {@link Box}es
-     */
-    Set<Box> getBoxes();
+//    /**
+//     * This method return all the {@link Building}s required for the specific
+//     * version.
+//     * 
+//     * @return a {@link Set} of {@link Building}s
+//     */
+//    Collection<Building> getBuildings();
+//
+//    /**
+//     * This method return all the {@link Box}es required for the specific
+//     * version. These {@link Box}es bring with them also the informations about
+//     * {@link Contract}s, {@link Action}s and {@link Group}s.
+//     * 
+//     * @return a {@link Set} of {@link Box}es
+//     */
+//    Set<Box> getBoxes();
 
     /**
      * This method return an instance of the only one {@link Bank}, specific of
@@ -41,12 +41,13 @@ public interface GameVersion {
      */
     Bank getBank();
 
-    /**
-     * This method return all the {@link Action}s required for the specific
-     * version.
-     * 
-     * @return a {@link Bank}
-     */
-    Set<Action> getAllActions();
+    Player getNextPlayer();
+//    /**
+//     * This method return all the {@link Action}s required for the specific
+//     * version.
+//     * 
+//     * @return a {@link Bank}
+//     */
+//    Set<Action> getAllActions();
 
 }

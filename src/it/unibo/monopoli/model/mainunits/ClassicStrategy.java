@@ -22,6 +22,37 @@ public class ClassicStrategy implements GameStrategy {
      */
     public ClassicStrategy(final List<Player> players) {
         this.players = players;
+        this.inizializesPlayers(players);
+    }
+    
+    private void inizializesPlayers(final List<Player> players) {
+        switch (players.size()){
+        case 2 : players.stream()
+                        .forEach(p -> {
+                            p.addOwnership();
+                            p.setMoney();
+                        });
+        case 3 : players.stream()
+                        .forEach(p -> {
+                            p.addOwnership();
+                            p.setMoney();
+                        });
+        case 4 : players.stream()
+                        .forEach(p -> {
+                            p.addOwnership();
+                            p.setMoney();
+                        });
+        case 5 : players.stream()
+                        .forEach(p -> {
+                            p.addOwnership();
+                            p.setMoney();
+                        });
+        case 6 : players.stream()
+                        .forEach(p -> {
+                            p.addOwnership();
+                            p.setMoney();
+                        });                 
+        }
     }
 
     @Override

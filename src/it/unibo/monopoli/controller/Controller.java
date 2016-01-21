@@ -7,75 +7,86 @@ import javax.swing.JTextField;
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.mainunits.Pawn;
 import it.unibo.monopoli.model.mainunits.Player;
-
+/**
+ * 
+ *
+ *
+ */
 public interface Controller {
+    /**
+    * Set the initial strategy of the game.
+    * @param strategy
+    * - set a strategy {@link JTextField}s
+    */
+    void setStrategy(JTextField strategy);
 
     /**
-     * Method for throwing dice
-     */
-    int diceThrow();
-
-    /*
-     * Inerente al giocatore get pedina set pedina
-     * 
-     */
-    Pawn getPawn();
+    * add player in a list.
+    * @param name .
+    * @param idPawn .
+    * @param typePlayer .
+    */
+    void addPlayer(final JTextField name, final int idPawn, final int typePlayer);
 
     /**
-     * Add player in a list
-     * 
-     * @param name
-     * @param id_pawn
-     * @param type_player
-     */
-
-    void addPlayer(final JTextField name, int id_pawn, int type_player);
-
-    /**
-     * Remove player from list
-     * 
-     * @param name
-     */
+    * Remove player from list.
+    * @param name .
+    */
     void removePlayer(final JTextField name);
 
     /**
-     * This method get the list of player {@link Player}.
-     */
-    List<Player> getListPlayer();
-
-    /**
-     * Set type of game
-     * 
-     * @param game_type
-     * 
-     */
-    void setGameType(JTextField game_type);
-
-    /**
-     * 
-     * 
-     */
+    * Return the id of the actual player.
+    * @return actual player
+    */
     int actualPlayer();
 
     /**
-     * add property on actual player
+    * Set pawn for player.
+    * 
+    * @param id .
+    */
+    void setPawn(int id);
+
+    /**
+    * Get pawn.
+    * @return pawn
+    */
+    Pawn getPawn();
+
+    /**
+     * Method for throwing dice.
+     * @return the number of throwing dice
      */
+    int diceThrow();
+
+    /**
+    * This method get the list of player {@link Player}.
+    * @return the list <@link List> of player <@link Player>
+    */
+    List<Player> getListPlayer();
+
+    /**
+    * add property on actual player.
+    * @param property .
+    */
     void addProprerty(JTextField property);
 
     /**
-     * go To next player
-     */
+    * go To next player.
+    * @return the integer for next player
+    */
     int endTurn();
 
     /**
-     * do auction for property
-     */
+    * do auction for property.
+    * @param property .
+    * @return {@link Card}.
+    */
     Card auction(JTextField property);
 
     /**
-     * 
-     * 
-     */
+    *
+    */
     void pay();
 
 }

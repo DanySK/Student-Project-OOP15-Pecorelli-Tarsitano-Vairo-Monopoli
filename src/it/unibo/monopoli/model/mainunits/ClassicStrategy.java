@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import it.unibo.monopoli.model.cards.Chance;
+import it.unibo.monopoli.model.cards.CommunityChest;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Ownership;
 

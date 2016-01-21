@@ -13,7 +13,7 @@ public class GameVersionImpl implements GameVersion {
     private final GameStrategy strategy;
     private final List<Player> players;
     private Iterator<Player> iter;
-    private  Player actualPlayer;
+//    private  Player actualPlayer;
 
     /**
      * Constructs an instance that will be able to give back the right version
@@ -30,12 +30,12 @@ public class GameVersionImpl implements GameVersion {
     }
 
 //    @Override
-//    public Collection<Building> getBuildings() {
-//        final Set<Building> buildings = new HashSet<>();
+//    public List<Building> getBuildings() {
+//        final List<Building> buildings = new LinkedList<>();
 //        for (int i = 0; i < this.strategy.howManyBuildings(); i++) {
 //            buildings.add(this.strategy.getBuilding());
 //        }
-//        return Collections.unmodifiableCollection(buildings);
+//        return Collections.unmodifiableList(buildings);
 //    }
 
 //    @Override
@@ -54,12 +54,11 @@ public class GameVersionImpl implements GameVersion {
         if (!this.iter.hasNext()) {
             this.iter = this.players.iterator();
         }
-        this.actualPlayer = (Player) this.iter.next();
-        return this.actualPlayer;
+        return (Player) this.iter.next();
     }
 
     @Override
-    public Player endOfTurnAndNextPlayer(Player player) {
+    public Player endOfTurnAndNextPlayer(final Player player) {
         return player.dicesAlreadyRolled() ? this.getNextPlayer() : player;
     }
 

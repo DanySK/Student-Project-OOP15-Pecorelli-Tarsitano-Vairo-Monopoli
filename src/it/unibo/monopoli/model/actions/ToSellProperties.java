@@ -99,7 +99,7 @@ public class ToSellProperties extends ToBuyAndSellProperties {
                 throw new IllegalArgumentException("Can build only in a NOT mortgage group of land");
             }
         }
-        if (!land.getOwner().getOwnerships().containsAll(land.getGroup().getMembers())) {
+        if (!((Player) land.getOwner()).getOwnerships().containsAll(land.getGroup().getMembers())) {
             throw new IllegalArgumentException("Can build only if the Player has ALL the lands of this land's group");
         }
         return new ToSellProperties(amount, Objects.requireNonNull(land), Objects.requireNonNull(building));

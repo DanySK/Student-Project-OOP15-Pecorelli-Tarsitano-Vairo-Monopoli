@@ -7,10 +7,10 @@ import it.unibo.monopoli.model.actions.Action;
 
 /**
  * This class represents an implementation of {@link Box}. More specifically it
- * represents the {@link Tax}'s {@link Box} of Monopoly.
+ * represents the {@link TaxImpl}'s {@link Box} of Monopoly.
  *
  */
-public class Tax implements Box {
+public class TaxImpl implements Box {
 
     private final String name;
     private final int ID;
@@ -18,14 +18,14 @@ public class Tax implements Box {
     private final Set<Action> obligatoryActions;
 
     /**
-     * Constructs an implementation of {@link Tax} that needs a name and a ID.
+     * Constructs an implementation of {@link TaxImpl} that needs a name and a ID.
      * 
      * @param name
      *            - of this {@link Box}
      * @param ID
      *            - of this {@link Box}
      */
-    public Tax(final String name, final int ID) {
+    public TaxImpl(final String name, final int ID) {
         this.name = name;
         this.ID = ID;
         this.allowedActions = new HashSet<>();

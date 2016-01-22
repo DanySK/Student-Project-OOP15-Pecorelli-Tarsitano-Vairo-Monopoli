@@ -1,13 +1,11 @@
 package it.unibo.monopoli.model.mainunits;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
-import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.table.Box;
-import it.unibo.monopoli.model.table.Building;
 
 /**
  * This class implements the contract of {@link GameVersion} to bring back the
@@ -17,6 +15,10 @@ import it.unibo.monopoli.model.table.Building;
 public class GameVersionImpl implements GameVersion {
 
     private final GameStrategy strategy;
+    private final List<Player> players;
+    private Iterator<Player> iter;
+    private final Set<Box> allBoxes;
+    // private Player actualPlayer;
 
     /**
      * Constructs an instance that will be able to give back the right version
@@ -28,33 +30,53 @@ public class GameVersionImpl implements GameVersion {
      */
     public GameVersionImpl(final GameStrategy strategy) {
         this.strategy = strategy;
+        this.players = strategy.getPlayers();
+        this.iter = this.players.iterator();
+        this.allBoxes = strategy.getBoxes();
     }
 
-    @Override
-    public Collection<Building> getBuildings() {
-        Set<Building> buildings = new HashSet<>();
-        for (int i = 0; i < this.strategy.howManyBuildings(); i++) {
-            buildings.add(this.strategy.getBuilding());
-        }
-        return Collections.unmodifiableCollection(buildings);
-    }
-
-    @Override
-    public Set<Box> getBoxes() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    // @Override
+    // public List<Building> getBuildings() {
+    // final List<Building> buildings = new LinkedList<>();
+    // for (int i = 0; i < this.strategy.howManyBuildings(); i++) {
+    // buildings.add(this.strategy.getBuilding());
+    // }
+    // return Collections.unmodifiableList(buildings);
+    // }
 
     @Override
     public Bank getBank() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.strategy.getBank();
+    }
+
+    // @Override
+    private Player getNextPlayer() {
+        if (!this.iter.hasNext()) {
+            this.iter = this.players.iterator();
+        }
+        return (Player) this.iter.next();
     }
 
     @Override
-    public Set<Action> getAllActions() {
-        // TODO Auto-generated method stub
-        return null;
+    public Player endOfTurnAndNextPlayer(final Player player) {
+        if (player.dicesAlreadyRolled()) {
+            player.setDicesRoll(false);
+            // new ToRollDices(new
+            // ClassicDicesStrategy()).play(this.getNextPlayer());
+            return this.getNextPlayer();
+        }
+        return player;
     }
+
+    @Override
+    public Set<Box> getAllBoxes() {
+        return Collections.unmodifiableSet(this.allBoxes);
+    }
+
+    // @Override
+    // public Set<Action> getAllActions() {
+    // // TODO Auto-generated method stub
+    // return null;
+    // }
 
 }

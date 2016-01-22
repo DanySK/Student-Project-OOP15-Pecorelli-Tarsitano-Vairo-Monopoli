@@ -1,12 +1,13 @@
 package it.unibo.monopoli.model.actions;
 
+import it.unibo.monopoli.model.cards.Card;
 
 /**
- * This class represent one of the {@link MoneyAction}s of the game. This one is
- * for paying.
+ * This class represent one of the {@link MoneyAction}s of the game. This one
+ * allows to buy {@link Card}s.
  *
  */
-public class ToPay extends ToPayAndBePaid {
+public class ToBePaid extends ToPayAndBePaid {
 
     /**
      * Construct a new instance of {@link ToPay}. The amount in input is the
@@ -17,8 +18,8 @@ public class ToPay extends ToPayAndBePaid {
      * @throws IllegalArgumentException
      *             - if the amount is less than or equal to zero
      */
-    public ToPay(final int amount) {
-        super(-amount);
+    public ToBePaid(final int amount) {
+        super(amount);
         if (amount <= 0) {
             throw new IllegalArgumentException("Only positive amount different of zero!");
         }

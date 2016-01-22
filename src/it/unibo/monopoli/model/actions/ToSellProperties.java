@@ -17,12 +17,32 @@ public class ToSellProperties extends ToBuyAndSellProperties {
 
     private final Ownership ownership;
 
-    private ToSellProperties(final int amount, final Ownership ownership) {
+    /**
+     * This is a static method that can be used to create a new instance of this
+     * class.
+     * 
+     * @param amount
+     *            - the amount of the sale
+     * @param ownership
+     *            - the {@link Ownership} to sell
+     */
+    protected ToSellProperties(final int amount, final Ownership ownership) {
         super(amount);
         this.ownership = ownership;
     }
 
-    private ToSellProperties(final int amount, final Land land, final Building building) {
+    /**
+     * This is a static method that can be used to create a new instance of this
+     * class.
+     * 
+     * @param amount
+     *            - the amount of the sale
+     * @param land
+     *            - the {@link Land} on which the {@link Building} was built
+     * @param building
+     *            - the {@link Building} to sell
+     */
+    protected ToSellProperties(final int amount, final Land land, final Building building) {
         super(amount, building);
         this.ownership = land;
     }
@@ -79,7 +99,7 @@ public class ToSellProperties extends ToBuyAndSellProperties {
                 throw new IllegalArgumentException("Can build only in a NOT mortgage group of land");
             }
         }
-        if (!land.getOwner().getOwnerships().containsAll(land.getGroup().getMembers())) {
+        if (!((Player) land.getOwner()).getOwnerships().containsAll(land.getGroup().getMembers())) {
             throw new IllegalArgumentException("Can build only if the Player has ALL the lands of this land's group");
         }
         return new ToSellProperties(amount, Objects.requireNonNull(land), Objects.requireNonNull(building));

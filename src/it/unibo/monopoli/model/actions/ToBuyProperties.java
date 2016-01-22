@@ -17,12 +17,32 @@ public class ToBuyProperties extends ToBuyAndSellProperties {
 
     private final Ownership ownership;
 
-    private ToBuyProperties(final int amount, final Ownership ownership) {
+    /**
+     * Constructs an instance of {@link ToBuyProperties}'s {@link Action}. This
+     * specific constructor is the one for buying {@link Ownership}s.
+     * 
+     * @param amount
+     *            - the amount necessary to buy the {@link Ownership}
+     * @param ownership
+     *            - the {@link Ownership} to buy
+     */
+    protected ToBuyProperties(final int amount, final Ownership ownership) {
         super(amount);
         this.ownership = ownership;
     }
 
-    private ToBuyProperties(final int amount, final Land land, final Building building) {
+    /**
+     * Constructs an instance of {@link ToBuyProperties}'s {@link Action}. This
+     * specific constructor is the one for buying {@link Building}s.
+     * 
+     * @param amount
+     *            - the amount necessary to buy the {@link Building}
+     * @param land
+     *            - the {@link Land} on which the {@link Building} will be built
+     * @param building
+     *            - the {@link Building} to buy
+     */
+    protected ToBuyProperties(final int amount, final Land land, final Building building) {
         super(amount, building);
         this.ownership = land;
     }
@@ -32,7 +52,7 @@ public class ToBuyProperties extends ToBuyAndSellProperties {
      * class.
      * 
      * @param amount
-     *            - the amount necessary to buy something
+     *            - the amount necessary to buy the {@link Ownership}
      * @param ownership
      *            - the {@link Ownership} to buy
      * @return an instance of this class
@@ -53,7 +73,7 @@ public class ToBuyProperties extends ToBuyAndSellProperties {
      * class.
      * 
      * @param amount
-     *            - the amount necessary to buy something
+     *            - the amount necessary to buy the {@link Building}
      * @param land
      *            - the {@link Land} on which the {@link Building} will be built
      * @param building

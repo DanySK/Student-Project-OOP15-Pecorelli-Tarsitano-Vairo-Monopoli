@@ -7,75 +7,138 @@ import javax.swing.JTextField;
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.mainunits.Pawn;
 import it.unibo.monopoli.model.mainunits.Player;
-
+/**
+ * 
+ *
+ *
+ */
 public interface Controller {
+    /* Menu Action */
+    /**
+    * Set the initial strategy of the game.
+    * @param strategy
+    * - set a strategy {@link JTextField}s
+    */
+    void setStrategy(JTextField strategy);
 
     /**
-     * Method for throwing dice
-     */
-    int diceThrow();
-
-    /*
-     * Inerente al giocatore get pedina set pedina
-     * 
-     */
-    Pawn getPawn();
+    * add player in a list.
+    * @param name .
+    * @param idPawn .
+    * @param typePlayer .
+    */
+    void addPlayer(final JTextField name, final int idPawn, final int typePlayer);
 
     /**
-     * Add player in a list
-     * 
-     * @param name
-     * @param id_pawn
-     * @param type_player
-     */
-
-    void addPlayer(final JTextField name, int id_pawn, int type_player);
-
-    /**
-     * Remove player from list
-     * 
-     * @param name
-     */
+    * Remove player from list.
+    * @param name .
+    */
     void removePlayer(final JTextField name);
 
     /**
-     * This method get the list of player {@link Player}.
+    * Set pawn for player.
+    * 
+    * @param id .
+    */
+    void setPawn(int id);
+    /**/
+    /*Game Action*/
+    /**
+     * Method for buy a property by id.
+     * @param id .
      */
-    List<Player> getListPlayer();
+    void buyProperty(int id);
+    /**
+     * method for sell a property by id.
+     * @param id .
+     */
+    void sellProperty(int id);
 
     /**
-     * Set type of game
-     * 
-     * @param game_type
-     * 
+     * This method allow to mortgage a property by id.
+     * @param id .
      */
-    void setGameType(JTextField game_type);
+    void mortgageProperty(int id);
+    /**
+     * This method allow to unmortgage a property by id.
+     * @param id .
+     */
+    void unmortgageProperty(int id);
+    /**
+     *this method is used for do a trade with other player.
+     */
+    void trade();
+    /*trade action*/
+    /**
+     * This method allow to counter a trade.
+     */
+    void counter();
+    /**
+     * This method allow to accept a trade.
+     */
+    void accept();
+    /**
+     * This method allow to reject a trade.
+     */
+    void reject();
 
     /**
-     * 
-     * 
-     */
+    * Return the id of the actual player.
+    * @return actual player
+    */
     int actualPlayer();
 
     /**
-     * add property on actual player
-     */
-    void addProprerty(JTextField property);
+    * Get pawn.
+    * @return pawn
+    */
+    Pawn getPawn();
 
     /**
-     * go To next player
+     * Method for throwing dice.
+     * @return the number of throwing dice
      */
+    int diceThrow();
+
+    /**
+    * This method get the list of player {@link Player}.
+    * @return the list <@link List> of player <@link Player>
+    */
+    List<Player> getListPlayer();
+
+    /**
+    * add property on actual player.
+    * @param property .
+    */
+    void addProprerty(JTextField property); 
+
+    /**
+    * go To next player.
+    * @return the integer for next player
+    */
     int endTurn();
 
     /**
-     * do auction for property
-     */
+    * do auction for property.
+    * @param property .
+    * @return {@link Card}.
+    */
     Card auction(JTextField property);
-
     /**
-     * 
-     * 
+     * Method for choose the winner.
+     * @return winner Player {@link Player}
      */
+    /**
+    *
+    */
     void pay();
+    /*prison action*/
+    /*dice pair throw*/
+    /*prison pay*/
+    /**
+     * this method allow to use card for Get out of Jail.
+     */
+    void usePrisonCard();
+    /**/
 
 }

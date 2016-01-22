@@ -30,10 +30,10 @@ public interface Player {
      */
     Pawn getPawn();
 
-    /**
-     * Set the {@link Pawn} that will belong to the {@link Player}.
-     */
-    void setPawn();
+    // /**
+    // * Set the {@link Pawn} that will belong to the {@link Player}.
+    // */
+    // void setPawn();
 
     /**
      * Return the {@link Set} of {@link Ownership} belonging to the
@@ -49,6 +49,38 @@ public interface Player {
      * @return an {@link Optional}'s {@link Deck}
      */
     Optional<Deck> getCards();
+
+    /**
+     * Returns true if the {@link Player} has already rolled {@link Dice}s,
+     * false if hasn't.
+     * 
+     * @return true if the {@link Player} has already rolled {@link Dice}s
+     */
+    boolean dicesAlreadyRolled();
+
+    /**
+     * Sets if the {@link Player} rolled {@link Dice}s (true) or not (false).
+     * 
+     * @param alreadyRolled
+     *            - true if {@link Player} already rolled {@link Dice}s,
+     *            otherwise, false
+     */
+    void setDicesRoll(boolean alreadyRolled);
+
+    /**
+     * Returns true if the {@link Player} is in prison, false if he isn't.
+     * 
+     * @return true if the {@link Player} is in prison
+     */
+    boolean isInPrison();
+
+    /**
+     * Sets if the {@link Player} is going to prison (true) or not (false).
+     * 
+     * @param isGoingToPrison
+     *            - true if {@link Player} is going to prison, otherwise, false
+     */
+    void setPrison(boolean isGoingToPrison);
 
     // /**
     // * If the {@link Ownership} request belongs to the {@link Player},
@@ -68,7 +100,7 @@ public interface Player {
     void addOwnership(Ownership ownership);
 
     /**
-     * Remove a {@link Ownership} of this {@link Player}.
+     * Remove a {@link Ownership} from the {@link Player}.
      * 
      * @param ownership
      *            - the one to remove

@@ -1,10 +1,10 @@
 package it.unibo.monopoli.model.table;
 
-import it.unibo.monopoli.model.mainunits.Player;
+import it.unibo.monopoli.model.mainunits.Owner;
 
 /**
- * This interface represent all the ownership of this game. They are particular
- * boxes because you can buy and sell them.
+ * This interface represent all the {@link Ownership}s of this game. They are
+ * particular {@link Box}es because you can buy and sell them.
  *
  */
 public interface Ownership extends Box {
@@ -14,14 +14,22 @@ public interface Ownership extends Box {
      * 
      * @return the {@link Contract} to fulfill
      */
-    LandContract getContract();
+    Contract getContract();
 
     /**
-     * Return the {@link Player} that own this {@link Ownership}.
+     * Return the {@link Owner} that own this {@link Ownership}.
      * 
-     * @return the owner of this {@link Ownership} or Null if it hasn't a owner
+     * @return the {@link Owner} of this {@link Ownership}
      */
-    Player getOwner();
+    Owner getOwner();
+
+    /**
+     * Sets the {@link Owner} of this {@link Ownership}.
+     * 
+     * @param owner
+     *            - the {@link Ownership}'s {@link Owner}
+     */
+    void setOwner(Owner owner);
 
     /**
      * Return the {@link Group} to which it belongs.
@@ -29,6 +37,13 @@ public interface Ownership extends Box {
      * @return a {@link Group}
      */
     Group getGroup();
+
+    /**
+     * Return the {@link Ownership}'s cost.
+     * 
+     * @return {@link Ownership}'s cost
+     */
+    int getCost();
 
     /**
      * Return true if the {@link Ownership} is mortgaged, else false.

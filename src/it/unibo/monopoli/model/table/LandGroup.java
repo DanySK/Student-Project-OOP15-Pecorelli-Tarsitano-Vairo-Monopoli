@@ -27,7 +27,7 @@ public interface LandGroup {
     void addBuilding(Building building);
 
     /**
-     * Remove a {@link Building} of this {@link Group}.
+     * Remove a {@link Building} from the {@link Group}.
      * 
      * @param building
      *            - the one to remove

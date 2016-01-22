@@ -65,7 +65,7 @@ public class GameVersionImpl implements GameVersion {
     public Player endOfTurnAndNextPlayer(final Player player) {
         if (player.dicesAlreadyRolled()) {
             player.setDicesRoll(false);
-            new ToRollDices(new ClassicDicesStrategy()).play(this.getNextPlayer());
+//            new ToRollDices(new ClassicDicesStrategy()).play(this.getNextPlayer());
             return this.getNextPlayer();
         }
         return player;

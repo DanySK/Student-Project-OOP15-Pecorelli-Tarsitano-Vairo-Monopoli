@@ -110,7 +110,7 @@ public interface Controller {
     * add property on actual player.
     * @param property .
     */
-    void addProprerty(JTextField property);
+    void addProprerty(JTextField property); 
 
     /**
     * go To next player.

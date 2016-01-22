@@ -8,7 +8,7 @@ import it.unibo.monopoli.model.actions.ToPay;
 
 /**
  * This class represents an implementation of {@link Tax}. More specifically it
- * represents the {@link Tax}'s {@link ActionBox} of Monopoly.
+ * represents the {@link Tax}'s {@link Box} of Monopoly.
  *
  */
 public class TaxImpl implements Tax {
@@ -24,9 +24,9 @@ public class TaxImpl implements Tax {
      * ID.
      * 
      * @param name
-     *            - of this {@link ActionBox}
+     *            - of this {@link Box}
      * @param ID
-     *            - of this {@link ActionBox}
+     *            - of this {@link Box}
      */
     public TaxImpl(final String name, final int ID, final int cost) {
         this.name = name;

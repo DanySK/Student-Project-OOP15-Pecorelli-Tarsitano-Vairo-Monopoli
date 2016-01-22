@@ -8,12 +8,12 @@ import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
 import it.unibo.monopoli.model.actions.ToRollDices;
 
 /**
- * This class represents an implementation of {@link ActionBox}. More
- * specifically it represents the {@link PrisonOrTransit}'s {@link ActionBox} of
+ * This class represents an implementation of {@link Box}. More
+ * specifically it represents the {@link PrisonOrTransit}'s {@link Box} of
  * Monopoly.
  *
  */
-public class PrisonOrTransit implements ActionBox {
+public class PrisonOrTransit implements Box {
 
     private final String name;
     private final int ID;

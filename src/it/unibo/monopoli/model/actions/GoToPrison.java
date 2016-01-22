@@ -2,7 +2,7 @@ package it.unibo.monopoli.model.actions;
 
 import it.unibo.monopoli.model.mainunits.Pawn;
 import it.unibo.monopoli.model.mainunits.Player;
-import it.unibo.monopoli.model.table.ActionBox;
+import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.model.table.PrisonOrTransit;
 
 /**
@@ -12,7 +12,7 @@ import it.unibo.monopoli.model.table.PrisonOrTransit;
  */
 public class GoToPrison implements Action {
 
-    private final ActionBox prison;
+    private final Box prison;
 
     /**
      * Constructs a new instance of {@link GoToPrison}'s {@link Action}. The
@@ -20,9 +20,9 @@ public class GoToPrison implements Action {
      * have to go.
      * 
      * @param prison
-     *            - the {@link PrisonOrTransit}'s {@link ActionBox}
+     *            - the {@link PrisonOrTransit}'s {@link Box}
      */
-    public GoToPrison(final ActionBox prison) {
+    public GoToPrison(final Box prison) {
         this.prison = prison;
     }
 

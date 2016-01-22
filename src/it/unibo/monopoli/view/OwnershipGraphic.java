@@ -12,13 +12,15 @@ import javax.swing.border.Border;
 import it.unibo.monopoli.model.table.ClassicOwnership;
 import it.unibo.monopoli.model.table.Ownership;
 
-public class OwnershipGraphic implements IBoxGraphic  {
+public class OwnershipGraphic extends AbstractGraphicCard {
 
 	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 	private Ownership own;
 	
-	public OwnershipGraphic(Ownership own){
+	public OwnershipGraphic(Ownership own, Position pos){
+		super(pos);
 		this.own = own;
+		
 	
 	}
 	

@@ -18,9 +18,13 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
 	protected JPanel getRotatedPanel() {
 		if (pos == Position.NORTH) {
 			return new RotatedPanel(180);
-		} else if (pos == Position.NORTH) {
-
+		} else if (pos == Position.EAST) {
+			return new RotatedPanel(-90);
+		}else if (pos == Position.WEST) {
+			return new RotatedPanel(90);
+		}else  {
+			return new RotatedPanel();
+		
 		}
-		return null;
 	}
 }

@@ -11,13 +11,14 @@ import javax.swing.border.Border;
 
 import it.unibo.monopoli.model.table.Tax;
 
-public class TaxGraphic implements IBoxGraphic {
+public class TaxGraphic extends AbstractGraphicCard {
 
 
 	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 	private Tax tax;
 	
-	public TaxGraphic(Tax tax){
+	public TaxGraphic(Tax tax, Position pos){
+		super(pos);
 		this.tax = tax;
 		
 	}

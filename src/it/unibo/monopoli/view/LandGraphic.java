@@ -11,12 +11,13 @@ import javax.swing.border.Border;
 
 import it.unibo.monopoli.model.table.Land;
 
-public class LandGraphic implements IBoxGraphic  {
+public class LandGraphic extends AbstractGraphicCard  {
 
 	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 	private Land land;
 	
-	public LandGraphic(Land land){
+	public LandGraphic(Land land, Position pos){
+			super(pos);
 			this.land = land;
 	}
 	

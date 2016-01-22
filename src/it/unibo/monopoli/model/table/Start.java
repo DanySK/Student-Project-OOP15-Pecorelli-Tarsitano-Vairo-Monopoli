@@ -13,7 +13,7 @@ import it.unibo.monopoli.model.actions.ToBePaid;
  */
 public class Start implements Box {
 
-    private static final int MONEY_TO_PICK_UP = 1;
+    private static final int MONEY_TO_PICK_UP = 20;
 
     private final String name;
     private final int ID;

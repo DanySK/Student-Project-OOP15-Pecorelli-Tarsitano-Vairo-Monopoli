@@ -1,11 +1,11 @@
 package it.unibo.monopoli.model.mainunits;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
-import it.unibo.monopoli.model.actions.Action;
-import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
-import it.unibo.monopoli.model.actions.ToRollDices;
+import it.unibo.monopoli.model.table.Box;
 
 /**
  * This class implements the contract of {@link GameVersion} to bring back the
@@ -17,6 +17,7 @@ public class GameVersionImpl implements GameVersion {
     private final GameStrategy strategy;
     private final List<Player> players;
     private Iterator<Player> iter;
+    private final Set<Box> allBoxes;
     // private Player actualPlayer;
 
     /**
@@ -31,6 +32,7 @@ public class GameVersionImpl implements GameVersion {
         this.strategy = strategy;
         this.players = strategy.getPlayers();
         this.iter = this.players.iterator();
+        this.allBoxes = strategy.getBoxes();
     }
 
     // @Override
@@ -40,12 +42,6 @@ public class GameVersionImpl implements GameVersion {
     // buildings.add(this.strategy.getBuilding());
     // }
     // return Collections.unmodifiableList(buildings);
-    // }
-
-    // @Override
-    // public Set<Box> getBoxes() {
-    // // TODO Auto-generated method stub
-    // return null;
     // }
 
     @Override
@@ -65,10 +61,16 @@ public class GameVersionImpl implements GameVersion {
     public Player endOfTurnAndNextPlayer(final Player player) {
         if (player.dicesAlreadyRolled()) {
             player.setDicesRoll(false);
-//            new ToRollDices(new ClassicDicesStrategy()).play(this.getNextPlayer());
+            // new ToRollDices(new
+            // ClassicDicesStrategy()).play(this.getNextPlayer());
             return this.getNextPlayer();
         }
         return player;
+    }
+
+    @Override
+    public Set<Box> getAllBoxes() {
+        return Collections.unmodifiableSet(this.allBoxes);
     }
 
     // @Override

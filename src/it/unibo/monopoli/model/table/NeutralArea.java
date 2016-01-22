@@ -1,42 +1,37 @@
 package it.unibo.monopoli.model.table;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import it.unibo.monopoli.model.actions.Action;
-import it.unibo.monopoli.model.actions.ToPay;
 
 /**
- * This class represents an implementation of {@link Tax}. More specifically it
- * represents the {@link Tax}'s {@link Box} of Monopoly.
+ * This class represents an implementation of {@link Box}. More specifically it
+ * represents the {@link NeutralArea}'s {@link Box} of Monopoly.
  *
  */
-public class TaxImpl implements Tax {
+public class NeutralArea implements Box {
 
     private final String name;
     private final int ID;
-    private final int cost;
     private final Set<Action> allowedActions;
     private final Set<Action> obligatoryActions;
 
     /**
-     * Constructs an implementation of {@link TaxImpl} that needs a name, an ID
-     * and a cost.
+     * Constructs an implementation of {@link NeutralArea} that needs a name and
+     * an ID.
      * 
      * @param name
      *            - of this {@link Box}
      * @param ID
      *            - of this {@link Box}
-     * @param cost
-     *            - of this {@link Box}
      */
-    public TaxImpl(final String name, final int ID, final int cost) {
+    public NeutralArea(final String name, final int ID) {
         this.name = name;
         this.ID = ID;
-        this.cost = cost;
         this.allowedActions = new HashSet<>();
         this.obligatoryActions = new HashSet<>();
-        this.obligatoryActions.add(new ToPay(this.cost));
     }
 
     @Override
@@ -51,12 +46,7 @@ public class TaxImpl implements Tax {
 
     @Override
     public Set<Action> getAllowedActions() {
-        return this.allowedActions;
-    }
-
-    @Override
-    public Set<Action> getObligatoryActions() {
-        return this.obligatoryActions;
+        return Collections.unmodifiableSet(this.allowedActions);
     }
 
     @Override
@@ -65,13 +55,13 @@ public class TaxImpl implements Tax {
     }
 
     @Override
-    public void setObligatoryActions(final Set<Action> actions) {
-        this.obligatoryActions.addAll(actions);
+    public Set<Action> getObligatoryActions() {
+        return Collections.unmodifiableSet(this.obligatoryActions);
     }
 
     @Override
-    public int getCost() {
-        return this.cost;
+    public void setObligatoryActions(final Set<Action> actions) {
+        this.obligatoryActions.addAll(actions);
     }
 
 }

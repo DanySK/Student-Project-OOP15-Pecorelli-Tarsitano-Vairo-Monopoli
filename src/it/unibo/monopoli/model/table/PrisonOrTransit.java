@@ -7,17 +7,17 @@ import it.unibo.monopoli.model.actions.Action;
 
 /**
  * This class represents an implementation of {@link ActionBox}. More specifically it
- * represents the {@link Prison}'s {@link ActionBox} of Monopoly.
+ * represents the {@link PrisonOrTransit}'s {@link ActionBox} of Monopoly.
  *
  */
-public class Prison implements ActionBox {
+public class PrisonOrTransit implements ActionBox {
 
     private final String name;
     private final int ID;
     private final Set<Action> allowedActions;
     private final Set<Action> obligatoryActions;
 
-    public Prison(final String name, final int ID) {
+    public PrisonOrTransit(final String name, final int ID) {
         this.name = name;
         this.ID = ID;
         this.allowedActions = new HashSet<>();

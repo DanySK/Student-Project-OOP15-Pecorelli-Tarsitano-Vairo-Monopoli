@@ -10,6 +10,7 @@ import it.unibo.monopoli.model.cards.Chance;
 import it.unibo.monopoli.model.cards.CommunityChest;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Building;
+import it.unibo.monopoli.model.table.Home;
 import it.unibo.monopoli.model.table.Ownership;
 
 /**
@@ -18,6 +19,9 @@ import it.unibo.monopoli.model.table.Ownership;
  *
  */
 public class ClassicStrategy implements GameStrategy {
+
+    private static final int N_MAX_OF_HOUSES = 32;
+    private static final int N_MAX_OF_HOTELS = 12;
 
     private final List<Player> players;
     private final List<Ownership> ownerships;
@@ -44,46 +48,53 @@ public class ClassicStrategy implements GameStrategy {
     }
 
     private void inizializesPlayers(final List<Player> players) {
-        Random r = new Random();
-        // final List<Ownership> copyOfOwnerships = this.ownerships;
         switch (players.size()) {
         case 2:
             players.stream().forEach(p -> {
-                p.addOwnership(this.ownerships.remove(r.nextInt(this.ownerships.size())));
-                p.setMoney();
+                this.addOwnerships(7, p);
+                p.setMoney(350);
             });
         case 3:
             players.stream().forEach(p -> {
-                p.addOwnership(this.ownerships.remove(r.nextInt(this.ownerships.size())));
-                p.setMoney();
+                this.addOwnerships(6, p);
+                p.setMoney(300);
             });
         case 4:
             players.stream().forEach(p -> {
-                p.addOwnership(this.ownerships.remove(r.nextInt(this.ownerships.size())));
-                p.setMoney();
+                this.addOwnerships(5, p);
+                p.setMoney(250);
             });
         case 5:
             players.stream().forEach(p -> {
-                p.addOwnership(this.ownerships.remove(r.nextInt(this.ownerships.size())));
-                p.setMoney();
+                this.addOwnerships(4, p);
+                p.setMoney(200);
             });
         case 6:
             players.stream().forEach(p -> {
-                p.addOwnership(this.ownerships.remove(r.nextInt(this.ownerships.size())));
-                p.setMoney();
+                this.addOwnerships(3, p);
+                p.setMoney(150);
             });
         default:
             break;
         }
     }
 
-    private List<Ownership> inizializesOwnerships() { // potrei fare una classe 
-                        //a parte visibile solo al package oppure inner class
+    private void addOwnerships(final int nOfOwner, final Player player) {
+        Random r = new Random();
+        for (int i = 0; i < nOfOwner; i++) {
+            player.addOwnership(this.ownerships.remove(r.nextInt(this.ownerships.size())));
+        }
+    }
+
+    private List<Ownership> inizializesOwnerships() {
         this.ownerships.add(new );
     }
 
     private List<Building> inizializesBuildings() {
-        this.buildings.add(new );
+        for (int i = 0; i < N_MAX_OF_HOUSES; i++) {
+            this.buildings.add(new Home(i + 1));
+        }
+        return this.buildings;
     }
 
     // @Override

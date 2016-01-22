@@ -9,11 +9,11 @@ import it.unibo.monopoli.model.cards.Deck;
 
 /**
  * This class represents an implementation of {@link Box}. It represents
- * {@link Luck}'s {@link Box}es of Monopoly, the {@link Box}es on which you have
+ * {@link DecksBox}'s {@link Box}es of Monopoly, the {@link Box}es on which you have
  * to draw from a {@link Deck}.
  *
  */
-public class Luck implements Box {
+public class DecksBox implements Box {
 
     private final String name;
     private final int ID;
@@ -21,7 +21,7 @@ public class Luck implements Box {
     private final Set<Action> obligatoryActions;
 
     /**
-     * Constructs an implementation of {@link Luck}'s {@link Box} that needs a
+     * Constructs an implementation of {@link DecksBox}'s {@link Box} that needs a
      * name and a ID.
      * 
      * @param name
@@ -31,7 +31,7 @@ public class Luck implements Box {
      * @param deck
      *            - {@link Deck} to draw from
      */
-    public Luck(final String name, final int ID, final Deck deck) {
+    public DecksBox(final String name, final int ID, final Deck deck) {
         this.name = name;
         this.ID = ID;
         this.allowedActions = new HashSet<>();

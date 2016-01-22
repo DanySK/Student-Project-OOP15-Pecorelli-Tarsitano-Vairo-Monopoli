@@ -4,10 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import it.unibo.monopoli.model.actions.Action;
+import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
+import it.unibo.monopoli.model.actions.ToRollDices;
 
 /**
- * This class represents an implementation of {@link ActionBox}. More specifically it
- * represents the {@link PrisonOrTransit}'s {@link ActionBox} of Monopoly.
+ * This class represents an implementation of {@link ActionBox}. More
+ * specifically it represents the {@link PrisonOrTransit}'s {@link ActionBox} of
+ * Monopoly.
  *
  */
 public class PrisonOrTransit implements ActionBox {
@@ -22,6 +25,7 @@ public class PrisonOrTransit implements ActionBox {
         this.ID = ID;
         this.allowedActions = new HashSet<>();
         this.obligatoryActions = new HashSet<>();
+        this.obligatoryActions.add(new ToRollDices(new ClassicDicesStrategy()));
     }
 
     @Override

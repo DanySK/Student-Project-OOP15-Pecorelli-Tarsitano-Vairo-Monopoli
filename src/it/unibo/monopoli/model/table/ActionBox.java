@@ -6,10 +6,24 @@ import it.unibo.monopoli.model.actions.Action;
 
 /**
  * This interface represent all the {@link ActionBox}es in the game's table.
- * Each box has some {@link Action}s to accomplish.
+ * Each box has a name, an ID and one or more {@link Action}s to accomplish.
  *
  */
 public interface ActionBox extends Box {
+
+    /**
+     * Return the name that identifies the {@link ActionBox}.
+     * 
+     * @return the name of the {@link ActionBox}
+     */
+    String getName();
+
+    /**
+     * Return the ID of the {@link ActionBox}.
+     * 
+     * @return the ID of the {@link ActionBox}
+     */
+    int getID();
 
     /**
      * Return a {@link Set} of allowed {@link Action}s to do in this

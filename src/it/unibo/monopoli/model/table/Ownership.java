@@ -4,10 +4,10 @@ import it.unibo.monopoli.model.mainunits.Owner;
 
 /**
  * This interface represent all the {@link Ownership}s of this game. They are
- * particular {@link Box}es because you can buy and sell them.
+ * particular {@link ActionBox}es because you can buy and sell them.
  *
  */
-public interface Ownership extends Box {
+public interface Ownership extends ActionBox {
 
     /**
      * Return the {@link Contract} to which has to fulfill.

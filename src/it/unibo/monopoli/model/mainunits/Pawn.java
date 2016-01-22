@@ -1,6 +1,6 @@
 package it.unibo.monopoli.model.mainunits;
 
-import it.unibo.monopoli.model.table.Box;
+import it.unibo.monopoli.model.table.ActionBox;
 
 /**
  * This interface represent all the pawns used in the game. Each {@link Player}
@@ -18,7 +18,7 @@ public interface Pawn {
 
     /**
      * Return the actual position of the {@link Pawn} in the table of play. This
-     * position is represented by the ID of the {@link Box} in witch the
+     * position is represented by the ID of the {@link ActionBox} in witch the
      * {@link Pawn} is located.
      * 
      * @return the actual position of the {@link Pawn}
@@ -27,11 +27,11 @@ public interface Pawn {
 
     /**
      * Set the new position of the {@link Pawn} in the table of play. This
-     * position is represented by the ID of the {@link Box} in witch the
+     * position is represented by the ID of the {@link ActionBox} in witch the
      * {@link Pawn} is located.
      * 
      * @param newPosizion
-     *            - the new ID of the {@link Box} in witch the {@link Pawn} is
+     *            - the new ID of the {@link ActionBox} in witch the {@link Pawn} is
      *            located.
      */
     void setPos(int newPosizion);

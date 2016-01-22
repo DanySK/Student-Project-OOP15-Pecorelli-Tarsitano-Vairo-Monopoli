@@ -8,12 +8,12 @@ import it.unibo.monopoli.model.actions.ToDrawCards;
 import it.unibo.monopoli.model.cards.Deck;
 
 /**
- * This class represents an implementation of {@link Box}. It represents
- * {@link DecksBox}'s {@link Box}es of Monopoly, the {@link Box}es on which you have
+ * This class represents an implementation of {@link ActionBox}. It represents
+ * {@link DecksBox}'s {@link ActionBox}es of Monopoly, the {@link ActionBox}es on which you have
  * to draw from a {@link Deck}.
  *
  */
-public class DecksBox implements Box {
+public class DecksBox implements ActionBox {
 
     private final String name;
     private final int ID;
@@ -21,13 +21,13 @@ public class DecksBox implements Box {
     private final Set<Action> obligatoryActions;
 
     /**
-     * Constructs an implementation of {@link DecksBox}'s {@link Box} that needs a
+     * Constructs an implementation of {@link DecksBox}'s {@link ActionBox} that needs a
      * name and a ID.
      * 
      * @param name
-     *            - of this {@link Box}
+     *            - of this {@link ActionBox}
      * @param ID
-     *            - of this {@link Box}
+     *            - of this {@link ActionBox}
      * @param deck
      *            - {@link Deck} to draw from
      */

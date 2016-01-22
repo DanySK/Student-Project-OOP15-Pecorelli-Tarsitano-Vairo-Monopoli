@@ -2,10 +2,10 @@ package it.unibo.monopoli.model.table;
 
 /**
  * This interface represent the {@link Tax}es of this game. They are particular
- * {@link Box}es because they also have a cost.
+ * {@link ActionBox}es because they also have a cost.
  *
  */
-public interface Tax extends Box {
+public interface Tax extends ActionBox {
 
     /**
      * Return the {@link Tax}'s cost.

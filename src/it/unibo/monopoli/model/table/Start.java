@@ -7,11 +7,11 @@ import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.actions.ToBePaid;
 
 /**
- * This class represents an implementation of {@link Box}. More specifically it
- * represents the {@link Start}'s {@link Box} of Monopoly.
+ * This class represents an implementation of {@link ActionBox}. More specifically it
+ * represents the {@link Start}'s {@link ActionBox} of Monopoly.
  *
  */
-public class Start implements Box {
+public class Start implements ActionBox {
 
     private static final int MONEY_TO_PICK_UP = 1;
 
@@ -24,9 +24,9 @@ public class Start implements Box {
      * Constructs an implementation of {@link Start} that needs a name and a ID.
      * 
      * @param name
-     *            - of this {@link Box}
+     *            - of this {@link ActionBox}
      * @param ID
-     *            - of this {@link Box}
+     *            - of this {@link ActionBox}
      */
     public Start(final String name, final int ID) {
         this.name = name;

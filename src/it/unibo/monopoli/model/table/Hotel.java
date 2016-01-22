@@ -5,18 +5,18 @@ package it.unibo.monopoli.model.table;
  * {@link Home}.
  *
  */
-public class Home implements Building {
+public class Hotel implements Building {
 
     private final int ID;
 
     /**
      * Constructs an instance of this class. The ID in input is the one to
-     * identify the specific {@link Home}.
+     * identify the specific {@link Hotel}.
      * 
      * @param ID
-     *            - to identify the specific {@link Home}
+     *            - to identify the specific {@link Hotel}
      */
-    public Home(final int ID) {
+    public Hotel(final int ID) {
         this.ID = ID;
     }
 

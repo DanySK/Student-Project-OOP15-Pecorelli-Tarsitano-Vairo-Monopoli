@@ -4,15 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
+
+import it.unibo.monopoli.model.table.Box;
 
 public class Index {
 
@@ -36,7 +37,7 @@ public class Index {
 		JPanel centerP = new JPanel(); // JPanelMain Centrale
 		centerP.setLayout(new BorderLayout());
 		
-		JPanel tabellone = new ProvaTabellone().initialize();
+		JPanel tabellone = new ProvaTabellone(null, 10, 10).initialize();
 		JPanel tableau = new JPanel();
 		centerP.add(tableau,BorderLayout.CENTER);
 		tableau.add(tabellone);

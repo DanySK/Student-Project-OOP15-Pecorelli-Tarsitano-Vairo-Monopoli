@@ -9,20 +9,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-public class CardGraphic {
+import it.unibo.monopoli.model.table.Land;
 
-	private String name;
-	private Color color;
-	private int value;
+public class LandGraphic implements IBoxGraphic  {
+
 	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+	private Land land;
 	
-	public CardGraphic(String name, Color color, int value){
-		/*super();
-		setBackground(Color.GREEN);*/
-		this.name = name;
-		this.color = color;
-		this.value = value;
-		
+	public LandGraphic(Land land){
+			this.land = land;
 	}
 	
 		
@@ -33,16 +28,16 @@ public class CardGraphic {
 		
 		JLabel colorP = new JLabel();
 		colorP.setOpaque(true);
-		colorP.setBackground(this.color);
+		colorP.setBackground(land.getColor());
 		card.add(colorP);
 		
-		JLabel nameP = new JLabel(this.name);
+		JLabel nameP = new JLabel(land.getName());
 		card.add(nameP);
 		
 		JPanel emptyP = new JPanel();
 		card.add(emptyP);
 		
-		JLabel valueP = new JLabel(""+this.value);
+		JLabel valueP = new JLabel(""+land.getCost());
 		card.add(valueP);
 		
 		card.setBorder(border);

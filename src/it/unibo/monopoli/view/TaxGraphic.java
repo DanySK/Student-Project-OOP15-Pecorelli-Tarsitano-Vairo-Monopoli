@@ -9,19 +9,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-public class CardGraphic {
+import it.unibo.monopoli.model.table.Tax;
 
-	private String name;
-	private Color color;
-	private int value;
+public class TaxGraphic implements IBoxGraphic {
+
+
 	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+	private Tax tax;
 	
-	public CardGraphic(String name, Color color, int value){
-		/*super();
-		setBackground(Color.GREEN);*/
-		this.name = name;
-		this.color = color;
-		this.value = value;
+	public TaxGraphic(Tax tax){
+		this.tax = tax;
 		
 	}
 	
@@ -30,19 +27,14 @@ public class CardGraphic {
 		JPanel card = new RotatedPanel();
 		card.setPreferredSize(new Dimension(60, 80));
 		card.setLayout(new GridLayout(4, 1));
-		
-		JLabel colorP = new JLabel();
-		colorP.setOpaque(true);
-		colorP.setBackground(this.color);
-		card.add(colorP);
-		
-		JLabel nameP = new JLabel(this.name);
+
+		JLabel nameP = new JLabel(tax.getName());
 		card.add(nameP);
 		
 		JPanel emptyP = new JPanel();
 		card.add(emptyP);
 		
-		JLabel valueP = new JLabel(""+this.value);
+		JLabel valueP = new JLabel(""+tax.getCost());
 		card.add(valueP);
 		
 		card.setBorder(border);

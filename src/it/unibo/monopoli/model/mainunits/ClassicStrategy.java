@@ -50,27 +50,27 @@ public class ClassicStrategy implements GameStrategy {
         case 2:
             players.stream().forEach(p -> {
                 p.addOwnership(this.ownerships.remove(r.nextInt(this.ownerships.size())));
-                p.setMoney();
+                p.setMoney(350);
             });
         case 3:
             players.stream().forEach(p -> {
                 p.addOwnership(this.ownerships.remove(r.nextInt(this.ownerships.size())));
-                p.setMoney();
+                p.setMoney(300);
             });
         case 4:
             players.stream().forEach(p -> {
                 p.addOwnership(this.ownerships.remove(r.nextInt(this.ownerships.size())));
-                p.setMoney();
+                p.setMoney(250);
             });
         case 5:
             players.stream().forEach(p -> {
                 p.addOwnership(this.ownerships.remove(r.nextInt(this.ownerships.size())));
-                p.setMoney();
+                p.setMoney(200);
             });
         case 6:
             players.stream().forEach(p -> {
                 p.addOwnership(this.ownerships.remove(r.nextInt(this.ownerships.size())));
-                p.setMoney();
+                p.setMoney(150);
             });
         default:
             break;

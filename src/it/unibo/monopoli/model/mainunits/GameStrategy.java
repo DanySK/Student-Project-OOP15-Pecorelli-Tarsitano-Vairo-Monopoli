@@ -12,9 +12,6 @@ import it.unibo.monopoli.model.table.Box;
  */
 public interface GameStrategy {
 
-    // public int howManyBuildings();
-    // public Building getBuilding();
-
     /**
      * Returns a {@link List} of the game's {@link Player}s.
      * 

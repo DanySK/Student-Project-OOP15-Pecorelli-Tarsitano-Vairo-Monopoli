@@ -5,6 +5,7 @@ import java.util.Set;
 
 import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.actions.ToBePaid;
+import it.unibo.monopoli.model.mainunits.Player;
 
 /**
  * This class represents an implementation of {@link Box}. More specifically it
@@ -64,6 +65,16 @@ public class Start implements Box {
     @Override
     public void setObligatoryActions(final Set<Action> actions) {
         this.obligatoryActions.addAll(actions);
+    }
+
+    /**
+     * Returns the values of the money to pick up when some {@link Player} pass
+     * from this {@link Box}.
+     * 
+     * @return the money to pick up
+     */
+    public static int getMuchToPick() {
+        return MONEY_TO_PICK_UP;
     }
 
 }

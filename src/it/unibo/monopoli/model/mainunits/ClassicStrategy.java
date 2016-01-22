@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import it.unibo.monopoli.model.actions.Action;
+import it.unibo.monopoli.model.actions.MoveUpTo;
 import it.unibo.monopoli.model.cards.Chance;
+import it.unibo.monopoli.model.cards.ClassicCard;
 import it.unibo.monopoli.model.cards.CommunityChest;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Box;
@@ -108,18 +111,6 @@ public class ClassicStrategy implements GameStrategy {
         return this.buildings;
     }
 
-    // @Override
-    // public int howManyBuildings() {
-    // // TODO Auto-generated method stub
-    // return 0;
-    // }
-    //
-    // @Override
-    // public Building getBuilding() {
-    // // TODO Auto-generated method stub
-    // return null;
-    // }
-
     @Override
     public List<Player> getPlayers() {
         return Collections.unmodifiableList(this.players);
@@ -152,7 +143,22 @@ public class ClassicStrategy implements GameStrategy {
     
     private void inizializesDecks() {
         Chance chance = new Chance();
-        chance.addCard(new );
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", MoveUpTo.takeSteps(-3)));
+        chance.addCard(new ClassicCard(chance, "GO TO MAYFAIR: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), MoveUpTo.moveUpToBox(box);(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
         CommunityChest chest = new CommunityChest();
         chest.addCard(new );
         this.decks.add(0, chance);

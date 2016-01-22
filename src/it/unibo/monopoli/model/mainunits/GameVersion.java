@@ -4,29 +4,12 @@ import java.util.Set;
 
 import it.unibo.monopoli.model.table.Box;
 
-//import java.util.Collection;
-//import java.util.Set;
-//
-//import it.unibo.monopoli.model.actions.Action;
-//import it.unibo.monopoli.model.table.Box;
-//import it.unibo.monopoli.model.table.Building;
-//import it.unibo.monopoli.model.table.Contract;
-//import it.unibo.monopoli.model.table.Group;
-
 /**
  * This is the interface that specifies witch instances are to be used depending
  * on the chosen game's version.
  *
  */
 public interface GameVersion {
-
-    // /**
-    // * This method return all the {@link Building}s required for the specific
-    // * version.
-    // *
-    // * @return a {@link Set} of {@link Building}s
-    // */
-    // Collection<Building> getBuildings();
 
     /**
      * This method return all the {@link Box}es required for the specific
@@ -45,8 +28,6 @@ public interface GameVersion {
      */
     Bank getBank();
 
-    // Player getNextPlayer();
-
     /**
      * Returns the {@link Player} which have to play.
      * 
@@ -55,15 +36,5 @@ public interface GameVersion {
      * @return the {@link Player} which have to play
      */
     Player endOfTurnAndNextPlayer(Player player);
-
-    // void rollDices(Player player);
-
-    // /**
-    // * This method return all the {@link Action}s required for the specific
-    // * version.
-    // *
-    // * @return a {@link Bank}
-    // */
-    // Set<Action> getAllActions();
 
 }

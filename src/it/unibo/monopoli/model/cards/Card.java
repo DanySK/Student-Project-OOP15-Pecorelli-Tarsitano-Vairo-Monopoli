@@ -10,11 +10,11 @@ import it.unibo.monopoli.model.actions.Action;
 public interface Card {
 
     /**
-     * Return the name of the {@link Card}.
+     * Return the {@link Deck} to which the {@link Card} belongs.
      * 
-     * @return {@link Card}'s name
+     * @return {@link Card}'s {@link Deck}
      */
-    String getName();
+    Deck getDeck();
 
     /**
      * Return the description of the specific {@link Card}.

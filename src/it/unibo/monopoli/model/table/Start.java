@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import it.unibo.monopoli.model.actions.Action;
+import it.unibo.monopoli.model.actions.ToBePaid;
 
 /**
  * This class represents an implementation of {@link Box}. More specifically it
@@ -12,14 +13,15 @@ import it.unibo.monopoli.model.actions.Action;
  */
 public class Start implements Box {
 
+    private static final int MONEY_TO_PICK_UP = 1;
+
     private final String name;
     private final int ID;
     private final Set<Action> allowedActions;
     private final Set<Action> obligatoryActions;
 
     /**
-     * Constructs an implementation of {@link Start} that needs a name and
-     * a ID.
+     * Constructs an implementation of {@link Start} that needs a name and a ID.
      * 
      * @param name
      *            - of this {@link Box}
@@ -31,6 +33,7 @@ public class Start implements Box {
         this.ID = ID;
         this.allowedActions = new HashSet<>();
         this.obligatoryActions = new HashSet<>();
+        this.obligatoryActions.add(new ToBePaid(MONEY_TO_PICK_UP));
     }
 
     @Override

@@ -29,7 +29,7 @@ public class GoToPrison implements Action {
     @Override
     public void play(final Player player) {
         player.setPrison(true);
-        player.getPawn().setPos(this.prison.getID());
+        MoveUpTo.moveUpToBox(prison);
     }
 
 }

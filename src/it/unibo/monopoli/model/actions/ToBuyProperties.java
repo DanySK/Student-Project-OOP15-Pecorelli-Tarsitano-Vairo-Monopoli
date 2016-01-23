@@ -13,36 +13,16 @@ import it.unibo.monopoli.model.table.Ownership;
  * allows to buy {@link Ownership}s and/or {@link Building}s.
  *
  */
-public class ToBuyProperties extends ToBuyAndSellProperties {
+public final class ToBuyProperties extends ToBuyAndSellProperties {
 
     private final Ownership ownership;
 
-    /**
-     * Constructs an instance of {@link ToBuyProperties}'s {@link Action}. This
-     * specific constructor is the one for buying {@link Ownership}s.
-     * 
-     * @param amount
-     *            - the amount necessary to buy the {@link Ownership}
-     * @param ownership
-     *            - the {@link Ownership} to buy
-     */
-    protected ToBuyProperties(final int amount, final Ownership ownership) {
+    private ToBuyProperties(final int amount, final Ownership ownership) {
         super(amount);
         this.ownership = ownership;
     }
 
-    /**
-     * Constructs an instance of {@link ToBuyProperties}'s {@link Action}. This
-     * specific constructor is the one for buying {@link Building}s.
-     * 
-     * @param amount
-     *            - the amount necessary to buy the {@link Building}
-     * @param land
-     *            - the {@link Land} on which the {@link Building} will be built
-     * @param building
-     *            - the {@link Building} to buy
-     */
-    protected ToBuyProperties(final int amount, final Land land, final Building building) {
+    private ToBuyProperties(final int amount, final Land land, final Building building) {
         super(amount, building);
         this.ownership = land;
     }

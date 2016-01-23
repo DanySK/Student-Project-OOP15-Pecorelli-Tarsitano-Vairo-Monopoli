@@ -5,6 +5,7 @@ import java.util.Set;
 
 import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.actions.ToBePaid;
+import it.unibo.monopoli.model.mainunits.Player;
 
 /**
  * This class represents an implementation of {@link Box}. More specifically it
@@ -16,7 +17,7 @@ public class Start implements Box {
     private static final int MONEY_TO_PICK_UP = 20;
 
     private final String name;
-    private final int ID;
+    private final int id;
     private final Set<Action> allowedActions;
     private final Set<Action> obligatoryActions;
 
@@ -25,12 +26,12 @@ public class Start implements Box {
      * 
      * @param name
      *            - of this {@link Box}
-     * @param ID
+     * @param id
      *            - of this {@link Box}
      */
-    public Start(final String name, final int ID) {
+    public Start(final String name, final int id) {
         this.name = name;
-        this.ID = ID;
+        this.id = id;
         this.allowedActions = new HashSet<>();
         this.obligatoryActions = new HashSet<>();
         this.obligatoryActions.add(new ToBePaid(MONEY_TO_PICK_UP));
@@ -43,7 +44,7 @@ public class Start implements Box {
 
     @Override
     public int getID() {
-        return this.ID;
+        return this.id;
     }
 
     @Override
@@ -64,6 +65,16 @@ public class Start implements Box {
     @Override
     public void setObligatoryActions(final Set<Action> actions) {
         this.obligatoryActions.addAll(actions);
+    }
+
+    /**
+     * Returns the values of the money to pick up when some {@link Player} pass
+     * from this {@link Box}.
+     * 
+     * @return the money to pick up
+     */
+    public static int getMuchToPick() {
+        return MONEY_TO_PICK_UP;
     }
 
 }

@@ -18,7 +18,6 @@ public class GameVersionImpl implements GameVersion {
     private final List<Player> players;
     private Iterator<Player> iter;
     private final Set<Box> allBoxes;
-    // private Player actualPlayer;
 
     /**
      * Constructs an instance that will be able to give back the right version
@@ -34,15 +33,6 @@ public class GameVersionImpl implements GameVersion {
         this.iter = this.players.iterator();
         this.allBoxes = strategy.getBoxes();
     }
-
-    // @Override
-    // public List<Building> getBuildings() {
-    // final List<Building> buildings = new LinkedList<>();
-    // for (int i = 0; i < this.strategy.howManyBuildings(); i++) {
-    // buildings.add(this.strategy.getBuilding());
-    // }
-    // return Collections.unmodifiableList(buildings);
-    // }
 
     @Override
     public Bank getBank() {
@@ -72,11 +62,5 @@ public class GameVersionImpl implements GameVersion {
     public Set<Box> getAllBoxes() {
         return Collections.unmodifiableSet(this.allBoxes);
     }
-
-    // @Override
-    // public Set<Action> getAllActions() {
-    // // TODO Auto-generated method stub
-    // return null;
-    // }
 
 }

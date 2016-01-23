@@ -35,12 +35,13 @@ public class MoveUpTo implements Action {
      *            - the number of the steps to take
      * @throws IllegalArgumentException
      *             - if the number in input is zero
+     * @return an instance of {@link MoveUpTo}
      */
     public static MoveUpTo takeSteps(final int stepsToTake) {
         if (stepsToTake == 0) {
             throw new IllegalArgumentException("The steps to take can't be zero");
         }
-        new MoveUpTo(stepsToTake);
+        return new MoveUpTo(stepsToTake);
     }
 
     /**
@@ -51,18 +52,19 @@ public class MoveUpTo implements Action {
      *            - the {@link Box} to which to go
      * @throws IllegalArgumentException
      *             - if the {@link Box} in input is null
+     * @return an instance of {@link MoveUpTo}
      */
     public static MoveUpTo moveUpToBox(final Box box) {
         if (box == null) {
             throw new NullPointerException();
         }
-        new MoveUpTo(box);
+        return new MoveUpTo(box);
     }
 
     @Override
     public void play(final Player player) {
         (this.box == null) 
-                ? player.getPawn().setPos(player.getPawn().getActualPos() + this.stepsToTake);
+                ? player.getPawn().setPos(player.getPawn().getActualPos() + this.stepsToTake)
                 : player.getPawn().setPos(this.box.getID());
     }
 

@@ -91,32 +91,30 @@ public class ProvaTabellone {
 				panel.add(newcard.build(), gbc);
 			});
 
-//		final JLabel label = new JLabel("20");
-//		label.setBorder(border);
-//		GridBagConstraints gbc_label = new GridBagConstraints();
-//		JPanel casella20 = new CardGraphic("Via Verdi", Color.GREEN, 10000).build();
-//		gbc_label.insets = new Insets(0, 0, 0, 0);
-//		gbc_label.gridx = 0;
-//		gbc_label.gridy = 0;
-//		panel.add(casella20, gbc_label);
-//
-//		final JLabel label_11 = new JLabel("21");
-//		label_11.setBorder(border);
-//		GridBagConstraints gbc_label_11 = new GridBagConstraints();
-//		JPanel casella21 = new CardGraphic("Via Rossi", Color.RED, 15000).build();
-//		gbc_label_11.insets = new Insets(0, 0, 0, 0);
-//		gbc_label_11.gridx = 1;
-//		gbc_label_11.gridy = 0;
-//		panel.add(casella21, gbc_label_11);
-//
-//		final JLabel label_12 = new JLabel("22");
-//		GridBagConstraints gbc_label_12 = new GridBagConstraints();
-//		JPanel casella22 = new CardGraphic("Via Gialli", Color.YELLOW, 20000).build();
-//		gbc_label_12.insets = new Insets(0, 0, 0, 0);
-//		gbc_label_12.gridx = 2;
-//		gbc_label_12.gridy = 0;
-//		panel.add(casella22, gbc_label_12);
-//
+		IBoxGraphic casella20;
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		casella20 = new CardGraphic("Via Verdi", Color.BLUE, 10000, Position.NORTH );
+		gbc_label.insets = new Insets(0, 0, 0, 0);
+		gbc_label.gridx = 0;
+		gbc_label.gridy = 0;
+		panel.add(casella20.build(), gbc_label);
+
+		IBoxGraphic casella21;
+		GridBagConstraints gbc_label_11 = new GridBagConstraints();
+		casella21 = new CardGraphic("Via Rossi", Color.RED, 15000,Position.NORTH);
+		gbc_label_11.insets = new Insets(0, 0, 0, 0);
+		gbc_label_11.gridx = 1;
+		gbc_label_11.gridy = 0;
+		panel.add(casella21.build(), gbc_label_11);
+
+		IBoxGraphic casella22;
+		GridBagConstraints gbc_label_12 = new GridBagConstraints();
+		casella22 = new CardGraphic("Via Gialli", Color.YELLOW, 20000,Position.NORTH);
+		gbc_label_12.insets = new Insets(0, 0, 0, 0);
+		gbc_label_12.gridx = 2;
+		gbc_label_12.gridy = 0;
+		panel.add(casella22.build(), gbc_label_12);
+
 //		final JLabel label_13 = new JLabel("23");
 //		GridBagConstraints gbc_label_13 = new GridBagConstraints();
 //		JPanel casella23 = new CardGraphic("Via Verdi", Color.GREEN, 10000).build();
@@ -181,14 +179,14 @@ public class ProvaTabellone {
 //		gbc_label_20.gridy = 0;
 //		panel.add(casella30, gbc_label_20);
 //
-//		final JLabel label_1 = new JLabel("19");
-//		GridBagConstraints gbc_label_1 = new GridBagConstraints();
-//		JPanel casella19 = new CardGraphic("Via Rossi", Color.RED, 15000).build();
-//		gbc_label_1.insets = new Insets(0, 0, 0, 0);
-//		gbc_label_1.gridx = 0;
-//		gbc_label_1.gridy = 1;
-//		// panel.add(label_1, gbc_label_1);
-//		panel.add(casella19, gbc_label_1);
+		final JLabel label_1 = new JLabel("19");
+		GridBagConstraints gbc_label_1 = new GridBagConstraints();
+		JPanel casella19 = new CardGraphic("Via Rossi", Color.RED, 15000, Position.WEST).build();
+		gbc_label_1.insets = new Insets(0, 0, 0, 0);
+		gbc_label_1.gridx = 0;
+		gbc_label_1.gridy = 1;
+		// panel.add(label_1, gbc_label_1);
+		panel.add(casella19, gbc_label_1);
 //
 //		final JLabel label_2 = new JLabel("18");
 //		GridBagConstraints gbc_label_2 = new GridBagConstraints();
@@ -254,14 +252,13 @@ public class ProvaTabellone {
 //		gbc_label_9.gridy = 9;
 //		panel.add(casella11, gbc_label_9);
 //
-//		final JLabel label_21 = new JLabel("31");
-//		GridBagConstraints gbc_label_21 = new GridBagConstraints();
-//		JPanel casella31 = new CardGraphic("Via Rossi", Color.RED, 15000).build();
-//		gbc_label_21.insets = new Insets(0, 0, 0, 0);
-//		gbc_label_21.gridx = 10;
-//		gbc_label_21.gridy = 1;
-//		// panel.add(label_21, gbc_label_21);
-//		panel.add(casella31, gbc_label_21);
+		IBoxGraphic casella31;
+		GridBagConstraints gbc_label_21 = new GridBagConstraints();
+		casella31 = new CardGraphic("Via Rossi", Color.RED, 15000,Position.EAST);
+		gbc_label_21.insets = new Insets(0, 0, 0, 0);
+		gbc_label_21.gridx = 10;
+		gbc_label_21.gridy = 1;
+		panel.add(casella31.build(), gbc_label_21);
 //
 //		final JLabel label_22 = new JLabel("32");
 //		GridBagConstraints gbc_label_22 = new GridBagConstraints();

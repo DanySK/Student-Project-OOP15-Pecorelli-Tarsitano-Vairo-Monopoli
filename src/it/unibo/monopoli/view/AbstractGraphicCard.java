@@ -23,7 +23,7 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
 		}else if (pos == Position.WEST) {
 			return new RotatedPanel(90);
 		}else  {
-			return new RotatedPanel();
+			return new RotatedPanel(0);
 		
 		}
 	}

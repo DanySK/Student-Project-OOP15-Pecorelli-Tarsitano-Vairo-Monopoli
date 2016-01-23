@@ -16,7 +16,7 @@ public class RotatedPanel extends JPanel {
 		}
 		
 		public RotatedPanel() {
-			this(90);
+			this();
 		}
 		@Override
 		public void paintComponent(Graphics g) {

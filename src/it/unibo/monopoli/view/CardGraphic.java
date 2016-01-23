@@ -9,16 +9,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-public class CardGraphic {
+import it.unibo.monopoli.view.IBoxGraphic.Position;
+
+public class CardGraphic extends AbstractGraphicCard {
 
 	private String name;
 	private Color color;
 	private int value;
 	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 	
-	public CardGraphic(String name, Color color, int value){
-		/*super();
-		setBackground(Color.GREEN);*/
+	public CardGraphic(String name, Color color, int value, Position pos){
+		super(pos);
 		this.name = name;
 		this.color = color;
 		this.value = value;
@@ -27,6 +28,7 @@ public class CardGraphic {
 	
 		
 	public JPanel build(){
+		this.getRotatedPanel();
 		JPanel card = new RotatedPanel();
 		card.setPreferredSize(new Dimension(60, 80));
 		card.setLayout(new GridLayout(4, 1));

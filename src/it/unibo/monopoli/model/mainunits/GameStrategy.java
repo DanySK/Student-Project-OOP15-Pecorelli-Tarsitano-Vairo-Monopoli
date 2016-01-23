@@ -1,7 +1,6 @@
 package it.unibo.monopoli.model.mainunits;
 
 import java.util.List;
-import java.util.Set;
 
 import it.unibo.monopoli.model.table.Box;
 
@@ -27,10 +26,10 @@ public interface GameStrategy {
     Bank getBank();
 
     /**
-     * Returns a {@link Set} with all the game's table's {@link Box}es.
+     * Returns a {@link List} with all the game's table's {@link Box}es.
      * 
-     * @return a {@link Set} of all {@link Box}es
+     * @return a {@link List} of all {@link Box}es
      */
-    Set<Box> getBoxes();
+    List<Box> getBoxes();
 
 }

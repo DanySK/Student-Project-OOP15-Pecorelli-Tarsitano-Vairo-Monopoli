@@ -1,6 +1,5 @@
 package it.unibo.monopoli.model.table;
 
-import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +15,7 @@ public class ClassicOwnership implements Ownership {
 
     private final String name;
     private final int cost;
-    private final int ID;
+    private final int id;
     private final Contract contract;
     private Owner owner;
     private final Set<Action> allowedActions;
@@ -32,7 +31,7 @@ public class ClassicOwnership implements Ownership {
      *            - of the {@link ClassicOwnership}
      * @param costOfOwnership
      *            - cost of the {@link ClassicOwnership}
-     * @param ID
+     * @param id
      *            - of the {@link ClassicOwnership}
      * @param owner
      *            - {@link Owner} of the {@link ClassicOwnership}
@@ -41,11 +40,11 @@ public class ClassicOwnership implements Ownership {
      * @param contract
      *            - {@link Contract} of the {@link ClassicOwnership}
      */
-    public ClassicOwnership(final String name, final int costOfOwnership, final int ID, final Owner owner,
+    public ClassicOwnership(final String name, final int costOfOwnership, final int id, final Owner owner,
             final Group group, final Contract contract) {
         this.name = name;
         this.cost = costOfOwnership;
-        this.ID = ID;
+        this.id = id;
         this.contract = contract;
         this.owner = owner;
         this.allowedActions = new HashSet<>();
@@ -60,7 +59,7 @@ public class ClassicOwnership implements Ownership {
 
     @Override
     public int getID() {
-        return this.ID;
+        return this.id;
     }
 
     @Override

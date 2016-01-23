@@ -10,7 +10,7 @@ import it.unibo.monopoli.model.table.Box;
  * {@link Player}'s {@link Pawn} and the number of steps that it has to take.
  *
  */
-public class MoveUpTo implements Action {
+public final class MoveUpTo implements Action {
 
     private final int stepsToTake;
     private final Box box;
@@ -56,16 +56,18 @@ public class MoveUpTo implements Action {
      */
     public static MoveUpTo moveUpToBox(final Box box) {
         if (box == null) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException("The box in input can't be null");
         }
         return new MoveUpTo(box);
     }
 
     @Override
     public void play(final Player player) {
-        (this.box == null) 
-                ? player.getPawn().setPos(player.getPawn().getActualPos() + this.stepsToTake)
-                : player.getPawn().setPos(this.box.getID());
+        if (this.box == null) {
+            player.getPawn().setPos(player.getPawn().getActualPos() + this.stepsToTake);
+        } else {
+            player.getPawn().setPos(this.box.getID());
+        }
     }
 
 }

@@ -9,9 +9,16 @@ import java.util.Random;
 import java.util.Set;
 
 import it.unibo.monopoli.model.actions.Action;
+import it.unibo.monopoli.model.actions.AddCardToPlayer;
+import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
+import it.unibo.monopoli.model.actions.GoToPrison;
 import it.unibo.monopoli.model.actions.MoveUpTo;
+import it.unibo.monopoli.model.actions.ToBePaid;
+import it.unibo.monopoli.model.actions.ToPay;
+import it.unibo.monopoli.model.actions.ToRollDices;
 import it.unibo.monopoli.model.cards.Chance;
 import it.unibo.monopoli.model.cards.ClassicCard;
+import it.unibo.monopoli.model.cards.ClassicCardBelonging;
 import it.unibo.monopoli.model.cards.CommunityChest;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Box;
@@ -32,6 +39,19 @@ import it.unibo.monopoli.model.table.TaxImpl;
  */
 public class ClassicStrategy implements GameStrategy {
 
+    private static final int START_POSITION = 0;
+    private static final int PRISON_POSITION = 10;
+    private static final int NEUTRAL_AREA_POSITION = 20;
+    private static final int POLICE_POSITION = 30;
+    private static final int FIRST_CHANCE_POSITION = 7;
+    private static final int SECOND_CHANCE_POSITION = 22;
+    private static final int THIRD_CHANCE_POSITION = 36;
+    private static final int FIRST_COMMUNITY_CHEST_POSITION = 2;
+    private static final int SECOND_COMMUNITY_CHEST_POSITION = 17;
+    private static final int THIRD_COMMUNITY_CHEST_POSITION = 33;
+    private static final int INCOME_TAX_POSITION = 4;
+    private static final int SUPER_TAX_POSITION = 38;
+
     private static final int N_MAX_OF_HOUSES = 32;
     private static final int N_MAX_OF_HOTELS = 12;
     private static final int AMOUNT_OF_FEES = 10;
@@ -39,6 +59,7 @@ public class ClassicStrategy implements GameStrategy {
     private final List<Player> players;
     private final List<Ownership> ownerships;
     private final List<Building> buildings;
+    private final List<Box> allBoxes;
     private final List<Deck> decks;
     private final Bank bank;
 
@@ -54,6 +75,7 @@ public class ClassicStrategy implements GameStrategy {
         this.inizializesPlayers(players);
         this.ownerships = this.inizializesOwnerships();
         this.buildings = this.inizializesBuildings();
+        this.allBoxes = new LinkedList<>();
         this.decks = new LinkedList<>();
         this.inizializesDecks();
         this.decks.add(new CommunityChest());
@@ -122,43 +144,50 @@ public class ClassicStrategy implements GameStrategy {
     }
 
     @Override
-    public Set<Box> getBoxes() {
-        Set<Box> allBoxes = new HashSet<>();
-        allBoxes.addAll(this.ownerships);
-        allBoxes.add(new Start("GO", 0));
-        PrisonOrTransit prison = new PrisonOrTransit("IN JAIL OR JUST VISITING", 10);
-        allBoxes.add(prison);
-        allBoxes.add(new NeutralArea("FREE PARKING", 20));
-        allBoxes.add(new Police("GO TO JAIL", 30, prison));
-        allBoxes.add(new DecksBox("CHANCE", 7, this.decks.get(0)));
-        allBoxes.add(new DecksBox("CHANCE", 22, this.decks.get(0)));
-        allBoxes.add(new DecksBox("CHANCE", 36, this.decks.get(0)));
-        allBoxes.add(new DecksBox("COMMUNITY CHEST", 2, this.decks.get(1)));
-        allBoxes.add(new DecksBox("COMMUNITY CHEST", 17, this.decks.get(1)));
-        allBoxes.add(new DecksBox("COMMUNITY CHEST", 33, this.decks.get(1)));
-        allBoxes.add(new TaxImpl("INCOME TAX", 4, AMOUNT_OF_FEES));
-        allBoxes.add(new TaxImpl("SUPER TAX", 38, AMOUNT_OF_FEES));
-        return allBoxes;
+    public List<Box> getBoxes() {
+        this.ownerships.stream()
+                       .forEach(o -> {
+                           this.allBoxes.add(o.getID(), o);
+                       });
+        this.allBoxes.add(START_POSITION, new Start("GO", START_POSITION));
+        PrisonOrTransit prison = new PrisonOrTransit("IN JAIL OR JUST VISITING", PRISON_POSITION);
+        this.allBoxes.add(PRISON_POSITION, prison);
+        this.allBoxes.add(NEUTRAL_AREA_POSITION, new NeutralArea("FREE PARKING", NEUTRAL_AREA_POSITION));
+        this.allBoxes.add(POLICE_POSITION, new Police("GO TO JAIL", POLICE_POSITION, prison));
+        this.allBoxes.add(FIRST_CHANCE_POSITION, new DecksBox("CHANCE", FIRST_CHANCE_POSITION, this.decks.get(0)));
+        this.allBoxes.add(SECOND_CHANCE_POSITION, new DecksBox("CHANCE", SECOND_CHANCE_POSITION, this.decks.get(0)));
+        this.allBoxes.add(THIRD_CHANCE_POSITION, new DecksBox("CHANCE", THIRD_CHANCE_POSITION, this.decks.get(0)));
+        this.allBoxes.add(FIRST_COMMUNITY_CHEST_POSITION, new DecksBox("COMMUNITY CHEST", FIRST_COMMUNITY_CHEST_POSITION, this.decks.get(1)));
+        this.allBoxes.add(SECOND_COMMUNITY_CHEST_POSITION, new DecksBox("COMMUNITY CHEST", SECOND_COMMUNITY_CHEST_POSITION, this.decks.get(1)));
+        this.allBoxes.add(THIRD_COMMUNITY_CHEST_POSITION, new DecksBox("COMMUNITY CHEST", THIRD_COMMUNITY_CHEST_POSITION, this.decks.get(1)));
+        this.allBoxes.add(INCOME_TAX_POSITION, new TaxImpl("INCOME TAX", INCOME_TAX_POSITION, AMOUNT_OF_FEES));
+        this.allBoxes.add(SUPER_TAX_POSITION, new TaxImpl("SUPER TAX", SUPER_TAX_POSITION, AMOUNT_OF_FEES));
+        return this.allBoxes;
     }
     
     private void inizializesDecks() {
         Chance chance = new Chance();
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", MoveUpTo.takeSteps(-3)));
-        chance.addCard(new ClassicCard(chance, "GO TO MAYFAIR: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), MoveUpTo.moveUpToBox(box);(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
-        chance.addCard(new ClassicCard(chance, "TAKE 3 STEPS BACK (WITH BEST WISHES)", new MoveUpTo(-3)));
+        chance.addCard(new ClassicCard("TAKE 3 STEPS BACK (WITH BEST WISHES)", MoveUpTo.takeSteps(-3)));
+        chance.addCard(new ClassicCard("GO TO PARK LANE: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), MoveUpTo.moveUpToBox(this.allBoxes.get(37))));
+        chance.addCard(new ClassicCard("ADVANCE TO THE NEAREST STATION: IF IT'S FREE, YOU CAN BUY IT;"
+                + "IF IT IS OWNED BY ANOTHER PLAYER, PAY HIM TWICE THE PRICE THAT MATTER", new ToPay(amount)));
+        ClassicCardBelonging card1 = new ClassicCardBelonging("GET OUT FREE OF JAIL. YOU CAN KEEP THIS CARD AND USE IT WHEN YOU WANT TO, OR YOU CAN SELL IT");
+        card1.addItselfToPlayer();
+        chance.addCard(card1);
+        chance.addCard(new ClassicCard("FINE FOR SPEEDING. PAY $20", new ToPay(20)));
+        chance.addCard(new ClassicCard("THE BANK WILL YOU PAY A BONUS OF $50", new ToBePaid(50)));
+        chance.addCard(new ClassicCard("GO DIRECTLY TO JAIL", new GoToPrison(this.allBoxes.get(10))));
+        chance.addCard(new ClassicCard("PERFORM MAINTENANCE WORK ON ALL OUR BUILDINGS. YOU HAVE TO PAY 25 FOR EACH HOME AND 100 FOR EACH HOTEL THAT YOU OWN", new ToPay()));
+        chance.addCard(new ClassicCard("YOU HAVE BEEN PROMOTED TO THE PRESIDENCY OF THE BOARD OF DIRECTORS. YOU HAVE TO PAY 50 TO ANY PLAYER", new ToPay(), new ToBePaid(amount)));
+        chance.addCard(new ClassicCard("GO TO BOX 'GO' AND TAKE $" + Start.getMuchToPick(), MoveUpTo.moveUpToBox(this.allBoxes.get(START_POSITION))));
+        chance.addCard(new ClassicCard("GO TO THE FENCHURCH ST. STATION: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), MoveUpTo.moveUpToBox(this.allBoxes.get()));
+        chance.addCard(new ClassicCard("ADVANCE TO THE NEAREST STATION: IF IT'S FREE, YOU CAN BUY IT;"
+                + "IF IT IS OWNED BY ANOTHER PLAYER, PAY HIM TWICE THE PRICE THAT MATTER", new ToPay(amount)));
+        chance.addCard(new ClassicCard("GO TO THE TRAFALGAR SQUARE: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), MoveUpTo.moveUpToBox(this.allBoxes.get()));
+        chance.addCard(new ClassicCard("GO TO THE WHITEHALL: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), MoveUpTo.moveUpToBox(this.allBoxes.get()));
+        chance.addCard(new ClassicCard("ADVANCE TO THE NEAREST STATION: IF IT'S FREE, YOU CAN BUY IT;"
+                + "IF IT IS OWNED BY ANOTHER PLAYER, LAUNCHING THE DICES AND PAY THE OWNER 10 TIMES THE NUMBER RELEASED", new ToRollDices(new ClassicDicesStrategy()), new ToPay(amount)));
+        chance.addCard(new ClassicCard("MATURANO THE COUPONS OF YOUR REAL ESTATE FUNDS: COLLECT $150", new ToBePaid(50)));
         CommunityChest chest = new CommunityChest();
         chest.addCard(new );
         this.decks.add(0, chance);

@@ -44,6 +44,14 @@ public interface Player {
     Set<Ownership> getOwnerships();
 
     /**
+     * Adds a {@link Card} to the {@link Player}'s {@link Deck}.
+     * 
+     * @param card
+     *            - the {@link Card} to add
+     */
+    void addCard(Card card);
+
+    /**
      * Return an {@link Optional}'s {@link Deck} of player's {@link Card}s.
      * 
      * @return an {@link Optional}'s {@link Deck}

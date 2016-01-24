@@ -5,11 +5,12 @@ import javax.swing.*;
 
 public class MyFrame extends JFrame {
 
-	public MyFrame(String title, LayoutManager lm) {
+	public MyFrame(String title, LayoutManager lm, Dimension dim) {
 		super(title);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1024, 700);
+		this.setSize(dim);
 		this.getContentPane().add(new JPanel(lm));
+		this.setBackground(Color.RED);
 
 	}
 

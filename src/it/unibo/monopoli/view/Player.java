@@ -14,25 +14,30 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 public class Player extends JComponent {
-	
+
 	Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
-	
-	public Player(){
+
+	public Player() {
 		build();
-		
 	}
-	
-	public JPanel build(){
+
+	/**
+	 * Method that build the Player's panel where there are the information
+	 * about player situation
+	 * 
+	 * @return -return a Player's panel
+	 */
+	public JPanel build() {
 		JPanel panelM = new JPanel();
 		JPanel panel = new JPanel();
-		
+
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		
+
 		panel.setLayout(gridBagLayout);
-		panel.setPreferredSize(new Dimension(300,70));
-		
+		panel.setPreferredSize(new Dimension(270, 70));
+
 		panel.setBorder(border);
-		
+
 		final JLabel lblGiocatore = new JLabel("Giocatore");
 		lblGiocatore.setFont(new Font("Papyrus", Font.BOLD, 22));
 		GridBagConstraints gbc_lblGiocatore = new GridBagConstraints();
@@ -41,7 +46,7 @@ public class Player extends JComponent {
 		gbc_lblGiocatore.gridx = 0;
 		gbc_lblGiocatore.gridy = 0;
 		panel.add(lblGiocatore, gbc_lblGiocatore);
-		
+
 		final JLabel lblMoney = new JLabel("Money:");
 		lblMoney.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_lblMoney = new GridBagConstraints();
@@ -49,7 +54,7 @@ public class Player extends JComponent {
 		gbc_lblMoney.gridx = 3;
 		gbc_lblMoney.gridy = 4;
 		panel.add(lblMoney, gbc_lblMoney);
-		
+
 		final JLabel lblSoldi = new JLabel("Soldi");
 		GridBagConstraints gbc_lblSoldi = new GridBagConstraints();
 		gbc_lblSoldi.insets = new Insets(0, 0, 5, 5);
@@ -59,11 +64,9 @@ public class Player extends JComponent {
 		panelM.add(panel);
 		panel.setVisible(true);
 		panelM.setVisible(true);
-		
+
 		return panelM;
-		
+
 	}
-	
-	
 
 }

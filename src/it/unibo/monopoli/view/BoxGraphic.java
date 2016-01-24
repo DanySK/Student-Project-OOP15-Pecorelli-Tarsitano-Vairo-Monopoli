@@ -24,6 +24,7 @@ public class BoxGraphic   extends AbstractGraphicCard  {
 	}
 	
 		
+	@Override
 	public JPanel build(){
 		JPanel card = getRotatedPanel();
 		card.setPreferredSize(new Dimension(80, 80));

@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.Set;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,12 +11,10 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 
-import it.unibo.monopoli.model.table.Box;
-
 public class Index {
 
 	public static void main(String[] args) {
-		final MyFrame frame = new MyFrame("Monopoli", new BorderLayout());
+		final MyFrame frame = new MyFrame("Monopoli", new BorderLayout(), new Dimension(1024,700));
 
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 
@@ -36,14 +32,13 @@ public class Index {
 		//JPanelMain Center
 		JPanel centerP = new JPanel(); // JPanelMain Centrale
 		centerP.setLayout(new BorderLayout());
-		
+
 		JPanel tabellone = new ProvaTabellone(null, 10, 10).initialize();
 		JPanel tableau = new JPanel();
 		centerP.add(tableau,BorderLayout.CENTER);
 		tableau.add(tabellone);
 		//System.out.println(tabellone.getLayout() + "" + tabellone.getComponents());
-		
-		
+
 		Border border2 = BorderFactory.createLineBorder(Color.GREEN, 2);
 		tabellone.setBorder(border2);
 		tableau.setBorder(border);

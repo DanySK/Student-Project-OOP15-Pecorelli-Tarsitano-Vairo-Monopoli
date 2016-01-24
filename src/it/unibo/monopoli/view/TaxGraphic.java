@@ -24,6 +24,7 @@ public class TaxGraphic extends AbstractGraphicCard {
 	}
 	
 		
+	@Override
 	public JPanel build(){
 		JPanel card = new RotatedPanel();
 		card.setPreferredSize(new Dimension(60, 80));

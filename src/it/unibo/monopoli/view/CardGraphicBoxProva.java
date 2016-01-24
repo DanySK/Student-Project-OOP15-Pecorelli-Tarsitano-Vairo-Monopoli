@@ -9,39 +9,41 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import it.unibo.monopoli.model.table.Ownership;
+public class CardGraphicBoxProva extends AbstractGraphicCard {
 
-public class OwnershipGraphic extends AbstractGraphicCard {
-
+	private String name;
+	private Color color;
+	private int value;
 	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-	private Ownership own;
 	
-	public OwnershipGraphic(Ownership own, Position pos){
+	public CardGraphicBoxProva(String name, Color color, int value, Position pos){
 		super(pos);
-		this.own = own;
+		this.name = name;
+		this.color = color;
+		this.value = value;
 		
-	
 	}
 	
 		
 	@Override
 	public JPanel build(){
-		JPanel card = new RotatedPanel();
-		card.setPreferredSize(new Dimension(60, 80));
+		
+		JPanel card = getRotatedPanel();
+		card.setPreferredSize(new Dimension(80, 80));
 		card.setLayout(new GridLayout(4, 1));
 		
-//		JLabel colorP = new JLabel();
-//		colorP.setOpaque(true);
-//		colorP.setBackground(Color.white);
-//		card.add(colorP);
+		JLabel colorP = new JLabel();
+		colorP.setOpaque(true);
+		colorP.setBackground(this.color);
+		card.add(colorP);
 		
-		JLabel nameP = new JLabel(own.getName());
+		JLabel nameP = new JLabel(this.name);
 		card.add(nameP);
 		
 		JPanel emptyP = new JPanel();
 		card.add(emptyP);
 		
-		JLabel valueP = new JLabel(""+own.getCost());
+		JLabel valueP = new JLabel(""+this.value);
 		card.add(valueP);
 		
 		card.setBorder(border);

@@ -9,52 +9,46 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import it.unibo.monopoli.view.IBoxGraphic.Position;
-
 public class CardGraphic extends AbstractGraphicCard {
 
 	private String name;
 	private Color color;
 	private int value;
 	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-	
-	public CardGraphic(String name, Color color, int value, Position pos){
+
+	public CardGraphic(String name, Color color, int value, Position pos) {
 		super(pos);
 		this.name = name;
 		this.color = color;
 		this.value = value;
-		
+
 	}
-	
-		
-	public JPanel build(){
-		this.getRotatedPanel();
-		JPanel card = new RotatedPanel();
+
+	@Override
+	public JPanel build() {
+		//JPanel card = new JPanel();
+		JPanel card = getRotatedPanel();
 		card.setPreferredSize(new Dimension(60, 80));
 		card.setLayout(new GridLayout(4, 1));
-		
+
 		JLabel colorP = new JLabel();
 		colorP.setOpaque(true);
 		colorP.setBackground(this.color);
 		card.add(colorP);
-		
+
 		JLabel nameP = new JLabel(this.name);
 		card.add(nameP);
-		
+
 		JPanel emptyP = new JPanel();
 		card.add(emptyP);
-		
-		JLabel valueP = new JLabel(""+this.value);
+
+		JLabel valueP = new JLabel("" + this.value);
 		card.add(valueP);
-		
+
 		card.setBorder(border);
 		card.setVisible(true);
-			
 		return card;
-		
-		
-	}
 
-	
+	}
 
 }

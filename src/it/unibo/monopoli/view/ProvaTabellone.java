@@ -40,15 +40,15 @@ public class ProvaTabellone {
 		// panel.setBorder(border2);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		
-//		  gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//		  0}; gbl_panel.rowHeights = new int[]{36, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//		  0, 0, 0}; gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0,
-//		  0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-//		  gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
-//		  0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-//		 
+		  gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		  0}; gbl_panel.rowHeights = new int[]{36, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		  0, 0, 0}; gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0,
+		  0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		  gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
+		  0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		 
 		panel.setLayout(gbl_panel);
-
+/*
 		if (cards != null)
 			cards.forEach(card -> {
 				int c = -1, r = -1;
@@ -90,10 +90,10 @@ public class ProvaTabellone {
 				gbc.gridy = r;
 				panel.add(newcard.build(), gbc);
 			});
-
+*/
 		IBoxGraphic casella20;
 		GridBagConstraints gbc_lblCiaooooo = new GridBagConstraints();
-		casella20 = new CardGraphicBoxProva("Via Verdi", Color.BLUE, 10000, Position.NORTH );
+		casella20 = new CardGraphicBoxProva("Via Verdi", Color.RED, 10000, Position.NORTH );
 		gbc_lblCiaooooo.insets = new Insets(0, 0, 0, 0);
 		gbc_lblCiaooooo.gridx = 0;
 		gbc_lblCiaooooo.gridy = 0;
@@ -117,7 +117,7 @@ public class ProvaTabellone {
 
 		IBoxGraphic casella23;
 		GridBagConstraints gbc_label_13 = new GridBagConstraints();
-		casella23 = new CardGraphic("Via Verdi", Color.GREEN, 10000, Position.NORTH);
+		casella23 = new CardGraphic("Via Verdi", Color.BLUE, 10000, Position.NORTH);
 		gbc_label_13.insets = new Insets(0, 0, 0, 0);
 		gbc_label_13.gridx = 3;
 		gbc_label_13.gridy = 0;
@@ -181,7 +181,7 @@ public class ProvaTabellone {
 
 		IBoxGraphic casella19;
 		GridBagConstraints gbc_label_1 = new GridBagConstraints();
-		casella19 = new CardGraphic("Via Rossi", Color.RED, 15000, Position.WEST);
+		casella19 = new CardGraphicBoxProva("Via Bianchi", Color.RED, 15000, Position.WEST);
 		gbc_label_1.insets = new Insets(0, 0, 0, 0);
 		gbc_label_1.gridx = 0;
 		gbc_label_1.gridy = 1;
@@ -189,7 +189,7 @@ public class ProvaTabellone {
 
 		IBoxGraphic casella18;
 		GridBagConstraints gbc_label_2 = new GridBagConstraints();
-		casella18 = new CardGraphic("Via Verdi", Color.GREEN, 10000, Position.WEST);
+		casella18 = new CardGraphicBoxProva("Via Pesci", Color.CYAN, 10000, Position.WEST);
 		gbc_label_2.insets = new Insets(0, 0, 0, 0);
 		gbc_label_2.gridx = 0;
 		gbc_label_2.gridy = 2;
@@ -203,13 +203,13 @@ public class ProvaTabellone {
 		gbc_label_3.gridy = 3;
 		panel.add(casella17.build(), gbc_label_3);
 
-//		final JLabel label_4 = new JLabel("16");
-//		GridBagConstraints gbc_label_4 = new GridBagConstraints();
-//		JPanel casella16 = new CardGraphic("Via Verdi", Color.GREEN, 10000).build();
-//		gbc_label_4.insets = new Insets(0, 0, 0, 0);
-//		gbc_label_4.gridx = 0;
-//		gbc_label_4.gridy = 4;
-//		panel.add(casella16, gbc_label_4);
+		IBoxGraphic casella16;
+		GridBagConstraints gbc_label_4 = new GridBagConstraints();
+		casella16 = new CardGraphic("Via Verdi", Color.GRAY, 10000,Position.WEST);
+		gbc_label_4.insets = new Insets(0, 0, 0, 0);
+		gbc_label_4.gridx = 0;
+		gbc_label_4.gridy = 4;
+		panel.add(casella16.build(), gbc_label_4);
 //
 //		final JLabel label_5 = new JLabel("15");
 //		GridBagConstraints gbc_label_5 = new GridBagConstraints();
@@ -218,7 +218,7 @@ public class ProvaTabellone {
 //		gbc_label_5.gridx = 0;
 //		gbc_label_5.gridy = 5;
 //		panel.add(casella15, gbc_label_5);
-//
+
 //		final JLabel label_6 = new JLabel("14");
 //		GridBagConstraints gbc_label_6 = new GridBagConstraints();
 //		JPanel casella14 = new CardGraphic("Via Gialli", Color.YELLOW, 20000).build();
@@ -267,12 +267,12 @@ public class ProvaTabellone {
 		gbc_label_22.gridy = 2;
 		panel.add(casella32.build(), gbc_label_22);
 		
-		final JLabel lblCiaooooo = new JLabel("Ciaooooo");
-		GridBagConstraints gbc_lblCiaooooo1 = new GridBagConstraints();
-		gbc_lblCiaooooo1.insets = new Insets(0, 0, 0, 0);
-		gbc_lblCiaooooo1.gridx = 4;
-		gbc_lblCiaooooo1.gridy = 4;
-		panel.add(lblCiaooooo, gbc_lblCiaooooo1);
+//		final JLabel lblCiaooooo = new JLabel("Ciaooooo");
+//		GridBagConstraints gbc_lblCiaooooo1 = new GridBagConstraints();
+//		gbc_lblCiaooooo1.insets = new Insets(0, 0, 0, 0);
+//		gbc_lblCiaooooo1.gridx = 4;
+//		gbc_lblCiaooooo1.gridy = 4;
+//		panel.add(lblCiaooooo, gbc_lblCiaooooo1);
 
 		IBoxGraphic casella33;
 		GridBagConstraints gbc_label_23 = new GridBagConstraints();
@@ -409,8 +409,8 @@ public class ProvaTabellone {
 //		gbc_label_39.gridx = 1;
 //		gbc_label_39.gridy = 10;
 //		panel.add(casella9, gbc_label_39);
-		
-		
+		panelM.add(panel,BorderLayout.CENTER);
+		panelM.setVisible(true);
 
 		return panelM;
 	}

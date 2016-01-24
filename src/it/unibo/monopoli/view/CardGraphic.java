@@ -14,6 +14,7 @@ public class CardGraphic extends AbstractGraphicCard {
 	private String name;
 	private Color color;
 	private int value;
+	private Position pos;
 	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 
 	public CardGraphic(String name, Color color, int value, Position pos) {
@@ -21,21 +22,23 @@ public class CardGraphic extends AbstractGraphicCard {
 		this.name = name;
 		this.color = color;
 		this.value = value;
+		this.pos = pos;
 
 	}
 
 	@Override
 	public JPanel build() {
 		//JPanel card = new JPanel();
+		Dimension dim = new Dimension();
 		JPanel card = getRotatedPanel();
-		card.setPreferredSize(new Dimension(60, 80));
+		
+		card.setPreferredSize(new Dimension(100,100));
 		card.setLayout(new GridLayout(4, 1));
 
 		JLabel colorP = new JLabel();
 		colorP.setOpaque(true);
 		colorP.setBackground(this.color);
 		card.add(colorP);
-
 		JLabel nameP = new JLabel(this.name);
 		card.add(nameP);
 

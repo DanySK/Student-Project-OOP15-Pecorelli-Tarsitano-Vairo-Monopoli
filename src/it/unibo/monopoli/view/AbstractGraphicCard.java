@@ -1,5 +1,7 @@
 package it.unibo.monopoli.view;
 
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 
 /**
@@ -25,14 +27,19 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
 	}
 
 	protected JPanel getRotatedPanel() {
+		Dimension dim = null;
 		if (pos == Position.NORTH) {
-			return new RotatedPanel(180);
+			//Dimension dim = new Dimension(60,80);
+			return new RotatedPanel(180, dim);
 		} else if (pos == Position.EAST) {
-			return new RotatedPanel(-90);
+			//Dimension dim = new Dimension(80,60);
+			return new RotatedPanel(-90, dim);
 		} else if (pos == Position.WEST) {
-			return new RotatedPanel(90);
+			//Dimension dim = new Dimension(80,60);
+			return new RotatedPanel(90,dim);
 		} else {
-			return new RotatedPanel(0);
+			//Dimension dim = new Dimension(60,80);
+			return new RotatedPanel(0,dim);
 
 		}
 	}

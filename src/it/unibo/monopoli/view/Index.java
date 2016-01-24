@@ -44,8 +44,7 @@ public class Index {
 		tableau.setBorder(border);
 		centerP.setBorder(border2);
 		
-		Dimension dimPanelP = new Dimension(400, 0);
-		JPanel giocatore = new Player().build();
+		
 		
 //East		
 
@@ -54,7 +53,7 @@ public class Index {
 
 		
 		for (int i = 0; i < 8; i++) {
-			panelE.add(new Player().build());
+			panelE.add(new Player());
 		}
 		
 		final JScrollPane scrollPane = new JScrollPane(/*panelE*/);

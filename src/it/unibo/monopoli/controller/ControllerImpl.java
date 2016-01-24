@@ -5,19 +5,28 @@ import java.util.List;
 
 import javax.swing.JTextField;
 
+import it.unibo.monopoli.model.actions.ToBuyAndSellProperties;
+import it.unibo.monopoli.model.actions.ToBuyProperties;
+import it.unibo.monopoli.model.actions.ToPay;
+import it.unibo.monopoli.model.actions.ToSellProperties;
 import it.unibo.monopoli.model.cards.Card;
+import it.unibo.monopoli.model.mainunits.ClassicStrategy;
+import it.unibo.monopoli.model.mainunits.GameStrategy;
 import it.unibo.monopoli.model.mainunits.Pawn;
 import it.unibo.monopoli.model.mainunits.Player;
+import it.unibo.monopoli.model.table.Ownership;
 
 public class ControllerImpl implements Controller {
 	final List<Player> player=new ArrayList<>();
 	int numberOfPlayer;
+	int actualPlayer=0;
     /**
     * Set the initial strategy of the game.
     * @param strategy
     *            - set a strategy {@link JTextField}s
     */
-    public void setStrategy(JTextField strategy) {
+    public void setStrategy() {
+    	final GameStrategy strategy = new ClassicStrategy(this.player);
     }
     /**
     * add player in a list.
@@ -26,7 +35,7 @@ public class ControllerImpl implements Controller {
     *            .
     * @param idPawn
     *            .
-    * @param typePlayer
+    * @param typePlayer 
     *            .
     */
     public void addPlayer(final JTextField name, final int idPawn, final int typePlayer) {
@@ -67,12 +76,30 @@ public class ControllerImpl implements Controller {
       * Method for buy a property by id.
       * @param id .
       */
-     void buyOwnership(int id);
+     void buyOwnership(int amount,Ownership ownership){
+
+    	 Player p=this.player.get(this.actualPlayer);
+    	 final ToBuyAndSellProperties buy= ToBuyProperties.buyAOwnership(amount, ownership);
+    	 
+     }
      /**
       * method for sell a property by id.
       * @param id .
       */
-     void sellOwnership(int id);
+     void sellOwnership(int amount,Ownership ownership){
+
+         Player p=this.player.get(this.actualPlayer);
+
+    	 final ToBuyAndSellProperties buy= ToSellProperties.buyAOwnership(amount, ownership);
+        
+         	
+     }
+     /** 
+      * This method allow to buy building for a properties
+      */
+     void BuyBuilding(int amount, Ownership){
+    	 
+     }
 
      /**
       * This method allow to mortgage a property by id.
@@ -109,7 +136,11 @@ public class ControllerImpl implements Controller {
      * Get pawn.
      * @return pawn
      */
-     Pawn getPawn();
+     Pawn getPawn(){
+
+         Player p=this.player.get(this.actualPlayer);
+    	 return p.getPawn();
+     }
 
      /**
       * Method for throwing dice.
@@ -123,14 +154,21 @@ public class ControllerImpl implements Controller {
      * add property on actual player.
      * @param property .
      */
-     void addOwnership(JTextField property); 
+     void addOwnership(Ownership ownership){
+    	 
+     }
 
      /**
      * go To next player.
      * @return the integer for next player
      */
-     public int endTurn(){
-    	 
+     public int endTurn() {
+        if (this.actualPlayer < this.numberOfPlayer) {
+            this.actualPlayer++;
+        } else {
+            this.actualPlayer = 0;
+        }
+        return this.actualPlayer;
      }
 
      /**
@@ -146,7 +184,9 @@ public class ControllerImpl implements Controller {
      /**
      *
      */
-     void pay();
+     void pay(int amount){
+    	 final ToPay pay=new ToPay(amount);
+     }
      
      /*prison action*/
      /*dice pair throw*/

@@ -12,8 +12,19 @@ import it.unibo.monopoli.model.table.Box;
  */
 public final class MoveUpTo implements Action {
 
+    private static final int FIRST_STATION = 5;
+    private static final int SECOND_STATION = 15;
+    private static final int THIRD_STATION = 25;
+    private static final int FOURTH_STATION = 35;
+    private static final int LAST_BOX = 39;
+
     private final int stepsToTake;
     private final Box box;
+
+    private MoveUpTo() {
+        this.stepsToTake = 0;
+        this.box = null;
+    }
 
     private MoveUpTo(final int stepsToTake) {
         this.stepsToTake = stepsToTake;
@@ -61,8 +72,33 @@ public final class MoveUpTo implements Action {
         return new MoveUpTo(box);
     }
 
+    /**
+     * Constructs an instance of this specific {@link Action}. It needs the
+     * {@link Box} to which that the {@link Player}'s {@link Pawn} has to go.
+     * 
+     * @return an instance of {@link MoveUpTo}
+     */
+    public static MoveUpTo theNearestStation() {
+        return new MoveUpTo();
+    }
+
     @Override
     public void play(final Player player) {
+        if (this.box == null && this.stepsToTake == 0) {
+            final int i = player.getPawn().getActualPos();
+            if ((i >= 0 && i <= FIRST_STATION) || (i > FOURTH_STATION && i <= LAST_BOX)) {
+                player.getPawn().setPos(FIRST_STATION);
+            }
+            if (i > FIRST_STATION && i <= SECOND_STATION) {
+                player.getPawn().setPos(SECOND_STATION);
+            }
+            if (i > SECOND_STATION && i <= THIRD_STATION) {
+                player.getPawn().setPos(THIRD_STATION);
+            }
+            if (i > THIRD_STATION && i <= FOURTH_STATION) {
+                player.getPawn().setPos(FOURTH_STATION);
+            }
+        }
         if (this.box == null) {
             player.getPawn().setPos(player.getPawn().getActualPos() + this.stepsToTake);
         } else {

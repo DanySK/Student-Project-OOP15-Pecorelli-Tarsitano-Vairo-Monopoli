@@ -24,4 +24,12 @@ public interface LandContract extends Contract {
      */
     int getBuildingIncome();
 
+    /**
+     * Return the income of the {@link Land} to which the {@link Contract}
+     * belongs.
+     * 
+     * @return the income of the {@link Land}
+     */
+    int getLandIncome();
+
 }

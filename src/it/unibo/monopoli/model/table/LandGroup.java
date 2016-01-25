@@ -1,6 +1,6 @@
 package it.unibo.monopoli.model.table;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * This interface represent the {@link Group}s of {@link Land}s. They are
@@ -11,12 +11,12 @@ import java.util.Set;
 public interface LandGroup {
 
     /**
-     * Return a {@link Set} of {@link Building}s that were built on such
+     * Return a {@link List} of {@link Building}s that were built on such
      * {@link LandGroup}.
      * 
-     * @return a {@link Set} of {@link Building}
+     * @return a {@link List} of {@link Building}
      */
-    Set<Building> getBuildings();
+    List<Building> getBuildings();
 
     /**
      * Add a new {@link Building}.

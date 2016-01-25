@@ -14,42 +14,31 @@ import it.unibo.monopoli.model.mainunits.Owner;
 public class ClassicOwnership implements Ownership {
 
     private final String name;
-    private final int cost;
     private final int id;
-    private final Contract contract;
+    private Contract contract;
     private Owner owner;
     private final Set<Action> allowedActions;
     private final Set<Action> obligatoryActions;
     private boolean mortgaged;
-    private final Group group;
+    private Group group;
 
     /**
      * Constructs an implementation of {@link ClassicOwnership} that needs a
-     * name, a cost, an ID, a {@link Owner} and a {@link Group}.
+     * name, an ID and an {@link Owner}.
      * 
      * @param name
      *            - of the {@link ClassicOwnership}
-     * @param costOfOwnership
-     *            - cost of the {@link ClassicOwnership}
      * @param id
      *            - of the {@link ClassicOwnership}
      * @param owner
      *            - {@link Owner} of the {@link ClassicOwnership}
-     * @param group
-     *            - {@link Group} of the {@link ClassicOwnership}
-     * @param contract
-     *            - {@link Contract} of the {@link ClassicOwnership}
      */
-    public ClassicOwnership(final String name, final int costOfOwnership, final int id, final Owner owner,
-            final Group group, final Contract contract) {
+    public ClassicOwnership(final String name, final int id, final Owner owner) {
         this.name = name;
-        this.cost = costOfOwnership;
         this.id = id;
-        this.contract = contract;
         this.owner = owner;
         this.allowedActions = new HashSet<>();
         this.obligatoryActions = new HashSet<>();
-        this.group = group;
     }
 
     @Override
@@ -113,8 +102,13 @@ public class ClassicOwnership implements Ownership {
     }
 
     @Override
-    public int getCost() {
-        return this.cost;
+    public void setContract(final Contract contract) {
+        this.contract = contract;
+    }
+
+    @Override
+    public void setGroup(final Group group) {
+        this.group = group;
     }
 
 }

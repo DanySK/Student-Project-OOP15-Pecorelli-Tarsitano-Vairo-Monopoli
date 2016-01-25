@@ -39,11 +39,12 @@ public interface Ownership extends Box {
     Group getGroup();
 
     /**
-     * Return the {@link Ownership}'s cost.
+     * Sets the {@link Group} of this {@link Ownership}.
      * 
-     * @return {@link Ownership}'s cost
+     * @param group
+     *            - the {@link Ownership}'s {@link Group}
      */
-    int getCost();
+    void setGroup(Group group);
 
     /**
      * Return true if the {@link Ownership} is mortgaged, else false.
@@ -61,5 +62,13 @@ public interface Ownership extends Box {
      *            {@link Ownership} is mortgaged (true) or not (false)
      */
     void setMortgage(boolean mortgage);
+
+    /**
+     * Sets the {@link Contract} of this {@link Ownership}.
+     * 
+     * @param contract
+     *            - {@link Ownership}'s {@link Contract}
+     */
+    void setContract(Contract contract);
 
 }

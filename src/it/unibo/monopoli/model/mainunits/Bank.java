@@ -10,7 +10,7 @@ import it.unibo.monopoli.model.table.Contract;
  * money, {@link Building}s and {@link Contract}s are keep at the beginning.
  *
  */
-public interface Bank {
+public interface Bank extends Owner{
 
     /**
      * Return a {@link List} of the remained {@link Contract}s.

@@ -19,22 +19,15 @@ public class ClassicLand extends ClassicOwnership implements Land {
      * 
      * @param name
      *            - of the {@link ClassicLand}
-     * @param costOfLand
-     *            - cost of the {@link ClassicLand}
-     * @param ID
+     * @param id
      *            - of the {@link ClassicLand}
      * @param owner
      *            - {@link Owner} of the {@link ClassicLand}
-     * @param group
-     *            - {@link Group} of the {@link ClassicLand}
-     * @param contract
-     *            - {@link Contract} of the {@link ClassicLand}
      * @param color
      *            - {@link Color} of the {@link ClassicLand}
      */
-    public ClassicLand(final String name, final int costOfLand, final int ID, final Owner owner, final Group group,
-            final Contract contract, final Color color) {
-        super(name, costOfLand, ID, owner, group, contract);
+    public ClassicLand(final String name, final int id, final Owner owner, final Color color) {
+        super(name, id, owner);
         this.color = color;
     }
 

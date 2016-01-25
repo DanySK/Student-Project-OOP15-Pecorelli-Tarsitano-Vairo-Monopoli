@@ -13,7 +13,7 @@ import it.unibo.monopoli.model.table.Ownership;
  * {@link Ownership}s and some money.
  *
  */
-public interface Player {
+public interface Player extends Owner{
 
     /**
      * Return the name of the {@link Player}.
@@ -81,6 +81,10 @@ public interface Player {
      * @return true if the {@link Player} is in prison
      */
     boolean isInPrison();
+    
+    int lastDicesNumber();
+    
+    void setLastDicesNumber();
 
     /**
      * Sets if the {@link Player} is going to prison (true) or not (false).

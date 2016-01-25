@@ -16,7 +16,7 @@ import it.unibo.monopoli.model.cards.Deck;
 public class DecksBox implements Box {
 
     private final String name;
-    private final int ID;
+    private final int id;
     private final Set<Action> allowedActions;
     private final Set<Action> obligatoryActions;
 
@@ -26,14 +26,14 @@ public class DecksBox implements Box {
      * 
      * @param name
      *            - of this {@link Box}
-     * @param ID
+     * @param id
      *            - of this {@link Box}
      * @param deck
      *            - {@link Deck} to draw from
      */
-    public DecksBox(final String name, final int ID, final Deck deck) {
+    public DecksBox(final String name, final int id, final Deck deck) {
         this.name = name;
-        this.ID = ID;
+        this.id = id;
         this.allowedActions = new HashSet<>();
         this.obligatoryActions = new HashSet<>();
         this.obligatoryActions.add(new ToDrawCards(deck));
@@ -46,7 +46,7 @@ public class DecksBox implements Box {
 
     @Override
     public int getID() {
-        return this.ID;
+        return this.id;
     }
 
     @Override

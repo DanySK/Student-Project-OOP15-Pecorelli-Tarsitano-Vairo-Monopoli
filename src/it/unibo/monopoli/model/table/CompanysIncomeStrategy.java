@@ -1,26 +1,26 @@
 package it.unibo.monopoli.model.table;
 
-import java.util.List;
+import it.unibo.monopoli.model.mainunits.Player;
 
-public class CompanysIncomeStrategy implements IncomeStrategy {
+public class CompanysIncomeStrategy extends BusinessesIncomeStrategy {
 
-    private final Ownership ownership;
+    private static final int ONE_COMPANY = 4;
+    private static final int TWO_COMPANIES = 10;
 
-    public CompanysIncomeStrategy(final Ownership ownership) {
-        this.ownership = ownership;
+    private final Player player;
+
+    public CompanysIncomeStrategy(final Ownership ownership, final Player player) {
+        super(ownership);
+        this.player = player;
     }
 
     @Override
-    public int getIncome() {
-        final Set<Ownership> members = this.ownership.getGroup().getMembers();
-        switch (build.size()) {
-        case 1: 
-            return (build.get(0) instanceof Home ? ONE_HOME : ONE_HOTEL) * ((ClassicLandContract) this.ownership.getContract()).getLandIncome();
-        case 2: return ((ClassicLandContract) this.ownership.getContract()).getLandIncome() * TWO_HOMES;
-        case 3: return ((ClassicLandContract) this.ownership.getContract()).getLandIncome() * THREE_HOMES;
-        case 4: return ((ClassicLandContract) this.ownership.getContract()).getLandIncome() * FOUR_HOMES;
-        default: return ((ClassicLandContract) this.ownership.getContract()).getLandIncome();
-       }
+    protected int getBusinessesIncome(final int size) {
+        switch (size) {
+        case 1: return this.player.lastDicesNumber() * ONE_COMPANY;
+        case 2: return this.player.lastDicesNumber() * TWO_COMPANIES;
+        default: throw new IllegalArgumentException();
+        }
     }
 
 }

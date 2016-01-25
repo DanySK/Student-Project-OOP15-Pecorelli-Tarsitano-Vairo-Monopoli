@@ -1,41 +1,21 @@
 package it.unibo.monopoli.model.table;
 
-import java.util.List;
 
 public class ClassicLandContract extends ClassicContract implements LandContract {
-
-    private static final int ONE_HOME = 5;
-    private static final int TWO_HOMES = 15;
-    private static final int THREE_HOMES = 35;
-    private static final int FOUR_HOMES = 55;
-    private static final int ONE_HOTEL = 75;
 
     private final int buildingsCost;
     private final int landIncome;
 
-    protected ClassicLandContract(final Ownership ownership, final int cost, final int income, final int buildingsCost) {
-        super(ownership, cost, income);
+    protected ClassicLandContract(final Ownership ownership, final int cost, final int landIncome, final int buildingsCost) {
+        super(ownership, cost);
         this.buildingsCost = buildingsCost;
-        this.landIncome = income;
+        this.landIncome = landIncome;
 
     }
 
     @Override
     public int getCostForEachBuilding(final Building building) {
         return this.buildingsCost;
-    }
-
-    @Override
-    public int getBuildingIncome() {
-        List<Building> build = ((LandGroup) this.getOwnership().getGroup()).getBuildings();
-        switch (build.size()) {
-        case 1: 
-            return build.get(0) instanceof Home ? this.getLandIncome() * ONE_HOME : this.getLandIncome() * ONE_HOTEL;
-        case 2: return this.getLandIncome() * TWO_HOMES;
-        case 3: return this.getLandIncome() * THREE_HOMES;
-        case 4: return this.getLandIncome() * FOUR_HOMES;
-        default: throw new IllegalStateException("There are no buildings constructed");
-       }
     }
 
     @Override

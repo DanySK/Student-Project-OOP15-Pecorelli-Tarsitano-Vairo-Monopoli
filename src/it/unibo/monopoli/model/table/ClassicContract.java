@@ -4,12 +4,10 @@ public class ClassicContract implements Contract{
 
     private final Ownership ownership;
     private final int cost;
-    private final int income;
 
-    protected ClassicContract(final Ownership ownership, final int cost, final int income) {
+    protected ClassicContract(final Ownership ownership, final int cost) {
         this.ownership = ownership;
         this.cost = cost;
-        this.income = income;
     }
 
     @Override
@@ -28,8 +26,8 @@ public class ClassicContract implements Contract{
     }
 
     @Override
-    public int getIncome() {
-        return this.income;
+    public int getIncome(final IncomeStrategy income) {
+        return income.getIncome();
     }
 
     @Override
@@ -52,16 +50,11 @@ public class ClassicContract implements Contract{
             return this;
         }
 
-        public Builder income(final int i) {
-            this.income = i;
-            return this;
-        }
-
         public ClassicContract build() throws IllegalArgumentException{
-            if (this.ownership == null || this.cost == 0 || this.income == 0) {
+            if (this.ownership == null || this.cost == 0) {
                 throw new IllegalArgumentException();
             }
-            return new ClassicContract(this.ownership, this.cost, this.income);
+            return new ClassicContract(this.ownership, this.cost);
         }
     }
 

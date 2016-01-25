@@ -1,8 +1,12 @@
 package it.unibo.monopoli.model.table;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class LandIncomeStrategy implements IncomeStrategy {
+import it.unibo.monopoli.model.mainunits.Player;
+
+public class LandIncomeStrategy extends AbstractIncomeStartegy {
 
 
     private static final int ONE_HOME = 5;
@@ -14,11 +18,12 @@ public class LandIncomeStrategy implements IncomeStrategy {
     private final Ownership ownership;
 
     public LandIncomeStrategy(final Ownership ownership) {
+        super(ownership);
         this.ownership = ownership;
     }
 
     @Override
-    public int getIncome() {
+    protected int getSpecificIncome(final Set<Ownership> allMembers) {
         final List<Building> build = ((LandGroup) this.ownership.getGroup()).getBuildings();
         switch (build.size()) {
         case 1: 
@@ -26,7 +31,7 @@ public class LandIncomeStrategy implements IncomeStrategy {
         case 2: return ((ClassicLandContract) this.ownership.getContract()).getLandIncome() * TWO_HOMES;
         case 3: return ((ClassicLandContract) this.ownership.getContract()).getLandIncome() * THREE_HOMES;
         case 4: return ((ClassicLandContract) this.ownership.getContract()).getLandIncome() * FOUR_HOMES;
-        default: return ((ClassicLandContract) this.ownership.getContract()).getLandIncome();
+        default: return (((Player) this.ownership.getOwner()).getOwnerships().containsAll(allMembers) ? 2 : 1) * ((ClassicLandContract) this.ownership.getContract()).getLandIncome();
        }
     }
 

@@ -35,9 +35,12 @@ public interface Contract {
      * Return the income of the {@link Ownership} to which the {@link Contract}
      * belongs.
      * 
+     * @param income
+     *            - the specific {@link IncomeStrategy}
+     * 
      * @return the income of the {@link Ownership}
      */
-    int getIncome();
+    int getIncome(IncomeStrategy income);
 
     /**
      * Return the mortgage value of the {@link Ownership} to which the

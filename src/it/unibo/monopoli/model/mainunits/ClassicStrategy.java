@@ -137,11 +137,38 @@ public class ClassicStrategy implements GameStrategy {
     }
     
     private void inizializesGroups() {
-        this.groups.add();
+        this.groups.add();land
     }
     
     private void inizializesContracts() {
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).);
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(3)).landCost(60).landIncome(4).buildingCost(50).build());
+        this.contracts.add(new ClassicContract.Builder().Ownership(this.ownerships.get(5)).ownershipCost(200).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
     }
 
     private void inizializesOwnerships() {

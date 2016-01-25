@@ -8,7 +8,7 @@ import java.util.List;
  * {@link Building}s.
  *
  */
-public interface LandGroup {
+public interface LandGroup extends Group {
 
     /**
      * Return a {@link List} of {@link Building}s that were built on such

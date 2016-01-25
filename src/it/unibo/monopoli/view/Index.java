@@ -14,12 +14,12 @@ import javax.swing.border.Border;
 public class Index {
 
 	public static void main(String[] args) {
-		final MyFrame frame = new MyFrame("Monopoli", new BorderLayout(), new Dimension(1024,700));
+		final MyFrame frame = new MyFrame("Monopoli", new BorderLayout(), new Dimension(1024, 700));
 
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 
 		// JPanelMain South
-		JPanel southP = new JPanel();
+		final JPanel southP = new JPanel();
 		JButton ok = new JButton("Ok");
 		JButton quit = new JButton("Quit");
 		JButton addPlayer = new JButton("Add Player");
@@ -28,53 +28,23 @@ public class Index {
 		southP.add(addPlayer);
 		Dimension dimSouth = new Dimension(0, 50);
 		southP.setPreferredSize(dimSouth);
-
-		//JPanelMain Center
-		JPanel centerP = new JPanel(); // JPanelMain Centrale
-		centerP.setLayout(new BorderLayout());
-
-		JPanel tabellone = new ProvaTabellone(null, 10, 10).initialize();
-		JPanel tableau = new JPanel();
-		centerP.add(tableau,BorderLayout.CENTER);
-		tableau.add(tabellone);
-		//System.out.println(tabellone.getLayout() + "" + tabellone.getComponents());
-
-		Border border2 = BorderFactory.createLineBorder(Color.GREEN, 2);
-		tabellone.setBorder(border2);
-		tableau.setBorder(border);
-		centerP.setBorder(border2);
 		
-		
-		
-//East		
+        final JPanel panelE = new JPanel();
+		panelE.setLayout(new GridLayout(2 /* mettere i giocatori */, 1));
 
-		JPanel panelE = new JPanel();
-		panelE.setLayout(new GridLayout(8 /* mettere i giocatori */, 1));
-
-		
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 2; i++) {
 			panelE.add(new Player());
 		}
-		
-		final JScrollPane scrollPane = new JScrollPane(/*panelE*/);
+
+		final JScrollPane scrollPane = new JScrollPane(/* panelE */);
 		scrollPane.setViewportView(panelE);
-		scrollPane.setPreferredSize(new Dimension (300,0));
+		scrollPane.setPreferredSize(new Dimension(300, 0));
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		
-
-
-
-			
 
 		frame.getMainPanel().add(new JButton(" North "), BorderLayout.NORTH);
 		frame.getMainPanel().add(southP, BorderLayout.SOUTH);
-		frame.getMainPanel().add(centerP, BorderLayout.CENTER);
 		frame.getMainPanel().add(scrollPane, BorderLayout.EAST);
 
-		
-		
-		
-		
 		frame.setVisible(true);
 
 	}

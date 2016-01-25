@@ -24,6 +24,7 @@ import it.unibo.monopoli.model.cards.CommunityChest;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.model.table.Building;
+import it.unibo.monopoli.model.table.ClassicContract;
 import it.unibo.monopoli.model.table.ClassicLand;
 import it.unibo.monopoli.model.table.ClassicLandContract;
 import it.unibo.monopoli.model.table.ClassicOwnership;
@@ -60,6 +61,35 @@ public class ClassicStrategy implements GameStrategy {
     private static final int INCOME_TAX_POSITION = 4;
     private static final int SUPER_TAX_POSITION = 38;
 
+    private static final int OWNERSHIP_N_1 = 0;
+    private static final int OWNERSHIP_N_2 = 1;
+    private static final int OWNERSHIP_N_3 = 2;
+    private static final int OWNERSHIP_N_4 = 3;
+    private static final int OWNERSHIP_N_5 = 4;
+    private static final int OWNERSHIP_N_6 = 5;
+    private static final int OWNERSHIP_N_7 = 6;
+    private static final int OWNERSHIP_N_8 = 7;
+    private static final int OWNERSHIP_N_9 = 8;
+    private static final int OWNERSHIP_N_10 = 9;
+    private static final int OWNERSHIP_N_11 = 10;
+    private static final int OWNERSHIP_N_12 = 11;
+    private static final int OWNERSHIP_N_13 = 12;
+    private static final int OWNERSHIP_N_14 = 13;
+    private static final int OWNERSHIP_N_15 = 14;
+    private static final int OWNERSHIP_N_16 = 15;
+    private static final int OWNERSHIP_N_17 = 16;
+    private static final int OWNERSHIP_N_18 = 17;
+    private static final int OWNERSHIP_N_19 = 18;
+    private static final int OWNERSHIP_N_20 = 19;
+    private static final int OWNERSHIP_N_21 = 20;
+    private static final int OWNERSHIP_N_22 = 21;
+    private static final int OWNERSHIP_N_23 = 22;
+    private static final int OWNERSHIP_N_24 = 23;
+    private static final int OWNERSHIP_N_25 = 24;
+    private static final int OWNERSHIP_N_26 = 25;
+    private static final int OWNERSHIP_N_27 = 26;
+    private static final int OWNERSHIP_N_28 = 27;
+
     private static final int N_MAX_OF_HOUSES = 32;
     private static final int N_MAX_OF_HOTELS = 12;
     private static final int AMOUNT_OF_FEES = 10;
@@ -83,15 +113,19 @@ public class ClassicStrategy implements GameStrategy {
     public ClassicStrategy(final List<Player> players) {
         this.players = players;
         this.inizializesPlayers(players);
+        this.ownerships = new LinkedList<>();
         this.inizializesOwnerships();
+        this.groups = new LinkedList<>();
         this.inizializesGroups();
+        this.buildings = new LinkedList<>();
         this.inizializesBuildings();
+        this.contracts = new LinkedList<>();
         this.inizializesContracts();
         this.allBoxes = new LinkedList<>();
         this.decks = new LinkedList<>();
         this.inizializesDecks();
-        this.decks.add(new CommunityChest());
-        this.decks.add(new Chance());
+//        this.decks.add(new CommunityChest());
+//        this.decks.add(new Chance());
         this.bank = new ClassicBank(this.ownerships, this.buildings);
     }
 
@@ -137,69 +171,79 @@ public class ClassicStrategy implements GameStrategy {
     }
     
     private void inizializesGroups() {
-        this.groups.add();land
+        this.groups.add(new ClassicLandGroup("Dark Gray", this.ownerships.get(OWNERSHIP_N_1), this.ownerships.get(OWNERSHIP_N_2)));
+        this.groups.add(new ClassicLandGroup("Cyan", this.ownerships.get(OWNERSHIP_N_4), this.ownerships.get(OWNERSHIP_N_5), this.ownerships.get(OWNERSHIP_N_6)));
+        this.groups.add(new ClassicLandGroup("Magenta", this.ownerships.get(OWNERSHIP_N_7), this.ownerships.get(OWNERSHIP_N_9), this.ownerships.get(OWNERSHIP_N_10)));
+        this.groups.add(new ClassicLandGroup("Orange", this.ownerships.get(OWNERSHIP_N_12), this.ownerships.get(OWNERSHIP_N_13), this.ownerships.get(OWNERSHIP_N_14)));
+        this.groups.add(new ClassicLandGroup("Red", this.ownerships.get(OWNERSHIP_N_15), this.ownerships.get(OWNERSHIP_N_16), this.ownerships.get(OWNERSHIP_N_17)));
+        this.groups.add(new ClassicLandGroup("Yellow", this.ownerships.get(OWNERSHIP_N_19), this.ownerships.get(OWNERSHIP_N_20), this.ownerships.get(OWNERSHIP_N_22)));
+        this.groups.add(new ClassicLandGroup("Green", this.ownerships.get(OWNERSHIP_N_23), this.ownerships.get(OWNERSHIP_N_24), this.ownerships.get(OWNERSHIP_N_25)));
+        this.groups.add(new ClassicLandGroup("Blue", this.ownerships.get(OWNERSHIP_N_27), this.ownerships.get(OWNERSHIP_N_28)));
+        this.groups.add(new ClassicLandGroup("Stations", this.ownerships.get(OWNERSHIP_N_3), this.ownerships.get(OWNERSHIP_N_11), this.ownerships.get(OWNERSHIP_N_18), this.ownerships.get(OWNERSHIP_N_26)));
+        this.groups.add(new ClassicLandGroup("Companies", this.ownerships.get(OWNERSHIP_N_8), this.ownerships.get(OWNERSHIP_N_21)));
     }
     
     private void inizializesContracts() {
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(3)).landCost(60).landIncome(4).buildingCost(50).build());
-        this.contracts.add(new ClassicContract.Builder().Ownership(this.ownerships.get(5)).ownershipCost(200).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
-        this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.contracts.add(OWNERSHIP_N_1, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_1)).landCost(60).landIncome(2).buildingCost(50).build());
+        this.ownerships.get(OWNERSHIP_N_1).setContract(this.contracts.get(OWNERSHIP_N_1));
+        this.contracts.add(OWNERSHIP_N_2, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_2)).landCost(60).landIncome(4).buildingCost(50).build());
+        this.contracts.add(OWNERSHIP_N_3, new ClassicContract.Builder().ownership(this.ownerships.get(OWNERSHIP_N_3)).ownershipsCost(200).build());
+        this.contracts.add(OWNERSHIP_N_4, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_4)).landCost(100).landIncome(6).buildingCost(50).build());
+        this.contracts.add(OWNERSHIP_N_5, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_5)).landCost(100).landIncome(6).buildingCost(50).build());
+        this.contracts.add(OWNERSHIP_N_6, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_6)).landCost(120).landIncome(8).buildingCost(50).build());
+        this.contracts.add(OWNERSHIP_N_7, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_7)).landCost(140).landIncome(10).buildingCost(100).build());
+        this.contracts.add(OWNERSHIP_N_8, new ClassicContract.Builder().ownership(this.ownerships.get(OWNERSHIP_N_8)).ownershipsCost(150).build());
+        this.contracts.add(OWNERSHIP_N_9, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_9)).landCost(140).landIncome(10).buildingCost(100).build());
+        this.contracts.add(OWNERSHIP_N_10, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_10)).landCost(160).landIncome(12).buildingCost(100).build());
+        this.contracts.add(OWNERSHIP_N_11, new ClassicContract.Builder().ownership(this.ownerships.get(OWNERSHIP_N_11)).ownershipsCost(200).build());
+        this.contracts.add(OWNERSHIP_N_12, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_12)).landCost(180).landIncome(14).buildingCost(100).build());
+        this.contracts.add(OWNERSHIP_N_13, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_13)).landCost(180).landIncome(14).buildingCost(100).build());
+        this.contracts.add(OWNERSHIP_N_14, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_14)).landCost(200).landIncome(16).buildingCost(100).build());
+        this.contracts.add(OWNERSHIP_N_15, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_15)).landCost(220).landIncome(18).buildingCost(150).build());
+        this.contracts.add(OWNERSHIP_N_16, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_16)).landCost(220).landIncome(18).buildingCost(150).build());
+        this.contracts.add(OWNERSHIP_N_17, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_17)).landCost(240).landIncome(20).buildingCost(150).build());
+        this.contracts.add(OWNERSHIP_N_18, new ClassicContract.Builder().ownership(this.ownerships.get(OWNERSHIP_N_18)).ownershipsCost(200).build());
+        this.contracts.add(OWNERSHIP_N_19, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_19)).landCost(260).landIncome(22).buildingCost(150).build());
+        this.contracts.add(OWNERSHIP_N_20, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_20)).landCost(260).landIncome(22).buildingCost(150).build());
+        this.contracts.add(OWNERSHIP_N_21, new ClassicContract.Builder().ownership(this.ownerships.get(OWNERSHIP_N_21)).ownershipsCost(150).build());
+        this.contracts.add(OWNERSHIP_N_22, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_22)).landCost(280).landIncome(24).buildingCost(150).build());
+        this.contracts.add(OWNERSHIP_N_23, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_23)).landCost(300).landIncome(26).buildingCost(200).build());
+        this.contracts.add(OWNERSHIP_N_24, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_24)).landCost(300).landIncome(26).buildingCost(200).build());
+        this.contracts.add(OWNERSHIP_N_25, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_25)).landCost(320).landIncome(28).buildingCost(200).build());
+        this.contracts.add(OWNERSHIP_N_26, new ClassicContract.Builder().ownership(this.ownerships.get(OWNERSHIP_N_26)).ownershipsCost(200).build());
+        this.contracts.add(OWNERSHIP_N_27, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_27)).landCost(350).landIncome(35).buildingCost(200).build());
+        this.contracts.add(OWNERSHIP_N_28, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_28)).landCost(400).landIncome(50).buildingCost(200).build());
     }
 
     private void inizializesOwnerships() {
-        this.ownerships.add(new ClassicLand("OLD KENT ROAD", 1, this.bank, Color.DARK_GRAY));
-        this.ownerships.add(new ClassicLand("WHITECHAPEL ROAD", 3, this.bank, Color.DARK_GRAY));
-        this.ownerships.add(new ClassicOwnership("KINGS CROSS STATION", 5, this.bank));
-        this.ownerships.add(new ClassicLand("THE ANGEL, ISLINGTON", 6, this.bank, Color.CYAN));
-        this.ownerships.add(new ClassicLand("EUSTON ROAD", 8, this.bank, Color.CYAN));
-        this.ownerships.add(new ClassicLand("PENTONVILLE ROAD", 9, this.bank, Color.CYAN));
-        this.ownerships.add(new ClassicLand("PALL MALL", 11, this.bank, Color.MAGENTA));
-        this.ownerships.add(new ClassicOwnership("ELECTRIC COMPANY", 12, this.bank));
-        this.ownerships.add(new ClassicLand("WHITEHALL", 13, this.bank, Color.MAGENTA));
-        this.ownerships.add(new ClassicLand("NORTHUMRL'D AVENUE", 14, this.bank, Color.MAGENTA));
-        this.ownerships.add(new ClassicOwnership("MARYLEBONE STATION", 15, this.bank));
-        this.ownerships.add(new ClassicLand("BOW STREET", 16, this.bank, Color.ORANGE));
-        this.ownerships.add(new ClassicLand("MARLBOROUGH STREET", 18, this.bank, Color.ORANGE));
-        this.ownerships.add(new ClassicLand("VINE STREET", 19, this.bank, Color.ORANGE));
-        this.ownerships.add(new ClassicLand("STRAND", 21, this.bank, Color.RED));
-        this.ownerships.add(new ClassicLand("FLEET STREET", 23, this.bank, Color.RED));
-        this.ownerships.add(new ClassicLand("TRAFALGAR SQUARE", 24, this.bank, Color.RED));
-        this.ownerships.add(new ClassicOwnership("FENCHURCH ST. STATION", 25, this.bank));
-        this.ownerships.add(new ClassicLand("LEICESTER SQUARE", 26, this.bank, Color.YELLOW));
-        this.ownerships.add(new ClassicLand("COVENTRY STREET", 27, this.bank, Color.YELLOW));
-        this.ownerships.add(new ClassicOwnership("WATER COMPANY", 28, this.bank));
-        this.ownerships.add(new ClassicLand("PICCADILLY", 29, this.bank, Color.YELLOW));
-        this.ownerships.add(new ClassicLand("REGENT STREET", 31, this.bank, Color.GREEN));
-        this.ownerships.add(new ClassicLand("OXFORD STREET", 32, this.bank, Color.GREEN));
-        this.ownerships.add(new ClassicLand("BOND STREET", 34, this.bank, Color.GREEN));
-        this.ownerships.add(new ClassicOwnership("LIVERPOOL ST. STATION", 35, this.bank));
-        this.ownerships.add(new ClassicLand("PARK LANE", 37, this.bank, Color.BLUE));
-        this.ownerships.add(new ClassicLand("MAYFAIR", 39, this.bank, Color.BLUE));
+        this.ownerships.add(OWNERSHIP_N_1, new ClassicLand("OLD KENT ROAD", 1, this.bank, Color.DARK_GRAY));
+        this.ownerships.add(OWNERSHIP_N_2, new ClassicLand("WHITECHAPEL ROAD", 3, this.bank, Color.DARK_GRAY));
+        this.ownerships.add(OWNERSHIP_N_3, new ClassicOwnership("KINGS CROSS STATION", 5, this.bank));
+        this.ownerships.add(OWNERSHIP_N_4, new ClassicLand("THE ANGEL, ISLINGTON", 6, this.bank, Color.CYAN));
+        this.ownerships.add(OWNERSHIP_N_5, new ClassicLand("EUSTON ROAD", 8, this.bank, Color.CYAN));
+        this.ownerships.add(OWNERSHIP_N_6, new ClassicLand("PENTONVILLE ROAD", 9, this.bank, Color.CYAN));
+        this.ownerships.add(OWNERSHIP_N_7, new ClassicLand("PALL MALL", 11, this.bank, Color.MAGENTA));
+        this.ownerships.add(OWNERSHIP_N_8, new ClassicOwnership("ELECTRIC COMPANY", 12, this.bank));
+        this.ownerships.add(OWNERSHIP_N_9, new ClassicLand("WHITEHALL", 13, this.bank, Color.MAGENTA));
+        this.ownerships.add(OWNERSHIP_N_10, new ClassicLand("NORTHUMRL'D AVENUE", 14, this.bank, Color.MAGENTA));
+        this.ownerships.add(OWNERSHIP_N_11, new ClassicOwnership("MARYLEBONE STATION", 15, this.bank));
+        this.ownerships.add(OWNERSHIP_N_12, new ClassicLand("BOW STREET", 16, this.bank, Color.ORANGE));
+        this.ownerships.add(OWNERSHIP_N_13, new ClassicLand("MARLBOROUGH STREET", 18, this.bank, Color.ORANGE));
+        this.ownerships.add(OWNERSHIP_N_14, new ClassicLand("VINE STREET", 19, this.bank, Color.ORANGE));
+        this.ownerships.add(OWNERSHIP_N_15, new ClassicLand("STRAND", 21, this.bank, Color.RED));
+        this.ownerships.add(OWNERSHIP_N_16, new ClassicLand("FLEET STREET", 23, this.bank, Color.RED));
+        this.ownerships.add(OWNERSHIP_N_17, new ClassicLand("TRAFALGAR SQUARE", 24, this.bank, Color.RED));
+        this.ownerships.add(OWNERSHIP_N_18, new ClassicOwnership("FENCHURCH ST. STATION", 25, this.bank));
+        this.ownerships.add(OWNERSHIP_N_19, new ClassicLand("LEICESTER SQUARE", 26, this.bank, Color.YELLOW));
+        this.ownerships.add(OWNERSHIP_N_20, new ClassicLand("COVENTRY STREET", 27, this.bank, Color.YELLOW));
+        this.ownerships.add(OWNERSHIP_N_21, new ClassicOwnership("WATER COMPANY", 28, this.bank));
+        this.ownerships.add(OWNERSHIP_N_22, new ClassicLand("PICCADILLY", 29, this.bank, Color.YELLOW));
+        this.ownerships.add(OWNERSHIP_N_23, new ClassicLand("REGENT STREET", 31, this.bank, Color.GREEN));
+        this.ownerships.add(OWNERSHIP_N_24, new ClassicLand("OXFORD STREET", 32, this.bank, Color.GREEN));
+        this.ownerships.add(OWNERSHIP_N_25, new ClassicLand("BOND STREET", 34, this.bank, Color.GREEN));
+        this.ownerships.add(OWNERSHIP_N_26, new ClassicOwnership("LIVERPOOL ST. STATION", 35, this.bank));
+        this.ownerships.add(OWNERSHIP_N_27, new ClassicLand("PARK LANE", 37, this.bank, Color.BLUE));
+        this.ownerships.add(OWNERSHIP_N_28, new ClassicLand("MAYFAIR", 39, this.bank, Color.BLUE));
     }
 
     private void inizializesBuildings() {

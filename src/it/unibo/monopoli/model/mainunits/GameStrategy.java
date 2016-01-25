@@ -11,12 +11,12 @@ import it.unibo.monopoli.model.table.Box;
  */
 public interface GameStrategy {
 
-    /**
-     * Returns a {@link List} of the game's {@link Player}s.
-     * 
-     * @return a {@link List} of the {@link Player}s
-     */
-    List<Player> getPlayers();
+//    /**
+//     * Returns a {@link List} of the game's {@link Player}s.
+//     * 
+//     * @return a {@link List} of the {@link Player}s
+//     */
+//    List<Player> getPlayers();
 
     /**
      * Return the game's {@link Bank}.

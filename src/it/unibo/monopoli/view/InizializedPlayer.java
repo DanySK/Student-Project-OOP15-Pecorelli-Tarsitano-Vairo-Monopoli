@@ -39,7 +39,7 @@ public class InizializedPlayer {
 	 * @return -return a Player's panel
 	 */
 	public JPanel build() {
-		JPanel panel = new JPanel();
+		final JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(120, 131));
 
 		panel.setBorder(border);
@@ -86,7 +86,7 @@ public class InizializedPlayer {
 		final JRadioButton rdbtnNewRadioButton = new JRadioButton("Computer");
 		centerP_row2.add(rdbtnNewRadioButton);
 		
-		ButtonGroup group = new ButtonGroup();
+		final ButtonGroup group = new ButtonGroup();
 		group.add(rdbtnNewRadioButton);
 		group.add(rdbtnUmano);
 

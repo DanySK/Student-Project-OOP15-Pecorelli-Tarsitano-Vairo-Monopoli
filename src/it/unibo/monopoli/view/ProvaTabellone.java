@@ -27,8 +27,7 @@ public class ProvaTabellone {
 
 	public ProvaTabellone(Set<Box> cards, int col, int row) {
 		border = BorderFactory.createLineBorder(Color.BLACK, 2);
-		initialize();
-	}
+	}		
 
 	public JPanel initialize() {
 
@@ -36,7 +35,7 @@ public class ProvaTabellone {
 		final JPanel panelM = new JPanel();
 		panelM.setLayout(new BorderLayout());
 		panelM.add(panel, BorderLayout.CENTER);
-		// Border border2 = BorderFactory.createLineBorder(Color.BLUE, 6);
+		// Border borders2 = BorderFactory.createLineBorder(Color.BLUE, 6);
 		// panel.setBorder(border2);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		

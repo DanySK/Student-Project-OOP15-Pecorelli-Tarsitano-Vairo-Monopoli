@@ -36,7 +36,7 @@ public class Start {
 		
 		final JPanel GridC = new JPanel();
 		start.getMainPanel().add(GridC, BorderLayout.CENTER);
-		GridBagLayout gbl_GridC = new GridBagLayout();
+		final GridBagLayout gbl_GridC = new GridBagLayout();
 		gbl_GridC.columnWidths = new int[] {81, 237, 157, 104, 63, 0, 1};
 		gbl_GridC.rowHeights = new int[] {24, 53, 0, 138, 31, 36, -17, 2};
 		gbl_GridC.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
@@ -46,7 +46,7 @@ public class Start {
 		
 		final JPanel firstRow = new JPanel();
 		final FlowLayout flowLayout = (FlowLayout) firstRow.getLayout();
-		GridBagConstraints gbc_firstRow = new GridBagConstraints();
+		final GridBagConstraints gbc_firstRow = new GridBagConstraints();
 		gbc_firstRow.anchor = GridBagConstraints.WEST;
 		gbc_firstRow.insets = new Insets(0, 0, 5, 5);
 		gbc_firstRow.fill = GridBagConstraints.VERTICAL;
@@ -60,7 +60,7 @@ public class Start {
 		firstRow.add(lblScegliLaVersione);
 		
 		final JPanel panel = new JPanel();
-		GridBagConstraints gbc_panel = new GridBagConstraints();
+		final GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 5, 5);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 2;
@@ -74,7 +74,7 @@ public class Start {
 		panel.add(comboBoxVersion);
 		
 		final JPanel secondRow = new JPanel();
-		GridBagConstraints gbc_secondRow = new GridBagConstraints();
+		final GridBagConstraints gbc_secondRow = new GridBagConstraints();
 		gbc_secondRow.gridwidth = 2;
 		gbc_secondRow.anchor = GridBagConstraints.WEST;
 		gbc_secondRow.insets = new Insets(0, 0, 5, 5);
@@ -90,7 +90,7 @@ public class Start {
 		secondRow.add(lblScegliIlNumero);
 		
 		final JPanel panel_1 = new JPanel();
-		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		final GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 3;
@@ -98,7 +98,7 @@ public class Start {
 		GridC.add(panel_1, gbc_panel_1);
 		
 		final JPanel playerP = new JPanel();
-		GridBagConstraints gbc_playerP = new GridBagConstraints();
+		final GridBagConstraints gbc_playerP = new GridBagConstraints();
 		gbc_playerP.insets = new Insets(0, 0, 5, 5);
 		gbc_playerP.gridwidth = 2;
 		gbc_playerP.fill = GridBagConstraints.BOTH;
@@ -115,10 +115,10 @@ public class Start {
 		
 		final JButton btnAddPlayer = new JButton("Add Player");
 		btnAddPlayer.addMouseListener(new MouseAdapter() {
-			@Override
+			/*@Override
 			public void mouseClicked(MouseEvent arg0) {
 				playerP.add(new InizializedPlayer().build());
-			}
+			}*/
 		});
 		panel_1.add(btnAddPlayer);
 		
@@ -140,7 +140,7 @@ public class Start {
 		GridC.add(btnNewButton, gbc_btnNewButton);
 		
 		
-		
+		System.out.println("Ciaooooo!!");
 		start.setVisible(true);
 
 	}

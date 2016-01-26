@@ -19,12 +19,12 @@ import javax.swing.ImageIcon;
 
 public class Player extends JPanel {
 
-	Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
+	final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 
 	public Player() {
-		JPanel player = new JPanel();
+		final JPanel player = new JPanel();
 		setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		GridBagLayout gridBagLayout = new GridBagLayout();
+		final GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{47, 120, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
@@ -33,7 +33,7 @@ public class Player extends JPanel {
 		
 		final JPanel row1 = new JPanel();
 		row1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_row1 = new GridBagConstraints();
+		final GridBagConstraints gbc_row1 = new GridBagConstraints();
 		gbc_row1.insets = new Insets(0, 0, 5, 0);
 		gbc_row1.fill = GridBagConstraints.BOTH;
 		gbc_row1.gridx = 0;
@@ -51,13 +51,13 @@ public class Player extends JPanel {
 		
 		final JPanel row2 = new JPanel();
 		row2.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_row2 = new GridBagConstraints();
+		final GridBagConstraints gbc_row2 = new GridBagConstraints();
 		gbc_row2.insets = new Insets(0, 0, 5, 0);
 		gbc_row2.fill = GridBagConstraints.BOTH;
 		gbc_row2.gridx = 0;
 		gbc_row2.gridy = 1;
 		player.add(row2, gbc_row2);
-		GridBagLayout gbl_row2 = new GridBagLayout();
+		final GridBagLayout gbl_row2 = new GridBagLayout();
 		gbl_row2.columnWidths = new int[]{0, 25, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_row2.rowHeights = new int[]{16, 22, 0, 10, 9, 0, 0};
 		gbl_row2.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -65,7 +65,7 @@ public class Player extends JPanel {
 		row2.setLayout(gbl_row2);
 		
 		final JLabel label_13 = new JLabel("");
-		GridBagConstraints gbc_label_13 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_13 = new GridBagConstraints();
 		gbc_label_13.insets = new Insets(0, 0, 5, 5);
 		gbc_label_13.gridx = 2;
 		gbc_label_13.gridy = 0;
@@ -74,7 +74,7 @@ public class Player extends JPanel {
 		final JLabel label = new JLabel("1");
 		label.setBorder(new LineBorder(new Color(0, 0, 0)));
 		label.setPreferredSize(new Dimension(20, 20));
-		GridBagConstraints gbc_label = new GridBagConstraints();
+		final GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.insets = new Insets(0, 0, 5, 5);
 		gbc_label.gridx = 2;
 		gbc_label.gridy = 1;
@@ -83,7 +83,7 @@ public class Player extends JPanel {
 		final JLabel label_1 = new JLabel("2");
 		label_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		label_1.setPreferredSize(new Dimension(20, 20));
-		GridBagConstraints gbc_label_1 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_1 = new GridBagConstraints();
 		gbc_label_1.insets = new Insets(0, 0, 5, 5);
 		gbc_label_1.gridx = 3;
 		gbc_label_1.gridy = 1;
@@ -92,7 +92,7 @@ public class Player extends JPanel {
 		final JLabel label_2 = new JLabel("3");
 		label_2.setPreferredSize(new Dimension(20, 20));
 		label_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_2 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_2 = new GridBagConstraints();
 		gbc_label_2.insets = new Insets(0, 0, 5, 5);
 		gbc_label_2.gridx = 6;
 		gbc_label_2.gridy = 1;
@@ -101,7 +101,7 @@ public class Player extends JPanel {
 		final JLabel label_3 = new JLabel("4");
 		label_3.setPreferredSize(new Dimension(20, 20));
 		label_3.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_3 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_3 = new GridBagConstraints();
 		gbc_label_3.insets = new Insets(0, 0, 5, 5);
 		gbc_label_3.gridx = 7;
 		gbc_label_3.gridy = 1;
@@ -110,7 +110,7 @@ public class Player extends JPanel {
 		final JLabel label_4 = new JLabel("5");
 		label_4.setPreferredSize(new Dimension(20, 20));
 		label_4.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_4 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_4 = new GridBagConstraints();
 		gbc_label_4.insets = new Insets(0, 0, 5, 5);
 		gbc_label_4.gridx = 8;
 		gbc_label_4.gridy = 1;
@@ -119,7 +119,7 @@ public class Player extends JPanel {
 		final JLabel label_5 = new JLabel("6");
 		label_5.setPreferredSize(new Dimension(20, 20));
 		label_5.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_5 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_5 = new GridBagConstraints();
 		gbc_label_5.insets = new Insets(0, 0, 5, 5);
 		gbc_label_5.gridx = 11;
 		gbc_label_5.gridy = 1;
@@ -128,7 +128,7 @@ public class Player extends JPanel {
 		final JLabel label_6 = new JLabel("7");
 		label_6.setPreferredSize(new Dimension(20, 20));
 		label_6.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_6 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_6 = new GridBagConstraints();
 		gbc_label_6.insets = new Insets(0, 0, 5, 5);
 		gbc_label_6.gridx = 12;
 		gbc_label_6.gridy = 1;
@@ -137,7 +137,7 @@ public class Player extends JPanel {
 		final JLabel label_7 = new JLabel("8");
 		label_7.setPreferredSize(new Dimension(20, 20));
 		label_7.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_7 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_7 = new GridBagConstraints();
 		gbc_label_7.insets = new Insets(0, 0, 5, 5);
 		gbc_label_7.gridx = 13;
 		gbc_label_7.gridy = 1;
@@ -146,7 +146,7 @@ public class Player extends JPanel {
 		final JLabel label_8 = new JLabel("9");
 		label_8.setPreferredSize(new Dimension(20, 20));
 		label_8.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_8 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_8 = new GridBagConstraints();
 		gbc_label_8.insets = new Insets(0, 0, 5, 5);
 		gbc_label_8.gridx = 15;
 		gbc_label_8.gridy = 1;
@@ -155,7 +155,7 @@ public class Player extends JPanel {
 		final JLabel label_9 = new JLabel("10");
 		label_9.setPreferredSize(new Dimension(20, 20));
 		label_9.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_9 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_9 = new GridBagConstraints();
 		gbc_label_9.insets = new Insets(0, 0, 5, 5);
 		gbc_label_9.gridx = 16;
 		gbc_label_9.gridy = 1;
@@ -164,21 +164,21 @@ public class Player extends JPanel {
 		final JLabel label_10 = new JLabel("11");
 		label_10.setPreferredSize(new Dimension(20, 20));
 		label_10.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_10 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_10 = new GridBagConstraints();
 		gbc_label_10.insets = new Insets(0, 0, 5, 0);
 		gbc_label_10.gridx = 17;
 		gbc_label_10.gridy = 1;
 		row2.add(label_10, gbc_label_10);
 		
 		final JLabel label_14 = new JLabel("");
-		GridBagConstraints gbc_label_14 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_14 = new GridBagConstraints();
 		gbc_label_14.insets = new Insets(0, 0, 5, 5);
 		gbc_label_14.gridx = 0;
 		gbc_label_14.gridy = 2;
 		row2.add(label_14, gbc_label_14);
 		
 		final JLabel label_12 = new JLabel("");
-		GridBagConstraints gbc_label_12 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_12 = new GridBagConstraints();
 		gbc_label_12.insets = new Insets(0, 0, 5, 5);
 		gbc_label_12.gridx = 1;
 		gbc_label_12.gridy = 3;
@@ -187,7 +187,7 @@ public class Player extends JPanel {
 		final JLabel label_11 = new JLabel("12");
 		label_11.setPreferredSize(new Dimension(20, 20));
 		label_11.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_11 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_11 = new GridBagConstraints();
 		gbc_label_11.insets = new Insets(0, 0, 5, 5);
 		gbc_label_11.gridx = 2;
 		gbc_label_11.gridy = 3;
@@ -196,7 +196,7 @@ public class Player extends JPanel {
 		final JLabel label_15 = new JLabel("13");
 		label_15.setPreferredSize(new Dimension(20, 20));
 		label_15.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_15 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_15 = new GridBagConstraints();
 		gbc_label_15.insets = new Insets(0, 0, 5, 5);
 		gbc_label_15.gridx = 3;
 		gbc_label_15.gridy = 3;
@@ -205,7 +205,7 @@ public class Player extends JPanel {
 		final JLabel label_16 = new JLabel("14");
 		label_16.setPreferredSize(new Dimension(20, 20));
 		label_16.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_16 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_16 = new GridBagConstraints();
 		gbc_label_16.insets = new Insets(0, 0, 5, 5);
 		gbc_label_16.gridx = 4;
 		gbc_label_16.gridy = 3;
@@ -214,7 +214,7 @@ public class Player extends JPanel {
 		final JLabel label_17 = new JLabel("15");
 		label_17.setPreferredSize(new Dimension(20, 20));
 		label_17.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_17 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_17 = new GridBagConstraints();
 		gbc_label_17.insets = new Insets(0, 0, 5, 5);
 		gbc_label_17.gridx = 6;
 		gbc_label_17.gridy = 3;
@@ -223,7 +223,7 @@ public class Player extends JPanel {
 		final JLabel label_18 = new JLabel("16");
 		label_18.setPreferredSize(new Dimension(20, 20));
 		label_18.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_18 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_18 = new GridBagConstraints();
 		gbc_label_18.insets = new Insets(0, 0, 5, 5);
 		gbc_label_18.gridx = 7;
 		gbc_label_18.gridy = 3;
@@ -232,7 +232,7 @@ public class Player extends JPanel {
 		final JLabel label_19 = new JLabel("17");
 		label_19.setPreferredSize(new Dimension(20, 20));
 		label_19.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_19 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_19 = new GridBagConstraints();
 		gbc_label_19.insets = new Insets(0, 0, 5, 5);
 		gbc_label_19.gridx = 8;
 		gbc_label_19.gridy = 3;
@@ -241,7 +241,7 @@ public class Player extends JPanel {
 		final JLabel label_20 = new JLabel("18");
 		label_20.setPreferredSize(new Dimension(20, 20));
 		label_20.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_20 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_20 = new GridBagConstraints();
 		gbc_label_20.insets = new Insets(0, 0, 5, 5);
 		gbc_label_20.gridx = 11;
 		gbc_label_20.gridy = 3;
@@ -250,7 +250,7 @@ public class Player extends JPanel {
 		final JLabel label_21 = new JLabel("19");
 		label_21.setPreferredSize(new Dimension(20, 20));
 		label_21.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_21 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_21 = new GridBagConstraints();
 		gbc_label_21.insets = new Insets(0, 0, 5, 5);
 		gbc_label_21.gridx = 12;
 		gbc_label_21.gridy = 3;
@@ -259,7 +259,7 @@ public class Player extends JPanel {
 		final JLabel label_22 = new JLabel("20");
 		label_22.setPreferredSize(new Dimension(20, 20));
 		label_22.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_22 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_22 = new GridBagConstraints();
 		gbc_label_22.insets = new Insets(0, 0, 5, 5);
 		gbc_label_22.gridx = 13;
 		gbc_label_22.gridy = 3;
@@ -268,7 +268,7 @@ public class Player extends JPanel {
 		final JLabel label_23 = new JLabel("21");
 		label_23.setPreferredSize(new Dimension(20, 20));
 		label_23.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_23 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_23 = new GridBagConstraints();
 		gbc_label_23.insets = new Insets(0, 0, 5, 5);
 		gbc_label_23.gridx = 15;
 		gbc_label_23.gridy = 3;
@@ -277,14 +277,14 @@ public class Player extends JPanel {
 		final JLabel label_24 = new JLabel("22");
 		label_24.setPreferredSize(new Dimension(20, 20));
 		label_24.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_24 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_24 = new GridBagConstraints();
 		gbc_label_24.insets = new Insets(0, 0, 5, 5);
 		gbc_label_24.gridx = 16;
 		gbc_label_24.gridy = 3;
 		row2.add(label_24, gbc_label_24);
 		
 		final JLabel label_26 = new JLabel("");
-		GridBagConstraints gbc_label_26 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_26 = new GridBagConstraints();
 		gbc_label_26.insets = new Insets(0, 0, 5, 5);
 		gbc_label_26.gridx = 2;
 		gbc_label_26.gridy = 4;
@@ -293,7 +293,7 @@ public class Player extends JPanel {
 		final JLabel label_25 = new JLabel("23");
 		label_25.setPreferredSize(new Dimension(20, 20));
 		label_25.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_25 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_25 = new GridBagConstraints();
 		gbc_label_25.insets = new Insets(0, 0, 0, 5);
 		gbc_label_25.gridx = 5;
 		gbc_label_25.gridy = 5;
@@ -302,7 +302,7 @@ public class Player extends JPanel {
 		final JLabel label_27 = new JLabel("24");
 		label_27.setPreferredSize(new Dimension(20, 20));
 		label_27.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_27 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_27 = new GridBagConstraints();
 		gbc_label_27.insets = new Insets(0, 0, 0, 5);
 		gbc_label_27.gridx = 6;
 		gbc_label_27.gridy = 5;
@@ -311,7 +311,7 @@ public class Player extends JPanel {
 		final JLabel label_29 = new JLabel("25");
 		label_29.setPreferredSize(new Dimension(20, 20));
 		label_29.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_29 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_29 = new GridBagConstraints();
 		gbc_label_29.insets = new Insets(0, 0, 0, 5);
 		gbc_label_29.gridx = 10;
 		gbc_label_29.gridy = 5;
@@ -320,7 +320,7 @@ public class Player extends JPanel {
 		final JLabel label_28 = new JLabel("26");
 		label_28.setPreferredSize(new Dimension(20, 20));
 		label_28.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_28 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_28 = new GridBagConstraints();
 		gbc_label_28.insets = new Insets(0, 0, 0, 5);
 		gbc_label_28.gridx = 11;
 		gbc_label_28.gridy = 5;
@@ -329,7 +329,7 @@ public class Player extends JPanel {
 		final JLabel label_30 = new JLabel("27");
 		label_30.setPreferredSize(new Dimension(20, 20));
 		label_30.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_30 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_30 = new GridBagConstraints();
 		gbc_label_30.insets = new Insets(0, 0, 0, 5);
 		gbc_label_30.gridx = 12;
 		gbc_label_30.gridy = 5;
@@ -338,7 +338,7 @@ public class Player extends JPanel {
 		final JLabel label_31 = new JLabel("28");
 		label_31.setPreferredSize(new Dimension(20, 20));
 		label_31.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_label_31 = new GridBagConstraints();
+		final GridBagConstraints gbc_label_31 = new GridBagConstraints();
 		gbc_label_31.insets = new Insets(0, 0, 0, 5);
 		gbc_label_31.gridx = 13;
 		gbc_label_31.gridy = 5;
@@ -349,7 +349,7 @@ public class Player extends JPanel {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		flowLayout.setAlignOnBaseline(true);
 		row3.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_row3 = new GridBagConstraints();
+		final GridBagConstraints gbc_row3 = new GridBagConstraints();
 		gbc_row3.fill = GridBagConstraints.BOTH;
 		gbc_row3.gridx = 0;
 		gbc_row3.gridy = 2;
@@ -386,7 +386,7 @@ public class Player extends JPanel {
 	 * @return -return a Player's panel
 	 */
 	public JPanel build() {
-		JPanel player = new JPanel();
+		final JPanel player = new JPanel();
 		
 
 		player.setVisible(true);

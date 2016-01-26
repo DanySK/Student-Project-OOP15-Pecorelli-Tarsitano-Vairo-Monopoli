@@ -2,6 +2,7 @@ package it.unibo.monopoli.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
@@ -15,6 +16,7 @@ public class CardGraphic extends AbstractGraphicCard {
 	private Color color;
 	private int value;
 	private Position pos;
+	private Dimension dim;
 	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 
 	public CardGraphic(String name, Color color, int value, Position pos) {
@@ -28,16 +30,21 @@ public class CardGraphic extends AbstractGraphicCard {
 
 	@Override
 	public JPanel build() {
-		//JPanel card = new JPanel();
-		Dimension dim = new Dimension();
-		JPanel card = getRotatedPanel();
+		JPanel card = new JPanel();
 		
-		card.setPreferredSize(new Dimension(100,100));
+		card = getRotatedPanel();
 		card.setLayout(new GridLayout(4, 1));
+		card.setPreferredSize(new Dimension(RotatedPanel.getDim()));
 
-		JLabel colorP = new JLabel();
+		JPanel colorP = new JPanel();
 		colorP.setOpaque(true);
 		colorP.setBackground(this.color);
+		colorP.setLayout(new FlowLayout());
+		for (int i = 0; i < 4; i++) {
+			JPanel casa = new BuildCasa().addCasa();
+			colorP.add(casa);
+		}
+
 		card.add(colorP);
 		JLabel nameP = new JLabel(this.name);
 		card.add(nameP);
@@ -49,6 +56,7 @@ public class CardGraphic extends AbstractGraphicCard {
 		card.add(valueP);
 
 		card.setBorder(border);
+
 		card.setVisible(true);
 		return card;
 

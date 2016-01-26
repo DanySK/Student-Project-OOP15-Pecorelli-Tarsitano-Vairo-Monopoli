@@ -139,8 +139,6 @@ public class Start {
 		gbc_btnNewButton.gridy = 4;
 		GridC.add(btnNewButton, gbc_btnNewButton);
 		
-		
-		System.out.println("Ciaooooo!!");
 		start.setVisible(true);
 
 	}

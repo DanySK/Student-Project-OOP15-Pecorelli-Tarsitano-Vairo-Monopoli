@@ -18,17 +18,32 @@ import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
 
 public class Player extends JPanel {
+	
+	final String name;
+	final int value;
 
 	final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 
-	public Player() {
+	public Player(String name, int value) {
+		this.name=name;
+		this.value=value;
+	}
+
+	/**
+	 * Method that build the Player's panel where there are the information
+	 * about player situation
+	 * 
+	 * @return -return a Player's panel
+	 */
+	public JPanel build() {
 		final JPanel player = new JPanel();
-		setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		player.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		final GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{47, 120, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
+		player.setPreferredSize(new Dimension(350,200));
 		player.setLayout(gridBagLayout);
 		
 		final JPanel row1 = new JPanel();
@@ -41,11 +56,11 @@ public class Player extends JPanel {
 		player.add(row1, gbc_row1);
 		row1.setLayout(new GridLayout(1, 2, 0, 0));
 		
-		final JLabel lblCol = new JLabel("Giocatore 1");
+		final JLabel lblCol = new JLabel(this.name);
 		lblCol.setFont(new Font("Papyrus", Font.BOLD, 18));
 		row1.add(lblCol);
 		
-		final JLabel lblCol_1 = new JLabel("\u20AC 0000,00");
+		final JLabel lblCol_1 = new JLabel(""+this.value);
 		lblCol_1.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 14));
 		row1.add(lblCol_1);
 		
@@ -71,7 +86,7 @@ public class Player extends JPanel {
 		gbc_label_13.gridy = 0;
 		row2.add(label_13, gbc_label_13);
 		
-		final JLabel label = new JLabel("1");
+		final JLabel label = new JLabel("01");
 		label.setBorder(new LineBorder(new Color(0, 0, 0)));
 		label.setPreferredSize(new Dimension(20, 20));
 		final GridBagConstraints gbc_label = new GridBagConstraints();
@@ -80,7 +95,7 @@ public class Player extends JPanel {
 		gbc_label.gridy = 1;
 		row2.add(label, gbc_label);
 		
-		final JLabel label_1 = new JLabel("2");
+		final JLabel label_1 = new JLabel("02");
 		label_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		label_1.setPreferredSize(new Dimension(20, 20));
 		final GridBagConstraints gbc_label_1 = new GridBagConstraints();
@@ -89,7 +104,7 @@ public class Player extends JPanel {
 		gbc_label_1.gridy = 1;
 		row2.add(label_1, gbc_label_1);
 		
-		final JLabel label_2 = new JLabel("3");
+		final JLabel label_2 = new JLabel("03");
 		label_2.setPreferredSize(new Dimension(20, 20));
 		label_2.setBorder(new LineBorder(new Color(0, 0, 0)));
 		final GridBagConstraints gbc_label_2 = new GridBagConstraints();
@@ -98,7 +113,7 @@ public class Player extends JPanel {
 		gbc_label_2.gridy = 1;
 		row2.add(label_2, gbc_label_2);
 		
-		final JLabel label_3 = new JLabel("4");
+		final JLabel label_3 = new JLabel("04");
 		label_3.setPreferredSize(new Dimension(20, 20));
 		label_3.setBorder(new LineBorder(new Color(0, 0, 0)));
 		final GridBagConstraints gbc_label_3 = new GridBagConstraints();
@@ -107,7 +122,7 @@ public class Player extends JPanel {
 		gbc_label_3.gridy = 1;
 		row2.add(label_3, gbc_label_3);
 		
-		final JLabel label_4 = new JLabel("5");
+		final JLabel label_4 = new JLabel("05");
 		label_4.setPreferredSize(new Dimension(20, 20));
 		label_4.setBorder(new LineBorder(new Color(0, 0, 0)));
 		final GridBagConstraints gbc_label_4 = new GridBagConstraints();
@@ -116,7 +131,7 @@ public class Player extends JPanel {
 		gbc_label_4.gridy = 1;
 		row2.add(label_4, gbc_label_4);
 		
-		final JLabel label_5 = new JLabel("6");
+		final JLabel label_5 = new JLabel("06");
 		label_5.setPreferredSize(new Dimension(20, 20));
 		label_5.setBorder(new LineBorder(new Color(0, 0, 0)));
 		final GridBagConstraints gbc_label_5 = new GridBagConstraints();
@@ -125,7 +140,7 @@ public class Player extends JPanel {
 		gbc_label_5.gridy = 1;
 		row2.add(label_5, gbc_label_5);
 		
-		final JLabel label_6 = new JLabel("7");
+		final JLabel label_6 = new JLabel("07");
 		label_6.setPreferredSize(new Dimension(20, 20));
 		label_6.setBorder(new LineBorder(new Color(0, 0, 0)));
 		final GridBagConstraints gbc_label_6 = new GridBagConstraints();
@@ -134,7 +149,7 @@ public class Player extends JPanel {
 		gbc_label_6.gridy = 1;
 		row2.add(label_6, gbc_label_6);
 		
-		final JLabel label_7 = new JLabel("8");
+		final JLabel label_7 = new JLabel("08");
 		label_7.setPreferredSize(new Dimension(20, 20));
 		label_7.setBorder(new LineBorder(new Color(0, 0, 0)));
 		final GridBagConstraints gbc_label_7 = new GridBagConstraints();
@@ -143,7 +158,7 @@ public class Player extends JPanel {
 		gbc_label_7.gridy = 1;
 		row2.add(label_7, gbc_label_7);
 		
-		final JLabel label_8 = new JLabel("9");
+		final JLabel label_8 = new JLabel("09");
 		label_8.setPreferredSize(new Dimension(20, 20));
 		label_8.setBorder(new LineBorder(new Color(0, 0, 0)));
 		final GridBagConstraints gbc_label_8 = new GridBagConstraints();
@@ -375,18 +390,6 @@ public class Player extends JPanel {
 		label_33.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
 		row3.add(label_33);
 		
-
-		
-	}
-
-	/**
-	 * Method that build the Player's panel where there are the information
-	 * about player situation
-	 * 
-	 * @return -return a Player's panel
-	 */
-	public JPanel build() {
-		final JPanel player = new JPanel();
 		
 
 		player.setVisible(true);

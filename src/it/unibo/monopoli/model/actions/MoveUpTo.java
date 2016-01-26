@@ -18,6 +18,9 @@ public final class MoveUpTo implements Action {
     private static final int FOURTH_STATION = 35;
     private static final int LAST_BOX = 39;
 
+    private static final int FIRST_USEFUL_POSITION = 28;
+    private static final int LAST_USEFUL_POSITION = 11;
+
     private final int stepsToTake;
     private final Box box;
 
@@ -82,6 +85,10 @@ public final class MoveUpTo implements Action {
         return new MoveUpTo();
     }
 
+    private boolean isPassedFromStartBox(final Player player) {
+        return player.getPawn().previousPos() >= FIRST_USEFUL_POSITION && player.getPawn().getActualPos() <= LAST_USEFUL_POSITION;
+    }
+
     @Override
     public void play(final Player player) {
         if (this.box == null && this.stepsToTake == 0) {
@@ -104,6 +111,9 @@ public final class MoveUpTo implements Action {
         } else {
             player.getPawn().setPos(this.box.getID());
         }
-    }  
+        if (this.isPassedFromStartBox(player)) {
+            new PassFromStar().play(player);
+        }
+    }
 
 }

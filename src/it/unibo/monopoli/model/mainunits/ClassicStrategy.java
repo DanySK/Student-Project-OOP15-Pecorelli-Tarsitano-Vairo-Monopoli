@@ -187,32 +187,59 @@ public class ClassicStrategy implements GameStrategy {
         this.contracts.add(OWNERSHIP_N_1, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_1)).landCost(60).landIncome(2).buildingCost(50).build());
         this.ownerships.get(OWNERSHIP_N_1).setContract(this.contracts.get(OWNERSHIP_N_1));
         this.contracts.add(OWNERSHIP_N_2, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_2)).landCost(60).landIncome(4).buildingCost(50).build());
+        this.ownerships.get(OWNERSHIP_N_2).setContract(this.contracts.get(OWNERSHIP_N_2));
         this.contracts.add(OWNERSHIP_N_3, new ClassicContract.Builder().ownership(this.ownerships.get(OWNERSHIP_N_3)).ownershipsCost(200).build());
+        this.ownerships.get(OWNERSHIP_N_3).setContract(this.contracts.get(OWNERSHIP_N_3));
         this.contracts.add(OWNERSHIP_N_4, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_4)).landCost(100).landIncome(6).buildingCost(50).build());
+        this.ownerships.get(OWNERSHIP_N_4).setContract(this.contracts.get(OWNERSHIP_N_4));
         this.contracts.add(OWNERSHIP_N_5, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_5)).landCost(100).landIncome(6).buildingCost(50).build());
+        this.ownerships.get(OWNERSHIP_N_5).setContract(this.contracts.get(OWNERSHIP_N_5));
         this.contracts.add(OWNERSHIP_N_6, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_6)).landCost(120).landIncome(8).buildingCost(50).build());
+        this.ownerships.get(OWNERSHIP_N_6).setContract(this.contracts.get(OWNERSHIP_N_6));
         this.contracts.add(OWNERSHIP_N_7, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_7)).landCost(140).landIncome(10).buildingCost(100).build());
+        this.ownerships.get(OWNERSHIP_N_7).setContract(this.contracts.get(OWNERSHIP_N_7));
         this.contracts.add(OWNERSHIP_N_8, new ClassicContract.Builder().ownership(this.ownerships.get(OWNERSHIP_N_8)).ownershipsCost(150).build());
+        this.ownerships.get(OWNERSHIP_N_8).setContract(this.contracts.get(OWNERSHIP_N_8));
         this.contracts.add(OWNERSHIP_N_9, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_9)).landCost(140).landIncome(10).buildingCost(100).build());
+        this.ownerships.get(OWNERSHIP_N_9).setContract(this.contracts.get(OWNERSHIP_N_9));
         this.contracts.add(OWNERSHIP_N_10, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_10)).landCost(160).landIncome(12).buildingCost(100).build());
+        this.ownerships.get(OWNERSHIP_N_10).setContract(this.contracts.get(OWNERSHIP_N_10));
         this.contracts.add(OWNERSHIP_N_11, new ClassicContract.Builder().ownership(this.ownerships.get(OWNERSHIP_N_11)).ownershipsCost(200).build());
+        this.ownerships.get(OWNERSHIP_N_11).setContract(this.contracts.get(OWNERSHIP_N_11));
         this.contracts.add(OWNERSHIP_N_12, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_12)).landCost(180).landIncome(14).buildingCost(100).build());
+        this.ownerships.get(OWNERSHIP_N_12).setContract(this.contracts.get(OWNERSHIP_N_12));
         this.contracts.add(OWNERSHIP_N_13, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_13)).landCost(180).landIncome(14).buildingCost(100).build());
+        this.ownerships.get(OWNERSHIP_N_13).setContract(this.contracts.get(OWNERSHIP_N_13));
         this.contracts.add(OWNERSHIP_N_14, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_14)).landCost(200).landIncome(16).buildingCost(100).build());
+        this.ownerships.get(OWNERSHIP_N_14).setContract(this.contracts.get(OWNERSHIP_N_14));
         this.contracts.add(OWNERSHIP_N_15, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_15)).landCost(220).landIncome(18).buildingCost(150).build());
+        this.ownerships.get(OWNERSHIP_N_15).setContract(this.contracts.get(OWNERSHIP_N_15));
         this.contracts.add(OWNERSHIP_N_16, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_16)).landCost(220).landIncome(18).buildingCost(150).build());
+        this.ownerships.get(OWNERSHIP_N_16).setContract(this.contracts.get(OWNERSHIP_N_16));
         this.contracts.add(OWNERSHIP_N_17, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_17)).landCost(240).landIncome(20).buildingCost(150).build());
+        this.ownerships.get(OWNERSHIP_N_17).setContract(this.contracts.get(OWNERSHIP_N_17));
         this.contracts.add(OWNERSHIP_N_18, new ClassicContract.Builder().ownership(this.ownerships.get(OWNERSHIP_N_18)).ownershipsCost(200).build());
+        this.ownerships.get(OWNERSHIP_N_18).setContract(this.contracts.get(OWNERSHIP_N_18));
         this.contracts.add(OWNERSHIP_N_19, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_19)).landCost(260).landIncome(22).buildingCost(150).build());
+        this.ownerships.get(OWNERSHIP_N_19).setContract(this.contracts.get(OWNERSHIP_N_19));
         this.contracts.add(OWNERSHIP_N_20, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_20)).landCost(260).landIncome(22).buildingCost(150).build());
+        this.ownerships.get(OWNERSHIP_N_20).setContract(this.contracts.get(OWNERSHIP_N_20));
         this.contracts.add(OWNERSHIP_N_21, new ClassicContract.Builder().ownership(this.ownerships.get(OWNERSHIP_N_21)).ownershipsCost(150).build());
+        this.ownerships.get(OWNERSHIP_N_21).setContract(this.contracts.get(OWNERSHIP_N_21));
         this.contracts.add(OWNERSHIP_N_22, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_22)).landCost(280).landIncome(24).buildingCost(150).build());
+        this.ownerships.get(OWNERSHIP_N_22).setContract(this.contracts.get(OWNERSHIP_N_22));
         this.contracts.add(OWNERSHIP_N_23, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_23)).landCost(300).landIncome(26).buildingCost(200).build());
+        this.ownerships.get(OWNERSHIP_N_23).setContract(this.contracts.get(OWNERSHIP_N_23));
         this.contracts.add(OWNERSHIP_N_24, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_24)).landCost(300).landIncome(26).buildingCost(200).build());
+        this.ownerships.get(OWNERSHIP_N_24).setContract(this.contracts.get(OWNERSHIP_N_24));
         this.contracts.add(OWNERSHIP_N_25, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_25)).landCost(320).landIncome(28).buildingCost(200).build());
+        this.ownerships.get(OWNERSHIP_N_25).setContract(this.contracts.get(OWNERSHIP_N_25));
         this.contracts.add(OWNERSHIP_N_26, new ClassicContract.Builder().ownership(this.ownerships.get(OWNERSHIP_N_26)).ownershipsCost(200).build());
+        this.ownerships.get(OWNERSHIP_N_26).setContract(this.contracts.get(OWNERSHIP_N_26));
         this.contracts.add(OWNERSHIP_N_27, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_27)).landCost(350).landIncome(35).buildingCost(200).build());
+        this.ownerships.get(OWNERSHIP_N_27).setContract(this.contracts.get(OWNERSHIP_N_27));
         this.contracts.add(OWNERSHIP_N_28, new ClassicLandContract.Builder().land(this.ownerships.get(OWNERSHIP_N_28)).landCost(400).landIncome(50).buildingCost(200).build());
+        this.ownerships.get(OWNERSHIP_N_28).setContract(this.contracts.get(OWNERSHIP_N_28));
     }
 
     private void inizializesOwnerships() {
@@ -255,10 +282,10 @@ public class ClassicStrategy implements GameStrategy {
         }
     }
 
-//    @Override
-//    public List<Player> getPlayers() {
-//        return Collections.unmodifiableList(this.players);
-//    }
+    @Override
+    public List<Player> getPlayers() {
+        return Collections.unmodifiableList(this.players);
+    }
 
     @Override
     public Bank getBank() {

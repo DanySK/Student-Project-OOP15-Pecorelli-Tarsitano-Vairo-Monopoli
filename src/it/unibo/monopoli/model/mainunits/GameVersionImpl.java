@@ -19,7 +19,7 @@ public class GameVersionImpl implements GameVersion {
     private final GameStrategy strategy;
     private final List<Player> players;
     private Iterator<Player> iter;
-    private final Set<Box> allBoxes;
+    private final List<Box> allBoxes;
 
     /**
      * Constructs an instance that will be able to give back the right version
@@ -56,8 +56,8 @@ public class GameVersionImpl implements GameVersion {
     }
 
     @Override
-    public Set<Box> getAllBoxes() {
-        return Collections.unmodifiableSet(this.allBoxes);
+    public List<Box> getAllBoxes() {
+        return Collections.unmodifiableList(this.allBoxes);
     }
     
     public List<Integer> toRollDices(final Player player) {

@@ -19,7 +19,7 @@ public interface GameVersion {
      *
      * @return a {@link Set} of {@link Box}es
      */
-    Set<Box> getAllBoxes();
+    List<Box> getAllBoxes();
 
     /**
      * This method return an instance of the only one {@link Bank}, specific of
@@ -37,6 +37,6 @@ public interface GameVersion {
      * @return the {@link Player} which have to play
      */
     Player endOfTurnAndNextPlayer(Player player);
-    
-    List<Integer> toRollDices(final Player player);
+
+    List<Integer> toRollDices(Player player);
 }

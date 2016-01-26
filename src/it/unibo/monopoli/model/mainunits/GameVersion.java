@@ -1,5 +1,6 @@
 package it.unibo.monopoli.model.mainunits;
 
+import java.util.List;
 import java.util.Set;
 
 import it.unibo.monopoli.model.table.Box;
@@ -18,7 +19,7 @@ public interface GameVersion {
      *
      * @return a {@link Set} of {@link Box}es
      */
-    Set<Box> getAllBoxes();
+    List<Box> getAllBoxes();
 
     /**
      * This method return an instance of the only one {@link Bank}, specific of
@@ -37,4 +38,5 @@ public interface GameVersion {
      */
     Player endOfTurnAndNextPlayer(Player player);
 
+    List<Integer> toRollDices(Player player);
 }

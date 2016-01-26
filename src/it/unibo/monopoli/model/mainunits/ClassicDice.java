@@ -10,16 +10,16 @@ public class ClassicDice implements Dice {
 
     private static final int FACES = 6;
 
-    private int lastNumber;
+ //   private int lastNumber;
 
     @Override
-    public void roll() {
-        this.lastNumber = new Random().nextInt(FACES) + 1;
+    public int roll() {
+        return new Random().nextInt(FACES) + 1;
     }
 
-    @Override
-    public int getLastNumberObtained() {
-        return this.lastNumber;
-    }
+//    @Override
+//    public int getLastNumberObtained() {
+//        return this.lastNumber;
+//    }
 
 }

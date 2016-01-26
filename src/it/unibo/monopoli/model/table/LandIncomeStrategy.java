@@ -23,7 +23,7 @@ public class LandIncomeStrategy extends AbstractIncomeStartegy {
     }
 
     @Override
-    protected int getSpecificIncome(final Set<Ownership> allMembers) {
+    protected int getSpecificIncome(final List<Ownership> allMembers) {
         final List<Building> build = ((LandGroup) this.ownership.getGroup()).getBuildings();
         switch (build.size()) {
         case 1: 

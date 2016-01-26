@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
+import it.unibo.monopoli.model.actions.ToRollDices;
 import it.unibo.monopoli.model.table.Box;
 
 /**
@@ -17,7 +19,7 @@ public class GameVersionImpl implements GameVersion {
     private final GameStrategy strategy;
     private final List<Player> players;
     private Iterator<Player> iter;
-    private final Set<Box> allBoxes;
+    private final List<Box> allBoxes;
 
     /**
      * Constructs an instance that will be able to give back the right version
@@ -49,18 +51,18 @@ public class GameVersionImpl implements GameVersion {
 
     @Override
     public Player endOfTurnAndNextPlayer(final Player player) {
-        if (player.dicesAlreadyRolled()) {
-            player.setDicesRoll(false);
-            // new ToRollDices(new
-            // ClassicDicesStrategy()).play(this.getNextPlayer());
-            return this.getNextPlayer();
-        }
-        return player;
+        player.setDicesRoll(false);
+        return this.getNextPlayer();
     }
 
     @Override
-    public Set<Box> getAllBoxes() {
-        return Collections.unmodifiableSet(this.allBoxes);
+    public List<Box> getAllBoxes() {
+        return Collections.unmodifiableList(this.allBoxes);
+    }
+    
+    public List<Integer> toRollDices(final Player player) {
+        new ToRollDices(new ClassicDicesStrategy(this)).play(player);;
+        return player.lastDicesNumber();
     }
 
 }

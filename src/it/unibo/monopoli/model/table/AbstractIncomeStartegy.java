@@ -16,7 +16,7 @@ public abstract class AbstractIncomeStartegy implements IncomeStrategy {
 
     @Override
     public int getIncome() {
-        final Set<Ownership> allMembers = this.ownership.getGroup().getMembers();
+        final List<Ownership> allMembers = this.ownership.getGroup().getMembers();
         return this.getSpecificIncome(allMembers);
     }
 
@@ -29,6 +29,6 @@ public abstract class AbstractIncomeStartegy implements IncomeStrategy {
      *            {@link Group}.
      * @return the income of the {@link Ownership}
      */
-    protected abstract int getSpecificIncome(final Set<Ownership> allMembers);
+    protected abstract int getSpecificIncome(final List<Ownership> allMembers);
 
 }

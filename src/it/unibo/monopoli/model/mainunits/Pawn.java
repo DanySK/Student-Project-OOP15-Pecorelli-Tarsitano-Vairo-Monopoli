@@ -24,6 +24,8 @@ public interface Pawn {
      * @return the actual position of the {@link Pawn}
      */
     int getActualPos();
+    
+    int previousPos();
 
     /**
      * Set the new position of the {@link Pawn} in the table of play. This

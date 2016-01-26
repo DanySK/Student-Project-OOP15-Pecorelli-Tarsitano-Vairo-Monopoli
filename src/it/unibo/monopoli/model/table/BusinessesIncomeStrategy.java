@@ -16,7 +16,7 @@ public abstract class BusinessesIncomeStrategy extends AbstractIncomeStartegy {
     }
 
     @Override
-    protected int getSpecificIncome(List<Ownership> allMembers) {
+    protected int getSpecificIncome(final List<Ownership> allMembers) {
         final Set<Ownership> playersMembers = new HashSet<>();
         allMembers.stream()
                   .filter(m -> ((Player) this.ownership.getOwner()).getOwnerships().contains(m))

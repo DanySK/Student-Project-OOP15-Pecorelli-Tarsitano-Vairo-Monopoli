@@ -15,7 +15,7 @@ public interface LandContract extends Contract {
      *            - the specific {@link Building}
      * @return the cost to build a {@link Building}
      */
-    int getCostForEachBuilding(final Building building);
+    int getCostForEachBuilding();
 
     /**
      * Return the income of the {@link Land} to which the {@link Contract}

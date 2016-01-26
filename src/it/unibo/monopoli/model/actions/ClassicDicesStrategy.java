@@ -14,10 +14,10 @@ import it.unibo.monopoli.model.mainunits.Player;
  */
 public class ClassicDicesStrategy implements DicesStrategy {
     
-    private final GameVersion version;
+   // private final GameVersion version;
     
-    public ClassicDicesStrategy(final GameVersion version) {
-        this.version = version;
+    public ClassicDicesStrategy() { //final GameVersion version
+       // this.version = version;
     }
 
     @Override

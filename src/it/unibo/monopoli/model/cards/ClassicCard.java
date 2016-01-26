@@ -46,7 +46,7 @@ public class ClassicCard implements Card {
     }
 
     @Override
-    public List<Action> getAction() {
+    public List<Action> getActions() {
         return this.action;
     }
 

@@ -2,6 +2,8 @@ package it.unibo.monopoli.model.mainunits;
 
 import java.util.List;
 
+import it.unibo.monopoli.model.actions.Action;
+import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.table.Box;
 
 /**
@@ -31,5 +33,9 @@ public interface GameStrategy {
      * @return a {@link List} of all {@link Box}es
      */
     List<Box> getBoxes();
+
+    List<Action> getNextBoxsActions(Box box, Player player);
+
+    List<Action> getNextCardsActions(Card card);
 
 }

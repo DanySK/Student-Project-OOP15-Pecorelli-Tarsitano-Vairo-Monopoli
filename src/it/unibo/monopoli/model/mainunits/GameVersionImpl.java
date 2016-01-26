@@ -5,8 +5,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
 import it.unibo.monopoli.model.actions.ToRollDices;
+import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.table.Box;
 
 /**
@@ -63,6 +65,18 @@ public class GameVersionImpl implements GameVersion {
     public List<Integer> toRollDices(final Player player) {
         new ToRollDices(new ClassicDicesStrategy(this)).play(player);;
         return player.lastDicesNumber();
+    }
+
+    @Override
+    public Action getNextBoxsAction(Box box) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Action getNextCardsAction(Card card) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

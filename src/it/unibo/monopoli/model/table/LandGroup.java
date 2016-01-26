@@ -19,6 +19,13 @@ public interface LandGroup extends Group {
     List<Building> getBuildings();
 
     /**
+     * Returns true if is still possible to build, otherwise false.
+     * 
+     * @return true if you can still building
+     */
+    boolean canBuiling();
+
+    /**
      * Add a new {@link Building}.
      * 
      * @param building

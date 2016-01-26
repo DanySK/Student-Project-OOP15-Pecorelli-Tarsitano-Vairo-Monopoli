@@ -1,5 +1,6 @@
 package it.unibo.monopoli.model.actions;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import it.unibo.monopoli.model.mainunits.Dice;
@@ -29,10 +30,12 @@ public class ToRollDices implements Action {
 
     @Override
     public void play(final Player player) {
+        List<Integer> dicesNumbers = new LinkedList<>();
         this.dices.stream()
                   .forEach(d -> {
-                      player.setLastDicesNumber(d.roll());
+                      dicesNumbers.add(d.roll());
                   });
+        player.setLastDicesNumber(dicesNumbers);
         player.setDicesRoll(true);
         this.strategy.nowPlay(this.dices, player);
     }

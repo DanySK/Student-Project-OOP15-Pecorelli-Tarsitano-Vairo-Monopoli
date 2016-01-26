@@ -9,11 +9,11 @@ import it.unibo.monopoli.model.mainunits.Player;
  */
 public interface Building {
 
-    /**
-     * Returns the ID of the {@link Building}.
-     * 
-     * @return {@link Building}'s ID
-     */
-    int getID();
+//    /**
+//     * Returns the ID of the {@link Building}.
+//     * 
+//     * @return {@link Building}'s ID
+//     */
+//    int getID();
 
 }

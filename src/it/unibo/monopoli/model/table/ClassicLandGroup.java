@@ -1,12 +1,7 @@
-package it.unibo.monopoli.model.mainunits;
+package it.unibo.monopoli.model.table;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import it.unibo.monopoli.model.table.Building;
-import it.unibo.monopoli.model.table.ClassicGroup;
-import it.unibo.monopoli.model.table.LandGroup;
-import it.unibo.monopoli.model.table.Ownership;
 
 public class ClassicLandGroup extends ClassicGroup implements LandGroup {
 
@@ -30,6 +25,11 @@ public class ClassicLandGroup extends ClassicGroup implements LandGroup {
     @Override
     public void removeBuilding(final Building building) {
         this.buildings.remove(building);
+    }
+
+    @Override
+    public boolean canBuiling() {
+        return this.buildings.get(0) instanceof Home;
     }
 
 }

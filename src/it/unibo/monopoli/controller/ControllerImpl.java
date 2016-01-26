@@ -1,14 +1,12 @@
 package it.unibo.monopoli.controller;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.JTextField;
 
 import it.unibo.monopoli.model.actions.ToBuyProperties;
 import it.unibo.monopoli.model.actions.ToMortgage;
-import it.unibo.monopoli.model.actions.ToPay;
 import it.unibo.monopoli.model.actions.ToRevokeMortgage;
 import it.unibo.monopoli.model.actions.ToSellProperties;
 import it.unibo.monopoli.model.cards.Card;
@@ -26,7 +24,7 @@ import it.unibo.monopoli.model.table.Ownership;
 /**
  * */
 public class ControllerImpl implements Controller {
-    private final List<Player> player = new ArrayList<>();
+    private final List<Player> player = new LinkedList<>();
     private Player actualPlayer;
     private GameStrategy strategy;
     private GameVersion version;
@@ -220,7 +218,12 @@ public class ControllerImpl implements Controller {
 
         return this.actualPlayer;
     }
-
+    /**
+     * .
+     */
+    public void takeChanche(){
+        
+    }
     /**
      * This method allow to roll dice.
      * 
@@ -228,7 +231,7 @@ public class ControllerImpl implements Controller {
      */
     public List<Integer> toRollDices() {
 
-        List<Integer> dices = strategy.getDices();
+        List<Integer> dices = version.toRollDices(actualPlayer);
         return dices;
     }
 
@@ -248,7 +251,7 @@ public class ControllerImpl implements Controller {
      */
     private void computerPlayer(Player player) {
         Player p = this.actualPlayer;
-        /*
+        /* *
          * Se player.amount > del costo dell'ownership + il costo dell'affitto
          * medio compra altrimenti partecipa all'asta fino a quando ^ sopra
          *

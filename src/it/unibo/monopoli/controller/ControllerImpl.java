@@ -63,7 +63,7 @@ public class ControllerImpl implements Controller {
      * 
      * @return Set of {@link Box}
      */
-    public Set<Box> getAllBoxes() {
+    public List<Box> getAllBoxes() {
         return version.getAllBoxes();
     }
 

@@ -35,7 +35,7 @@ public class ControllerImpl implements Controller {
      * 
      * - set a strategy {@link JTextField}s
      */
-    public void setStrategy() {
+    public ControllerImpl(final EVersion version ) {
         strategy = new ClassicStrategy(this.player);
         version = new GameVersionImpl(this.strategy);
     }
@@ -173,7 +173,7 @@ public class ControllerImpl implements Controller {
      * @param id
      *            .
      */
-    void revokeMortgageOwnership(final int amount, final Ownership ownership) {
+    public void revokeMortgageOwnership(final int amount, final Ownership ownership) {
         Player p = this.actualPlayer;
         final ToRevokeMortgage mortgage = new ToRevokeMortgage(amount, ownership);
         mortgage.play(p);

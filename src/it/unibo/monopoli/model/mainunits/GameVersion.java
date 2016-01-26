@@ -1,5 +1,6 @@
 package it.unibo.monopoli.model.mainunits;
 
+import java.util.List;
 import java.util.Set;
 
 import it.unibo.monopoli.model.table.Box;
@@ -36,5 +37,6 @@ public interface GameVersion {
      * @return the {@link Player} which have to play
      */
     Player endOfTurnAndNextPlayer(Player player);
-
+    
+    List<Integer> toRollDices(final Player player);
 }

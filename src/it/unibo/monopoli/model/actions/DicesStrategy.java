@@ -28,6 +28,6 @@ public interface DicesStrategy {
      * @param player
      *            - the {@link Player} who rolled
      */
-    void strategy(List<Dice> dices, Player player);
+    void nowPlay(List<Dice> dices, Player player);
 
 }

@@ -1,6 +1,7 @@
 package it.unibo.monopoli.model.table;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import it.unibo.monopoli.model.mainunits.Player;
@@ -15,7 +16,7 @@ public abstract class BusinessesIncomeStrategy extends AbstractIncomeStartegy {
     }
 
     @Override
-    protected int getSpecificIncome(Set<Ownership> allMembers) {
+    protected int getSpecificIncome(List<Ownership> allMembers) {
         final Set<Ownership> playersMembers = new HashSet<>();
         allMembers.stream()
                   .filter(m -> ((Player) this.ownership.getOwner()).getOwnerships().contains(m))

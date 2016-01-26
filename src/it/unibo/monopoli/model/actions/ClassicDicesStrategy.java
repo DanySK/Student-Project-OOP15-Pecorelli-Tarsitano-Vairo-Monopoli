@@ -5,6 +5,7 @@ import java.util.List;
 
 import it.unibo.monopoli.model.mainunits.ClassicDice;
 import it.unibo.monopoli.model.mainunits.Dice;
+import it.unibo.monopoli.model.mainunits.GameVersion;
 import it.unibo.monopoli.model.mainunits.Player;
 
 /**
@@ -12,6 +13,12 @@ import it.unibo.monopoli.model.mainunits.Player;
  *
  */
 public class ClassicDicesStrategy implements DicesStrategy {
+    
+    private final GameVersion version;
+    
+    public ClassicDicesStrategy(final GameVersion version) {
+        this.version = version;
+    }
 
     @Override
     public List<Dice> getDices() {
@@ -22,27 +29,20 @@ public class ClassicDicesStrategy implements DicesStrategy {
     }
 
     @Override
-    public void strategy(final List<Dice> dices, final Player player) {
+    public void nowPlay(final List<Dice> dices, final Player player) {
         if (dices.size() != 2) {
             throw new IllegalArgumentException("This version needs two dices");
         }
-        player.isInPrison() 
-            ? this.prisonStrategy(this.twice(dices), player) 
-            : player.getPawn().setPos(player.getPawn().getActualPos() + this.dices.get(0).getLastNumberObtained() + this.dices.get(1).getLastNumberObtained());
-    }
-
-    private void prisonStrategy(final boolean isTwiceNumber, final Player player) {
-        if (isTwiceNumber) {
-            player.setDicesRoll(false);
+        if (player.isInPrison() && !this.twice(player)) {
+            this.version.endOfTurnAndNextPlayer(player);
+        } else {
             player.setPrison(false);
+            MoveUpTo.takeSteps(player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
         }
     }
 
-    private boolean twice(final List<Dice> dices) {
-        if (dices.get(0).getLastNumberObtained() == dices.get(1).getLastNumberObtained()) {
-            return true;
-        }
-        return false;
+    private boolean twice(final Player player) {
+        return player.lastDicesNumber().get(0) == player.lastDicesNumber().get(1); 
     }
 
 }

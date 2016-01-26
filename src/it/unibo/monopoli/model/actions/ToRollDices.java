@@ -30,9 +30,11 @@ public class ToRollDices implements Action {
     @Override
     public void play(final Player player) {
         this.dices.stream()
-                  .forEach(d -> d.roll());
+                  .forEach(d -> {
+                      player.setLastDicesNumber(d.roll());
+                  });
         player.setDicesRoll(true);
-        this.strategy.strategy(this.dices, player);
+        this.strategy.nowPlay(this.dices, player);
     }
 
 }

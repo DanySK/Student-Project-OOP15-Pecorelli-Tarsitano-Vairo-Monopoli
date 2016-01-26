@@ -1,5 +1,6 @@
 package it.unibo.monopoli.model.mainunits;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -82,9 +83,9 @@ public interface Player extends Owner{
      */
     boolean isInPrison();
     
-    int lastDicesNumber();
+    List<Integer> lastDicesNumber();
     
-    void setLastDicesNumber();
+    void setLastDicesNumber(int number);
 
     /**
      * Sets if the {@link Player} is going to prison (true) or not (false).

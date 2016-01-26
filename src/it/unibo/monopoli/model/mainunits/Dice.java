@@ -8,15 +8,17 @@ public interface Dice {
 
     /**
      * This method allows to roll the {@link Dice}. It calculates a number from
-     * those available of the {@link Dice}.
-     */
-    void roll();
-
-    /**
-     * Returns the last number obtained from the {@link Dice}.
+     * those available of the {@link Dice} and it returns that number.
      * 
-     * @return - the last number obtained
+     * @return a number from those available of the {@link Dice}
      */
-    int getLastNumberObtained();
+    int roll();
+
+    // /**
+    // * Returns the last number obtained from the {@link Dice}.
+    // *
+    // * @return - the last number obtained
+    // */
+    // int getLastNumberObtained();
 
 }

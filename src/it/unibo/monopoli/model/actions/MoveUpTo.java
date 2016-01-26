@@ -104,10 +104,6 @@ public final class MoveUpTo implements Action {
         } else {
             player.getPawn().setPos(this.box.getID());
         }
-    }
-    
-    public static void main (String... args) {
-        System.out.println("ciao");
-    }   
+    }  
 
 }

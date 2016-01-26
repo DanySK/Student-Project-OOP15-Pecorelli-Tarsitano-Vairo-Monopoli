@@ -3,6 +3,8 @@ package it.unibo.monopoli.model.mainunits;
 import java.util.List;
 import java.util.Set;
 
+import it.unibo.monopoli.model.actions.Action;
+import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.table.Box;
 
 /**
@@ -39,4 +41,8 @@ public interface GameVersion {
     Player endOfTurnAndNextPlayer(Player player);
 
     List<Integer> toRollDices(Player player);
+
+    Action getNextBoxsAction(Box box);
+
+    Action getNextCardsAction(Card card);
 }

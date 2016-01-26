@@ -14,7 +14,7 @@ public class ClassicLandContract extends ClassicContract implements LandContract
     }
 
     @Override
-    public int getCostForEachBuilding(final Building building) {
+    public int getCostForEachBuilding() {
         return this.buildingsCost;
     }
 

@@ -14,7 +14,7 @@ import it.unibo.monopoli.model.table.Ownership;
  * {@link Ownership}s and some money.
  *
  */
-public interface Player extends Owner{
+public interface Player extends Owner {
 
     /**
      * Return the name of the {@link Player}.
@@ -42,7 +42,7 @@ public interface Player extends Owner{
      * 
      * @return a {@link Set} of {@link Ownership}
      */
-    Set<Ownership> getOwnerships();
+    Optional<Set<Ownership>>  getOwnerships();
 
     /**
      * Adds a {@link Card} to the {@link Player}'s {@link Deck}.
@@ -53,11 +53,11 @@ public interface Player extends Owner{
     void addCard(Card card);
 
     /**
-     * Return an {@link Optional}'s {@link Deck} of player's {@link Card}s.
+     * Return an {@link Optional}'s {@link List} of player's {@link Card}s.
      * 
-     * @return an {@link Optional}'s {@link Deck}
+     * @return an {@link Optional}'s {@link List}
      */
-    Optional<Deck> getCards();
+    Optional<List<Card>> getCards();
 
     /**
      * Returns true if the {@link Player} has already rolled {@link Dice}s,
@@ -85,7 +85,7 @@ public interface Player extends Owner{
     
     List<Integer> lastDicesNumber();
     
-    void setLastDicesNumber(int number);
+    void setLastDicesNumber(List<Integer> numbers);
 
     /**
      * Sets if the {@link Player} is going to prison (true) or not (false).

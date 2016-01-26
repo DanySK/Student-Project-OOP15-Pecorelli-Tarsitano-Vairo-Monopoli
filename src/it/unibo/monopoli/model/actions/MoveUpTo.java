@@ -86,7 +86,7 @@ public final class MoveUpTo implements Action {
     }
 
     private boolean isPassedFromStartBox(final Player player) {
-        return player.getPawn().previousPos() >= FIRST_USEFUL_POSITION && player.getPawn().getActualPos() <= LAST_USEFUL_POSITION;
+        return player.getPawn().getPreviousPos() >= FIRST_USEFUL_POSITION && player.getPawn().getActualPos() <= LAST_USEFUL_POSITION;
     }
 
     @Override

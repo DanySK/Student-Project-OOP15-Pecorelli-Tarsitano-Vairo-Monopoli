@@ -31,7 +31,7 @@ public interface Card {
      * 
      * @return {@link Card}'s {@link Action}s
      */
-    List<Action> getAction();
+    List<Action> getActions();
 
     /**
      * Returns the {@link Player} who draw the {@link Card}.

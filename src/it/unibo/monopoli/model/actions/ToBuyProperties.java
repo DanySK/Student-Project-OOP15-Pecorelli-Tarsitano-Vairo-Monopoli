@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Building;
+import it.unibo.monopoli.model.table.ClassicLandContract;
 import it.unibo.monopoli.model.table.Land;
 import it.unibo.monopoli.model.table.LandGroup;
 import it.unibo.monopoli.model.table.Ownership;
@@ -41,11 +42,11 @@ public final class ToBuyProperties extends ToBuyAndSellProperties {
      * @throws IllegalArgumentException
      *             - if the amount is less than or equal to zero
      */
-    public static ToBuyProperties buyAOwnership(final int amount, final Ownership ownership) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Only positive amount different of zero!");
-        }
-        return new ToBuyProperties(-amount, Objects.requireNonNull(ownership));
+    public static ToBuyProperties buyAOwnership(final Ownership ownership) {
+//        if (amount <= 0) {
+//            throw new IllegalArgumentException("Only positive amount different of zero!");
+//        }
+        return new ToBuyProperties(-ownership.getContract().getCost(), Objects.requireNonNull(ownership));
     }
 
     /**
@@ -65,11 +66,11 @@ public final class ToBuyProperties extends ToBuyAndSellProperties {
      * @throws IllegalArgumentException
      *             - if the amount is less than or equal to zero
      */
-    public static ToBuyProperties buyABuilding(final int amount, final Land land, final Building building) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Only positive amount different of zero!");
-        }
-        return new ToBuyProperties(-amount, Objects.requireNonNull(land), Objects.requireNonNull(building));
+    public static ToBuyProperties buyABuilding(final Land land, final Building building) {
+//        if (amount <= 0) {
+//            throw new IllegalArgumentException("Only positive amount different of zero!");
+//        }
+        return new ToBuyProperties(-((ClassicLandContract) land.getContract()).getCostForEachBuilding(), Objects.requireNonNull(land), Objects.requireNonNull(building));
     }
 
     @Override

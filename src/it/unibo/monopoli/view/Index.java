@@ -11,6 +11,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 
+import it.unibo.monopoli.controller.ControllerImpl;
+
 public class Index {
 
 	public static void main(String[] args) {
@@ -30,7 +32,7 @@ public class Index {
 		southP.setPreferredSize(dimSouth);
 //Center
 		JPanel centerP = new JPanel();
-		JPanel tabellone = new ProvaTabellone(null,10,10).initialize();
+		JPanel tabellone = new ProvaTabellone(null,10,10, new ControllerImpl()).initialize();
 		centerP.add(tabellone);		
 //East		
         final JPanel panelE = new JPanel();

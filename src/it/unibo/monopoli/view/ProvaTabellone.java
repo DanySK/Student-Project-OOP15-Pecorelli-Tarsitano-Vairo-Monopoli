@@ -1,10 +1,13 @@
 package it.unibo.monopoli.view;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
@@ -17,16 +20,20 @@ import it.unibo.monopoli.model.table.Land;
 import it.unibo.monopoli.model.table.Ownership;
 import it.unibo.monopoli.model.table.TaxImpl;
 import it.unibo.monopoli.view.IBoxGraphic.Position;
+import it.unibo.monopoli.controller.*;
 
 public class ProvaTabellone {
 
-	private Set<Box> cards;
+	private final Controller controller;
+	private List<Box> cards ;
 	private int col, row;
 
 	private Border border;
 
-	public ProvaTabellone(Set<Box> cards, int col, int row) {
+	public ProvaTabellone(Set<Box> cards, int col, int row, final Controller controller) {
 		border = BorderFactory.createLineBorder(Color.BLACK, 2);
+		this.controller = controller;
+		this.cards = this.controller.getAllBoxes();
 	}		
 
 	public JPanel initialize() {
@@ -47,7 +54,9 @@ public class ProvaTabellone {
 		  0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		 
 		panel.setLayout(gbl_panel);
-/*
+
+		
+		
 		if (cards != null)
 			cards.forEach(card -> {
 				int c = -1, r = -1;
@@ -89,7 +98,7 @@ public class ProvaTabellone {
 				gbc.gridy = r;
 				panel.add(newcard.build(), gbc);
 			});
-*/
+//*/
 		IBoxGraphic casella20;
 		GridBagConstraints gbc_lblCiaooooo = new GridBagConstraints();
 		casella20 = new CardGraphicBoxProva("Via Verdi", Color.RED, 10000, Position.NORTH );

@@ -2,11 +2,15 @@ package it.unibo.monopoli.model.actions;
 
 import java.util.List;
 
+import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.mainunits.Player;
+import it.unibo.monopoli.model.table.Ownership;
 
 public interface Auction {
     
-    void setPlayersAndTheFirstOne(List<Player> players, Player firstPlayer);
+    void setPlayersTheFirstOneAndOwnership(List<Player> players, Player firstPlayer, Ownership ownership);
+
+    void setPlayersTheFirstOneAndCard(List<Player> players, Player firstPlayer, Card card);
 
     void increment();
 
@@ -17,6 +21,12 @@ public interface Auction {
     Player nextPlayer();
 
     void removePlayer();
+
+    /**
+     * Stops the {@link Auction} and 
+     * @param player
+     */
+    void stopAuction(Player player);
 
     /**
      * Returns true if this {@link Player} is able to do the {@link Auction},

@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Building;
+import it.unibo.monopoli.model.table.ClassicLandContract;
 import it.unibo.monopoli.model.table.Land;
 import it.unibo.monopoli.model.table.LandGroup;
 import it.unibo.monopoli.model.table.Ownership;
@@ -41,11 +42,11 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
      * @throws IllegalArgumentException
      *             - if the amount is less than or equal to zero
      */
-    public static ToSellProperties buyAOwnership(final int amount, final Ownership ownership) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Only positive amount different of zero!");
-        }
-        return new ToSellProperties(amount, Objects.requireNonNull(ownership));
+    public static ToSellProperties sellAOwnership(final Ownership ownership) {
+//        if (amount <= 0) {
+//            throw new IllegalArgumentException("Only positive amount different of zero!");
+//        }
+        return new ToSellProperties(ownership.getContract().getCost(), Objects.requireNonNull(ownership));
     }
 
     /**
@@ -70,19 +71,19 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
      *             - if the {@link Player} doesn't own all the {@link Land}s of
      *             this specific {@link LandGroup}
      */
-    public static ToSellProperties buyABuilding(final int amount, final Land land, final Building building) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Only positive amount different of zero!");
-        }
+    public static ToSellProperties sellABuilding(final Land land, final Building building) {
+//        if (amount <= 0) {
+//            throw new IllegalArgumentException("Only positive amount different of zero!");
+//        }
         for (final Ownership o : land.getGroup().getMembers()) {
             if (o.isMortgaged()) {
                 throw new IllegalArgumentException("Can build only in a NOT mortgage group of land");
             }
         }
-        if (!((Player) land.getOwner()).getOwnerships().containsAll(land.getGroup().getMembers())) {
+        if (!((Player) land.getOwner()).getOwnerships().get().containsAll(land.getGroup().getMembers())) {
             throw new IllegalArgumentException("Can build only if the Player has ALL the lands of this land's group");
         }
-        return new ToSellProperties(amount, Objects.requireNonNull(land), Objects.requireNonNull(building));
+        return new ToSellProperties(((ClassicLandContract) land.getContract()).getCostForEachBuilding(), Objects.requireNonNull(land), Objects.requireNonNull(building));
     }
 
     @Override

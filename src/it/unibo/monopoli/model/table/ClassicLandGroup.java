@@ -27,4 +27,9 @@ public class ClassicLandGroup extends ClassicGroup implements LandGroup {
         this.buildings.remove(building);
     }
 
+    @Override
+    public boolean canBuiling() {
+        return this.buildings.get(0) instanceof Home;
+    }
+
 }

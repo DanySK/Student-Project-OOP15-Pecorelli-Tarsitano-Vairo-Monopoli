@@ -81,7 +81,12 @@ public class ClassicBank implements Bank {
 
     @Override
     public Building getBuilding(final Building buildingsType) {
-        return buildingsType instanceof Home ? this.homes.remove(0) : this.hotels.remove(0);
+        try {
+            return buildingsType instanceof Home ? this.homes.remove(0) : this.hotels.remove(0);
+        } catch (IndexOutOfBoundsException i) {
+            System.out.println("There are no more buildings of this type");
+            throw i;
+        }
     }
 
     @Override

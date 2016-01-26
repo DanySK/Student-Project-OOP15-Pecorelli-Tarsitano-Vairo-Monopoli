@@ -20,6 +20,7 @@ import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.model.table.Building;
 import it.unibo.monopoli.model.table.Land;
 import it.unibo.monopoli.model.table.Ownership;
+import it.unibo.monopoli.view.EVersion;
 
 /**
  * */
@@ -35,7 +36,7 @@ public class ControllerImpl implements Controller {
      * 
      * - set a strategy {@link JTextField}s
      */
-    public ControllerImpl(final EVersion version ) {
+    public ControllerImpl(final EVersion versionEnum ) {
         strategy = new ClassicStrategy(this.player);
         version = new GameVersionImpl(this.strategy);
     }

@@ -14,6 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.model.table.Land;
@@ -54,7 +55,6 @@ public class ProvaTabellone {
 		  0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		 
 		panel.setLayout(gbl_panel);
-
 		
 		
 		if (cards != null)
@@ -65,6 +65,7 @@ public class ProvaTabellone {
 					r = row - 1;
 					c = col - 1 - card.getID();
 					pos = Position.SOUTH;
+					System.out.println(""+card.getID());
 				} else if (card.getID() < col + row) {
 					c = 0;
 					r = row - 1 - card.getID() - (row);
@@ -98,7 +99,7 @@ public class ProvaTabellone {
 				gbc.gridy = r;
 				panel.add(newcard.build(), gbc);
 			});
-//*/
+
 		IBoxGraphic casella20;
 		GridBagConstraints gbc_lblCiaooooo = new GridBagConstraints();
 		casella20 = new CardGraphicBoxProva("Via Verdi", Color.RED, 10000, Position.NORTH );

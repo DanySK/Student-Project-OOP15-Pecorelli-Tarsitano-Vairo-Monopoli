@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.swing.JTextField;
 
-import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.actions.ToBuyProperties;
 import it.unibo.monopoli.model.actions.ToMortgage;
 import it.unibo.monopoli.model.actions.ToPay;
@@ -18,9 +17,10 @@ import it.unibo.monopoli.model.mainunits.ClassicStrategy;
 import it.unibo.monopoli.model.mainunits.GameStrategy;
 import it.unibo.monopoli.model.mainunits.GameVersion;
 import it.unibo.monopoli.model.mainunits.GameVersionImpl;
-import it.unibo.monopoli.model.mainunits.Pawn;
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Box;
+import it.unibo.monopoli.model.table.Building;
+import it.unibo.monopoli.model.table.Land;
 import it.unibo.monopoli.model.table.Ownership;
 
 /**
@@ -28,7 +28,6 @@ import it.unibo.monopoli.model.table.Ownership;
 public class ControllerImpl implements Controller {
     private final List<Player> player = new ArrayList<>();
     private Player actualPlayer;
-    private Action action;
     private GameStrategy strategy;
     private GameVersion version;
     private Ownership actualPosition;
@@ -141,10 +140,19 @@ public class ControllerImpl implements Controller {
     }
 
     /**
-     * This method allow to buy building for a properties
+     * This method allow to build house or hotel on {@link Land}.
+     * 
+     * @param amount
+     *            -cost of building
+     * @param land
+     *            .
+     * @param building
+     *            -house to add
      */
-    void BuyBuilding() {
-
+    public void buyBuilding(final int amount, final Land land, final Building building) {
+        Player p = this.actualPlayer;
+        final ToBuyProperties buy = ToBuyProperties.buyABuilding(amount, land, building);
+        buy.play(p);
     }
 
     /**
@@ -174,41 +182,32 @@ public class ControllerImpl implements Controller {
     }
 
     /**
-     * this method is used for do a trade with other player.
-     */
-    void trade() {
-    }
-
-    /* trade action */
-    /**
-     * This method allow to counter a trade.
-     */
-    void counter() {
-    }
-
-    /**
-     * This method allow to accept a trade.
-     */
-    void accept() {
-    }
-
-    /**
-     * This method allow to reject a trade.
-     */
-    void reject() {
-    }
-
-    /**
-     * Get pawn.
+     * this method allow to accept trade between two player.
      * 
-     * @return pawn
+     * @param amount
+     *            - amount of trade
+     * @param ownership
+     *            - the {@link Ownership} to trade
+     * @param tradePlayer
+     *            - the {@link Player} for the trade
      */
-    Pawn getPawn() {
+    public void acceptTrade(final int amount, final Ownership ownership, final Player tradePlayer) {
+
+        this.buyOwnership(amount, ownership);
+        final ToSellProperties sell = ToSellProperties.buyAOwnership(amount, ownership);
+        sell.play(tradePlayer);
+    }
+
+    /**
+     * This method allow to get the new position.
+     * 
+     * @return new position
+     */
+    public int getNewPosition() {
 
         Player p = this.actualPlayer;
-        return p.getPawn();
+        return p.getPawn().getActualPos();
     }
-
 
     /**
      * go To next player.
@@ -220,6 +219,28 @@ public class ControllerImpl implements Controller {
         this.actualPlayer = version.endOfTurnAndNextPlayer(actualPlayer);
 
         return this.actualPlayer;
+    }
+
+    /**
+     * This method allow to roll dice.
+     * 
+     * @return the list of {@link Dices} rolled;
+     */
+    public List<Integer> toRollDices() {
+
+        List<Integer> dices = strategy.getDices();
+        return dices;
+    }
+
+    /**
+     * This method allow to get the result of dices .
+     * 
+     * @return the result of rolling dices .
+     */
+    public int getDicesResult() {
+        List<Integer> dices = this.toRollDices();
+        int result = dices.get(0) + dices.get(1);
+        return result;
     }
 
     /**
@@ -253,20 +274,27 @@ public class ControllerImpl implements Controller {
      * 
      * @param property
      *            .
-     * @return {@link Ownershio}.
+     * @return {@link Ownership}.
      */
-    Card auction(Ownership property);
+    public Card auction(Ownership property) {
+
+        return null;
+    }
 
     /**
      * Method for choose the winner.
      * 
      * @return winner Player {@link Player}
      */
+    public Player winner() {
+        return this.actualPlayer;
+    }
+
     /**
-    *
-    */
-    void pay(int amount) {
-        final ToPay pay = new ToPay(amount);
+     * Method to declare bankruptcy.
+     */
+    public void bankrupt() {
+
     }
 
     /* prison action */
@@ -275,16 +303,9 @@ public class ControllerImpl implements Controller {
     /**
      * this method allow to use card for Get out of Jail.
      */
-    void usePrisonCard();
+    public void usePrisonCard() {
 
-    /**/
-    /* prison action */
-    /* dice pair throw */
-    /* prison pay */
-    /**
-     * this method allow to use card for Get out of Jail.
-     */
-    void usePrisonCard();
+    }
 
     public static void main(String[] args) {
 

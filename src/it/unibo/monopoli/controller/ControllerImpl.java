@@ -25,7 +25,7 @@ import it.unibo.monopoli.view.EVersion;
 /**
  * */
 public class ControllerImpl implements Controller {
-    private final LinkedList<Player> player = new LinkedList<>();
+    private final List<Player> player;
     private Player actualPlayer;
     private GameStrategy strategy;
     private GameVersion version;
@@ -36,8 +36,9 @@ public class ControllerImpl implements Controller {
      * 
      * - set a strategy {@link JTextField}s
      */
-    public ControllerImpl(final EVersion versionEnum ) {
-        strategy = new ClassicStrategy(this.player);
+    public ControllerImpl(final EVersion versionEnum,List<Player> players) {
+        this.player=players;
+        strategy = new ClassicStrategy(players);
         version = new GameVersionImpl(this.strategy);
     }
 

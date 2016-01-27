@@ -25,7 +25,7 @@ import it.unibo.monopoli.view.EVersion;
 /**
  * */
 public class ControllerImpl implements Controller {
-    private final List<Player> player = new LinkedList<>();
+    private final LinkedList<Player> player = new LinkedList<>();
     private Player actualPlayer;
     private GameStrategy strategy;
     private GameVersion version;
@@ -68,7 +68,6 @@ public class ControllerImpl implements Controller {
 
     /**
      * This method allow to get Bank.
-     * 
      * @return {@link Bank}
      */
     public Bank getBank() {
@@ -291,14 +290,18 @@ public class ControllerImpl implements Controller {
      * @return winner Player {@link Player}
      */
     public Player winner() {
-        return this.actualPlayer;
+        if(this.player.size()==1){
+          return this.actualPlayer;  
+        }
+        return null;
     }
 
     /**
      * Method to declare bankruptcy.
      */
     public void bankrupt() {
-
+        int i=this.player.indexOf(actualPlayer);
+        this.player.remove(i);
     }
 
     /* prison action */

@@ -1,24 +1,28 @@
 package it.unibo.monopoli.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Point;
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import java.awt.FlowLayout;
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import it.unibo.monopoli.view.listener.StartPlay;
+import it.unibo.monopoli.view.listener.VersionSelected;
 
 public class Start {
 	
@@ -69,8 +73,8 @@ public class Start {
 		
 		final JComboBox<String> comboBoxVersion = new JComboBox<String>();
 		lblScegliLaVersione.setLabelFor(comboBoxVersion);
-		comboBoxVersion.addItem("Verion1");
-		comboBoxVersion.addItem("Version2");
+		Arrays.asList(EVersion.values()).forEach(v -> comboBoxVersion.addItem(v.getName()));
+		comboBoxVersion.addItemListener(new VersionSelected());
 		panel.add(comboBoxVersion);
 		
 		final JPanel secondRow = new JPanel();
@@ -114,16 +118,23 @@ public class Start {
 		
 		
 		final JButton btnAddPlayer = new JButton("Add Player");
-		btnAddPlayer.addMouseListener(new MouseAdapter() {
-			/*@Override
-			public void mouseClicked(MouseEvent arg0) {
-				playerP.add(new InizializedPlayer().build());
-			}*/
+		btnAddPlayer.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+						
+//				playerP.add(new InizializedPlayer().build());
+//				System.out.println("Add Player");
+				Dialog d = new Dialog(new JFrame(), "Prova", "Hai cliccato AddPlayer");
+				
+			}
 		});
+		
+		
 		panel_1.add(btnAddPlayer);
 		
 		final JPanel row4 = new JPanel();
-		GridBagConstraints gbc_row4 = new GridBagConstraints();
+		final GridBagConstraints gbc_row4 = new GridBagConstraints();
 		gbc_row4.insets = new Insets(0, 0, 5, 5);
 		gbc_row4.fill = GridBagConstraints.BOTH;
 		gbc_row4.gridx = 1;
@@ -131,8 +142,9 @@ public class Start {
 		GridC.add(row4, gbc_row4);
 		
 		final JButton btnNewButton = new JButton("AVVIA PARTITA");
+		btnNewButton.addActionListener(new StartPlay());
 		btnNewButton.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 16));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		final GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.gridwidth = 2;
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 3;

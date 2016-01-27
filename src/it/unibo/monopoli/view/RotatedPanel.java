@@ -40,6 +40,7 @@ public class RotatedPanel extends JPanel {
 			float y = this.getHeight() / 2.0f;
 			
 			g2d.rotate(Math.toRadians(rotation), x, y);
+		
 			
 		}
 }

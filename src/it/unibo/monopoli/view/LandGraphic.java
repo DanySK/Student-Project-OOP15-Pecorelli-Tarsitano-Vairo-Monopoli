@@ -39,7 +39,7 @@ public class LandGraphic extends AbstractGraphicCard  {
 		JPanel emptyP = new JPanel();
 		card.add(emptyP);
 		
-		JLabel valueP = new JLabel(""+land.getCost());
+		JLabel valueP = new JLabel(""+land.getContract().getCost());
 		card.add(valueP);
 		
 		card.setBorder(border);

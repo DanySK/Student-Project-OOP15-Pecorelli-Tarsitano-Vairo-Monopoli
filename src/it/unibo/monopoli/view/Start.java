@@ -19,6 +19,8 @@ import java.awt.FlowLayout;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Start {
 	
@@ -114,11 +116,17 @@ public class Start {
 		
 		
 		final JButton btnAddPlayer = new JButton("Add Player");
-		btnAddPlayer.addMouseListener(new MouseAdapter() {
-			/*@Override
-			public void mouseClicked(MouseEvent arg0) {
-				playerP.add(new InizializedPlayer().build());
-			}*/
+		btnAddPlayer.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JButton button = (JButton)e.getSource();
+				int count = 0;
+				button.setText("AVVIA PARTITA" + count);
+				count++;
+				new Index();
+				
+			}
 		});
 		panel_1.add(btnAddPlayer);
 		
@@ -131,6 +139,7 @@ public class Start {
 		GridC.add(row4, gbc_row4);
 		
 		final JButton btnNewButton = new JButton("AVVIA PARTITA");
+		btnNewButton.addActionListener(new CountCLickButton());
 		btnNewButton.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 16));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.gridwidth = 2;

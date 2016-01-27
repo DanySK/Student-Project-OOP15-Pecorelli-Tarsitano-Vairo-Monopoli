@@ -7,6 +7,7 @@ import it.unibo.monopoli.model.mainunits.Player;
  * different action must implements its own operation to be taken.
  *
  */
+@FunctionalInterface
 public interface Action {
 
     /**

@@ -42,7 +42,7 @@ public interface GameVersion {
 
     List<Integer> toRollDices(Player player);
 
-    Action getNextBoxsAction(Box box);
+    Action getNextBoxsAction(Box box, Player player);
 
-    Action getNextCardsAction(Card card);
+    Action getNextCardsAction(Box box, Card card, Player player);
 }

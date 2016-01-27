@@ -32,8 +32,6 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
      * This is a static method that can be used to create a new instance of this
      * class.
      * 
-     * @param amount
-     *            - the amount of the sale
      * @param ownership
      *            - the {@link Ownership} to sell
      * @return an instance of this class
@@ -53,8 +51,6 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
      * This is a static method that can be used to create a new instance of this
      * class.
      * 
-     * @param amount
-     *            - the amount of the sale
      * @param land
      *            - the {@link Land} on which the {@link Building} was built
      * @param building
@@ -75,14 +71,6 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
 //        if (amount <= 0) {
 //            throw new IllegalArgumentException("Only positive amount different of zero!");
 //        }
-        for (final Ownership o : land.getGroup().getMembers()) {
-            if (o.isMortgaged()) {
-                throw new IllegalArgumentException("Can build only in a NOT mortgage group of land");
-            }
-        }
-        if (!((Player) land.getOwner()).getOwnerships().get().containsAll(land.getGroup().getMembers())) {
-            throw new IllegalArgumentException("Can build only if the Player has ALL the lands of this land's group");
-        }
         return new ToSellProperties(((ClassicLandContract) land.getContract()).getCostForEachBuilding(), Objects.requireNonNull(land), Objects.requireNonNull(building));
     }
 

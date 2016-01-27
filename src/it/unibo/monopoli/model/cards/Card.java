@@ -18,6 +18,8 @@ public interface Card {
     // * @return {@link Card}'s {@link Deck}
     // */
     // Deck getDeck();
+    
+    int getID();
 
     /**
      * Return the description of the specific {@link Card}.
@@ -26,26 +28,26 @@ public interface Card {
      */
     String getDescription();
 
-    /**
-     * Return a {@link List} of {@link Action}s of the specific {@link Card}.
-     * 
-     * @return {@link Card}'s {@link Action}s
-     */
-    List<Action> getActions();
-
-    /**
-     * Returns the {@link Player} who draw the {@link Card}.
-     * 
-     * @return the {@link Player} who draw the {@link Card}
-     */
-    Player getPlayer();
-
-    /**
-     * Sets the {@link Player} who draw the {@link Card}.
-     * 
-     * @param player
-     *            - the {@link Player} who draw the {@link Card}.
-     */
-    void setPlayer(Player player);
+//    /**
+//     * Return a {@link List} of {@link Action}s of the specific {@link Card}.
+//     * 
+//     * @return {@link Card}'s {@link Action}s
+//     */
+//    List<Action> getActions();
+//
+//    /**
+//     * Returns the {@link Player} who draw the {@link Card}.
+//     * 
+//     * @return the {@link Player} who draw the {@link Card}
+//     */
+//    Player getPlayer();
+//
+//    /**
+//     * Sets the {@link Player} who draw the {@link Card}.
+//     * 
+//     * @param player
+//     *            - the {@link Player} who draw the {@link Card}.
+//     */
+//    void setPlayer(Player player);
 
 }

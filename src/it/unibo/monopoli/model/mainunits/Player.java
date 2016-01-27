@@ -86,6 +86,10 @@ public interface Player extends Owner {
     List<Integer> lastDicesNumber();
     
     void setLastDicesNumber(List<Integer> numbers);
+    
+    boolean areDebtsPaid();
+    
+    void setDebts(boolean arePaid);
 
     /**
      * Sets if the {@link Player} is going to prison (true) or not (false).
@@ -134,5 +138,7 @@ public interface Player extends Owner {
      *            - the amount of money to set
      */
     void setMoney(int amount);
+    
+    boolean isHuman();
 
 }

@@ -7,7 +7,9 @@ public class PassFromStar implements Action{
 
     @Override
     public void play(final Player player) {
-        new ToBePaid(Start.getMuchToPick()).play(player);
+        if (!player.isInPrison()) {
+            new ToBePaid(Start.getMuchToPick()).play(player);
+        }
     }
 
 

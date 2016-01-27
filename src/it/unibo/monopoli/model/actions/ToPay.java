@@ -1,5 +1,6 @@
 package it.unibo.monopoli.model.actions;
 
+import it.unibo.monopoli.model.mainunits.Player;
 
 /**
  * This class represent one of the {@link MoneyAction}s of the game. This one is
@@ -15,12 +16,12 @@ public class ToPay extends ToPayAndBePaid {
      * @param amount
      *            - the amount to pay
      * @throws IllegalArgumentException
-     *             - if the amount is less than or equal to zero
+     *             - if the player's moneys are less than the amount to pay
      */
-    public ToPay(final int amount) {
+    public ToPay(final int amount, final Player player) {
         super(-amount);
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Only positive amount different of zero!");
+        if (amount > player.getMoney()) {
+            throw new IllegalArgumentException();
         }
     }
 

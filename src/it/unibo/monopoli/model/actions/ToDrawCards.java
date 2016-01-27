@@ -27,9 +27,9 @@ public class ToDrawCards implements Action {
     @Override
     public void play(final Player player) {
         final Card firstCard = this.deck.getFirstCard();
-        firstCard.setPlayer(player);
-        firstCard.getActions().stream()
-                             .forEach(a -> a.play(player));
+//        firstCard.setPlayer(player);
+//        firstCard.getActions().stream()
+//                             .forEach(a -> a.play(player));
         this.deck.getCards().remove(firstCard);
         this.deck.getCards().add(0, firstCard);
     }

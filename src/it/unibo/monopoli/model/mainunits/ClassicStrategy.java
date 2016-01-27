@@ -14,6 +14,7 @@ import it.unibo.monopoli.model.actions.MoveUpTo;
 import it.unibo.monopoli.model.actions.ToAuction;
 import it.unibo.monopoli.model.actions.ToBePaid;
 import it.unibo.monopoli.model.actions.ToBuyProperties;
+import it.unibo.monopoli.model.actions.ToDrawCards;
 import it.unibo.monopoli.model.actions.ToPay;
 import it.unibo.monopoli.model.actions.ToRollDices;
 import it.unibo.monopoli.model.actions.ToSellCards;
@@ -31,6 +32,8 @@ import it.unibo.monopoli.model.table.ClassicLand;
 import it.unibo.monopoli.model.table.ClassicLandContract;
 import it.unibo.monopoli.model.table.ClassicLandGroup;
 import it.unibo.monopoli.model.table.ClassicOwnership;
+import it.unibo.monopoli.model.table.Company;
+import it.unibo.monopoli.model.table.CompanysIncomeStrategy;
 import it.unibo.monopoli.model.table.Contract;
 import it.unibo.monopoli.model.table.DecksBox;
 import it.unibo.monopoli.model.table.Group;
@@ -44,6 +47,8 @@ import it.unibo.monopoli.model.table.Ownership;
 import it.unibo.monopoli.model.table.Police;
 import it.unibo.monopoli.model.table.PrisonOrTransit;
 import it.unibo.monopoli.model.table.Start;
+import it.unibo.monopoli.model.table.Station;
+import it.unibo.monopoli.model.table.StationIncomeStrategy;
 import it.unibo.monopoli.model.table.TaxImpl;
 
 /**
@@ -65,6 +70,39 @@ public class ClassicStrategy implements GameStrategy {
     private static final int THIRD_COMMUNITY_CHEST_POSITION = 33;
     private static final int INCOME_TAX_POSITION = 4;
     private static final int SUPER_TAX_POSITION = 38;
+    
+    private static final int CARD1 = 1;
+    private static final int CARD2 = 2;
+    private static final int CARD3 = 3;
+    private static final int CARD4 = 4;
+    private static final int CARD5 = 5;
+    private static final int CARD6 = 6;
+    private static final int CARD7 = 7;
+    private static final int CARD8 = 8;
+    private static final int CARD9 = 9;
+    private static final int CARD10 = 10;
+    private static final int CARD11 = 11;
+    private static final int CARD12 = 12;
+    private static final int CARD13 = 13;
+    private static final int CARD14 = 14;
+    private static final int CARD15 = 15;
+    private static final int CARD16 = 16;
+    private static final int CARD17 = 17;
+    private static final int CARD18 = 18;
+    private static final int CARD19 = 19;
+    private static final int CARD20 = 20;
+    private static final int CARD21 = 21;
+    private static final int CARD22 = 22;
+    private static final int CARD23 = 23;
+    private static final int CARD24 = 24;
+    private static final int CARD25 = 25;
+    private static final int CARD26 = 26;
+    private static final int CARD27 = 27;
+    private static final int CARD28 = 28;
+    private static final int CARD29 = 29;
+    private static final int CARD30 = 30;
+    private static final int CARD31 = 31;
+    private static final int CARD32 = 32;
 
     private static final int OWNERSHIP_N_1 = 0;
     private static final int OWNERSHIP_N_2 = 1;
@@ -98,6 +136,8 @@ public class ClassicStrategy implements GameStrategy {
     private static final int N_MAX_OF_HOUSES = 32;
     private static final int N_MAX_OF_HOTELS = 12;
     private static final int AMOUNT_OF_FEES = 10;
+    
+    private static final int CARD_TAX = 50;
 
     private final List<Player> players;
     private final List<Ownership> ownerships;
@@ -288,40 +328,40 @@ public class ClassicStrategy implements GameStrategy {
     private void inizializesOwnerships() {
         this.ownerships.add(OWNERSHIP_N_1, new ClassicLand("OLD KENT ROAD", 1, this.bank, Color.DARK_GRAY));
         this.ownerships.add(OWNERSHIP_N_2, new ClassicLand("WHITECHAPEL ROAD", 3, this.bank, Color.DARK_GRAY));
-        this.ownerships.add(OWNERSHIP_N_3, new ClassicOwnership("KINGS CROSS STATION", 5, this.bank));
+        this.ownerships.add(OWNERSHIP_N_3, new Station("KINGS CROSS STATION", 5, this.bank));
         this.ownerships.add(OWNERSHIP_N_4, new ClassicLand("THE ANGEL, ISLINGTON", 6, this.bank, Color.CYAN));
         this.ownerships.add(OWNERSHIP_N_5, new ClassicLand("EUSTON ROAD", 8, this.bank, Color.CYAN));
         this.ownerships.add(OWNERSHIP_N_6, new ClassicLand("PENTONVILLE ROAD", 9, this.bank, Color.CYAN));
         this.ownerships.add(OWNERSHIP_N_7, new ClassicLand("PALL MALL", 11, this.bank, Color.MAGENTA));
-        this.ownerships.add(OWNERSHIP_N_8, new ClassicOwnership("ELECTRIC COMPANY", 12, this.bank));
+        this.ownerships.add(OWNERSHIP_N_8, new Company("ELECTRIC COMPANY", 12, this.bank));
         this.ownerships.add(OWNERSHIP_N_9, new ClassicLand("WHITEHALL", 13, this.bank, Color.MAGENTA));
         this.ownerships.add(OWNERSHIP_N_10, new ClassicLand("NORTHUMRL'D AVENUE", 14, this.bank, Color.MAGENTA));
-        this.ownerships.add(OWNERSHIP_N_11, new ClassicOwnership("MARYLEBONE STATION", 15, this.bank));
+        this.ownerships.add(OWNERSHIP_N_11, new Station("MARYLEBONE STATION", 15, this.bank));
         this.ownerships.add(OWNERSHIP_N_12, new ClassicLand("BOW STREET", 16, this.bank, Color.ORANGE));
         this.ownerships.add(OWNERSHIP_N_13, new ClassicLand("MARLBOROUGH STREET", 18, this.bank, Color.ORANGE));
         this.ownerships.add(OWNERSHIP_N_14, new ClassicLand("VINE STREET", 19, this.bank, Color.ORANGE));
         this.ownerships.add(OWNERSHIP_N_15, new ClassicLand("STRAND", 21, this.bank, Color.RED));
         this.ownerships.add(OWNERSHIP_N_16, new ClassicLand("FLEET STREET", 23, this.bank, Color.RED));
         this.ownerships.add(OWNERSHIP_N_17, new ClassicLand("TRAFALGAR SQUARE", 24, this.bank, Color.RED));
-        this.ownerships.add(OWNERSHIP_N_18, new ClassicOwnership("FENCHURCH ST. STATION", 25, this.bank));
+        this.ownerships.add(OWNERSHIP_N_18, new Station("FENCHURCH ST. STATION", 25, this.bank));
         this.ownerships.add(OWNERSHIP_N_19, new ClassicLand("LEICESTER SQUARE", 26, this.bank, Color.YELLOW));
         this.ownerships.add(OWNERSHIP_N_20, new ClassicLand("COVENTRY STREET", 27, this.bank, Color.YELLOW));
-        this.ownerships.add(OWNERSHIP_N_21, new ClassicOwnership("WATER COMPANY", 28, this.bank));
+        this.ownerships.add(OWNERSHIP_N_21, new Company("WATER COMPANY", 28, this.bank));
         this.ownerships.add(OWNERSHIP_N_22, new ClassicLand("PICCADILLY", 29, this.bank, Color.YELLOW));
         this.ownerships.add(OWNERSHIP_N_23, new ClassicLand("REGENT STREET", 31, this.bank, Color.GREEN));
         this.ownerships.add(OWNERSHIP_N_24, new ClassicLand("OXFORD STREET", 32, this.bank, Color.GREEN));
         this.ownerships.add(OWNERSHIP_N_25, new ClassicLand("BOND STREET", 34, this.bank, Color.GREEN));
-        this.ownerships.add(OWNERSHIP_N_26, new ClassicOwnership("LIVERPOOL ST. STATION", 35, this.bank));
+        this.ownerships.add(OWNERSHIP_N_26, new Station("LIVERPOOL ST. STATION", 35, this.bank));
         this.ownerships.add(OWNERSHIP_N_27, new ClassicLand("PARK LANE", 37, this.bank, Color.BLUE));
         this.ownerships.add(OWNERSHIP_N_28, new ClassicLand("MAYFAIR", 39, this.bank, Color.BLUE));
     }
 
     private void inizializesBuildings() {
         for (int i = 0; i < N_MAX_OF_HOUSES; i++) {
-            this.homes.add(new Home(i + 1));
+            this.homes.add(new Home());
         }
         for (int i = 0; i < N_MAX_OF_HOTELS; i++) {
-            this.hotels.add(new Hotel(i + 1));
+            this.hotels.add(new Hotel());
         }
     }
 
@@ -363,30 +403,44 @@ public class ClassicStrategy implements GameStrategy {
     }
 
     private void inizializesDecks() {
-        Chance chance = new Chance();
-        chance.addCard(new ClassicCard("TAKE 3 STEPS BACK (WITH BEST WISHES)", MoveUpTo.takeSteps(-3)));
-        chance.addCard(new ClassicCard("GO TO PARK LANE: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), MoveUpTo.moveUpToBox(this.allBoxes.get(37))));
+        final Chance chance = new Chance();
+        chance.addCard(new ClassicCard("TAKE 3 STEPS BACK (WITH BEST WISHES)", CARD1, MoveUpTo.takeSteps(-3)));
+        chance.addCard(new ClassicCard("GO TO PARK LANE: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), CARD2, MoveUpTo.moveUpToBox(this.allBoxes.get(37))));
         chance.addCard(new ClassicCard("ADVANCE TO THE NEAREST STATION: IF IT'S FREE, YOU CAN BUY IT;"
-                + "IF IT IS OWNED BY ANOTHER PLAYER, PAY HIM TWICE THE PRICE THAT MATTER", MoveUpTo.theNearestStation(), new ToPay(amount)));
-        ClassicCardBelonging card1 = new ClassicCardBelonging("GET OUT FREE OF JAIL. YOU CAN KEEP THIS CARD AND USE IT WHEN YOU WANT TO, OR YOU CAN SELL IT");
-        card1.addItselfToPlayer();
-        chance.addCard(card1);
-        chance.addCard(new ClassicCard("FINE FOR SPEEDING. PAY $20", new ToPay(20)));
-        chance.addCard(new ClassicCard("THE BANK WILL YOU PAY A BONUS OF $50", new ToBePaid(50)));
-        chance.addCard(new ClassicCard("GO DIRECTLY TO JAIL", new GoToPrison(this.allBoxes.get(10))));
-        chance.addCard(new ClassicCard("PERFORM MAINTENANCE WORK ON ALL OUR BUILDINGS. YOU HAVE TO PAY 25 FOR EACH HOME AND 100 FOR EACH HOTEL THAT YOU OWN", new ToPay()));
-        chance.addCard(new ClassicCard("YOU HAVE BEEN PROMOTED TO THE PRESIDENCY OF THE BOARD OF DIRECTORS. YOU HAVE TO PAY 50 TO ANY PLAYER", new ToPay(), new ToBePaid(amount)));
-        chance.addCard(new ClassicCard("GO TO BOX 'GO' AND TAKE $" + Start.getMuchToPick(), MoveUpTo.moveUpToBox(this.allBoxes.get(START_POSITION))));
-        chance.addCard(new ClassicCard("GO TO THE FENCHURCH ST. STATION: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), MoveUpTo.moveUpToBox(this.allBoxes.get()));
+                + "IF IT IS OWNED BY ANOTHER PLAYER, PAY HIM TWICE THE PRICE THAT MATTER", CARD3, MoveUpTo.theNearestStation()));
+        chance.addCard(new ClassicCard("GET OUT FREE OF JAIL. YOU CAN KEEP THIS CARD AND USE IT WHEN YOU WANT TO, OR YOU CAN SELL IT", CARD4));
+        chance.addCard(new ClassicCard("FINE FOR SPEEDING. PAY $20", CARD5));
+        chance.addCard(new ClassicCard("THE BANK WILL YOU PAY A BONUS OF $50", CARD6, new ToBePaid(50)));
+        chance.addCard(new ClassicCard("GO DIRECTLY TO JAIL", CARD7, new GoToPrison(this.allBoxes.get(PRISON_POSITION))));
+        chance.addCard(new ClassicCard("PERFORM MAINTENANCE WORK ON ALL OUR BUILDINGS. YOU HAVE TO PAY $25 FOR EACH HOME AND $100 FOR EACH HOTEL THAT YOU OWN", CARD8));
+        chance.addCard(new ClassicCard("YOU HAVE BEEN PROMOTED TO THE PRESIDENCY OF THE BOARD OF DIRECTORS. YOU HAVE TO PAY 50 TO ANY PLAYER", CARD9));
+        chance.addCard(new ClassicCard("GO TO BOX 'GO' AND TAKE $" + Start.getMuchToPick(), CARD10, MoveUpTo.moveUpToBox(this.allBoxes.get(START_POSITION))));
+        chance.addCard(new ClassicCard("GO TO THE FENCHURCH ST. STATION: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), CARD11, MoveUpTo.moveUpToBox(this.allBoxes.get(OWNERSHIP_N_18))));
         chance.addCard(new ClassicCard("ADVANCE TO THE NEAREST STATION: IF IT'S FREE, YOU CAN BUY IT;"
-                + "IF IT IS OWNED BY ANOTHER PLAYER, PAY HIM TWICE THE PRICE THAT MATTER", MoveUpTo.theNearestStation(), new ToPay(amount)));
-        chance.addCard(new ClassicCard("GO TO THE TRAFALGAR SQUARE: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), MoveUpTo.moveUpToBox(this.allBoxes.get()));
-        chance.addCard(new ClassicCard("GO TO THE WHITEHALL: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), MoveUpTo.moveUpToBox(this.allBoxes.get()));
+                + "IF IT IS OWNED BY ANOTHER PLAYER, PAY HIM TWICE THE PRICE THAT MATTER", CARD12, MoveUpTo.theNearestStation()));
+        chance.addCard(new ClassicCard("GO TO THE TRAFALGAR SQUARE: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), CARD13, MoveUpTo.moveUpToBox(this.allBoxes.get(OWNERSHIP_N_17))));
+        chance.addCard(new ClassicCard("GO TO THE WHITEHALL: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), CARD14, MoveUpTo.moveUpToBox(this.allBoxes.get(OWNERSHIP_N_9))));
         chance.addCard(new ClassicCard("ADVANCE TO THE NEAREST STATION: IF IT'S FREE, YOU CAN BUY IT;"
-                + "IF IT IS OWNED BY ANOTHER PLAYER, LAUNCHING THE DICES AND PAY THE OWNER 10 TIMES THE NUMBER RELEASED", MoveUpTo.theNearestStation(), new ToRollDices(new ClassicDicesStrategy()), new ToPay(amount)));
-        chance.addCard(new ClassicCard("MATURANO THE COUPONS OF YOUR REAL ESTATE FUNDS: COLLECT $150", new ToBePaid(50)));
-        CommunityChest chest = new CommunityChest();
-        chest.addCard(new );
+                + "IF IT IS OWNED BY ANOTHER PLAYER, LAUNCHING THE DICES AND PAY THE OWNER 10 TIMES THE NUMBER RELEASED", CARD15, MoveUpTo.theNearestStation(), new ToRollDices(new ClassicDicesStrategy())));
+        chance.addCard(new ClassicCard("MATURANO THE COUPONS OF YOUR REAL ESTATE FUNDS: COLLECT $150", CARD16, new ToBePaid(150)));
+        final CommunityChest chest = new CommunityChest();
+        chest.addCard(new ClassicCard("RECEIVE DOCTOR'S BILL, PAY $50", CARD17));
+        chest.addCard(new ClassicCard("PAY SCHOOL FEES OF OUR CHILDREN: $50", CARD18));
+        chest.addCard(new ClassicCard("INHERITED $100 FROM A UNCLE", CARD19, new ToBePaid(50)));
+        chest.addCard(new ClassicCard("GET OUT FREE OF JAIL. YOU CAN KEEP THIS CARD AND USE IT WHEN YOU WANT TO, OR YOU CAN SELL IT", CARD20));
+        chest.addCard(new ClassicCard("PAY HOSPITAL'S BILL. PAY $100", CARD21));
+        chest.addCard(new ClassicCard("FOR THE SALE OF A STOCK OF PRODUCTS YOU OBTAIN $50", CARD22, new ToBePaid(50)));
+        chest.addCard(new ClassicCard("GO DIRECTLY TO JAIL", CARD23, new GoToPrison(this.allBoxes.get(PRISON_POSITION))));
+        chest.addCard(new ClassicCard("PAY CONTRIBUTIONS TO IMPROVE THE ROADS. YOU HAVE TO PAY $40 FOR EACH HOME AND $115 FOR EACH HOTEL THAT YOU OWN", CARD24));
+        chest.addCard(new ClassicCard("IS YOUR BIRTHDAY. EACH PLAYER GIVES YOU $10", CARD25));
+        chest.addCard(new ClassicCard("GO TO BOX 'GO' AND TAKE $" + Start.getMuchToPick(), CARD26, MoveUpTo.moveUpToBox(this.allBoxes.get(START_POSITION))));
+        chest.addCard(new ClassicCard("GET $25 FOR YOUR ADVICE", CARD27, new ToBePaid(25)));
+        chest.addCard(new ClassicCard("BANK RECOGNIZES AN ERROR IN YOUR STATEMENT. COLLECT $200", CARD28, new ToBePaid(200)));
+        chest.addCard(new ClassicCard("YOU WON THE SECOND PRIZE IN A BEAUTY CONTEST. COLLECT $10", CARD29, new ToBePaid(10)));
+        chest.addCard(new ClassicCard("MATURANO THE COUPONS OF YOUR ACTITONS. COLLECT $100", CARD30, new ToBePaid(100)));
+        chest.addCard(new ClassicCard("FEE INCOME WAS REFUNDED. GET $20", CARD31, new ToBePaid(20)));
+        chest.addCard(new ClassicCard("MATURANO INTEREST ON YOUR LIFE INSURANCE: COLLECT $100", CARD32, new ToBePaid(100)));
+        
         this.decks.add(0, chance);
         this.decks.add(1, chest);
     }
@@ -395,13 +449,14 @@ public class ClassicStrategy implements GameStrategy {
     public List<Action> getNextBoxsActions(final Box box, final Player player) {
         final List<Action> actions = new LinkedList<>();
         if (!player.dicesAlreadyRolled()) {
-            new ToRollDices(new ClassicDicesStrategy());
+            actions.add(new ToRollDices(new ClassicDicesStrategy()));
+            return actions;
         }
         if (box instanceof Land) {
             final Land land = (Land) box;
             if (land.getOwner().equals(this.bank)) {
                 final Action action1 = ToBuyProperties.buyAOwnership(land);
-                final Action action2 = new ToAuction(this.players, new ClassicAuction());
+                final Action action2 = ToAuction.ownerships(this.players, new ClassicAuction(), land);
                 actions.add(action1);
                 actions.add(action2);
             } else if (land.getOwner().equals(player)) {
@@ -414,46 +469,163 @@ public class ClassicStrategy implements GameStrategy {
             } else {
                 final int amount = ((ClassicLandContract) land.getContract()).getIncome(new LandIncomeStrategy(land));
                 if (amount <= player.getMoney()) {
-                    actions.add(new ToPay(amount));
+                    actions.add(new ToPay(amount, player));
                     new ToBePaid(amount).play((Player) land.getOwner());
+                    player.setDebts(true);
                 } else {
-                    if (player.getOwnerships().isPresent()) {
-                        player.getOwnerships().get().stream()
-                                                    .map(o -> ((LandGroup) o.getGroup()))
-                                                    .filter(g -> g.getBuildings().size() > 0)
-                                                    .map(g -> g.getBuildings())
-                                                    .forEach(l -> {
-                                                        l.forEach(b -> actions.add(ToSellProperties.sellABuilding(land, b)));
-                                                    });
-                        if (actions.isEmpty()) {
-                            player.getOwnerships().get().stream()
-                                                        .forEach(o -> {
-                                                            actions.add(ToSellProperties.sellAOwnership(o));
-                                                        });
-                        }
-                    } else if (player.getCards().isPresent()) {
-                        player.getCards().get().forEach(c -> actions.add(ToAuction.cards(this.players, ClassicAuction, c)));
-                    } else {
-                        FINE DEL GIOCO
-                    }
+                    this.notMuchMoney(player, actions);
                 }
             }
+        } else if (box instanceof Ownership) {
+            final Ownership ownership = (Ownership) box;
+            if (ownership.getOwner().equals(this.bank)) {
+                final Action action1 = ToBuyProperties.buyAOwnership(ownership);
+                final Action action2 = ToAuction.ownerships(this.players, new ClassicAuction(), ownership);
+                actions.add(action1);
+                actions.add(action2);
+            } else if (!ownership.getOwner().equals(player)) {
+                final int amount = ownership.getContract().getIncome(ownership instanceof Station ? new StationIncomeStrategy(ownership) : new CompanysIncomeStrategy(ownership, player));
+                if (amount <= player.getMoney()) {
+                    actions.add(new ToPay(amount, player));
+                    new ToBePaid(amount).play((Player) ownership.getOwner());
+                    player.setDebts(true);
+                } else {
+                    this.notMuchMoney(player, actions);
+                }
+            }
+        } else {
+            if (box instanceof Start) {
+                actions.add(new ToBePaid(Start.getMuchToPick()));
+            }
+//            if (box instanceof PrisonOrTransit) { // NON FANNO NULLA; QUINDI OMETTERLI
+//            }
+//            if (box instanceof NeutralArea) {
+//            }
+            if (box instanceof Police) {
+                actions.add(new GoToPrison(this.allBoxes.get(PRISON_POSITION)));
+            }
+            if (box instanceof DecksBox) {
+                actions.add(new ToDrawCards(this.decks.get(box.getID() == FIRST_CHANCE_POSITION || box.getID() == SECOND_CHANCE_POSITION ? 0 : 1)));
+            }
+            if (box instanceof TaxImpl) {
+                new ToPay(((TaxImpl) box).getCost(), player);
+            }
         }
-        
-        
-        
-        if (box instanceof Ownership) {
-            
-        }
-        if (box instanceof Box) {
-    
+        if (actions.isEmpty()) {
+            player.setDebts(false);
+            player.setDicesRoll(false);
         }
         return actions;
     }
 
     @Override
-    public List<Action> getNextCardsActions(final Card card) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Action> getNextCardsActions(final Box box, final Card card, final Player player) {
+        final List<Action> actions = new LinkedList<>();
+        switch (card.getID()) {
+        case CARD3 : if (((Ownership) box).getOwner().equals(player)) {
+                         actions.addAll(this.getNextBoxsActions(box, player));
+                     } else {
+                         final int amount = 2 * ((Ownership) box).getContract().getIncome(new StationIncomeStrategy(((Ownership) box)));
+                         actions.add(new ToPay(amount, player));
+                         new ToBePaid(amount);
+                     }
+        break;
+        case CARD4 : player.addCard(card);
+        break;
+        case CARD5 : actions.add(new ToPay(20, player));
+        break;
+        case CARD8 : player.getOwnerships().get().stream()
+                                                 .filter(o -> o instanceof Land)
+                                                 .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
+                                                 .map(o -> ((LandGroup) o.getGroup()).getBuildings())
+                                                 .forEach(l -> {
+                                                     l.forEach(b -> {
+                                                         actions.add(new ToPay(b instanceof Home? 25 : 100, player));
+                                                     });
+                                                 });
+        break;
+        case CARD9 : this.players.stream()
+                                 .filter(p -> !p.equals(player))
+                                 .forEach(p -> {
+                                     try {
+                                         new ToPay(CARD_TAX, player).play(player);
+                                         new ToBePaid(CARD_TAX).play(p);                                         
+                                     } catch (IllegalArgumentException i) {
+                                         this.notMuchMoney(player, actions);
+                                     }
+                                 });
+        break;
+        case CARD12 : if (((Ownership) box).getOwner().equals(player)) {
+                          actions.addAll(this.getNextBoxsActions(box, player));
+                      } else {
+                          final int amount = 2 * ((Ownership) box).getContract().getIncome(new StationIncomeStrategy(((Ownership) box)));
+                          actions.add(new ToPay(amount, player));
+                          new ToBePaid(amount);
+                      }
+        break;
+        case CARD15 : if (((Ownership) box).getOwner().equals(player)) {
+                          actions.addAll(this.getNextBoxsActions(box, player));
+                      } else {
+                          final int amount = (player.lastDicesNumber().stream().reduce((d,d1) -> d + d1).get() * 10);
+                          actions.add(new ToPay(amount, player));
+                          new ToBePaid(amount);
+                      }
+        break;
+        case CARD17 : actions.add(new ToPay(50, player));
+        break;
+        case CARD18 : actions.add(new ToPay(50, player));
+        break;
+        case CARD20 : player.addCard(card);
+        break;
+        case CARD21 : actions.add(new ToPay(100, player));
+        break;
+        case CARD24 : player.getOwnerships().get().stream()
+                                                 .filter(o -> o instanceof Land)
+                                                 .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
+                                                 .map(o -> ((LandGroup) o.getGroup()).getBuildings())
+                                                 .forEach(l -> {
+                                                     l.forEach(b -> {
+                                                         actions.add(new ToPay(b instanceof Home? 40 : 115, player));
+                                                     });
+                                                 });
+        break;
+        case CARD25 : this.players.stream()
+                                  .filter(p -> !p.equals(player))
+                                  .forEach(p -> {
+                                      try {
+                                          new ToPay(10, p).play(p);
+                                          new ToBePaid(10).play(player);                                         
+                                      } catch (IllegalArgumentException i) {
+                                          this.notMuchMoney(player, actions);
+                                      }
+                                   });
+        break;
+        default : break;
+        }
+        return actions;
+    }
+    
+    private void notMuchMoney(final Player player, final List<Action> actions) {
+        if (player.getOwnerships().isPresent()) {
+            player.getOwnerships().get().stream()
+                                        .filter(o -> o.getGroup() instanceof LandGroup)
+                                        .filter(o -> ((LandGroup) o.getGroup()).getBuildings().size() > 0)
+                                        .forEach(o -> {
+                                            ((LandGroup) o.getGroup()).getBuildings().forEach(b -> actions.add(ToSellProperties.sellABuilding(((Land) o), b)));
+                                        });
+            if (actions.isEmpty()) {
+                player.getOwnerships().get().stream()
+                                            .forEach(o -> {
+                                                actions.add(ToSellProperties.sellAOwnership(o));
+                                            });
+            }
+        } else if (player.getCards().isPresent()) {
+            player.getCards().get().forEach(c -> actions.add(ToAuction.cards(this.players, new ClassicAuction(), c)));
+        } else {
+//            FINE DEL GIOCO -> interfaccia funzionale (Action ?) + classe anonima: rimuove il giocatore con il play)
+            actions.add(p -> {
+                this.players.remove(p);
+            });
+        }
     }
 }

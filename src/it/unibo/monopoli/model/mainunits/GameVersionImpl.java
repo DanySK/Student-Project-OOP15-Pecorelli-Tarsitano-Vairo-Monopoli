@@ -63,18 +63,18 @@ public class GameVersionImpl implements GameVersion {
     }
     
     public List<Integer> toRollDices(final Player player) {
-        new ToRollDices(new ClassicDicesStrategy(this)).play(player);;
+        new ToRollDices(new ClassicDicesStrategy()).play(player);;
         return player.lastDicesNumber();
     }
 
     @Override
-    public Action getNextBoxsAction(Box box) {
+    public Action getNextBoxsAction(final Box box, final Player player) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Action getNextCardsAction(Card card) {
+    public Action getNextCardsAction(final Box box, final Card card, final Player player) {
         // TODO Auto-generated method stub
         return null;
     }

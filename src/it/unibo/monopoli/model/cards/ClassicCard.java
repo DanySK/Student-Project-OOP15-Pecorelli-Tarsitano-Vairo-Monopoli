@@ -18,6 +18,7 @@ public class ClassicCard implements Card {
     private final String description;
     private final List<Action> action;
     private Player player;
+    private final int id;
 
     /**
      * Constructs a {@link ClassicCard}. This {@link Card} needs a description
@@ -28,11 +29,12 @@ public class ClassicCard implements Card {
      * @param action
      *            - the {@link Card}'s {@link Action}
      */
-    public ClassicCard(final String description, final Action... action) {
+    public ClassicCard(final String description, final int id, final Action... action) {
         // this.deck = deck;
         this.description = description;
         this.action = new ArrayList<>();
         this.action.addAll(Arrays.asList(action));
+        this.id = id;
     }
 
     // @Override
@@ -45,19 +47,24 @@ public class ClassicCard implements Card {
         return this.description;
     }
 
-    @Override
-    public List<Action> getActions() {
-        return this.action;
-    }
+//    @Override
+//    public List<Action> getActions() {
+//        return this.action;
+//    }
+//
+//    @Override
+//    public Player getPlayer() {
+//        return this.player;
+//    }
+//
+//    @Override
+//    public void setPlayer(final Player player) {
+//        this.player = player;
+//    }
 
     @Override
-    public Player getPlayer() {
-        return this.player;
-    }
-
-    @Override
-    public void setPlayer(final Player player) {
-        this.player = player;
+    public int getID() {
+        return this.id;
     }
 
 }

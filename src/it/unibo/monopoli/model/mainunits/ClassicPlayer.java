@@ -20,6 +20,7 @@ public class ClassicPlayer implements Player{
     private boolean isAPrisoner;
     private final List<Integer> dicesNumbers;
     private int money;
+    private boolean debtsPaid;
 
     public ClassicPlayer(final String name, final Pawn pawn) {
         this.name = name;
@@ -107,6 +108,16 @@ public class ClassicPlayer implements Player{
     @Override
     public void setMoney(final int amount) {
         this.money = amount;
+    }
+
+    @Override
+    public boolean areDebtsPaid() {
+        return this.debtsPaid;
+    }
+
+    @Override
+    public void setDebts(final boolean arePaid) {
+        this.debtsPaid = arePaid;
     }
 
 }

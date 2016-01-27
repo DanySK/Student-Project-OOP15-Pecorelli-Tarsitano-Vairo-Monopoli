@@ -15,8 +15,6 @@ public class CardGraphic extends AbstractGraphicCard {
 	private String name;
 	private Color color;
 	private int value;
-	private Position pos;
-	private Dimension dim;
 	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 
 	public CardGraphic(String name, Color color, int value, Position pos) {
@@ -24,7 +22,7 @@ public class CardGraphic extends AbstractGraphicCard {
 		this.name = name;
 		this.color = color;
 		this.value = value;
-		this.pos = pos;
+		
 
 	}
 

@@ -33,7 +33,7 @@ public class Index {
 		southP.setPreferredSize(dimSouth);
 //Center
 		JPanel centerP = new JPanel();
-		JPanel tabellone = new ProvaTabellone(null,10,10 /*new ControllerImpl())*/).initialize();
+		JPanel tabellone = new ProvaTabellone(null,10,10/*, new ControllerImpl(EVersion.CLASSIC)*/).initialize();
 		centerP.add(tabellone);		
 //East		
         final JPanel panelE = new JPanel();

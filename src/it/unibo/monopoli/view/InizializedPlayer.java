@@ -90,7 +90,7 @@ public class InizializedPlayer {
 		group.add(rdbtnNewRadioButton);
 		group.add(rdbtnUmano);
 
-		
+		panel.setVisible(true);
 		return panel;
 
 	}

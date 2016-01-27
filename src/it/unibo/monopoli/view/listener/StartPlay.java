@@ -1,19 +1,22 @@
-package it.unibo.monopoli.view;
+package it.unibo.monopoli.view.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class CountCLickButton implements ActionListener {
+import it.unibo.monopoli.view.Index;
+
+public class StartPlay implements ActionListener {
 	int count =1;
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton)e.getSource();
-		button.setText("AVVIA PARTITA" + count);
-		count++;
 		new Index();
+		
+		System.out.println("Version: " + VersionSelected.getSelectedItem());
 	}
+	
 	
 	
 }

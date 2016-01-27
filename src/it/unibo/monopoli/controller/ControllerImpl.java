@@ -11,6 +11,7 @@ import it.unibo.monopoli.model.actions.ToRevokeMortgage;
 import it.unibo.monopoli.model.actions.ToSellProperties;
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.mainunits.Bank;
+import it.unibo.monopoli.model.mainunits.ClassicPlayer;
 import it.unibo.monopoli.model.mainunits.ClassicStrategy;
 import it.unibo.monopoli.model.mainunits.GameStrategy;
 import it.unibo.monopoli.model.mainunits.GameVersion;
@@ -52,7 +53,7 @@ public class ControllerImpl implements Controller {
      *            .
      */
     public void addPlayer(final JTextField name, final int idPawn, final int typePlayer) {
-        final Player p = new Player(name.getText(), idPawn, typePlayer);
+        final Player p = new ClassicPlayer(name.getText(), idPawn, typePlayer);
         this.player.add(p);
 
     }

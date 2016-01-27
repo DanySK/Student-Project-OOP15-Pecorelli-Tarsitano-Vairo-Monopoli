@@ -21,8 +21,9 @@ public class ClassicPlayer implements Player{
     private final List<Integer> dicesNumbers;
     private int money;
     private boolean debtsPaid;
+    private final boolean human;
 
-    public ClassicPlayer(final String name, final Pawn pawn) {
+    public ClassicPlayer(final String name, final Pawn pawn, final boolean isHuman) {
         this.name = name;
         this.pawn = pawn;
         this.ownerships = Optional.empty();
@@ -30,6 +31,7 @@ public class ClassicPlayer implements Player{
         this.alreadyRolled = false;
         this.isAPrisoner = false;
         this.dicesNumbers = new LinkedList<>();
+        this.human = isHuman;
     }
 
     @Override
@@ -118,6 +120,11 @@ public class ClassicPlayer implements Player{
     @Override
     public void setDebts(final boolean arePaid) {
         this.debtsPaid = arePaid;
+    }
+
+    @Override
+    public boolean isHuman() {
+        return this.human;
     }
 
 }

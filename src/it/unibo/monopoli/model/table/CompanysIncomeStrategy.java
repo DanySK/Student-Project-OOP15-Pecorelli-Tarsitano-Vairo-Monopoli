@@ -17,8 +17,8 @@ public class CompanysIncomeStrategy extends BusinessesIncomeStrategy {
     @Override
     protected int getBusinessesIncome(final int size) {
         switch (size) {
-        case 1: return this.player.lastDicesNumber() * ONE_COMPANY;
-        case 2: return this.player.lastDicesNumber() * TWO_COMPANIES;
+        case 1: return this.player.lastDicesNumber().stream().reduce((b, b1) -> b + b1).get() * ONE_COMPANY;
+        case 2: return this.player.lastDicesNumber().stream().reduce((b, b1) -> b + b1).get() * TWO_COMPANIES;
         default: throw new IllegalArgumentException();
         }
     }

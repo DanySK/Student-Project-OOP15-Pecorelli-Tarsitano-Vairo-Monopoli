@@ -28,13 +28,13 @@ public interface Card {
      */
     String getDescription();
 
-//    /**
-//     * Return a {@link List} of {@link Action}s of the specific {@link Card}.
-//     * 
-//     * @return {@link Card}'s {@link Action}s
-//     */
-//    List<Action> getActions();
-//
+    /**
+     * Return a {@link List} of {@link Action}s of the specific {@link Card}.
+     * 
+     * @return {@link Card}'s {@link Action}s
+     */
+    List<Action> getActions();
+
 //    /**
 //     * Returns the {@link Player} who draw the {@link Card}.
 //     * 

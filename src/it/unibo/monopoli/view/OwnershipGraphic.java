@@ -41,7 +41,8 @@ public class OwnershipGraphic extends AbstractGraphicCard {
 		JPanel emptyP = new JPanel();
 		card.add(emptyP);
 		
-		JLabel valueP = new JLabel(""+own.getContract().getCost());
+		int i = this.own.getContract().getCost();
+		JLabel valueP = new JLabel("" + i);
 		card.add(valueP);
 		
 		card.setBorder(border);

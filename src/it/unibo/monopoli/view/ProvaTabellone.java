@@ -31,7 +31,7 @@ public class ProvaTabellone {
 
 	private Border border;
 
-	public ProvaTabellone(Set<Box> cards, int col, int row, final Controller controller) {
+	public ProvaTabellone(int col, int row, final Controller controller) {
 		border = BorderFactory.createLineBorder(Color.BLACK, 2);
 		this.controller = controller;
 		this.cards = this.controller.getAllBoxes();

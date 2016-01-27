@@ -17,7 +17,7 @@ public class ClassicCard implements Card {
     // private final Deck deck;
     private final String description;
     private final List<Action> action;
-    private Player player;
+//    private Player player;
     private final int id;
 
     /**
@@ -47,11 +47,11 @@ public class ClassicCard implements Card {
         return this.description;
     }
 
-//    @Override
-//    public List<Action> getActions() {
-//        return this.action;
-//    }
-//
+    @Override
+    public List<Action> getActions() {
+        return this.action;
+    }
+
 //    @Override
 //    public Player getPlayer() {
 //        return this.player;

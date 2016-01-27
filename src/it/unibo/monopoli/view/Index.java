@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -14,8 +15,8 @@ import javax.swing.border.Border;
 import it.unibo.monopoli.controller.ControllerImpl;
 
 public class Index {
-
-	public static void main(String[] args) {
+	
+	public Index(){
 		final MyFrame frame = new MyFrame("Monopoli", new BorderLayout(), new Dimension(1200, 700));
 
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
@@ -32,7 +33,7 @@ public class Index {
 		southP.setPreferredSize(dimSouth);
 //Center
 		JPanel centerP = new JPanel();
-		JPanel tabellone = new ProvaTabellone(null,10,10, new ControllerImpl()).initialize();
+		JPanel tabellone = new ProvaTabellone(null,10,10, new ControllerImpl(EVersion.CLASSIC)).initialize();
 		centerP.add(tabellone);		
 //East		
         final JPanel panelE = new JPanel();
@@ -56,6 +57,10 @@ public class Index {
 
 		frame.setVisible(true);
 
+	}
+
+	public static void main(String[] args) {
+		
 	}
 
 }

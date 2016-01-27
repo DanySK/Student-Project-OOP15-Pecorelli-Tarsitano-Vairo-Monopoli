@@ -25,16 +25,16 @@ import it.unibo.monopoli.controller.*;
 
 public class ProvaTabellone {
 
-	private final Controller controller;
+	//private final Controller controller;
 	private List<Box> cards ;
 	private int col, row;
 
 	private Border border;
 
-	public ProvaTabellone(Set<Box> cards, int col, int row, final Controller controller) {
+	public ProvaTabellone(Set<Box> cards, int col, int row/*, final Controller controller*/) {
 		border = BorderFactory.createLineBorder(Color.BLACK, 2);
-		this.controller = controller;
-		this.cards = this.controller.getAllBoxes();
+		//this.controller = controller;
+		//this.cards = this.controller.getAllBoxes();
 	}		
 
 	public JPanel initialize() {

@@ -11,10 +11,13 @@ public class ToPay extends ToPayAndBePaid {
 
     /**
      * Construct a new instance of {@link ToPay}. The amount in input is the
-     * amount to pay.
+     * amount to pay, instead the {@link Player} in input is the one that have
+     * to pay.
      * 
      * @param amount
      *            - the amount to pay
+     * @param player
+     *            - the {@link Player} that have to pay
      * @throws IllegalArgumentException
      *             - if the player's moneys are less than the amount to pay
      */

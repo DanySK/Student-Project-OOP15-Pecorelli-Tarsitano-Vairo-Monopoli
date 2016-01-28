@@ -63,12 +63,12 @@ public interface AuctionOfOwnershipAndCard {
 
     /**
      * Returns the next {@link Player} that have to play in the auction.
-     * @return
+     * @return the next {@link Player} that have to play
      */
     Player nextPlayer();
 
     /**
-     * removes the {@link Player} that is playing in the auction from it.
+     * Removes the {@link Player} that is playing in the auction from it.
      */
     void removePlayer();
 

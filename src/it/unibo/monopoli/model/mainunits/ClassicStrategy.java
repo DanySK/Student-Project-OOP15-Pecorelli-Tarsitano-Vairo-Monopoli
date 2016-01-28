@@ -1,12 +1,10 @@
 package it.unibo.monopoli.model.mainunits;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.actions.ClassicAuction;
@@ -19,7 +17,6 @@ import it.unibo.monopoli.model.actions.ToBuyProperties;
 import it.unibo.monopoli.model.actions.ToDrawCards;
 import it.unibo.monopoli.model.actions.ToPay;
 import it.unibo.monopoli.model.actions.ToRollDices;
-import it.unibo.monopoli.model.actions.ToSellCards;
 import it.unibo.monopoli.model.actions.ToSellProperties;
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.Chance;
@@ -27,12 +24,10 @@ import it.unibo.monopoli.model.cards.ClassicCard;
 import it.unibo.monopoli.model.cards.CommunityChest;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Box;
-import it.unibo.monopoli.model.table.Building;
 import it.unibo.monopoli.model.table.ClassicContract;
 import it.unibo.monopoli.model.table.ClassicLand;
 import it.unibo.monopoli.model.table.ClassicLandContract;
 import it.unibo.monopoli.model.table.ClassicLandGroup;
-import it.unibo.monopoli.model.table.ClassicOwnership;
 import it.unibo.monopoli.model.table.Company;
 import it.unibo.monopoli.model.table.CompanysIncomeStrategy;
 import it.unibo.monopoli.model.table.Contract;
@@ -464,6 +459,10 @@ public class ClassicStrategy implements GameStrategy {
         this.decks.add(0, chance);
         this.decks.add(1, chest);
     }
+    
+    private boolean twice(final Player player) {
+        return player.lastDicesNumber().get(0) == player.lastDicesNumber().get(1); 
+    }
 
     @Override
     public List<Action> getNextBoxsActions(final Box box, final Player player) {
@@ -471,6 +470,9 @@ public class ClassicStrategy implements GameStrategy {
         if (!player.dicesAlreadyRolled()) {
             actions.add(new ToRollDices(new ClassicDicesStrategy()));
             return actions;
+        } else if (player.isInPrison() && this.twice(player)) {
+            player.setPrison(false);
+            MoveUpTo.takeSteps(player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
         }
         if (box instanceof Land) {
             final Land land = (Land) box;

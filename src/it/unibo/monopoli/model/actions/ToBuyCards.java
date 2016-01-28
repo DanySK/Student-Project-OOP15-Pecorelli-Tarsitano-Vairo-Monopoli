@@ -1,9 +1,6 @@
 package it.unibo.monopoli.model.actions;
 
-import java.util.List;
-
 import it.unibo.monopoli.model.cards.Card;
-import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.mainunits.Player;
 
 /**
@@ -17,7 +14,7 @@ public class ToBuyCards extends ToBuyAndSellCards {
 
     /**
      * Construct a new instance of {@link ToBuyCards}. The {@link Card} in input
-     * is the card to buy.
+     * is the one to buy.
      * 
      * @param card
      *            - the {@link Card} to buy
@@ -35,8 +32,13 @@ public class ToBuyCards extends ToBuyAndSellCards {
     }
 
     @Override
-    protected void cardsStrategy(final Player player) {
+    protected void strategy(final Player player) {
         player.addCard(this.card);
     }
+
+    // @Override
+    // protected void cardsStrategy(final Player player) {
+    // player.addCard(this.card);
+    // }
 
 }

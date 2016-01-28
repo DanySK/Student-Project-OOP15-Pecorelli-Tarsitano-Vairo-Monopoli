@@ -13,7 +13,7 @@ import it.unibo.monopoli.model.table.Ownership;
  * This class represent a classic implementation of Monopoly's auction.
  *
  */
-public class ClassicAuction implements AuctionOfOwnershipAndCard{
+public class ClassicAuction implements AuctionOfOwnershipAndCard {
 
     private Iterator<Player> iterator;
     private List<Player> players;
@@ -43,7 +43,7 @@ public class ClassicAuction implements AuctionOfOwnershipAndCard{
       final int pos = this.players.indexOf(firstPlayer);
       final List<Player> list = new LinkedList<>();
       list.addAll(0, this.players.subList(pos, this.players.size() - 1));
-      list.addAll(this.players.size() - pos, this.players.subList(0, pos -1));
+      list.addAll(this.players.size() - pos, this.players.subList(0, pos - 1));
       this.iterator = list.listIterator(0);
       this.ownership = Optional.of(ownership);
       this.card = Optional.empty();
@@ -55,7 +55,7 @@ public class ClassicAuction implements AuctionOfOwnershipAndCard{
       final int pos = this.players.indexOf(firstPlayer);
       final List<Player> list = new LinkedList<>();
       list.addAll(0, this.players.subList(pos, this.players.size() - 1));
-      list.addAll(this.players.size() - pos, this.players.subList(0, pos -1));
+      list.addAll(this.players.size() - pos, this.players.subList(0, pos - 1));
       this.iterator = list.listIterator(0);
       this.ownership = Optional.empty();
       this.card = Optional.of(card);

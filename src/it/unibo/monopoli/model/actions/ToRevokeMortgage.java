@@ -1,5 +1,6 @@
 package it.unibo.monopoli.model.actions;
 
+import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Ownership;
 
 /**
@@ -18,21 +19,19 @@ public class ToRevokeMortgage extends ToMortgageAndRevoke {
      * 
      * @param ownership
      *            - the {@link Ownership} with the mortgage to revoke
-     * @param amount
-     *            - the amount of the revoke
-     * @throws IllegalArgumentException
-     *             - if the amount is less than or equal to zero
      */
-    public ToRevokeMortgage(final int amount, final Ownership ownership) {
-        super(-amount);
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Only positive amount different of zero!");
-        }
+    public ToRevokeMortgage(final Ownership ownership) {
+        super(-(ownership.getContract().getMortgageValue()));
         this.ownership = ownership;
     }
 
+    // @Override
+    // protected void strategyOfMortgaging() {
+    // this.ownership.setMortgage(false);
+    // }
+
     @Override
-    protected void strategyOfMortgaging() {
+    protected void strategy(final Player player) {
         this.ownership.setMortgage(false);
     }
 

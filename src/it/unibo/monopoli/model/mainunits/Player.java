@@ -42,7 +42,7 @@ public interface Player extends Owner {
      * 
      * @return a {@link Set} of {@link Ownership}
      */
-    Optional<Set<Ownership>>  getOwnerships();
+    Optional<List<Ownership>>  getOwnerships();
 
     /**
      * Adds a {@link Card} to the {@link Player}'s {@link Deck}.

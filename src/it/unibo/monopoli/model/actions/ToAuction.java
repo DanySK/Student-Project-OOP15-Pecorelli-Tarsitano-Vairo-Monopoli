@@ -58,7 +58,7 @@ public final class ToAuction implements Action {
      *            - the {@link Player} who started the auction
      * @param auction
      *            - the {@link AuctionOfOwnershipAndCard}'s method to use
-     * @param ownership
+     * @param card
      *            -the {@link Card} {@link ToAuction}
      * @return an instance of this class
      */

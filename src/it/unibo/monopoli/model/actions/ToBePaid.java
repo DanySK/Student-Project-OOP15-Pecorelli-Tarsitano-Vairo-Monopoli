@@ -1,20 +1,21 @@
 package it.unibo.monopoli.model.actions;
 
-import it.unibo.monopoli.model.cards.Card;
+import it.unibo.monopoli.model.mainunits.Player;
 
 /**
  * This class represent one of the {@link MoneyAction}s of the game. This one
- * allows to buy {@link Card}s.
+ * allows to be paid.
  *
  */
 public class ToBePaid extends ToPayAndBePaid {
 
     /**
-     * Construct a new instance of {@link ToPay}. The amount in input is the
-     * amount to pay.
+     * Construct a new instance of {@link ToBePaid}. The amount in input is the
+     * amount with which the {@link Player} is paid.
      * 
      * @param amount
-     *            - the amount to pay
+     *            - the amount with which the {@link Player} is paid. It can be
+     *            only positive
      * @throws IllegalArgumentException
      *             - if the amount is less than or equal to zero
      */

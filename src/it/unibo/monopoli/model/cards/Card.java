@@ -7,8 +7,9 @@ import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.mainunits.Player;
 
 /**
- * This interface represent all the {@link Card}s in that game. They all have a name, a
- * description and an {@link Action} to execute.
+ * This interface represent all the {@link Card}s in that game. They all have a
+ * name, a description and an ID. Some of these have also one or more
+ * {@link Action}s to execute.
  *
  */
 public interface Card {
@@ -19,7 +20,12 @@ public interface Card {
     // * @return {@link Card}'s {@link Deck}
     // */
     // Deck getDeck();
-    
+
+    /**
+     * Returns the ID of the {@link Card}.
+     * 
+     * @return {@link Card}'s ID
+     */
     int getID();
 
     /**
@@ -30,14 +36,15 @@ public interface Card {
     String getDescription();
 
     /**
-     * Return a {@link List} of {@link Action}s of the specific {@link Card}.
+     * Return an {@link Optional} {@link List} of {@link Action}s of the
+     * specific {@link Card}.
      * 
      * @return {@link Card}'s {@link Action}s
      */
-    List<Action> getActions();
+    Optional<List<Action>> getActions();
 
     /**
-     * Returns the {@link Player} who draw the {@link Card}.
+     * Returns the {@link Optional} {@link Player} who draw the {@link Card}.
      * 
      * @return the {@link Player} who draw the {@link Card}
      */

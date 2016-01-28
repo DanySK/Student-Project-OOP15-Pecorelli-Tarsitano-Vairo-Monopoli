@@ -1,6 +1,5 @@
 package it.unibo.monopoli.model.cards;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -17,24 +16,26 @@ public class ClassicCard implements Card {
 
     // private final Deck deck;
     private final String description;
-    private final List<Action> action;
+    private final Optional<List<Action>> action;
     private Optional<Player> player;
     private final int id;
 
     /**
-     * Constructs a {@link ClassicCard}. This {@link Card} needs a description
-     * and the {@link Action} that is able to fulfill.
+     * Constructs a {@link ClassicCard}'s instance. This {@link Card} needs a
+     * description, an ID and the {@link Optional} {@link Action} s that is able
+     * to fulfill.
      * 
      * @param description
      *            - the {@link Card}'s description
-     * @param action
-     *            - the {@link Card}'s {@link Action}
+     * @param id
+     *            - the {@link Card}'s ID
+     * @param actions
+     *            - the {@link Card}'s {@link Action}s
      */
-    public ClassicCard(final String description, final int id, final Action... action) {
+    public ClassicCard(final String description, final int id, final Action... actions) {
         // this.deck = deck;
         this.description = description;
-        this.action = new ArrayList<>();
-        this.action.addAll(Arrays.asList(action));
+        this.action = Optional.ofNullable(Arrays.asList(actions));
         this.id = id;
         this.player = Optional.empty();
     }
@@ -50,7 +51,7 @@ public class ClassicCard implements Card {
     }
 
     @Override
-    public List<Action> getActions() {
+    public Optional<List<Action>> getActions() {
         return this.action;
     }
 

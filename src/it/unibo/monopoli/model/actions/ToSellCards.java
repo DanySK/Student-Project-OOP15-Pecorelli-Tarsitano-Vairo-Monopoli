@@ -1,9 +1,6 @@
 package it.unibo.monopoli.model.actions;
 
-import java.util.List;
-
 import it.unibo.monopoli.model.cards.Card;
-import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.mainunits.Player;
 
 /**
@@ -35,8 +32,13 @@ public class ToSellCards extends ToBuyAndSellCards {
     }
 
     @Override
-    protected void cardsStrategy(final Player player) {
-        player.removeCard(this.card);
+    protected void strategy(final Player player) {
+        player.getCards().ifPresent(l -> player.removeCard(this.card));
     }
+
+    // @Override
+    // protected void cardsStrategy(final Player player) {
+    // player.removeCard(this.card);
+    // }
 
 }

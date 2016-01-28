@@ -4,12 +4,8 @@ import java.util.List;
 
 import javax.swing.JTextField;
 
-import it.unibo.monopoli.model.actions.ToBuyProperties;
-import it.unibo.monopoli.model.actions.ToMortgage;
-import it.unibo.monopoli.model.actions.ToRevokeMortgage;
-import it.unibo.monopoli.model.actions.ToSellProperties;
-import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.mainunits.Bank;
+import it.unibo.monopoli.model.mainunits.ClassicPawn;
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.model.table.Building;
@@ -22,25 +18,31 @@ import it.unibo.monopoli.model.table.Ownership;
  */
 public interface Controller {
 
+//    /**
+//    * Set the initial strategy of the game.
+//    * @param strategy
+//    * - set a strategy {@link JTextField}s
+//    */
+//    //void setStrategy();
+//    /**
+//     * This method allow to get all Boxes.
+//     * @
+//     */
     /**
-    * Set the initial strategy of the game.
-    * @param strategy
-    * - set a strategy {@link JTextField}s
-    */
-    //void setStrategy();
-    /**
-     * This method allow to get all Boxes
-     * @return {@link List} of {@link Boxes}
+     * a.
+     * @param name .
+     * @param pawn .
+     * @param isHuman .
      */
 
-    void addPlayer(final JTextField name, final int idPawn, final int typePlayer);
+    void addPlayer(final JTextField name, final ClassicPawn pawn, final boolean isHuman);
 
     /**
      * This method allow to get set of all Box.
      * 
      * @return Set of {@link Box}
      */
-    List<Box> getAllBoxes() ;
+    List<Box> getAllBoxes();
 
     /**
      * This method allow to get Bank.
@@ -146,18 +148,18 @@ public interface Controller {
      * @return the integer for next player
      */
     Player endTurn();
-    /**
-     * This method allow to roll dice.
-     * 
-     * @return the list of {@link Dices} rolled;
-     */
-    List<Integer> toRollDices();
+//    /**
+//     * This method allow to roll dice.
+//     * 
+//     * @return the list of {@link Dices} rolled;
+//     */
+//    List<Integer> toRollDices();
     /**
      * This method allow to get the result of dices .
      * 
      * @return the result of rolling dices .
      */
-    int getDicesResult();
+    int toRollDices();
 
 
 }

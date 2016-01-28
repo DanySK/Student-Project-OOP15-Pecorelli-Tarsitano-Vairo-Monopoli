@@ -26,7 +26,7 @@ import it.unibo.monopoli.view.EVersion;
 /**
  * */
 public class ControllerImpl implements Controller {
-    private final List<Player> player;
+    private final List<Player> player ;
     private Player actualPlayer;
     private GameStrategy strategy;
     private GameVersion version;

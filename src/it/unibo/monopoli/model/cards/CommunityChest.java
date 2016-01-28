@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This is a specific implementation of a classic game's {@link Deck}.
+ * This is a specific implementation of one of classic game's {@link Deck}s.
  *
  */
 public class CommunityChest implements Deck {
@@ -12,8 +12,7 @@ public class CommunityChest implements Deck {
     private final List<Card> cards;
 
     /**
-     * Constructs an instance of {@link Deck} named {@link Chance} and adds to
-     * it all its {@link Card}s.
+     * Constructs an instance of {@link Deck} named {@link CommunityChest}.
      */
     public CommunityChest() {
         this.cards = new LinkedList<>();
@@ -39,8 +38,7 @@ public class CommunityChest implements Deck {
 
     @Override
     public void removeCard(final Card card) {
-        // TODO Auto-generated method stub
-
+        this.cards.remove(card);
     }
 
     @Override

@@ -7,18 +7,19 @@ import it.unibo.monopoli.model.table.Contract;
 import it.unibo.monopoli.model.table.Ownership;
 
 /**
- * This interface represent the only one bank in the game. Here is were all the
- * money, {@link Building}s and {@link Contract}s are keep at the beginning.
+ * This interface represent the game's bank. Usually is here that are kept all
+ * the money, {@link Building}s and {@link Contract}s at the beginning of the
+ * game.
  *
  */
 public interface Bank extends Owner {
 
     /**
-     * Return a {@link List} of the remained {@link Contract}s.
+     * Return a {@link List} of the remained {@link Ownership}s.
      * 
-     * @return a {@link List} of {@link Contract}s
+     * @return a {@link List} of {@link Ownership}s
      */
-    List<Contract> getLeftContract();
+    List<Ownership> getLeftOwnership();
 
     /**
      * Return a {@link List} of the remained {@link Building}s.
@@ -28,16 +29,16 @@ public interface Bank extends Owner {
     List<Building> getLeftBuilding();
 
     /**
-     * Add a new {@link Contract}.
+     * Add a new {@link Ownership} to those of the bank.
      * 
-     * @param contract
+     * @param ownership
      *            - the one to add
      */
-    void addContract(Contract contract);
+    void addOwnership(Ownership ownership);
 
     /**
-     * Returns the {@link Ownership} with the ID in
-     * input and removes it from the {@link Bank}.
+     * Returns the {@link Ownership} with the ID in input and removes it from
+     * the {@link Bank}.
      * 
      * @param ownershipsIndex
      *            - the ID of the {@link Ownership}
@@ -47,14 +48,14 @@ public interface Bank extends Owner {
 
     /**
      * Returns a random {@link Ownership} from those belonging to the
-     * {@link Bank} and removes it.
+     * {@link Bank} and removes it from the {@link Bank}.
      * 
      * @return a random {@link Ownership}
      */
     Ownership getOwnership();
 
     /**
-     * Add a new {@link Building}.
+     * Add a new {@link Building} to those of the bank.
      * 
      * @param building
      *            - the one to add

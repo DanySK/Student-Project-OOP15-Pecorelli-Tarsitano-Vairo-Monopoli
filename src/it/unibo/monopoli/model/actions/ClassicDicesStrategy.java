@@ -5,7 +5,6 @@ import java.util.List;
 
 import it.unibo.monopoli.model.mainunits.ClassicDice;
 import it.unibo.monopoli.model.mainunits.Dice;
-import it.unibo.monopoli.model.mainunits.GameVersion;
 import it.unibo.monopoli.model.mainunits.Player;
 
 /**
@@ -13,12 +12,12 @@ import it.unibo.monopoli.model.mainunits.Player;
  *
  */
 public class ClassicDicesStrategy implements DicesStrategy {
-    
+
    // private final GameVersion version;
-    
-    public ClassicDicesStrategy() { //final GameVersion version
-       // this.version = version;
-    }
+
+//    public ClassicDicesStrategy() { //final GameVersion version
+//       // this.version = version;
+//    }
 
     @Override
     public List<Dice> getDices() {
@@ -33,16 +32,13 @@ public class ClassicDicesStrategy implements DicesStrategy {
         if (dices.size() != 2) {
             throw new IllegalArgumentException("This version needs two dices");
         }
-        if (player.isInPrison() && !this.twice(player)) {
-            this.version.endOfTurnAndNextPlayer(player);
-        } else {
-            player.setPrison(false);
+        if (!player.isInPrison()) {
             MoveUpTo.takeSteps(player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
         }
     }
 
-    private boolean twice(final Player player) {
-        return player.lastDicesNumber().get(0) == player.lastDicesNumber().get(1); 
-    }
+//    private boolean twice(final Player player) {
+//        return player.lastDicesNumber().get(0) == player.lastDicesNumber().get(1); 
+//    }
 
 }

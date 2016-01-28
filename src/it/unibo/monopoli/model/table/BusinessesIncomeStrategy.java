@@ -19,7 +19,7 @@ public abstract class BusinessesIncomeStrategy extends AbstractIncomeStartegy {
     protected int getSpecificIncome(final List<Ownership> allMembers) {
         final Set<Ownership> playersMembers = new HashSet<>();
         allMembers.stream()
-                  .filter(m -> ((Player) this.ownership.getOwner()).getOwnerships().contains(m))
+                  .filter(m -> ((Player) this.ownership.getOwner()).getOwnerships().get().contains(m))
                   .forEach(m -> playersMembers.add(m));
         return this.getBusinessesIncome(playersMembers.size());
     }

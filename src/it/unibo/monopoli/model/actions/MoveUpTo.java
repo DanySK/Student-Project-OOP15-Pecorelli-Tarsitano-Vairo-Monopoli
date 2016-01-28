@@ -3,11 +3,13 @@ package it.unibo.monopoli.model.actions;
 import it.unibo.monopoli.model.mainunits.Pawn;
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Box;
+import it.unibo.monopoli.model.table.Station;
 
 /**
  * This class represent one of the {@link Action}s of the game. This one is for
- * moving up to a specific {@link Box}. It uses the actual position of the
- * {@link Player}'s {@link Pawn} and the number of steps that it has to take.
+ * moving up to a {@link Box}. It uses the actual position of the {@link Player}
+ * 's {@link Pawn} and the number of steps that it has to take, or the specific
+ * {@link Box} to reach or the nearest {@link Station}.
  *
  */
 public final class MoveUpTo implements Action {
@@ -60,10 +62,10 @@ public final class MoveUpTo implements Action {
 
     /**
      * Constructs an instance of this specific {@link Action}. It needs the
-     * {@link Box} to which that the {@link Player}'s {@link Pawn} has to go.
+     * {@link Box} to reach by the {@link Player}'s {@link Pawn}.
      * 
      * @param box
-     *            - the {@link Box} to which to go
+     *            - the {@link Box} to reach
      * @throws IllegalArgumentException
      *             - if the {@link Box} in input is null
      * @return an instance of {@link MoveUpTo}
@@ -76,8 +78,8 @@ public final class MoveUpTo implements Action {
     }
 
     /**
-     * Constructs an instance of this specific {@link Action}. It needs the
-     * {@link Box} to which that the {@link Player}'s {@link Pawn} has to go.
+     * Constructs an instance of this specific {@link Action}. It send you to
+     * the nearest {@link Station}.
      * 
      * @return an instance of {@link MoveUpTo}
      */
@@ -86,7 +88,8 @@ public final class MoveUpTo implements Action {
     }
 
     private boolean isPassedFromStartBox(final Player player) {
-        return player.getPawn().getPreviousPos() >= FIRST_USEFUL_POSITION && player.getPawn().getActualPos() <= LAST_USEFUL_POSITION;
+        return player.getPawn().getPreviousPos() >= FIRST_USEFUL_POSITION
+                && player.getPawn().getActualPos() <= LAST_USEFUL_POSITION;
     }
 
     @Override

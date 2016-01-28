@@ -1,10 +1,5 @@
 package it.unibo.monopoli.model.table;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import it.unibo.monopoli.model.actions.Action;
-import it.unibo.monopoli.model.actions.ToDrawCards;
 import it.unibo.monopoli.model.cards.Deck;
 
 /**
@@ -17,8 +12,8 @@ public class DecksBox implements Box {
 
     private final String name;
     private final int id;
-    private final Set<Action> allowedActions;
-    private final Set<Action> obligatoryActions;
+//    private final Set<Action> allowedActions;
+//    private final Set<Action> obligatoryActions;
 
     /**
      * Constructs an implementation of {@link DecksBox}'s {@link Box} that needs a
@@ -34,9 +29,9 @@ public class DecksBox implements Box {
     public DecksBox(final String name, final int id, final Deck deck) {
         this.name = name;
         this.id = id;
-        this.allowedActions = new HashSet<>();
-        this.obligatoryActions = new HashSet<>();
-        this.obligatoryActions.add(new ToDrawCards(deck));
+//        this.allowedActions = new HashSet<>();
+//        this.obligatoryActions = new HashSet<>();
+//        this.obligatoryActions.add(new ToDrawCards(deck));
     }
 
     @Override
@@ -49,24 +44,24 @@ public class DecksBox implements Box {
         return this.id;
     }
 
-    @Override
-    public Set<Action> getAllowedActions() {
-        return this.allowedActions;
-    }
-
-    @Override
-    public Set<Action> getObligatoryActions() {
-        return this.obligatoryActions;
-    }
-
-    @Override
-    public void setAllowedActions(final Set<Action> actions) {
-        this.allowedActions.addAll(actions);
-    }
-
-    @Override
-    public void setObligatoryActions(final Set<Action> actions) {
-        this.obligatoryActions.addAll(actions);
-    }
+//    @Override
+//    public Set<Action> getAllowedActions() {
+//        return this.allowedActions;
+//    }
+//
+//    @Override
+//    public Set<Action> getObligatoryActions() {
+//        return this.obligatoryActions;
+//    }
+//
+//    @Override
+//    public void setAllowedActions(final Set<Action> actions) {
+//        this.allowedActions.addAll(actions);
+//    }
+//
+//    @Override
+//    public void setObligatoryActions(final Set<Action> actions) {
+//        this.obligatoryActions.addAll(actions);
+//    }
 
 }

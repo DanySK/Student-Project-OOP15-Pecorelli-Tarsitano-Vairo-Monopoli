@@ -44,7 +44,7 @@ public class GameVersionImpl implements GameVersion {
     }
 
     // @Override
-    private Player getNextPlayer() {
+    public Player getNextPlayer() {
         if (!this.iter.hasNext()) {
             this.iter = this.players.iterator();
         }

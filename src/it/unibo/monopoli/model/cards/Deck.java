@@ -3,8 +3,8 @@ package it.unibo.monopoli.model.cards;
 import java.util.List;
 
 /**
- * This interface represent all the decks in the game. They are composed of
- * several cards.
+ * This interface represent the decks in the game. They are composed of several
+ * cards.
  *
  */
 public interface Deck {
@@ -24,7 +24,7 @@ public interface Deck {
     List<Card> getCards();
 
     /**
-     * This method add to the {@link Deck} a new {@link Card} randomly.
+     * This method add to the {@link Deck} a new {@link Card}.
      * 
      * @param card
      *            - the {@link Card} to add

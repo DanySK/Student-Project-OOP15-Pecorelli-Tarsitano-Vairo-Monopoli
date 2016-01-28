@@ -4,7 +4,7 @@ import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Ownership;
 
 /**
- * This abstract class represent the common contract of sub-classes that want to
+ * This abstract class represent the common contract of classes that want to
  * mortgage or revoke a mortgage on a {@link Ownership}.
  *
  */
@@ -22,15 +22,13 @@ public abstract class ToMortgageAndRevoke extends MoneyAction {
     }
 
     @Override
-    protected void strategy(final Player player) {
-        this.strategyOfMortgaging();
-    }
+    protected abstract void strategy(final Player player);
 
-    /**
-     * This is an abstract method that the specifics sub-classes have to
-     * implements depending on the strategy. This method represent how to
-     * operate with the mortgaging.
-     */
-    protected abstract void strategyOfMortgaging();
+//    /**
+//     * This is an abstract method that the specifics sub-classes have to
+//     * implements depending on the strategy. This method represent how to
+//     * operate with the mortgaging.
+//     */
+//    protected abstract void strategyOfMortgaging();
 
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 import it.unibo.monopoli.model.table.Building;
-import it.unibo.monopoli.model.table.Contract;
 import it.unibo.monopoli.model.table.Home;
 import it.unibo.monopoli.model.table.Hotel;
 import it.unibo.monopoli.model.table.Ownership;
@@ -46,12 +45,8 @@ public class ClassicBank implements Bank {
     }
 
     @Override
-    public List<Contract> getLeftContract() {
-        final List<Contract> contracts = new LinkedList<>();
-        this.ownerships.stream().forEach(o -> {
-            contracts.add(o.getContract());
-        });
-        return contracts;
+    public List<Ownership> getLeftOwnership() {
+        return Collections.unmodifiableList(this.ownerships);
     }
 
     @Override
@@ -60,8 +55,8 @@ public class ClassicBank implements Bank {
     }
 
     @Override
-    public void addContract(final Contract contract) {
-        this.ownerships.add(contract.getOwnership());
+    public void addOwnership(final Ownership ownership) {
+        this.ownerships.add(ownership);
     }
 
     @Override

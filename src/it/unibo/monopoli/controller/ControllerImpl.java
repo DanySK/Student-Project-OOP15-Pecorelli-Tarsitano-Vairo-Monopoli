@@ -1,6 +1,5 @@
 package it.unibo.monopoli.controller;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JTextField;
@@ -11,6 +10,7 @@ import it.unibo.monopoli.model.actions.ToRevokeMortgage;
 import it.unibo.monopoli.model.actions.ToSellProperties;
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.mainunits.Bank;
+import it.unibo.monopoli.model.mainunits.ClassicPawn;
 import it.unibo.monopoli.model.mainunits.ClassicPlayer;
 import it.unibo.monopoli.model.mainunits.ClassicStrategy;
 import it.unibo.monopoli.model.mainunits.GameStrategy;
@@ -26,36 +26,36 @@ import it.unibo.monopoli.view.EVersion;
 /**
  * */
 public class ControllerImpl implements Controller {
-    private final List<Player> player;
+    private List<Player> player;
     private Player actualPlayer;
     private GameStrategy strategy;
     private GameVersion version;
-    private Ownership actualPosition;
+    private int actualPosition;
+    private List<Integer> lastDices;
+    private EVersion eVersion;
 
     /**
      * Set the initial strategy of the game.
      * 
      * - set a strategy {@link JTextField}s
      */
-    public ControllerImpl(final EVersion versionEnum,List<Player> players) {
-        this.player=players;
-        strategy = new ClassicStrategy(players);
-        version = new GameVersionImpl(this.strategy);
+    // public ControllerImpl() {
+    //
+    //
+    // }
+
+    @Override
+    public void addPlayer(final JTextField name, final ClassicPawn pawn, final boolean isHuman) {
+
+        this.player.add(new ClassicPlayer(name.getText(), pawn, isHuman));
+
     }
 
-    /**
-     * add player in a list.
-     * 
-     * @param name
-     *            .
-     * @param idPawn
-     *            .
-     * @param typePlayer
-     *            .
-     */
-    public void addPlayer(final JTextField name, final int idPawn, final int typePlayer) {
-        final Player p = new ClassicPlayer(name.getText(), idPawn, typePlayer);
-        this.player.add(p);
+    public void initializedVersion(final EVersion versionEnum) {
+
+        this.eVersion = versionEnum;
+
+        this.version = new GameVersionImpl(new ClassicStrategy(this.player));
 
     }
 
@@ -70,6 +70,7 @@ public class ControllerImpl implements Controller {
 
     /**
      * This method allow to get Bank.
+     * 
      * @return {@link Bank}
      */
     public Bank getBank() {
@@ -220,21 +221,16 @@ public class ControllerImpl implements Controller {
 
         return this.actualPlayer;
     }
+
+    public void nextAction() {
+
+    }
+
     /**
      * .
      */
-    public void takeChanche(){
-        
-    }
-    /**
-     * This method allow to roll dice.
-     * 
-     * @return the list of {@link Dices} rolled;
-     */
-    public List<Integer> toRollDices() {
+    public void takeChanche() {
 
-        List<Integer> dices = version.toRollDices(actualPlayer);
-        return dices;
     }
 
     /**
@@ -242,10 +238,23 @@ public class ControllerImpl implements Controller {
      * 
      * @return the result of rolling dices .
      */
-    public int getDicesResult() {
-        List<Integer> dices = this.toRollDices();
-        int result = dices.get(0) + dices.get(1);
+    public int toRollDices() {
+        lastDices = version.toRollDices(actualPlayer);
+        int result = lastDices.get(0) + lastDices.get(1);
+
         return result;
+    }
+
+    /**
+     * this method allow to say if last throw of dices return twice result .
+     * 
+     * @return boolean for dices
+     */
+    public boolean isTwiceDices() {
+        if (lastDices.get(0) == lastDices.get(1)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -253,8 +262,8 @@ public class ControllerImpl implements Controller {
      */
     private void computerPlayer(Player player) {
         Player p = this.actualPlayer;
-        /* *
-         * Se player.amount > del costo dell'ownership + il costo dell'affitto
+        /*
+         * * Se player.amount > del costo dell'ownership + il costo dell'affitto
          * medio compra altrimenti partecipa all'asta fino a quando ^ sopra
          *
          *
@@ -292,8 +301,8 @@ public class ControllerImpl implements Controller {
      * @return winner Player {@link Player}
      */
     public Player winner() {
-        if(this.player.size()==1){
-          return this.actualPlayer;  
+        if (this.player.size() == 1) {
+            return this.actualPlayer;
         }
         return null;
     }
@@ -302,7 +311,7 @@ public class ControllerImpl implements Controller {
      * Method to declare bankruptcy.
      */
     public void bankrupt() {
-        int i=this.player.indexOf(actualPlayer);
+        int i = this.player.indexOf(actualPlayer);
         this.player.remove(i);
     }
 

@@ -30,7 +30,7 @@ public class ToRollDices implements Action {
 
     @Override
     public void play(final Player player) {
-        List<Integer> dicesNumbers = new LinkedList<>();
+        final List<Integer> dicesNumbers = new LinkedList<>();
         this.dices.stream()
                   .forEach(d -> {
                       dicesNumbers.add(d.roll());

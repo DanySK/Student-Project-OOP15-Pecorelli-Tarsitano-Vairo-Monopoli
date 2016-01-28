@@ -52,6 +52,13 @@ public class ClassicPlayer implements Player{
     @Override
     public void addCard(final Card card) {
         this.cards.orElse(new LinkedList<>()).add(card);
+        card.setPlayer(this);
+    }
+
+    @Override
+    public void removeCard(Card card) {
+        this.cards.get().remove(card);
+        card.setPlayer(null);
     }
 
     @Override

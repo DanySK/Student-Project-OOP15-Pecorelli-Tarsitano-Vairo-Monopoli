@@ -1,7 +1,10 @@
 package it.unibo.monopoli.model.actions;
 
+import java.util.List;
+
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.Deck;
+import it.unibo.monopoli.model.mainunits.Player;
 
 /**
  * This class represent one of the {@link MoneyAction}s of the game. This one
@@ -32,8 +35,8 @@ public class ToBuyCards extends ToBuyAndSellCards {
     }
 
     @Override
-    protected void cardsStrategy(final Deck deck) {
-        deck.addCard(this.card);
+    protected void cardsStrategy(final Player player) {
+        player.addCard(this.card);
     }
 
 }

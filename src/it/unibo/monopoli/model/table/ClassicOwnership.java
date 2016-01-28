@@ -1,9 +1,5 @@
 package it.unibo.monopoli.model.table;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.mainunits.Owner;
 
 /**
@@ -17,8 +13,8 @@ public class ClassicOwnership implements Ownership {
     private final int id;
     private Contract contract;
     private Owner owner;
-    private final Set<Action> allowedActions;
-    private final Set<Action> obligatoryActions;
+//    private final Set<Action> allowedActions;
+//    private final Set<Action> obligatoryActions;
     private boolean mortgaged;
     private Group group;
 
@@ -37,8 +33,8 @@ public class ClassicOwnership implements Ownership {
         this.name = name;
         this.id = id;
         this.owner = owner;
-        this.allowedActions = new HashSet<>();
-        this.obligatoryActions = new HashSet<>();
+//        this.allowedActions = new HashSet<>();
+//        this.obligatoryActions = new HashSet<>();
     }
 
     @Override
@@ -51,15 +47,15 @@ public class ClassicOwnership implements Ownership {
         return this.id;
     }
 
-    @Override
-    public Set<Action> getAllowedActions() {
-        return this.allowedActions;
-    }
-
-    @Override
-    public Set<Action> getObligatoryActions() {
-        return this.obligatoryActions;
-    }
+//    @Override
+//    public Set<Action> getAllowedActions() {
+//        return this.allowedActions;
+//    }
+//
+//    @Override
+//    public Set<Action> getObligatoryActions() {
+//        return this.obligatoryActions;
+//    }
 
     @Override
     public Contract getContract() {
@@ -86,15 +82,15 @@ public class ClassicOwnership implements Ownership {
         this.mortgaged = mortgage;
     }
 
-    @Override
-    public void setAllowedActions(final Set<Action> actions) {
-        this.allowedActions.addAll(actions);
-    }
-
-    @Override
-    public void setObligatoryActions(final Set<Action> actions) {
-        this.obligatoryActions.addAll(actions);
-    }
+//    @Override
+//    public void setAllowedActions(final Set<Action> actions) {
+//        this.allowedActions.addAll(actions);
+//    }
+//
+//    @Override
+//    public void setObligatoryActions(final Set<Action> actions) {
+//        this.obligatoryActions.addAll(actions);
+//    }
 
     @Override
     public void setOwner(final Owner owner) {

@@ -51,6 +51,8 @@ public interface Player extends Owner {
      *            - the {@link Card} to add
      */
     void addCard(Card card);
+    
+    void removeCard(Card card);
 
     /**
      * Return an {@link Optional}'s {@link List} of player's {@link Card}s.

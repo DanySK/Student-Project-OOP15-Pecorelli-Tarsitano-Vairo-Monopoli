@@ -1,5 +1,7 @@
 package it.unibo.monopoli.model.actions;
 
+import java.util.List;
+
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.mainunits.Player;
@@ -25,7 +27,7 @@ public abstract class ToBuyAndSellCards extends MoneyAction {
     @Override
     protected void strategy(final Player player) {
         player.getCards().ifPresent(d -> {
-            this.cardsStrategy(d);
+            this.cardsStrategy(player);
         });
     }
 
@@ -38,6 +40,6 @@ public abstract class ToBuyAndSellCards extends MoneyAction {
      *            - the {@link Deck} where the {@link Card} have to be add or
      *            remove
      */
-    protected abstract void cardsStrategy(final Deck deck);
+    protected abstract void cardsStrategy(final Player player);
 
 }

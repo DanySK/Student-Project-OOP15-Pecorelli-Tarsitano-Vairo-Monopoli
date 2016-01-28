@@ -24,7 +24,6 @@ import it.unibo.monopoli.model.actions.ToSellProperties;
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.Chance;
 import it.unibo.monopoli.model.cards.ClassicCard;
-import it.unibo.monopoli.model.cards.ClassicCardBelonging;
 import it.unibo.monopoli.model.cards.CommunityChest;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Box;

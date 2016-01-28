@@ -1,7 +1,8 @@
 package it.unibo.monopoli.model.actions;
 
+import java.util.List;
+
 import it.unibo.monopoli.model.cards.Card;
-import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.mainunits.Player;
 
 /**
@@ -15,7 +16,7 @@ public class AddCardToPlayer implements Action {
 
     /**
      * Constructs an instance of this {@link Action} that allowed to add a
-     * {@link Card} in {@link Player}'s {@link Deck}.
+     * {@link Card} in {@link Player}'s {@link Card}'s {@link List}.
      * 
      * @param card
      *            - the {@link Card} to add

@@ -1,6 +1,7 @@
 package it.unibo.monopoli.model.cards;
 
 import java.util.List;
+import java.util.Optional;
 
 import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.mainunits.Player;
@@ -35,19 +36,19 @@ public interface Card {
      */
     List<Action> getActions();
 
-//    /**
-//     * Returns the {@link Player} who draw the {@link Card}.
-//     * 
-//     * @return the {@link Player} who draw the {@link Card}
-//     */
-//    Player getPlayer();
-//
-//    /**
-//     * Sets the {@link Player} who draw the {@link Card}.
-//     * 
-//     * @param player
-//     *            - the {@link Player} who draw the {@link Card}.
-//     */
-//    void setPlayer(Player player);
+    /**
+     * Returns the {@link Player} who draw the {@link Card}.
+     * 
+     * @return the {@link Player} who draw the {@link Card}
+     */
+    Optional<Player> getPlayer();
+
+    /**
+     * Sets the {@link Player} who draw the {@link Card}.
+     * 
+     * @param player
+     *            - the {@link Player} who draw the {@link Card}.
+     */
+    void setPlayer(Player player);
 
 }

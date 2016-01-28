@@ -3,6 +3,7 @@ package it.unibo.monopoli.model.cards;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.mainunits.Player;
@@ -17,7 +18,7 @@ public class ClassicCard implements Card {
     // private final Deck deck;
     private final String description;
     private final List<Action> action;
-//    private Player player;
+    private Optional<Player> player;
     private final int id;
 
     /**
@@ -35,6 +36,7 @@ public class ClassicCard implements Card {
         this.action = new ArrayList<>();
         this.action.addAll(Arrays.asList(action));
         this.id = id;
+        this.player = Optional.empty();
     }
 
     // @Override
@@ -52,15 +54,15 @@ public class ClassicCard implements Card {
         return this.action;
     }
 
-//    @Override
-//    public Player getPlayer() {
-//        return this.player;
-//    }
-//
-//    @Override
-//    public void setPlayer(final Player player) {
-//        this.player = player;
-//    }
+    @Override
+    public Optional<Player> getPlayer() {
+        return this.player;
+    }
+
+    @Override
+    public void setPlayer(final Player player) {
+        this.player = Optional.ofNullable(player);
+    }
 
     @Override
     public int getID() {

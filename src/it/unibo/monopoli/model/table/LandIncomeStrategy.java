@@ -1,8 +1,6 @@
 package it.unibo.monopoli.model.table;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import it.unibo.monopoli.model.mainunits.Player;
 
@@ -31,7 +29,7 @@ public class LandIncomeStrategy extends AbstractIncomeStartegy {
         case 2: return ((ClassicLandContract) this.ownership.getContract()).getLandIncome() * TWO_HOMES;
         case 3: return ((ClassicLandContract) this.ownership.getContract()).getLandIncome() * THREE_HOMES;
         case 4: return ((ClassicLandContract) this.ownership.getContract()).getLandIncome() * FOUR_HOMES;
-        default: return (((Player) this.ownership.getOwner()).getOwnerships().containsAll(allMembers) ? 2 : 1) * ((ClassicLandContract) this.ownership.getContract()).getLandIncome();
+        default: return (((Player) this.ownership.getOwner()).getOwnerships().get().containsAll(allMembers) ? 2 : 1) * ((ClassicLandContract) this.ownership.getContract()).getLandIncome();
        }
     }
 

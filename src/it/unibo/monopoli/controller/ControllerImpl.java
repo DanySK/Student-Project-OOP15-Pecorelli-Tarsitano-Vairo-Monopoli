@@ -1,6 +1,5 @@
 package it.unibo.monopoli.controller;
 
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,7 +51,7 @@ public class ControllerImpl implements Controller {
     private static final int FIRST_CHANCE_POSITION = 7;
     private static final int SECOND_CHANCE_POSITION = 22;
     private static final int THIRD_CHANCE_POSITION = 36;
-
+    private static final int EXIT_PRISON_COST = 50;
     private final List<Player> players;
     private Player actualPlayer;
     private GameVersion version;
@@ -63,13 +62,14 @@ public class ControllerImpl implements Controller {
     private List<Deck> decks;
     private Optional<InPlay> view;
     private boolean alreadyBuilt;
+    private Ownership actualOwnership;
 
-     /**
-     * 
-     */
-     public ControllerImpl() {
-         this.players = new LinkedList<>();
-     }
+    /**
+    * 
+    */
+    public ControllerImpl() {
+        this.players = new LinkedList<>();
+    }
 
     @Override
     public void addPlayer(final String name, final ClassicPawn pawn, final boolean isHuman) {
@@ -227,46 +227,132 @@ public class ControllerImpl implements Controller {
     private int patrimony(final Player player) {
         Optional<Integer> res = Optional.empty();
         if (player.getOwnerships().isPresent()) {
-            res = player.getOwnerships().get().stream()
-                                              .map(o -> o.getContract().getMortgageValue())
-                                              .reduce((i, i1) -> i + i1);
+            res = player.getOwnerships().get().stream().map(o -> o.getContract().getMortgageValue())
+                    .reduce((i, i1) -> i + i1);
         }
         return player.getMoney() + (res.isPresent() ? res.get() : 0);
     }
 
-//    /**
-//     * This method allow to get the new position.
-//     *
-//     * @return new position
-//     */
-//     public int getNewPosition() {
-//     Player p = this.actualPlayer;
-//     return p.getPawn().getActualPos();
-//     }
-//
-//     public void nextAction() {
-//     }
-//
-//    /**
-//     * .
-//     */
-//     public void takeChanche() {
-//     }
+    // /**
+    // * This method allow to get the new position.
+    // *
+    // * @return new position
+    // */
+    // public int getNewPosition() {
+    // Player p = this.actualPlayer;
+    // return p.getPawn().getActualPos();
+    // }
+    //
+    // public void nextAction() {
+    // }
+    //
+    // /**
+    // * .
+    // */
+    // public void takeChanche() {
+    // }
 
     /**
      * this method allow to say if last throw of dices return twice result .
      * 
      * @return boolean for dices
      */
-     public boolean isTwiceDices() {
-     return lastDices.get(0) == lastDices.get(1);
-     }
+    public boolean isTwiceDices() {
+        return lastDices.get(0) == lastDices.get(1);
+    }
 
     /**
      * This is a method for the brain of computer Player
      */
-    private void computerPlayer(Player player) {
+    private void computerPlayer() {
         Player p = this.actualPlayer;
+        if(this.actualPlayer.isInPrison()){
+            //dubbio chieder margherita  devo impostare su false la prison
+            
+            //ControllaAmount(costo);
+            new ToPay(EXIT_PRISON_COST, this.actualPlayer).play(this.actualPlayer);
+        }
+        this.actualPosition= this.toRollDices();
+        Box box=this.actualOwnership;//non è cosi sicuramente
+        if (box instanceof Land) {
+            final Land land = (Land) box;
+            if (land.getOwner().equals(this.bank)) {
+                if (this.actualPlayer.getMoney() > this.actualOwnership.getContract().getCost()) {
+                    this.buyOwnership(this.actualOwnership);
+                    // ToBuyProperties.buyAOwnership(this.actualOwnership.getContract().getCost(),
+                    // this.actualOwnership).play(this.actualPlayer);
+                } else {
+                    // asta
+                }
+            } else if (land.getOwner().equals(this.actualPlayer)) {
+                if (this.actualPlayer.getOwnerships().get().containsAll(land.getGroup().getMembers())
+                        && ((LandGroup) land.getGroup()).canBuiling() && this.bank.getLeftBuilding().size() > 0
+                        && this.actualPlayer.getMoney() >= ((LandContract) land.getContract()).getCostForEachBuilding() // +
+                                                                                                                        // il
+                                                                                                                        // costo
+                                                                                                                        // medio
+                                                                                                                        // dell'affitto
+                        && !this.alreadyBuilt) {
+                    this.bank.getLeftBuilding().forEach(b -> {
+                        if ((((LandGroup) land.getGroup()).getBuildings().size() < 4 && b instanceof Home)// capire
+                                || (b instanceof Hotel)) {
+
+                        }
+                    });
+                }
+
+            } else {
+                final int amount = ((ClassicLandContract) land.getContract()).getIncome(new LandIncomeStrategy(land));
+                if (amount <= this.actualPlayer.getMoney()) {
+                    new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
+                    new ToBePaid(amount).play((Player) land.getOwner());
+                    this.actualPlayer.setDebts(true);
+                } else {
+                    // this.notMuchMoney(player, actions);
+                }
+            }
+        } else if (box instanceof Ownership) {
+            final Ownership ownership = (Ownership) box;
+            if (ownership.getOwner().equals(this.bank)) {
+                if (this.actualPlayer.getMoney() > this.actualOwnership.getContract().getCost()) {
+                    this.buyOwnership(this.actualOwnership);
+                } else {
+                    // asta
+                }
+            } else if (!ownership.getOwner().equals(this.actualPlayer)) {
+                final int amount = ownership.getContract().getIncome(ownership instanceof Station
+                        ? new StationIncomeStrategy(ownership) : new CompanysIncomeStrategy(ownership,this.actualPlayer));
+                if (amount <= this.actualPlayer.getMoney()) {
+                    new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
+                    new ToBePaid(amount).play((Player) ownership.getOwner());
+                    this.actualPlayer.setDebts(true);// impostare che venda
+                                                     // automaticamente
+                } else {
+                   // this.notMuchMoney(player, actions);
+                }
+            }
+        } else {
+            if (box instanceof Start) {
+                new ToBePaid(Start.getMuchToPick()).play(this.actualPlayer);
+            }
+            // if (box instanceof PrisonOrTransit) { // NON FANNO NULLA; QUINDI
+            // OMETTERLI
+            // }
+            // if (box instanceof NeutralArea) {
+            // }
+            if (box instanceof Police) {
+                new GoToPrison(this.boxes.get(PRISON_POSITION)).play(this.actualPlayer);
+            }
+            if (box instanceof DecksBox) {
+                new ToDrawCards(this.decks.get(box.getID() == FIRST_CHANCE_POSITION
+                        || box.getID() == SECOND_CHANCE_POSITION || box.getID() == THIRD_CHANCE_POSITION ? 0 : 1))
+                                .play(this.actualPlayer);
+            }
+            if (box instanceof TaxImpl) {
+                new ToPay(((TaxImpl) box).getCost(), this.actualPlayer).play(this.actualPlayer);
+            }
+        }
+        
         /*
          * * Se player.amount > del costo dell'ownership + il costo dell'affitto
          * medio compra altrimenti partecipa all'asta fino a quando ^ sopra
@@ -288,29 +374,29 @@ public class ControllerImpl implements Controller {
          */
     }
 
-//    /**
-//     * Method for choose the winner.
-//     * 
-//     * @return winner Player {@link Player}
-//     */
-//    public Player winner() {
-//        if (this.players.size() == 1) {
-//            return this.actualPlayer;
-//        }
-//        return null;
-//    }
-//
-//    /**
-//     * Method to declare bankruptcy.
-//     */
-//     public void gameOver() {
-//     this.view.gameOver(this.actualPlayer);
-//     this.players.remove(this.actualPlayer);
-//     }
-//
-//    public void usePrisonCard() {
-//
-//    }
+    // /**
+    // * Method for choose the winner.
+    // *
+    // * @return winner Player {@link Player}
+    // */
+    // public Player winner() {
+    // if (this.players.size() == 1) {
+    // return this.actualPlayer;
+    // }
+    // return null;
+    // }
+    //
+    // /**
+    // * Method to declare bankruptcy.
+    // */
+    // public void gameOver() {
+    // this.view.gameOver(this.actualPlayer);
+    // this.players.remove(this.actualPlayer);
+    // }
+    //
+    // public void usePrisonCard() {
+    //
+    // }
 
     private List<String> getNextBoxsActions(final Box box, final Player player) {
         final List<String> actions = new LinkedList<>();
@@ -438,16 +524,17 @@ public class ControllerImpl implements Controller {
         }
     }
 
-//    public static void main(String[] args) {
-//        LinkedList<Integer> l = new LinkedList<>();
-//        l.add(1);
-//
-//        // List<Integer> in = new LinkedList<>();
-//
-//        Optional<Integer> in = l.stream().sorted((s, s1) -> (s - s1)).reduce((i, i1) -> i + i1);
-//
-//        System.out.println(l);
-//        System.out.println(in.get());
-//    }
+    // public static void main(String[] args) {
+    // LinkedList<Integer> l = new LinkedList<>();
+    // l.add(1);
+    //
+    // // List<Integer> in = new LinkedList<>();
+    //
+    // Optional<Integer> in = l.stream().sorted((s, s1) -> (s - s1)).reduce((i,
+    // i1) -> i + i1);
+    //
+    // System.out.println(l);
+    // System.out.println(in.get());
+    // }
 
 }

@@ -2,6 +2,8 @@ package it.unibo.monopoli.model.actions;
 
 import java.util.Objects;
 
+import it.unibo.monopoli.model.mainunits.Bank;
+import it.unibo.monopoli.model.mainunits.Owner;
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Building;
 import it.unibo.monopoli.model.table.ClassicLandContract;
@@ -17,15 +19,18 @@ import it.unibo.monopoli.model.table.Ownership;
 public final class ToSellProperties extends ToBuyAndSellProperties {
 
     private final Ownership ownership;
+    private final Bank bank;
 
-    private ToSellProperties(final int amount, final Ownership ownership) {
+    private ToSellProperties(final int amount, final Ownership ownership, final Bank bank) {
         super(amount);
         this.ownership = ownership;
+        this.bank = bank;
     }
 
-    private ToSellProperties(final int amount, final Land land, final Building building) {
+    private ToSellProperties(final int amount, final Land land, final Building building, final Bank bank) {
         super(amount, building);
         this.ownership = land;
+        this.bank = bank;
     }
 
     /**
@@ -34,16 +39,20 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
      * 
      * @param ownership
      *            - the {@link Ownership} to sell
+     * @param bank
+     *            - the {@link Bank} to witch you sell the property
      * @return an instance of this class
      * @throws NullPointerException
-     *             - if instead of an {@link Ownership} there is null
+     *             - if instead of {@link Ownership} and/or {@link Bank} there
+     *             are some null
      */
-    public static ToSellProperties sellAOwnership(final Ownership ownership) {
+    public static ToSellProperties sellAOwnership(final Ownership ownership, final Bank bank) {
         // if (amount <= 0) {
         // throw new IllegalArgumentException("Only positive amount different of
         // zero!");
         // }
-        return new ToSellProperties(ownership.getContract().getCost(), Objects.requireNonNull(ownership));
+        return new ToSellProperties(ownership.getContract().getCost(), Objects.requireNonNull(ownership),
+                Objects.requireNonNull(bank));
     }
 
     /**
@@ -54,23 +63,27 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
      *            - the {@link Land} on which the {@link Building} was built
      * @param building
      *            - the {@link Building} to sell
+     * @param bank
+     *            - the {@link Bank} to witch you sell the property
      * @return an instance of this class
      * @throws NullPointerException
-     *             - if instead of an {@link Land} and/or a {@link Building}
+     *             - if instead of {@link Land} and/or {@link Building} and/or
+     *             {@link Bank} there are some null
      */
-    public static ToSellProperties sellABuilding(final Land land, final Building building) {
+    public static ToSellProperties sellABuilding(final Land land, final Building building, final Bank bank) {
         // if (amount <= 0) {
         // throw new IllegalArgumentException("Only positive amount different of
         // zero!");
         // }
         return new ToSellProperties(((ClassicLandContract) land.getContract()).getCostForEachBuilding(),
-                Objects.requireNonNull(land), Objects.requireNonNull(building));
+                Objects.requireNonNull(land), Objects.requireNonNull(building), Objects.requireNonNull(bank));
     }
 
     @Override
     protected void whatToDoWithBuilding(final Building building) {
         if (((LandGroup) this.ownership.getGroup()).getBuildings().contains(building)) {
             ((LandGroup) this.ownership.getGroup()).removeBuilding(building);
+            this.bank.addBuilding(building);
         } else {
             throw new IllegalArgumentException();
         }
@@ -84,6 +97,7 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
                 throw new IllegalArgumentException("You can't sell an ownership if in its group there are buildings");
             }
             player.removeOwnership(this.ownership);
+            this.bank.addOwnership(this.ownership);
         } else {
             throw new IllegalArgumentException();
         }

@@ -653,11 +653,11 @@ public class ClassicStrategy implements GameStrategy {
             player.getOwnerships().get().stream().filter(o -> o.getGroup() instanceof LandGroup)
                     .filter(o -> ((LandGroup) o.getGroup()).getBuildings().size() > 0).forEach(o -> {
                         ((LandGroup) o.getGroup()).getBuildings()
-                                .forEach(b -> actions.add(ToSellProperties.sellABuilding(((Land) o), b)));
+                                .forEach(b -> actions.add(ToSellProperties.sellABuilding(((Land) o), b, this.bank)));
                     });
             if (actions.isEmpty()) {
                 player.getOwnerships().get().stream().forEach(o -> {
-                    actions.add(ToSellProperties.sellAOwnership(o));
+                    actions.add(ToSellProperties.sellAOwnership(o, this.bank));
                 });
             }
         } else if (player.getCards().isPresent()) {

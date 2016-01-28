@@ -36,7 +36,7 @@ public final class ToBuyProperties extends ToBuyAndSellProperties {
      *            - the {@link Ownership} to buy
      * @return an instance of this class
      * @throws NullPointerException
-     *             - if instead of an {@link Ownership} there is null
+     *             - if {@link Ownership} is null
      */
     public static ToBuyProperties buyAOwnership(final Ownership ownership) {
         // if (amount <= 0) {
@@ -56,8 +56,8 @@ public final class ToBuyProperties extends ToBuyAndSellProperties {
      *            - the {@link Building} to buy
      * @return an instance of this class
      * @throws NullPointerException
-     *             - if instead of an {@link Land} and/or a {@link Building}
-     *             there are some null
+     *             - if instead of {@link Land} and/or {@link Building} there
+     *             are some null
      */
     public static ToBuyProperties buyABuilding(final Land land, final Building building) {
         // if (amount <= 0) {

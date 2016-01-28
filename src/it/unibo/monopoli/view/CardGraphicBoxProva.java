@@ -29,7 +29,7 @@ public class CardGraphicBoxProva extends AbstractGraphicCard {
 	public JPanel build(){
 		
 		JPanel card = getRotatedPanel();
-		card.setPreferredSize(new Dimension(80, 80));
+		card.setPreferredSize(new Dimension(70, 70));
 		card.setLayout(new GridLayout(4, 1));
 		
 		JLabel colorP = new JLabel();

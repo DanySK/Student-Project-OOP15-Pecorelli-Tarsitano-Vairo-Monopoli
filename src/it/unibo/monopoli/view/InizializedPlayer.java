@@ -26,7 +26,9 @@ import javax.swing.JRadioButton;
  */
 public class InizializedPlayer {
 	final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
-	private JTextField textNome;
+	private String name;
+	private boolean isUman;
+	
 
 	public InizializedPlayer() {
 		build();
@@ -68,12 +70,13 @@ public class InizializedPlayer {
 		lblNome.setFont(new Font("Berlin Sans FB", Font.PLAIN, 13));
 		centerP_row1.add(lblNome);
 		
-		textNome = new JTextField();
+		JTextField textNome = new JTextField();
 		textNome.setPreferredSize(new Dimension(10, 20));
 		textNome.setHorizontalAlignment(SwingConstants.CENTER);
 		centerP_row1.add(textNome);
 		textNome.setColumns(10);
-		
+		this.name = textNome.getText();
+				
 		final JPanel centerP_row2 = new JPanel();
 		centerP.add(centerP_row2);
 		
@@ -81,17 +84,31 @@ public class InizializedPlayer {
 		rdbtnUmano.setSelected(true);
 		rdbtnUmano.setHorizontalAlignment(SwingConstants.LEFT);
 		rdbtnUmano.setAlignmentY(Component.TOP_ALIGNMENT);
-		centerP_row2.add(rdbtnUmano);
+		centerP_row2.add(rdbtnUmano);		
 		
-		final JRadioButton rdbtnNewRadioButton = new JRadioButton("Computer");
-		centerP_row2.add(rdbtnNewRadioButton);
+		final JRadioButton rdbtnComputer = new JRadioButton("Computer");
+		centerP_row2.add(rdbtnComputer);
 		
 		final ButtonGroup group = new ButtonGroup();
-		group.add(rdbtnNewRadioButton);
+		group.add(rdbtnComputer);
 		group.add(rdbtnUmano);
-
+		
+		if(rdbtnComputer.isSelected()){
+			isUman = false;
+		}else{
+			isUman  = true;
+		}
+		
 		panel.setVisible(true);
 		return panel;
 
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public boolean isUman(){
+		return isUman;
 	}
 }

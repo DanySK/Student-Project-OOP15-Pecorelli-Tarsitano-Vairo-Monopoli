@@ -18,6 +18,10 @@ public class ToPay extends ToPayAndBePaid {
      * @throws IllegalArgumentException
      *             - if the player's moneys are less than the amount to pay
      */
+	public ToPay(final int amount){
+		super(amount);
+	}
+	
     public ToPay(final int amount, final Player player) {
         super(-amount);
         if (amount > player.getMoney()) {

@@ -25,20 +25,20 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
 	public Position getPosition() {
 		return pos;
 	}
-
+	
 	protected JPanel getRotatedPanel() {
 		Dimension dim = null;
 		if (pos == Position.NORTH) {
-			dim = new Dimension(60,80);
+			dim = new Dimension(50,70);
 			return new RotatedPanel(180, dim);
 		} else if (pos == Position.EAST) {
-			dim = new Dimension(80,60);
+			dim = new Dimension(70,50);
 			return new RotatedPanel(-90, dim);
 		} else if (pos == Position.WEST) {
-			dim = new Dimension(80,60);
+			dim = new Dimension(70,50);
 			return new RotatedPanel(90,dim);
 		} else {
-			dim = new Dimension(60,80);
+			dim = new Dimension(50,70);
 			return new RotatedPanel(0,dim);
 
 		}

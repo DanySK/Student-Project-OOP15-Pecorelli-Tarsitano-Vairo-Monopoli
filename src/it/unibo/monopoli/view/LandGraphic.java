@@ -24,8 +24,8 @@ public class LandGraphic extends AbstractGraphicCard  {
 		
 	@Override
 	public JPanel build(){
-		JPanel card = new RotatedPanel();
-		card.setPreferredSize(new Dimension(60, 80));
+		JPanel card = getRotatedPanel();
+		card.setPreferredSize(new Dimension(RotatedPanel.getDim()));
 		card.setLayout(new GridLayout(4, 1));
 		
 		JLabel colorP = new JLabel();

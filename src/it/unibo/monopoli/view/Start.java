@@ -63,19 +63,19 @@ public class Start {
 		lblScegliLaVersione.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
 		firstRow.add(lblScegliLaVersione);
 		
-		final JPanel panel = new JPanel();
-		final GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.insets = new Insets(0, 0, 5, 5);
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 2;
-		gbc_panel.gridy = 1;
-		GridC.add(panel, gbc_panel);
+		final JPanel panelComboBox = new JPanel();
+		final GridBagConstraints gbc_panelComboBox = new GridBagConstraints();
+		gbc_panelComboBox.insets = new Insets(0, 0, 5, 5);
+		gbc_panelComboBox.fill = GridBagConstraints.BOTH;
+		gbc_panelComboBox.gridx = 2;
+		gbc_panelComboBox.gridy = 1;
+		GridC.add(panelComboBox, gbc_panelComboBox);
 		
 		final JComboBox<String> comboBoxVersion = new JComboBox<String>();
 		lblScegliLaVersione.setLabelFor(comboBoxVersion);
 		Arrays.asList(EVersion.values()).forEach(v -> comboBoxVersion.addItem(v.getName()));
 		comboBoxVersion.addItemListener(new VersionSelected());
-		panel.add(comboBoxVersion);
+		panelComboBox.add(comboBoxVersion);
 		
 		final JPanel secondRow = new JPanel();
 		final GridBagConstraints gbc_secondRow = new GridBagConstraints();
@@ -93,13 +93,13 @@ public class Start {
 		lblScegliIlNumero.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
 		secondRow.add(lblScegliIlNumero);
 		
-		final JPanel panel_1 = new JPanel();
-		final GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_panel_1.fill = GridBagConstraints.BOTH;
-		gbc_panel_1.gridx = 3;
-		gbc_panel_1.gridy = 2;
-		GridC.add(panel_1, gbc_panel_1);
+		final JPanel panelBtnAddPlayer = new JPanel();
+		final GridBagConstraints gbc_panelBtnAddPlayer = new GridBagConstraints();
+		gbc_panelBtnAddPlayer.insets = new Insets(0, 0, 5, 5);
+		gbc_panelBtnAddPlayer.fill = GridBagConstraints.BOTH;
+		gbc_panelBtnAddPlayer.gridx = 3;
+		gbc_panelBtnAddPlayer.gridy = 2;
+		GridC.add(panelBtnAddPlayer, gbc_panelBtnAddPlayer);
 		
 		final JPanel playerP = new JPanel();
 		final GridBagConstraints gbc_playerP = new GridBagConstraints();
@@ -109,12 +109,14 @@ public class Start {
 		gbc_playerP.gridx = 1;
 		gbc_playerP.gridy = 3;
 		GridC.add(playerP, gbc_playerP);
-		playerP.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		FlowLayout fl_playerP = new FlowLayout();
+		playerP.setLayout(fl_playerP/*(FlowLayout.CENTER, 5, 5)*/);
 		
 		
 		for (int i = 0; i < 2; i++) {
 			playerP.add(new InizializedPlayer().build());
 		}
+		playerP.add(new JLabel("Prova"));
 		
 		
 		final JButton btnAddPlayer = new JButton("Add Player");
@@ -122,24 +124,20 @@ public class Start {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				JLabel prova = new JLabel("Prova");
 						
-//				playerP.add(new InizializedPlayer().build());
-//				System.out.println("Add Player");
-				Dialog d = new Dialog(new JFrame(), "Prova", "Hai cliccato AddPlayer");
+				playerP.add(new InizializedPlayer().build());
+				
+				System.out.println("Add Player");
+				//Dialog d = new Dialog(new JFrame(), "Prova", "Hai cliccato AddPlayer");
 				
 			}
 		});
 		
 		
-		panel_1.add(btnAddPlayer);
-		
-		final JPanel row4 = new JPanel();
-		final GridBagConstraints gbc_row4 = new GridBagConstraints();
-		gbc_row4.insets = new Insets(0, 0, 5, 5);
-		gbc_row4.fill = GridBagConstraints.BOTH;
-		gbc_row4.gridx = 1;
-		gbc_row4.gridy = 4;
-		GridC.add(row4, gbc_row4);
+		panelBtnAddPlayer.add(btnAddPlayer);
 		
 		final JButton btnNewButton = new JButton("AVVIA PARTITA");
 		btnNewButton.addActionListener(new StartPlay());

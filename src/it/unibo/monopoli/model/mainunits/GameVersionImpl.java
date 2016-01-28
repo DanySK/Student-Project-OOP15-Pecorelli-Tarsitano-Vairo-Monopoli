@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Set;
 
 import it.unibo.monopoli.model.actions.Action;
+import it.unibo.monopoli.model.actions.AuctionOfOwnershipAndCard;
 import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
 import it.unibo.monopoli.model.actions.ToRollDices;
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.table.Box;
+import it.unibo.monopoli.model.table.Ownership;
 
 /**
  * This class implements the contract of {@link GameVersion} to bring back the
@@ -65,6 +67,11 @@ public class GameVersionImpl implements GameVersion {
     public List<Integer> toRollDices(final Player player) {
         new ToRollDices(new ClassicDicesStrategy()).play(player);;
         return player.lastDicesNumber();
+    }
+    
+    @Override
+    public AuctionOfOwnershipAndCard toAuction(final Ownership ownership, final Player player) {
+        this.strategy.toAuction(ownership, player);
     }
 
     @Override

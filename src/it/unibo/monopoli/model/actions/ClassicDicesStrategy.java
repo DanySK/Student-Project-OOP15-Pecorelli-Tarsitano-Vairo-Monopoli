@@ -32,13 +32,21 @@ public class ClassicDicesStrategy implements DicesStrategy {
         if (dices.size() != 2) {
             throw new IllegalArgumentException("This version needs two dices");
         }
+        if (this.twice(player)) {
+            if(player.isInPrison()) {
+                player.setPrison(false);
+            } else {
+                player.setDicesRoll(false);
+            }
+            player.getPawn().setPos(player.getPawn().getActualPos() + player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
+        }
         if (!player.isInPrison()) {
-            MoveUpTo.takeSteps(player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
+            player.getPawn().setPos(player.getPawn().getActualPos() + player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
         }
     }
 
-//    private boolean twice(final Player player) {
-//        return player.lastDicesNumber().get(0) == player.lastDicesNumber().get(1); 
-//    }
+    private boolean twice(final Player player) {
+        return player.lastDicesNumber().get(0) == player.lastDicesNumber().get(1); 
+    }
 
 }

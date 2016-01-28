@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import it.unibo.monopoli.model.actions.Action;
+import it.unibo.monopoli.model.actions.AuctionOfOwnershipAndCard;
 import it.unibo.monopoli.model.actions.ClassicAuction;
 import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
 import it.unibo.monopoli.model.actions.GoToPrison;
@@ -205,7 +206,7 @@ public class ClassicStrategy implements GameStrategy {
 
     private void addOwnerships(final int nOfOwnership, final Player player) {
         for (int i = 0; i < nOfOwnership; i++) {
-            Ownership ow = this.bank.getOwnership();
+            final Ownership ow = this.bank.getOwnership();
             player.addOwnership(ow);
             ow.setOwner(player);
         }
@@ -377,6 +378,12 @@ public class ClassicStrategy implements GameStrategy {
         return this.allBoxes;
     }
 
+    @Override
+    public List<Deck> getDecks() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     private void inizializesBoxes() {
         final Box[] boxes = new Box[40];
         this.ownerships.stream().forEach(o -> {
@@ -459,91 +466,96 @@ public class ClassicStrategy implements GameStrategy {
         this.decks.add(0, chance);
         this.decks.add(1, chest);
     }
-    
-    private boolean twice(final Player player) {
-        return player.lastDicesNumber().get(0) == player.lastDicesNumber().get(1); 
-    }
 
     @Override
-    public List<Action> getNextBoxsActions(final Box box, final Player player) {
-        final List<Action> actions = new LinkedList<>();
-        if (!player.dicesAlreadyRolled()) {
-            actions.add(new ToRollDices(new ClassicDicesStrategy()));
-            return actions;
-        } else if (player.isInPrison() && this.twice(player)) {
-            player.setPrison(false);
-            MoveUpTo.takeSteps(player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
-        }
-        if (box instanceof Land) {
-            final Land land = (Land) box;
-            if (land.getOwner().equals(this.bank)) {
-                final Action action1 = ToBuyProperties.buyAOwnership(land);
-                final Action action2 = ToAuction.ownerships(this.players, new ClassicAuction(), land);
-                actions.add(action1);
-                actions.add(action2);
-            } else if (land.getOwner().equals(player)) {
-                if (player.getOwnerships().get().containsAll(land.getGroup().getMembers())
-                        && ((LandGroup) land.getGroup()).canBuiling() && this.bank.getLeftBuilding().size() > 0) {
-                    try {
-                        actions.add(ToBuyProperties.buyABuilding(land, this.bank.getBuilding(
-                                ((LandGroup) land.getGroup()).getBuildings().size() < 4 ? new Home() : new Hotel())));
-                    } catch (IndexOutOfBoundsException i) {
-                    }
-                }
-            } else {
-                final int amount = ((ClassicLandContract) land.getContract()).getIncome(new LandIncomeStrategy(land));
-                if (amount <= player.getMoney()) {
-                    actions.add(new ToPay(amount, player));
-                    new ToBePaid(amount).play((Player) land.getOwner());
-                    player.setDebts(true);
-                } else {
-                    this.notMuchMoney(player, actions);
-                }
-            }
-        } else if (box instanceof Ownership) {
-            final Ownership ownership = (Ownership) box;
-            if (ownership.getOwner().equals(this.bank)) {
-                final Action action1 = ToBuyProperties.buyAOwnership(ownership);
-                final Action action2 = ToAuction.ownerships(this.players, new ClassicAuction(), ownership);
-                actions.add(action1);
-                actions.add(action2);
-            } else if (!ownership.getOwner().equals(player)) {
-                final int amount = ownership.getContract().getIncome(ownership instanceof Station
-                        ? new StationIncomeStrategy(ownership) : new CompanysIncomeStrategy(ownership, player));
-                if (amount <= player.getMoney()) {
-                    actions.add(new ToPay(amount, player));
-                    new ToBePaid(amount).play((Player) ownership.getOwner());
-                    player.setDebts(true);
-                } else {
-                    this.notMuchMoney(player, actions);
-                }
-            }
-        } else {
-            if (box instanceof Start) {
-                actions.add(new ToBePaid(Start.getMuchToPick()));
-            }
-            // if (box instanceof PrisonOrTransit) { // NON FANNO NULLA; QUINDI
-            // OMETTERLI
-            // }
-            // if (box instanceof NeutralArea) {
-            // }
-            if (box instanceof Police) {
-                actions.add(new GoToPrison(this.allBoxes.get(PRISON_POSITION)));
-            }
-            if (box instanceof DecksBox) {
-                actions.add(new ToDrawCards(this.decks
-                        .get(box.getID() == FIRST_CHANCE_POSITION || box.getID() == SECOND_CHANCE_POSITION ? 0 : 1)));
-            }
-            if (box instanceof TaxImpl) {
-                new ToPay(((TaxImpl) box).getCost(), player);
-            }
-        }
-        if (actions.isEmpty()) {
-            player.setDebts(false);
-            player.setDicesRoll(false);
-        }
-        return actions;
+    public AuctionOfOwnershipAndCard toAuction(final Ownership ownership, final Player player) {
+        return ToAuction.ownerships(this.players, new ClassicAuction(), ownership, this.bank).getAuction(player);
     }
+
+//    private boolean twice(final Player player) {
+//        return player.lastDicesNumber().get(0) == player.lastDicesNumber().get(1); 
+//    }
+//
+//    @Override
+//    public List<Action> getNextBoxsActions(final Box box, final Player player) {
+//        final List<Action> actions = new LinkedList<>();
+//        if (!player.dicesAlreadyRolled()) {
+//            actions.add(new ToRollDices(new ClassicDicesStrategy()));
+//            return actions;
+//        } else if (player.isInPrison() && this.twice(player)) {
+//            player.setPrison(false);
+//            MoveUpTo.takeSteps(player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
+//        }
+//        if (box instanceof Land) {
+//            final Land land = (Land) box;
+//            if (land.getOwner().equals(this.bank)) {
+//                final Action action1 = ToBuyProperties.buyAOwnership(land);
+//                final Action action2 = ToAuction.ownerships(this.players, new ClassicAuction(), land);
+//                actions.add(action1);
+//                actions.add(action2);
+//            } else if (land.getOwner().equals(player)) {
+//                if (player.getOwnerships().get().containsAll(land.getGroup().getMembers())
+//                        && ((LandGroup) land.getGroup()).canBuiling() && this.bank.getLeftBuilding().size() > 0) {
+//                    try {
+//                        actions.add(ToBuyProperties.buyABuilding(land, this.bank.getBuilding(
+//                                ((LandGroup) land.getGroup()).getBuildings().size() < 4 ? new Home() : new Hotel())));
+//                    } catch (IndexOutOfBoundsException i) {
+//                    }
+//                }
+//            } else {
+//                final int amount = ((ClassicLandContract) land.getContract()).getIncome(new LandIncomeStrategy(land));
+//                if (amount <= player.getMoney()) {
+//                    actions.add(new ToPay(amount, player));
+//                    new ToBePaid(amount).play((Player) land.getOwner());
+//                    player.setDebts(true);
+//                } else {
+//                    this.notMuchMoney(player, actions);
+//                }
+//            }
+//        } else if (box instanceof Ownership) {
+//            final Ownership ownership = (Ownership) box;
+//            if (ownership.getOwner().equals(this.bank)) {
+//                final Action action1 = ToBuyProperties.buyAOwnership(ownership);
+//                final Action action2 = ToAuction.ownerships(this.players, new ClassicAuction(), ownership);
+//                actions.add(action1);
+//                actions.add(action2);
+//            } else if (!ownership.getOwner().equals(player)) {
+//                final int amount = ownership.getContract().getIncome(ownership instanceof Station
+//                        ? new StationIncomeStrategy(ownership) : new CompanysIncomeStrategy(ownership, player));
+//                if (amount <= player.getMoney()) {
+//                    actions.add(new ToPay(amount, player));
+//                    new ToBePaid(amount).play((Player) ownership.getOwner());
+//                    player.setDebts(true);
+//                } else {
+//                    this.notMuchMoney(player, actions);
+//                }
+//            }
+//        } else {
+//            if (box instanceof Start) {
+//                actions.add(new ToBePaid(Start.getMuchToPick()));
+//            }
+//            // if (box instanceof PrisonOrTransit) { // NON FANNO NULLA; QUINDI
+//            // OMETTERLI
+//            // }
+//            // if (box instanceof NeutralArea) {
+//            // }
+//            if (box instanceof Police) {
+//                actions.add(new GoToPrison(this.allBoxes.get(PRISON_POSITION)));
+//            }
+//            if (box instanceof DecksBox) {
+//                actions.add(new ToDrawCards(this.decks
+//                        .get(box.getID() == FIRST_CHANCE_POSITION || box.getID() == SECOND_CHANCE_POSITION || box.getID() == THIRD_CHANCE_POSITION ? 0 : 1)));
+//            }
+//            if (box instanceof TaxImpl) {
+//                new ToPay(((TaxImpl) box).getCost(), player);
+//            }
+//        }
+//        if (actions.isEmpty()) {
+//            player.setDebts(false);
+//            player.setDicesRoll(false);
+//        }
+//        return actions;
+//    }
 
     @Override
     public List<Action> getNextCardsActions(final Box box, final Card card, final Player player) {
@@ -648,26 +660,26 @@ public class ClassicStrategy implements GameStrategy {
         return actions;
     }
 
-    private void notMuchMoney(final Player player, final List<Action> actions) {
-        if (player.getOwnerships().isPresent()) {
-            player.getOwnerships().get().stream().filter(o -> o.getGroup() instanceof LandGroup)
-                    .filter(o -> ((LandGroup) o.getGroup()).getBuildings().size() > 0).forEach(o -> {
-                        ((LandGroup) o.getGroup()).getBuildings()
-                                .forEach(b -> actions.add(ToSellProperties.sellABuilding(((Land) o), b, this.bank)));
-                    });
-            if (actions.isEmpty()) {
-                player.getOwnerships().get().stream().forEach(o -> {
-                    actions.add(ToSellProperties.sellAOwnership(o, this.bank));
-                });
-            }
-        } else if (player.getCards().isPresent()) {
-            player.getCards().get().forEach(c -> actions.add(ToAuction.cards(this.players, new ClassicAuction(), c)));
-        } else {
-            // FINE DEL GIOCO -> interfaccia funzionale (Action ?) + classe
-            // anonima: rimuove il giocatore con il play)
-            actions.add(p -> {
-                this.players.remove(p);
-            });
-        }
-    }
+//    private void notMuchMoney(final Player player, final List<Action> actions) {
+//        if (player.getOwnerships().isPresent()) {
+//            player.getOwnerships().get().stream().filter(o -> o.getGroup() instanceof LandGroup)
+//                    .filter(o -> ((LandGroup) o.getGroup()).getBuildings().size() > 0).forEach(o -> {
+//                        ((LandGroup) o.getGroup()).getBuildings()
+//                                .forEach(b -> actions.add(ToSellProperties.sellABuilding(((Land) o), b, this.bank)));
+//                    });
+//            if (actions.isEmpty()) {
+//                player.getOwnerships().get().stream().forEach(o -> {
+//                    actions.add(ToSellProperties.sellAOwnership(o, this.bank));
+//                });
+//            }
+//        } else if (player.getCards().isPresent()) {
+//            player.getCards().get().forEach(c -> actions.add(ToAuction.cards(this.players, new ClassicAuction(), c)));
+//        } else {
+//            // FINE DEL GIOCO -> interfaccia funzionale (Action ?) + classe
+//            // anonima: rimuove il giocatore con il play)
+//            actions.add(p -> {
+//                this.players.remove(p);
+//            });
+//        }
+//    }
 }

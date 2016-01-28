@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Set;
 
 import it.unibo.monopoli.model.actions.Action;
+import it.unibo.monopoli.model.actions.AuctionOfOwnershipAndCard;
 import it.unibo.monopoli.model.cards.Card;
+import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Box;
+import it.unibo.monopoli.model.table.Ownership;
 
 /**
  * This is the interface that specifies witch instances are to be used depending
@@ -45,4 +48,8 @@ public interface GameVersion {
     Action getNextBoxsAction(Box box, Player player);
 
     Action getNextCardsAction(Box box, Card card, Player player);
+    
+    List<Deck> getDecks();
+    
+    AuctionOfOwnershipAndCard toAuction(Ownership ownership, Player player);
 }

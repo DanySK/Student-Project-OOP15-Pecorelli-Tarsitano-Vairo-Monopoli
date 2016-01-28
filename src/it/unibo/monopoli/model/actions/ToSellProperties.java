@@ -3,11 +3,10 @@ package it.unibo.monopoli.model.actions;
 import java.util.Objects;
 
 import it.unibo.monopoli.model.mainunits.Bank;
-import it.unibo.monopoli.model.mainunits.Owner;
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Building;
-import it.unibo.monopoli.model.table.ClassicLandContract;
 import it.unibo.monopoli.model.table.Land;
+import it.unibo.monopoli.model.table.LandContract;
 import it.unibo.monopoli.model.table.LandGroup;
 import it.unibo.monopoli.model.table.Ownership;
 
@@ -37,6 +36,8 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
      * This is a static method that can be used to create a new instance of this
      * class. It serves for selling an {@link Ownership}.
      * 
+     * @param amount
+     *            - the amount of the {@link Ownership}.
      * @param ownership
      *            - the {@link Ownership} to sell
      * @param bank
@@ -46,13 +47,8 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
      *             - if instead of {@link Ownership} and/or {@link Bank} there
      *             are some null
      */
-    public static ToSellProperties sellAOwnership(final Ownership ownership, final Bank bank) {
-        // if (amount <= 0) {
-        // throw new IllegalArgumentException("Only positive amount different of
-        // zero!");
-        // }
-        return new ToSellProperties(ownership.getContract().getCost(), Objects.requireNonNull(ownership),
-                Objects.requireNonNull(bank));
+    public static ToSellProperties sellAOwnership(final int amount, final Ownership ownership, final Bank bank) {
+        return new ToSellProperties(amount, Objects.requireNonNull(ownership), Objects.requireNonNull(bank));
     }
 
     /**
@@ -70,13 +66,10 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
      *             - if instead of {@link Land} and/or {@link Building} and/or
      *             {@link Bank} there are some null
      */
-    public static ToSellProperties sellABuilding(final Land land, final Building building, final Bank bank) {
-        // if (amount <= 0) {
-        // throw new IllegalArgumentException("Only positive amount different of
-        // zero!");
-        // }
-        return new ToSellProperties(((ClassicLandContract) land.getContract()).getCostForEachBuilding(),
-                Objects.requireNonNull(land), Objects.requireNonNull(building), Objects.requireNonNull(bank));
+    public static ToSellProperties sellABuilding(final Land land, final Building building,
+            final Bank bank) {
+        return new ToSellProperties(((LandContract) land.getContract()).getCostForEachBuilding(), Objects.requireNonNull(land), Objects.requireNonNull(building),
+                Objects.requireNonNull(bank));
     }
 
     @Override

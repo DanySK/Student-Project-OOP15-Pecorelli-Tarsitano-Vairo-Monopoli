@@ -3,6 +3,7 @@ package it.unibo.monopoli.model.actions;
 import java.util.List;
 
 import it.unibo.monopoli.model.cards.Card;
+import it.unibo.monopoli.model.mainunits.Bank;
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Ownership;
 
@@ -26,8 +27,10 @@ public interface AuctionOfOwnershipAndCard {
      *            one)
      * @param ownership
      *            - the {@link Ownership} to auction
+     * @param bank
+     *            - the {@link Bank} through which the sale takes place.
      */
-    void initializedOwnershipsAuction(List<Player> players, Player firstPlayer, Ownership ownership);
+    void initializedOwnershipsAuction(List<Player> players, Player firstPlayer, Ownership ownership, Bank bank);
 
     /**
      * This method initializes all the main components of the auction. This one
@@ -42,8 +45,10 @@ public interface AuctionOfOwnershipAndCard {
      *            one)
      * @param card
      *            - the {@link Card} to auction
+     * @param bank
+     *            - the {@link Bank} through which the sale takes place.
      */
-    void initializedCardsAuction(List<Player> players, Player firstPlayer, Card card);
+    void initializedCardsAuction(List<Player> players, Player firstPlayer, Card card, Bank bank);
 
     /**
      * This method increments the amount of money to invest in the auction.
@@ -57,12 +62,14 @@ public interface AuctionOfOwnershipAndCard {
 
     /**
      * Returns the actual value of the auction.
+     * 
      * @return the value of the auction
      */
     int getValue();
 
     /**
      * Returns the next {@link Player} that have to play in the auction.
+     * 
      * @return the next {@link Player} that have to play
      */
     Player nextPlayer();
@@ -73,9 +80,11 @@ public interface AuctionOfOwnershipAndCard {
     void removePlayer();
 
     /**
-     * Stops the auction and sell the {@link Ownership} or the {@link Card} to the winer of the auction.
+     * Stops the auction and sell the {@link Ownership} or the {@link Card} to
+     * the winer of the auction.
      * 
-     * @param player - the {@link Player} who win the auction
+     * @param player
+     *            - the {@link Player} who win the auction
      */
     void stopAuction(Player player);
 

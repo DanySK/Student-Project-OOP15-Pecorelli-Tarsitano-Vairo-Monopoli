@@ -56,6 +56,7 @@ public class ControllerImpl implements Controller {
     private static final int SECOND_CHANCE_POSITION = 22;
     private static final int THIRD_CHANCE_POSITION = 36;
     private static final int EXIT_PRISON_COST = 50;
+
     private final List<Player> players;
     private Player actualPlayer;
     private GameVersion version;
@@ -92,6 +93,7 @@ public class ControllerImpl implements Controller {
         this.bank = this.version.getBank();
         this.boxes = this.version.getAllBoxes();
         this.decks = this.version.getDecks();
+        this.actualPlayer = this.version.getNextPlayer();
     }
 
     @Override

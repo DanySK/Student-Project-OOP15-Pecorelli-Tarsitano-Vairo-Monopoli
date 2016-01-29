@@ -89,12 +89,7 @@ public class ControllerImpl implements Controller {
         this.bank = this.version.getBank();
         this.boxes = this.version.getAllBoxes();
         this.decks = this.version.getDecks();
-<<<<<<< local
         this.actualPlayer = this.version.getNextPlayer();
-=======
-        this.actualPlayer = this.players.get(0);
-        this.actualPosition = this.boxes.get(0).getID();
->>>>>>> other
     }
 
     @Override

@@ -18,6 +18,7 @@ import it.unibo.monopoli.model.table.Ownership;
 public class ClassicBank implements Bank {
 
     private static final int N_MAX_OF_OWNERSHIP = 28;
+    private static final Random random = new Random();
 
     private final List<Ownership> ownerships;
     private final List<Building> buildings;
@@ -86,15 +87,7 @@ public class ClassicBank implements Bank {
 
     @Override
     public Ownership getOwnership() {
-        try {
-            return this.getOwnership(new Random().nextInt(this.ownerships.size()));
-        } catch (IllegalArgumentException i) {
-            if (!this.ownerships.isEmpty()) {
-                return this.getOwnership();
-            } else {
-                throw i;
-            }
-        }
+        return this.ownerships.get(random.nextInt(this.ownerships.size()));
     }
 
 }

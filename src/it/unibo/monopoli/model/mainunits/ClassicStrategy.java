@@ -341,65 +341,65 @@ public class ClassicStrategy implements GameStrategy {
 
     private void inizializesDecks() {
         final Chance chance = new Chance();
-        chance.addCard(new ClassicCard("TAKE 3 STEPS BACK (WITH BEST WISHES)", CardsId.CARD1, MoveUpTo.takeSteps(-3)));
-        chance.addCard(new ClassicCard("GO TO PARK LANE: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), CARD2));
+        chance.addCard(new ClassicCard("TAKE 3 STEPS BACK (WITH BEST WISHES)", CardsId.CARD1.getValue(), MoveUpTo.takeSteps(-3)));
+        chance.addCard(new ClassicCard("GO TO PARK LANE: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), CardsId.CARD2.getValue()));
         chance.addCard(new ClassicCard(
                 "ADVANCE TO THE NEAREST STATION: IF IT'S FREE, YOU CAN BUY IT;"
                         + "IF IT IS OWNED BY ANOTHER PLAYER, PAY HIM TWICE THE PRICE THAT MATTER",
-                CARD3, MoveUpTo.theNearestStation()));
+                CardsId.CARD3.getValue(), MoveUpTo.theNearestStation()));
         chance.addCard(new ClassicCard(
-                "GET OUT FREE OF JAIL. YOU CAN KEEP THIS CARD AND USE IT WHEN YOU WANT TO, OR YOU CAN SELL IT", CARD4));
-        chance.addCard(new ClassicCard("FINE FOR SPEEDING. PAY $20", CARD5));
-        chance.addCard(new ClassicCard("THE BANK WILL YOU PAY A BONUS OF $50", CARD6, new ToBePaid(50)));
-        chance.addCard(new ClassicCard("GO DIRECTLY TO JAIL", CARD7));
+                "GET OUT FREE OF JAIL. YOU CAN KEEP THIS CARD AND USE IT WHEN YOU WANT TO, OR YOU CAN SELL IT", CardsId.CARD4.getValue()));
+        chance.addCard(new ClassicCard("FINE FOR SPEEDING. PAY $20", CardsId.CARD5.getValue()));
+        chance.addCard(new ClassicCard("THE BANK WILL YOU PAY A BONUS OF $50", CardsId.CARD6.getValue(), new ToBePaid(50)));
+        chance.addCard(new ClassicCard("GO DIRECTLY TO JAIL", CardsId.CARD7.getValue()));
         chance.addCard(new ClassicCard(
                 "PERFORM MAINTENANCE WORK ON ALL OUR BUILDINGS. YOU HAVE TO PAY $25 FOR EACH HOME AND $100 FOR EACH HOTEL THAT YOU OWN",
-                CARD8));
+                CardsId.CARD8.getValue()));
         chance.addCard(new ClassicCard(
                 "YOU HAVE BEEN PROMOTED TO THE PRESIDENCY OF THE BOARD OF DIRECTORS. YOU HAVE TO PAY 50 TO ANY PLAYER",
-                CARD9));
-        chance.addCard(new ClassicCard("GO TO BOX 'GO' AND TAKE $" + Start.getMuchToPick(), CARD10));
+                CardsId.CARD9.getValue()));
+        chance.addCard(new ClassicCard("GO TO BOX 'GO' AND TAKE $" + Start.getMuchToPick(), CardsId.CARD10.getValue()));
         chance.addCard(new ClassicCard(
-                "GO TO THE FENCHURCH ST. STATION: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), CARD11));
+                "GO TO THE FENCHURCH ST. STATION: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), CardsId.CARD11.getValue()));
         chance.addCard(new ClassicCard(
                 "ADVANCE TO THE NEAREST STATION: IF IT'S FREE, YOU CAN BUY IT;"
                         + "IF IT IS OWNED BY ANOTHER PLAYER, PAY HIM TWICE THE PRICE THAT MATTER",
-                CARD12, MoveUpTo.theNearestStation()));
+                CardsId.CARD12.getValue(), MoveUpTo.theNearestStation()));
         chance.addCard(new ClassicCard("GO TO THE TRAFALGAR SQUARE: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(),
-                CARD13));
+                CardsId.CARD13.getValue()));
         chance.addCard(
-                new ClassicCard("GO TO THE WHITEHALL: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), CARD14));
+                new ClassicCard("GO TO THE WHITEHALL: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), CardsId.CARD14.getValue()));
         chance.addCard(new ClassicCard(
                 "ADVANCE TO THE NEAREST STATION: IF IT'S FREE, YOU CAN BUY IT;"
                         + "IF IT IS OWNED BY ANOTHER PLAYER, LAUNCHING THE DICES AND PAY THE OWNER 10 TIMES THE NUMBER RELEASED",
-                CARD15, MoveUpTo.theNearestStation(), new ToRollDices(new ClassicDicesStrategy())));
-        chance.addCard(new ClassicCard("MATURANO THE COUPONS OF YOUR REAL ESTATE FUNDS: COLLECT $150", CARD16,
+                CardsId.CARD15.getValue(), MoveUpTo.theNearestStation(), new ToRollDices(new ClassicDicesStrategy())));
+        chance.addCard(new ClassicCard("MATURANO THE COUPONS OF YOUR REAL ESTATE FUNDS: COLLECT $150", CardsId.CARD16.getValue(),
                 new ToBePaid(150)));
         final CommunityChest chest = new CommunityChest();
-        chest.addCard(new ClassicCard("RECEIVE DOCTOR'S BILL, PAY $50", CARD17));
-        chest.addCard(new ClassicCard("PAY SCHOOL FEES OF OUR CHILDREN: $50", CARD18));
-        chest.addCard(new ClassicCard("INHERITED $100 FROM A UNCLE", CARD19, new ToBePaid(50)));
+        chest.addCard(new ClassicCard("RECEIVE DOCTOR'S BILL, PAY $50", CardsId.CARD17.getValue()));
+        chest.addCard(new ClassicCard("PAY SCHOOL FEES OF OUR CHILDREN: $50", CardsId.CARD18.getValue()));
+        chest.addCard(new ClassicCard("INHERITED $100 FROM A UNCLE", CardsId.CARD19.getValue(), new ToBePaid(50)));
         chest.addCard(new ClassicCard(
                 "GET OUT FREE OF JAIL. YOU CAN KEEP THIS CARD AND USE IT WHEN YOU WANT TO, OR YOU CAN SELL IT",
-                CARD20));
-        chest.addCard(new ClassicCard("PAY HOSPITAL'S BILL. PAY $100", CARD21));
-        chest.addCard(new ClassicCard("FOR THE SALE OF A STOCK OF PRODUCTS YOU OBTAIN $50", CARD22, new ToBePaid(50)));
-        chest.addCard(new ClassicCard("GO DIRECTLY TO JAIL", CARD23));
+                CardsId.CARD20.getValue()));
+        chest.addCard(new ClassicCard("PAY HOSPITAL'S BILL. PAY $100", CardsId.CARD21.getValue()));
+        chest.addCard(new ClassicCard("FOR THE SALE OF A STOCK OF PRODUCTS YOU OBTAIN $50", CardsId.CARD22.getValue(), new ToBePaid(50)));
+        chest.addCard(new ClassicCard("GO DIRECTLY TO JAIL", CardsId.CARD23.getValue()));
         chest.addCard(new ClassicCard(
                 "PAY CONTRIBUTIONS TO IMPROVE THE ROADS. YOU HAVE TO PAY $40 FOR EACH HOME AND $115 FOR EACH HOTEL THAT YOU OWN",
-                CARD24));
-        chest.addCard(new ClassicCard("IS YOUR BIRTHDAY. EACH PLAYER GIVES YOU $10", CARD25));
-        chest.addCard(new ClassicCard("GO TO BOX 'GO' AND TAKE $" + Start.getMuchToPick(), CARD26));
-        chest.addCard(new ClassicCard("GET $25 FOR YOUR ADVICE", CARD27, new ToBePaid(25)));
+                CardsId.CARD24.getValue()));
+        chest.addCard(new ClassicCard("IS YOUR BIRTHDAY. EACH PLAYER GIVES YOU $10", CardsId.CARD25.getValue()));
+        chest.addCard(new ClassicCard("GO TO BOX 'GO' AND TAKE $" + Start.getMuchToPick(), CardsId.CARD26.getValue()));
+        chest.addCard(new ClassicCard("GET $25 FOR YOUR ADVICE", CardsId.CARD27.getValue(), new ToBePaid(25)));
         chest.addCard(
-                new ClassicCard("BANK RECOGNIZES AN ERROR IN YOUR STATEMENT. COLLECT $200", CARD28, new ToBePaid(200)));
+                new ClassicCard("BANK RECOGNIZES AN ERROR IN YOUR STATEMENT. COLLECT $200", CardsId.CARD28.getValue(), new ToBePaid(200)));
         chest.addCard(
-                new ClassicCard("YOU WON THE SECOND PRIZE IN A BEAUTY CONTEST. COLLECT $10", CARD29, new ToBePaid(10)));
+                new ClassicCard("YOU WON THE SECOND PRIZE IN A BEAUTY CONTEST. COLLECT $10", CardsId.CARD29.getValue(), new ToBePaid(10)));
         chest.addCard(
-                new ClassicCard("MATURANO THE COUPONS OF YOUR ACTITONS. COLLECT $100", CARD30, new ToBePaid(100)));
-        chest.addCard(new ClassicCard("FEE INCOME WAS REFUNDED. GET $20", CARD31, new ToBePaid(20)));
+                new ClassicCard("MATURANO THE COUPONS OF YOUR ACTITONS. COLLECT $100", CardsId.CARD30.getValue(), new ToBePaid(100)));
+        chest.addCard(new ClassicCard("FEE INCOME WAS REFUNDED. GET $20", CardsId.CARD31.getValue(), new ToBePaid(20)));
         chest.addCard(
-                new ClassicCard("MATURANO INTEREST ON YOUR LIFE INSURANCE: COLLECT $100", CARD32, new ToBePaid(100)));
+                new ClassicCard("MATURANO INTEREST ON YOUR LIFE INSURANCE: COLLECT $100", CardsId.CARD32.getValue(), new ToBePaid(100)));
 
         this.decks.add(0, chance);
         this.decks.add(1, chest);
@@ -512,9 +512,9 @@ public class ClassicStrategy implements GameStrategy {
     public List<Action> getNextCardsActions(final Box box, final Card card, final Player player) {
         final List<Action> actions = new LinkedList<>();
         switch (card.getID()) {
-        case CARD2:
+        case CardsId.CARD2.getValue():
             actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(37)));
-        case CARD3:
+        case CardsId.CARD3.getValue():
             if (((Ownership) box).getOwner().equals(player)) {
                 actions.addAll(this.getNextBoxsActions(box, player));
             } else {
@@ -524,15 +524,15 @@ public class ClassicStrategy implements GameStrategy {
                 new ToBePaid(amount);
             }
             break;
-        case CARD4:
+        case CardsId.CARD4.getValue():
             player.addCard(card);
             break;
-        case CARD5:
+        case CACardsId.CARD5.getValue():
             actions.add(new ToPay(20, player));
             break;
         case CARD7:
             actions.add(new GoToPrison(this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos())));
-        case CARD8:
+        case CardsId.CARD8.getValue():
             player.getOwnerships().get().stream().filter(o -> o instanceof Land)
                     .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
                     .map(o -> ((LandGroup) o.getGroup()).getBuildings()).forEach(l -> {
@@ -541,7 +541,7 @@ public class ClassicStrategy implements GameStrategy {
                         });
                     });
             break;
-        case CARD9:
+        case CardsId.CARD9.getValue():
             this.players.stream().filter(p -> !p.equals(player)).forEach(p -> {
                 try {
                     new ToPay(CARD_TAX, player).play(player);
@@ -551,7 +551,7 @@ public class ClassicStrategy implements GameStrategy {
                 }
             });
             break;
-        case CARD10:
+        case CARCardsId.CARD10.getValue()D10:
             actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.START_POSITION.getPos())));
         case CARD11:
             actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(OWNERSHIP_N_18)));
@@ -618,7 +618,28 @@ public class ClassicStrategy implements GameStrategy {
         }
         return actions;
     }
-
+//    private void notMuchMoney(final Player player, final List<Action> actions) {
+//        if (player.getOwnerships().isPresent()) {
+//            player.getOwnerships().get().stream().filter(o -> o.getGroup() instanceof LandGroup)
+//                    .filter(o -> ((LandGroup) o.getGroup()).getBuildings().size() > 0).forEach(o -> {
+//                        ((LandGroup) o.getGroup()).getBuildings()
+//                                .forEach(b -> actions.add(ToSellProperties.sellABuilding(((Land) o), b, this.bank)));
+//                    });
+//            if (actions.isEmpty()) {
+//                player.getOwnerships().get().stream().forEach(o -> {
+//                    actions.add(ToSellProperties.sellAOwnership(o, this.bank));
+//                });
+//            }
+//        } else if (player.getCards().isPresent()) {
+//            player.getCards().get().forEach(c -> actions.add(ToAuction.cards(this.players, new ClassicAuction(), c)));
+//        } else {
+//            // FINE DEL GIOCO -> interfaccia funzionale (Action ?) + classe
+//            // anonima: rimuove il giocatore con il play)
+//            actions.add(p -> {
+//                this.players.remove(p);
+//            });
+//        }
+//    }
     // private void notMuchMoney(final Player player, final List<Action>
     // actions) {
     // if (player.getOwnerships().isPresent()) {
@@ -646,8 +667,4 @@ public class ClassicStrategy implements GameStrategy {
     // });
     // }
     // }
-    
-    public static void main(String[] args) {
-        System.out.println("ciao");
-    }
 }

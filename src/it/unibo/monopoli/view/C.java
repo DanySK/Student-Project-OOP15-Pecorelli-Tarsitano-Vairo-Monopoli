@@ -8,4 +8,6 @@ public class C {
 	
 	public static final String NOT_SELECTABLE_OPTION = " - Select an Option - ";
 	public static final int MAXPLAYER = 6;
+	public static final int MAX_PLAYERS = 6;
+
 }

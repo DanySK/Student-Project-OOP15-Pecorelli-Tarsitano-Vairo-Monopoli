@@ -191,7 +191,8 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void sellBuilding() {
-        ToSellProperties.sellABuilding((Land) this.actualOwnership,building, this.bank).play(this.actualPlayer);
+        final List<Building> l = ((LandGroup) this.actualOwnership.getGroup()).getBuildings();
+        ToSellProperties.sellABuilding((Land) this.actualOwnership,l.remove(l.size()-1), this.bank).play(this.actualPlayer);
         this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions((Land) this.actualOwnership, this.actualPlayer)));
     }
 

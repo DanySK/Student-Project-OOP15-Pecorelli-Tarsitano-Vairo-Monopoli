@@ -39,8 +39,8 @@ public interface GameStrategy {
 
 //    List<Action> getNextBoxsActions(Box box, Player player);
 //
-    List<Action> getNextCardsActions(Box box, Card card, Player player);
-
+//    List<Action> getNextCardsActions(Box box, Card card, Player player);
+//
     List<Deck> getDecks();
 
     AuctionOfOwnership toAuction(Ownership ownership, Player player);

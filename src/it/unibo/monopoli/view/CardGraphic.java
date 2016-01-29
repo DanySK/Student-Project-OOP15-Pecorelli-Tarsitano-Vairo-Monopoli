@@ -12,52 +12,51 @@ import javax.swing.border.Border;
 
 public class CardGraphic extends AbstractGraphicCard {
 
-	private String name;
-	private Color color;
-	private int value;
-	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+    private String name;
+    private Color color;
+    private int value;
+    private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 
-	public CardGraphic(String name, Color color, int value, Position pos) {
-		super(pos);
-		this.name = name;
-		this.color = color;
-		this.value = value;
-		
+    public CardGraphic(String name, Color color, int value, Position pos) {
+        super(pos);
+        this.name = name;
+        this.color = color;
+        this.value = value;
 
-	}
+    }
 
-	@Override
-	public JPanel build() {
-		JPanel card = new JPanel();
-		
-		card = getRotatedPanel();
-		card.setLayout(new GridLayout(4, 1));
-		card.setPreferredSize(new Dimension(RotatedPanel.getDim()));
+    @Override
+    public JPanel build() {
+        JPanel card = new JPanel();
 
-		JPanel colorP = new JPanel();
-		colorP.setOpaque(true);
-		colorP.setBackground(this.color);
-		colorP.setLayout(new FlowLayout());
-		for (int i = 0; i < 4; i++) {
-			JPanel casa = new BuildCasa().addCasa();
-			colorP.add(casa);
-		}
+        card = getRotatedPanel();
+        card.setLayout(new GridLayout(4, 1));
+        card.setPreferredSize(new Dimension(RotatedPanel.getDim()));
 
-		card.add(colorP);
-		JLabel nameP = new JLabel(this.name);
-		card.add(nameP);
+        JPanel colorP = new JPanel();
+        colorP.setOpaque(true);
+        colorP.setBackground(this.color);
+        colorP.setLayout(new FlowLayout());
+        for (int i = 0; i < 4; i++) {
+            JPanel casa = new BuildCasa().addCasa();
+            colorP.add(casa);
+        }
 
-		JPanel emptyP = new JPanel();
-		card.add(emptyP);
+        card.add(colorP);
+        JLabel nameP = new JLabel(this.name);
+        card.add(nameP);
 
-		JLabel valueP = new JLabel("" + this.value);
-		card.add(valueP);
+        JPanel emptyP = new JPanel();
+        card.add(emptyP);
 
-		card.setBorder(border);
+        JLabel valueP = new JLabel("" + this.value);
+        card.add(valueP);
 
-		card.setVisible(true);
-		return card;
+        card.setBorder(border);
 
-	}
+        card.setVisible(true);
+        return card;
+
+    }
 
 }

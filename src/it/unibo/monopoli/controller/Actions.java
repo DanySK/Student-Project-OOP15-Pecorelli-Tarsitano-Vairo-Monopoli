@@ -10,7 +10,7 @@ public enum Actions {
     SELL_BUILDING("SELL BUILDING"),
     MORTGAGE("MORTGAGE"),
     REVOKE_MORTGAGE("REVOKE MORTGAGE"),
-    TRADE("TRADE"),
+//    TRADE("TRADE"),
     END_OF_THE_GAME("END OF THE GAME");
 
     private final String text;

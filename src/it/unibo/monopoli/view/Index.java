@@ -88,6 +88,8 @@ public class Index {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                
                 controller.toRollDices();
 
                 buttonList.forEach(b -> b.setEnabled(false));

@@ -146,12 +146,13 @@ public class ControllerImpl implements Controller {
     public int toRollDices() {
         this.lastDices = this.version.toRollDices(this.actualPlayer);
         this.actualPosition = this.actualPlayer.getPawn().getActualPos();
+        System.out.println(this.actualPosition);
         this.boxes.forEach(b -> {
             if (b.getID() == this.actualPosition) {
                 this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions(b, this.actualPlayer)));
             }
         });
-        this.actualOwnership = (Ownership) this.boxes.get(this.actualPosition);
+        
         return this.actualPosition;
     }
 

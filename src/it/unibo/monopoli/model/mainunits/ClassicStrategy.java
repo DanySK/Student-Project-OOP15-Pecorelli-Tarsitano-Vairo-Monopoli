@@ -146,27 +146,55 @@ public class ClassicStrategy implements GameStrategy {
     }
 
     private void inizializesGroups() {
-        this.groups.add(new ClassicLandGroup("Dark Gray", this.ownerships.get(BoxesPositions.OWNERSHIP_N_1.getPos()),
+        this.groups.add(0, new ClassicLandGroup("Dark Gray", this.ownerships.get(BoxesPositions.OWNERSHIP_N_1.getPos()),
                 this.ownerships.get(BoxesPositions.OWNERSHIP_N_2.getPos())));
-        this.groups.add(new ClassicLandGroup("Cyan", this.ownerships.get(BoxesPositions.OWNERSHIP_N_4.getPos()),
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_1.getPos()).setGroup(this.groups.get(0));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_2.getPos()).setGroup(this.groups.get(0));
+        this.groups.add(1, new ClassicLandGroup("Cyan", this.ownerships.get(BoxesPositions.OWNERSHIP_N_4.getPos()),
                 this.ownerships.get(BoxesPositions.OWNERSHIP_N_5.getPos()), this.ownerships.get(BoxesPositions.OWNERSHIP_N_6.getPos())));
-        this.groups.add(new ClassicLandGroup("Magenta", this.ownerships.get(BoxesPositions.OWNERSHIP_N_7.getPos()),
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_4.getPos()).setGroup(this.groups.get(1));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_5.getPos()).setGroup(this.groups.get(1));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_6.getPos()).setGroup(this.groups.get(1));
+        this.groups.add(2, new ClassicLandGroup("Magenta", this.ownerships.get(BoxesPositions.OWNERSHIP_N_7.getPos()),
                 this.ownerships.get(BoxesPositions.OWNERSHIP_N_9.getPos()), this.ownerships.get(BoxesPositions.OWNERSHIP_N_10.getPos())));
-        this.groups.add(new ClassicLandGroup("Orange", this.ownerships.get(BoxesPositions.OWNERSHIP_N_12.getPos()),
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_7.getPos()).setGroup(this.groups.get(2));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_9.getPos()).setGroup(this.groups.get(2));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_10.getPos()).setGroup(this.groups.get(2));
+        this.groups.add(3, new ClassicLandGroup("Orange", this.ownerships.get(BoxesPositions.OWNERSHIP_N_12.getPos()),
                 this.ownerships.get(BoxesPositions.OWNERSHIP_N_13.getPos()), this.ownerships.get(BoxesPositions.OWNERSHIP_N_14.getPos())));
-        this.groups.add(new ClassicLandGroup("Red", this.ownerships.get(BoxesPositions.OWNERSHIP_N_15.getPos()),
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_12.getPos()).setGroup(this.groups.get(3));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_13.getPos()).setGroup(this.groups.get(3));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_14.getPos()).setGroup(this.groups.get(3));
+        this.groups.add(4, new ClassicLandGroup("Red", this.ownerships.get(BoxesPositions.OWNERSHIP_N_15.getPos()),
                 this.ownerships.get(BoxesPositions.OWNERSHIP_N_16.getPos()), this.ownerships.get(BoxesPositions.OWNERSHIP_N_17.getPos())));
-        this.groups.add(new ClassicLandGroup("Yellow", this.ownerships.get(BoxesPositions.OWNERSHIP_N_19.getPos()),
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_15.getPos()).setGroup(this.groups.get(4));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_16.getPos()).setGroup(this.groups.get(4));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_17.getPos()).setGroup(this.groups.get(4));
+        this.groups.add(5, new ClassicLandGroup("Yellow", this.ownerships.get(BoxesPositions.OWNERSHIP_N_19.getPos()),
                 this.ownerships.get(BoxesPositions.OWNERSHIP_N_20.getPos()), this.ownerships.get(BoxesPositions.OWNERSHIP_N_22.getPos())));
-        this.groups.add(new ClassicLandGroup("Green", this.ownerships.get(BoxesPositions.OWNERSHIP_N_23.getPos()),
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_19.getPos()).setGroup(this.groups.get(5));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_20.getPos()).setGroup(this.groups.get(5));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_22.getPos()).setGroup(this.groups.get(5));        
+        this.groups.add(6, new ClassicLandGroup("Green", this.ownerships.get(BoxesPositions.OWNERSHIP_N_23.getPos()),
                 this.ownerships.get(BoxesPositions.OWNERSHIP_N_24.getPos()), this.ownerships.get(BoxesPositions.OWNERSHIP_N_25.getPos())));
-        this.groups.add(
-                new ClassicLandGroup("Blue", this.ownerships.get(BoxesPositions.OWNERSHIP_N_27.getPos()), this.ownerships.get(BoxesPositions.OWNERSHIP_N_28.getPos())));
-        this.groups.add(new ClassicLandGroup("Stations", this.ownerships.get(BoxesPositions.OWNERSHIP_N_3.getPos()),
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_23.getPos()).setGroup(this.groups.get(6));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_24.getPos()).setGroup(this.groups.get(6));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_25.getPos()).setGroup(this.groups.get(6));
+        this.groups.add(7, new ClassicLandGroup("Blue", this.ownerships.get(BoxesPositions.OWNERSHIP_N_27.getPos()), 
+                this.ownerships.get(BoxesPositions.OWNERSHIP_N_28.getPos())));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_27.getPos()).setGroup(this.groups.get(7));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_28.getPos()).setGroup(this.groups.get(7));
+        this.groups.add(8, new ClassicLandGroup("Stations", this.ownerships.get(BoxesPositions.OWNERSHIP_N_3.getPos()),
                 this.ownerships.get(BoxesPositions.OWNERSHIP_N_11.getPos()), this.ownerships.get(BoxesPositions.OWNERSHIP_N_18.getPos()),
                 this.ownerships.get(BoxesPositions.OWNERSHIP_N_26.getPos())));
-        this.groups.add(new ClassicLandGroup("Companies", this.ownerships.get(BoxesPositions.OWNERSHIP_N_8.getPos()),
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_3.getPos()).setGroup(this.groups.get(8));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_11.getPos()).setGroup(this.groups.get(8));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_18.getPos()).setGroup(this.groups.get(8));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_26.getPos()).setGroup(this.groups.get(8));
+        this.groups.add(9, new ClassicLandGroup("Companies", this.ownerships.get(BoxesPositions.OWNERSHIP_N_8.getPos()),
                 this.ownerships.get(BoxesPositions.OWNERSHIP_N_21.getPos())));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_8.getPos()).setGroup(this.groups.get(9));
+        this.ownerships.get(BoxesPositions.OWNERSHIP_N_21.getPos()).setGroup(this.groups.get(9));
     }
 
     private void inizializesContracts() {

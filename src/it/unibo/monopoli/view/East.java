@@ -23,7 +23,7 @@ public class East extends JPanel {
         final JPanel panelPlayer = new JPanel();
         panelPlayer.setLayout(new GridLayout(5, 1));
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < InizializedPlayer.getMap().size(); i++) {
             panelPlayer.add(new PlayerGraphic("Laura", 5).build());
         }
         this.add(new JScrollPane(panelPlayer), BorderLayout.CENTER);

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import it.unibo.monopoli.model.table.Ownership;
+import it.unibo.monopoli.view.JShape.Shapes;
 
 public class OwnershipGraphic extends AbstractGraphicCard {
 
@@ -44,7 +45,7 @@ public class OwnershipGraphic extends AbstractGraphicCard {
 		int i = this.own.getContract().getCost();
 		JLabel valueP = new JLabel("" + i);
 		card.add(valueP);
-		
+		emptyP.add(new JShape(Shapes.ROMBO));
 		card.setBorder(border);
 		card.setVisible(true);
 			

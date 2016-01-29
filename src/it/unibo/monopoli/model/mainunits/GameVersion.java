@@ -34,6 +34,8 @@ public interface GameVersion {
      */
     Bank getBank();
 
+    Player getNextPlayer();
+
     /**
      * Returns the {@link Player} which have to play.
      * 

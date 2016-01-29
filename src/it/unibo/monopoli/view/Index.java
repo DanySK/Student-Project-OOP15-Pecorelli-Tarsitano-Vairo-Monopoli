@@ -37,16 +37,13 @@ public class Index {
         JPanel centerP = new JPanel();
         JPanel tabellone = new ProvaTabellone(11, 11, new ControllerImpl(EVersion.CLASSIC,player)).initialize();
         centerP.add(tabellone);
+
         // East
-        final JPanel panelEst = new JPanel();
-        panelEst.add(new East());
-        
-        frame.getMainPanel().add(southP, BorderLayout.SOUTH);
-        frame.getMainPanel().add(panelEst, BorderLayout.EAST);
+        frame.getContentPane().add(new East(), BorderLayout.EAST);
         frame.getMainPanel().add(centerP, BorderLayout.CENTER);
-
+        frame.getMainPanel().add(southP, BorderLayout.SOUTH);
+        
         frame.setVisible(true);
-
     }
 
     public static void main(String[] args) {

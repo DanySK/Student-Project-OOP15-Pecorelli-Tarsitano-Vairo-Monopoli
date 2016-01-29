@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import it.unibo.monopoli.model.table.Box;
+import it.unibo.monopoli.view.JShape.Shapes;
 
 public class BoxGraphic   extends AbstractGraphicCard  {
 
@@ -28,7 +29,7 @@ public class BoxGraphic   extends AbstractGraphicCard  {
 	public JPanel build(){
 		JPanel card = getRotatedPanel();
 		card.setPreferredSize(new Dimension(70, 70));
-		card.setLayout(new GridLayout(4, 1));
+		card.setLayout(new GridLayout(2, 1));
 		
 		
 		JLabel nameP = new JLabel(box.getName());
@@ -36,6 +37,8 @@ public class BoxGraphic   extends AbstractGraphicCard  {
 		
 		JPanel emptyP = new JPanel();
 		card.add(emptyP);
+		
+		emptyP.add(new JShape(Shapes.ROMBO));
 
 		card.setBorder(border);
 		card.setVisible(true);

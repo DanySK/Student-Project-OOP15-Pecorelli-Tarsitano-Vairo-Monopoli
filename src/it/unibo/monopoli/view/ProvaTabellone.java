@@ -113,6 +113,8 @@ public class ProvaTabellone {
 				
 
 			});
+			
+			
 		}
 		// IBoxGraphic casella20;
 		// final GridBagConstraints gbc_lblCiaooooo = new GridBagConstraints();

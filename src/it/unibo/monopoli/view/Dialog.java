@@ -18,7 +18,7 @@ public class Dialog extends JDialog implements ActionListener {
 	    if (parent != null) {
 	      Dimension parentSize = parent.getSize(); 
 	      Point p = parent.getLocation(); 
-	      setLocation(p.x /*+ parentSize.width / 4*/, p.y /*+ parentSize.height / 4*/);
+	      setLocation(p.x + parentSize.width / 4, p.y + parentSize.height / 4);
 	    }
 	    JPanel messagePane = new JPanel();
 	    messagePane.add(new JLabel(message));

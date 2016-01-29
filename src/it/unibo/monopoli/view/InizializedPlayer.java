@@ -30,9 +30,9 @@ public class InizializedPlayer {
 	private boolean isUman;
 	
 
-	public InizializedPlayer() {
-		build();
-	}
+//	public InizializedPlayer() {
+////		build();
+//	}
 
 	/**
 	 * Method that build the Player's panel where there are the information
@@ -93,6 +93,8 @@ public class InizializedPlayer {
 		group.add(rdbtnComputer);
 		group.add(rdbtnUmano);
 		
+		rdbtnComputer.setSelected(true);
+				
 		if(rdbtnComputer.isSelected()){
 			isUman = false;
 		}else{
@@ -105,7 +107,8 @@ public class InizializedPlayer {
 	}
 	
 	public String getName(){
-		return name;
+		
+		return this.name;
 	}
 	
 	public boolean isUman(){

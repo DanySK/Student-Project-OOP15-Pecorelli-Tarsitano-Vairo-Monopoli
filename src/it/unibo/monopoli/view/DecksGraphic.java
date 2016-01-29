@@ -12,6 +12,7 @@ import javax.swing.border.Border;
 import it.unibo.monopoli.model.table.DecksBox;
 import it.unibo.monopoli.model.table.Land;
 import it.unibo.monopoli.model.table.Ownership;
+import it.unibo.monopoli.view.JShape.Shapes;
 
 public class DecksGraphic extends AbstractGraphicCard {
 	
@@ -36,7 +37,8 @@ public class DecksGraphic extends AbstractGraphicCard {
 		JPanel emptyP = new JPanel();
 		card.add(emptyP);
 		
-			
+		emptyP.add(new JShape(Shapes.ROMBO));
+		emptyP.add(new JShape(Shapes.ROMBO));
 		card.setBorder(border);
 		card.setVisible(true);
 			

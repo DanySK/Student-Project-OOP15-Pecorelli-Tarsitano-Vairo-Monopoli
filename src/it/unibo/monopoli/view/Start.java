@@ -6,17 +6,16 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -24,30 +23,36 @@ import javax.swing.SwingConstants;
 import it.unibo.monopoli.view.listener.StartPlay;
 import it.unibo.monopoli.view.listener.VersionSelected;
 
+
+
 public class Start {
 	
-	public static void main(String[] args) {
 	
-		final MyFrame start = new MyFrame("Start - Monopoli", new BorderLayout(), new Dimension(800,450));
+	  
+	public static void main(String[] args) {
+
+		final MyFrame start = new MyFrame("Start - Monopoli", new BorderLayout(), new Dimension(800, 450));
 		start.setFont(new Font("Berlin Sans FB", Font.PLAIN, 14));
 		start.setLocation(new Point(300, 100));
 		start.getMainPanel().setLayout(new BorderLayout(0, 0));
-		
-		final JLabel lblMonopoliBenvenuto = new JLabel("MONOPOLI - BENVENUTO");
+
+		final JPanel panel = new JPanel();
+		start.getMainPanel().add(panel, BorderLayout.CENTER);
+
+		final JLabel lblMonopoliBenvenuto = new JLabel("MONOPOLI - WELCOME");
+		panel.add(lblMonopoliBenvenuto);
 		lblMonopoliBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonopoliBenvenuto.setFont(new Font("Berlin Sans FB", Font.BOLD, 50));
-		start.getMainPanel().add(lblMonopoliBenvenuto, BorderLayout.NORTH);
-		
+
 		final JPanel GridC = new JPanel();
-		start.getMainPanel().add(GridC, BorderLayout.CENTER);
+		panel.add(GridC);
 		final GridBagLayout gbl_GridC = new GridBagLayout();
-		gbl_GridC.columnWidths = new int[] {81, 237, 157, 104, 63, 0, 1};
-		gbl_GridC.rowHeights = new int[] {24, 53, 0, 138, 31, 36, -17, 2};
-		gbl_GridC.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_GridC.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_GridC.columnWidths = new int[] { 81, 237, 157, 104, 0, 0, 63, 0, 1 };
+		gbl_GridC.rowHeights = new int[] { 24, 53, 0, 166, 31, 36, -17, 2 };
+		gbl_GridC.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_GridC.rowWeights = new double[] { 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 		GridC.setLayout(gbl_GridC);
-		
-		
+
 		final JPanel firstRow = new JPanel();
 		final FlowLayout flowLayout = (FlowLayout) firstRow.getLayout();
 		final GridBagConstraints gbc_firstRow = new GridBagConstraints();
@@ -57,12 +62,12 @@ public class Start {
 		gbc_firstRow.gridx = 1;
 		gbc_firstRow.gridy = 1;
 		GridC.add(firstRow, gbc_firstRow);
-		
-		final JLabel lblScegliLaVersione = new JLabel("Scegli la versione:");
+
+		final JLabel lblScegliLaVersione = new JLabel("Choose version: ");
 		lblScegliLaVersione.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblScegliLaVersione.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
 		firstRow.add(lblScegliLaVersione);
-		
+
 		final JPanel panelComboBox = new JPanel();
 		final GridBagConstraints gbc_panelComboBox = new GridBagConstraints();
 		gbc_panelComboBox.insets = new Insets(0, 0, 5, 5);
@@ -70,13 +75,31 @@ public class Start {
 		gbc_panelComboBox.gridx = 2;
 		gbc_panelComboBox.gridy = 1;
 		GridC.add(panelComboBox, gbc_panelComboBox);
+
 		
 		final JComboBox<String> comboBoxVersion = new JComboBox<String>();
 		lblScegliLaVersione.setLabelFor(comboBoxVersion);
-		Arrays.asList(EVersion.values()).forEach(v -> comboBoxVersion.addItem(v.getName()));
 		comboBoxVersion.addItemListener(new VersionSelected());
 		panelComboBox.add(comboBoxVersion);
-		
+		comboBoxVersion.setModel(new DefaultComboBoxModel<String>(){
+
+			boolean selectionAllowed = true;
+			
+			@Override
+			public void setSelectedItem(Object anObject) {
+				if (!C.NOT_SELECTABLE_OPTION.equals(anObject)) {
+			          super.setSelectedItem(anObject);
+			        } else if (selectionAllowed) {
+			          // Allow this just once
+			          selectionAllowed = false;
+			          super.setSelectedItem(anObject);
+			        }
+			}
+			
+		});
+		comboBoxVersion.addItem(C.NOT_SELECTABLE_OPTION);
+		Arrays.asList(EVersion.values()).forEach(v -> comboBoxVersion.addItem(v.getName()));
+
 		final JPanel secondRow = new JPanel();
 		final GridBagConstraints gbc_secondRow = new GridBagConstraints();
 		gbc_secondRow.gridwidth = 2;
@@ -86,13 +109,13 @@ public class Start {
 		gbc_secondRow.gridx = 1;
 		gbc_secondRow.gridy = 2;
 		GridC.add(secondRow, gbc_secondRow);
-		
-		final JLabel lblScegliIlNumero = new JLabel("Scegli il numero dei giocatori e la loro tipologia:");
+
+		final JLabel lblScegliIlNumero = new JLabel("Choose number of players, their type and color of the pawn: ");
 		lblScegliIlNumero.setVerticalAlignment(SwingConstants.TOP);
 		lblScegliIlNumero.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblScegliIlNumero.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
 		secondRow.add(lblScegliIlNumero);
-		
+
 		final JPanel panelBtnAddPlayer = new JPanel();
 		final GridBagConstraints gbc_panelBtnAddPlayer = new GridBagConstraints();
 		gbc_panelBtnAddPlayer.insets = new Insets(0, 0, 5, 5);
@@ -100,55 +123,46 @@ public class Start {
 		gbc_panelBtnAddPlayer.gridx = 3;
 		gbc_panelBtnAddPlayer.gridy = 2;
 		GridC.add(panelBtnAddPlayer, gbc_panelBtnAddPlayer);
-		
+
 		final JPanel playerP = new JPanel();
 		final GridBagConstraints gbc_playerP = new GridBagConstraints();
 		gbc_playerP.insets = new Insets(0, 0, 5, 5);
-		gbc_playerP.gridwidth = 2;
+		gbc_playerP.gridwidth = 6;
 		gbc_playerP.fill = GridBagConstraints.BOTH;
 		gbc_playerP.gridx = 1;
 		gbc_playerP.gridy = 3;
 		GridC.add(playerP, gbc_playerP);
-		FlowLayout fl_playerP = new FlowLayout();
-		playerP.setLayout(fl_playerP/*(FlowLayout.CENTER, 5, 5)*/);
-		
-		
+		final FlowLayout fl_playerP = new FlowLayout();
+		playerP.setLayout(fl_playerP/* (FlowLayout.CENTER, 5, 5) */);
+
 		for (int i = 0; i < 2; i++) {
 			playerP.add(new InizializedPlayer().build());
 		}
-		playerP.add(new JLabel("Prova"));
-		
-		
+
 		final JButton btnAddPlayer = new JButton("Add Player");
+		
 		btnAddPlayer.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				JLabel prova = new JLabel("Prova");
-						
+				// TODO
+//				if ( numero < C.MAXPLAYER)
 				playerP.add(new InizializedPlayer().build());
-				
-				System.out.println("Add Player");
-				//Dialog d = new Dialog(new JFrame(), "Prova", "Hai cliccato AddPlayer");
-				
+				playerP.revalidate();
 			}
 		});
-		
-		
 		panelBtnAddPlayer.add(btnAddPlayer);
-		
+
 		final JButton btnNewButton = new JButton("AVVIA PARTITA");
 		btnNewButton.addActionListener(new StartPlay());
 		btnNewButton.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 16));
 		final GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.gridwidth = 2;
+		gbc_btnNewButton.gridheight = 2;
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 3;
 		gbc_btnNewButton.gridy = 4;
 		GridC.add(btnNewButton, gbc_btnNewButton);
-		
+
 		start.setVisible(true);
 
 	}

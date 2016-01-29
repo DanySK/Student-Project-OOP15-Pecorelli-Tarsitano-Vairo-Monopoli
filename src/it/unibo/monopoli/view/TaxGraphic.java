@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import it.unibo.monopoli.model.table.Tax;
+import it.unibo.monopoli.view.JShape.Shapes;
 
 public class TaxGraphic extends AbstractGraphicCard {
 
@@ -39,6 +40,7 @@ public class TaxGraphic extends AbstractGraphicCard {
 		JLabel valueP = new JLabel(""+tax.getCost());
 		card.add(valueP);
 		
+		emptyP.add(new JShape(Shapes.ROMBO));
 		card.setBorder(border);
 		card.setVisible(true);
 			

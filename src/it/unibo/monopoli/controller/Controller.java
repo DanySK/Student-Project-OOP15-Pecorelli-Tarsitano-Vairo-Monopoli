@@ -77,7 +77,7 @@ public interface Controller {
      */
     int toRollDices();
 
-    /**  
+    /**
      * go To next player.
      * 
      * @return the integer for next player
@@ -97,7 +97,7 @@ public interface Controller {
      * @param ownership
      *            .
      */
-    void buyOwnership(Ownership ownership);
+    void buyOwnership();
 
     /**
      * method for sell a property by id. .
@@ -105,18 +105,18 @@ public interface Controller {
      * @param ownership
      *            .
      */
-    void sellOwnership(Ownership ownership);
+    void sellOwnership();
 
-    AuctionOfOwnership auction(Ownership ownership);
+    AuctionOfOwnership auction();
 
     /**
      * This method allow to build house or hotel on {@link Land}.
      * 
      * @param land
      */
-    void build(Land land);
+    void build();
 
-    void sellBuilding(Land land, Building building);
+    void sellBuilding();
 
     /**
      * This method allow to mortgage a property by id. .
@@ -124,17 +124,17 @@ public interface Controller {
      * @param ownership
      *            .
      */
-    void mortgageOwnership(final Ownership ownership);
+    void mortgageOwnership();
 
     /**
      * This method allow to revoke mortgage a property by id. .
      */
-    void revokeMortgageOwnership(Ownership ownership);
+    void revokeMortgageOwnership();
 
-    /**
-     * this method allow to accept trade between two player.
-     */
-    void trade(Ownership firstOwnership, Ownership seconfOwnership, Player firstPlayer, Player secondPlayer);
+//    /**
+//     * this method allow to accept trade between two player.
+//     */
+//    void trade(Ownership firstOwnership, Ownership seconfOwnership, Player firstPlayer, Player secondPlayer);
 
     /**
      * Returns the winner!

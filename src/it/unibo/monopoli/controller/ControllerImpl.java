@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.actions.GoToPrison;
+import it.unibo.monopoli.model.actions.MoveUpTo;
 import it.unibo.monopoli.model.actions.ToBePaid;
 import it.unibo.monopoli.model.actions.ToBuyProperties;
 import it.unibo.monopoli.model.actions.ToDrawCards;
@@ -15,8 +17,10 @@ import it.unibo.monopoli.model.actions.ToMortgage;
 import it.unibo.monopoli.model.actions.ToPay;
 import it.unibo.monopoli.model.actions.ToRevokeMortgage;
 import it.unibo.monopoli.model.actions.ToSellProperties;
+import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.mainunits.Bank;
+import it.unibo.monopoli.model.mainunits.BoxesPositions;
 import it.unibo.monopoli.model.mainunits.ClassicPawn;
 import it.unibo.monopoli.model.mainunits.ClassicPlayer;
 import it.unibo.monopoli.model.mainunits.ClassicStrategy;
@@ -162,25 +166,29 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void buyOwnership(final Ownership ownership) {
+    public void buyOwnership() {
+        final Ownership ownership = ((Ownership) this.boxes.get(this.actualPosition));
         ToBuyProperties.buyAOwnership(ownership.getContract().getCost(), ownership).play(this.actualPlayer);
         this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions(ownership, this.actualPlayer)));
     }
 
     @Override
-    public void sellOwnership(final Ownership ownership) {
+    public void sellOwnership() {
+        final Ownership ownership = ((Ownership) this.boxes.get(this.actualPosition));
         ToSellProperties.sellAOwnership(ownership.getContract().getCost(), ownership, this.bank)
                 .play(this.actualPlayer);
         this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions(ownership, this.actualPlayer)));
     }
 
     @Override
-    public AuctionOfOwnership auction(final Ownership ownership) {
+    public AuctionOfOwnership auction() {
+        final Ownership ownership = ((Ownership) this.boxes.get(this.actualPosition));
         return this.version.toAuction(ownership, this.actualPlayer);
     }
 
     @Override
-    public void build(final Land land) {
+    public void build() {
+        final Land land = ((Land) this.boxes.get(this.actualPosition));
         ToBuyProperties.buyABuilding(land, this.bank).play(this.actualPlayer);
         this.alreadyBuilt = true;
         this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions(land, this.actualPlayer)));
@@ -188,35 +196,39 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void sellBuilding(final Land land, final Building building) {
-        ToSellProperties.sellABuilding(land, building, this.bank).play(this.actualPlayer);
+    public void sellBuilding() {
+        final Land land = ((Land) this.boxes.get(this.actualPosition));
+        List<Building> build = ((LandGroup) land.getGroup()).getBuildings();
+        ToSellProperties.sellABuilding(land, build.remove(build.size() - 1), this.bank).play(this.actualPlayer);
         this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions(land, this.actualPlayer)));
     }
 
     @Override
-    public void mortgageOwnership(final Ownership ownership) {
+    public void mortgageOwnership() {
+        final Ownership ownership = ((Ownership) this.boxes.get(this.actualPosition));
         new ToMortgage(ownership).play(this.actualPlayer);
         this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions(ownership, this.actualPlayer)));
     }
 
     @Override
-    public void revokeMortgageOwnership(final Ownership ownership) {
+    public void revokeMortgageOwnership() {
+        final Ownership ownership = ((Ownership) this.boxes.get(this.actualPosition));
         new ToRevokeMortgage(ownership).play(this.actualPlayer);
         this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions(ownership, this.actualPlayer)));
     }
 
-    @Override
-    public void trade(final Ownership firstOwnership, final Ownership seconfOwnership, final Player firstPlayer,
-            final Player secondPlayer) {
-        ToSellProperties.sellAOwnership(firstOwnership.getContract().getCost(), firstOwnership, this.bank)
-                .play(firstPlayer);
-        ToBuyProperties.buyAOwnership(firstOwnership.getContract().getCost(), firstOwnership).play(secondPlayer);
-        ToSellProperties.sellAOwnership(firstOwnership.getContract().getCost(), seconfOwnership, this.bank)
-                .play(secondPlayer);
-        ToBuyProperties.buyAOwnership(firstOwnership.getContract().getCost(), seconfOwnership).play(firstPlayer);
-        this.view.ifPresent(
-                v -> v.setButton(this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.actualPlayer)));
-    }
+//    @Override
+//    public void trade(final Ownership firstOwnership, final Ownership seconfOwnership, final Player firstPlayer,
+//            final Player secondPlayer) {
+//        ToSellProperties.sellAOwnership(firstOwnership.getContract().getCost(), firstOwnership, this.bank)
+//                .play(firstPlayer);
+//        ToBuyProperties.buyAOwnership(firstOwnership.getContract().getCost(), firstOwnership).play(secondPlayer);
+//        ToSellProperties.sellAOwnership(firstOwnership.getContract().getCost(), seconfOwnership, this.bank)
+//                .play(secondPlayer);
+//        ToBuyProperties.buyAOwnership(firstOwnership.getContract().getCost(), seconfOwnership).play(firstPlayer);
+//        this.view.ifPresent(
+//                v -> v.setButton(this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.actualPlayer)));
+//    }
 
     @Override
     public List<Player> endGame() {
@@ -246,7 +258,7 @@ public class ControllerImpl implements Controller {
     //
     // public void nextAction() {
     // }
-    //  
+    //
     // /**
     // * .
     // */
@@ -563,6 +575,116 @@ public class ControllerImpl implements Controller {
             });
         }
         actions.add("Finisci partita");
+        return actions;
+    }
+
+    private List<String> getNextCardsActions(final Box box, final Card card, final Player player) {
+        final List<Action> actions = new LinkedList<>();
+        switch (card.getID()) {
+        case CardsId.CARD2.getValue():
+            actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(37)));
+        case CardsId.CARD3.getValue():
+            if (((Ownership) box).getOwner().equals(player)) {
+                actions.addAll(this.getNextBoxsActions(box, player));
+            } else {
+                final int amount = 2
+                        * ((Ownership) box).getContract().getIncome(new StationIncomeStrategy(((Ownership) box)));
+                actions.add(new ToPay(amount, player));
+                new ToBePaid(amount);
+            }
+            break;
+        case CardsId.CARD4.getValue():
+            player.addCard(card);
+            break;
+        case CACardsId.CARD5.getValue():
+            actions.add(new ToPay(20, player));
+            break;
+        case CARD7:
+            actions.add(new GoToPrison(this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos())));
+        case CardsId.CARD8.getValue():
+            player.getOwnerships().get().stream().filter(o -> o instanceof Land)
+                    .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
+                    .map(o -> ((LandGroup) o.getGroup()).getBuildings()).forEach(l -> {
+                        l.forEach(b -> {
+                            actions.add(new ToPay(b instanceof Home ? 25 : 100, player));
+                        });
+                    });
+            break;
+        case CardsId.CARD9.getValue():
+            this.players.stream().filter(p -> !p.equals(player)).forEach(p -> {
+                try {
+                    new ToPay(CARD_TAX, player).play(player);
+                    new ToBePaid(CARD_TAX).play(p);
+                } catch (IllegalArgumentException i) {
+                    this.notMuchMoney(player, actions);
+                }
+            });
+            break;
+        case CARCardsId.CARD10.getValue()D10:
+            actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.START_POSITION.getPos())));
+        case CARD11:
+            actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(OWNERSHIP_N_18)));
+        case CARD12:
+            if (((Ownership) box).getOwner().equals(player)) {
+                actions.addAll(this.getNextBoxsActions(box, player));
+            } else {
+                final int amount = 2
+                        * ((Ownership) box).getContract().getIncome(new StationIncomeStrategy(((Ownership) box)));
+                actions.add(new ToPay(amount, player));
+                new ToBePaid(amount);
+            }
+            break;
+        case CARD13:
+            actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(OWNERSHIP_N_17)));
+        case CARD14:
+            actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(OWNERSHIP_N_9)));
+        case CARD15:
+            if (((Ownership) box).getOwner().equals(player)) {
+                actions.addAll(this.getNextBoxsActions(box, player));
+            } else {
+                final int amount = (player.lastDicesNumber().stream().reduce((d, d1) -> d + d1).get() * 10);
+                actions.add(new ToPay(amount, player));
+                new ToBePaid(amount);
+            }
+            break;
+        case CARD17:
+            actions.add(new ToPay(50, player));
+            break;
+        case CARD18:
+            actions.add(new ToPay(50, player));
+            break;
+        case CARD20:
+            player.addCard(card);
+            break;
+        case CARD21:
+            actions.add(new ToPay(100, player));
+            break;
+        case CARD23:
+            actions.add(new GoToPrison(this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos())));
+        case CARD24:
+            player.getOwnerships().get().stream().filter(o -> o instanceof Land)
+                    .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
+                    .map(o -> ((LandGroup) o.getGroup()).getBuildings()).forEach(l -> {
+                        l.forEach(b -> {
+                            actions.add(new ToPay(b instanceof Home ? 40 : 115, player));
+                        });
+                    });
+            break;
+        case CARD25:
+            this.players.stream().filter(p -> !p.equals(player)).forEach(p -> {
+                try {
+                    new ToPay(10, p).play(p);
+                    new ToBePaid(10).play(player);
+                } catch (IllegalArgumentException i) {
+                    this.notMuchMoney(player, actions);
+                }
+            });
+            break;
+        case CARD26:
+            actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.START_POSITION.getPos())));
+        default:
+            break;
+        }
         return actions;
     }
 

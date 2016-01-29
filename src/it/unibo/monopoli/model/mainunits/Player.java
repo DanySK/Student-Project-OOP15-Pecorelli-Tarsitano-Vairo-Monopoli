@@ -103,7 +103,7 @@ public interface Player extends Owner {
 
     // /**
     // * If the {@link Ownership} request belongs to the {@link Player},
-    // * the method return an {@link Optional} of {@link Ownership}, else return
+    // * the method returns an {@link Optional} of {@link Ownership}, else return
     // * an {@link Optional} of null.
     // * @return an {@link Optional} of {@link Ownership}
     // * @param ownership - the {@link Ownership} to find the return

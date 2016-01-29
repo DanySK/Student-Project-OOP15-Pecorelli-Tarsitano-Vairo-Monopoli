@@ -3,8 +3,10 @@ package it.unibo.monopoli.model.mainunits;
 import java.awt.Color;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.actions.AuctionOfOwnership;
@@ -68,7 +70,7 @@ public class ClassicStrategy implements GameStrategy {
     private final List<Contract> contracts;
     private final List<Home> homes;
     private final List<Hotel> hotels;
-    private final List<Box> allBoxes;
+    private List<Box> allBoxes;
     private final List<Deck> decks;
     private final Bank bank;
 
@@ -316,27 +318,37 @@ public class ClassicStrategy implements GameStrategy {
     }
 
     private void inizializesBoxes() {
-        final Box[] boxes = new Box[40];
-        this.ownerships.stream().forEach(o -> {
-            boxes[o.getID()] = o;
-        });
-        boxes[BoxesPositions.START_POSITION.getPos()] = new Start("GO", BoxesPositions.START_POSITION.getPos());
+        final List<Box> temp = new LinkedList<>();
+//        final Box[] boxes = new Box[40];
+//        this.ownerships.stream().forEach(o -> {
+//            boxes[o.getID()] = o;
+//        });
+        temp.add(new Start("GO", BoxesPositions.START_POSITION.getPos()));
         final PrisonOrTransit prison = new PrisonOrTransit("IN JAIL OR JUST VISITING", BoxesPositions.PRISON_POSITION.getPos());
-        boxes[BoxesPositions.PRISON_POSITION.getPos()] = prison;
-        boxes[BoxesPositions.NEUTRAL_AREA_POSITION.getPos()] = new NeutralArea("FREE PARKING", BoxesPositions.NEUTRAL_AREA_POSITION.getPos());
-        boxes[BoxesPositions.POLICE_POSITION.getPos()] = new Police("GO TO JAIL", BoxesPositions.POLICE_POSITION.getPos(), prison);
-        boxes[BoxesPositions.FIRST_CHANCE_POSITION.getPos()] = new DecksBox("CHANCE", BoxesPositions.FIRST_CHANCE_POSITION.getPos(), this.decks.get(0));
-        boxes[BoxesPositions.SECOND_CHANCE_POSITION.getPos()] = new DecksBox("CHANCE", BoxesPositions.SECOND_CHANCE_POSITION.getPos(), this.decks.get(0));
-        boxes[BoxesPositions.THIRD_CHANCE_POSITION.getPos()] = new DecksBox("CHANCE", BoxesPositions.THIRD_CHANCE_POSITION.getPos(), this.decks.get(0));
-        boxes[BoxesPositions.FIRST_COMMUNITY_CHEST_POSITION.getPos()] = new DecksBox("COMMUNITY CHEST", BoxesPositions.FIRST_COMMUNITY_CHEST_POSITION.getPos(),
-                this.decks.get(1));
-        boxes[BoxesPositions.SECOND_COMMUNITY_CHEST_POSITION.getPos()] = new DecksBox("COMMUNITY CHEST", BoxesPositions.SECOND_COMMUNITY_CHEST_POSITION.getPos(),
-                this.decks.get(1));
-        boxes[BoxesPositions.THIRD_COMMUNITY_CHEST_POSITION.getPos()] = new DecksBox("COMMUNITY CHEST", BoxesPositions.THIRD_COMMUNITY_CHEST_POSITION.getPos(),
-                this.decks.get(1));
-        boxes[BoxesPositions.INCOME_TAX_POSITION.getPos()] = new TaxImpl("INCOME TAX", BoxesPositions.INCOME_TAX_POSITION.getPos(), AMOUNT_OF_FEES);
-        boxes[BoxesPositions.SUPER_TAX_POSITION.getPos()] = new TaxImpl("SUPER TAX", BoxesPositions.SUPER_TAX_POSITION.getPos(), AMOUNT_OF_FEES);
-        this.allBoxes.addAll(Arrays.asList(boxes));
+        temp.add(prison);
+        temp.add(new NeutralArea("FREE PARKING", BoxesPositions.NEUTRAL_AREA_POSITION.getPos()));
+        temp.add(new Police("GO TO JAIL", BoxesPositions.POLICE_POSITION.getPos(), prison));
+        temp.add(new DecksBox("CHANCE", BoxesPositions.FIRST_CHANCE_POSITION.getPos(), this.decks.get(0)));
+        temp.add(new DecksBox("CHANCE", BoxesPositions.SECOND_CHANCE_POSITION.getPos(), this.decks.get(0)));
+        temp.add(new DecksBox("CHANCE", BoxesPositions.THIRD_CHANCE_POSITION.getPos(), this.decks.get(0)));
+        temp.add(new DecksBox("COMMUNITY CHEST", BoxesPositions.FIRST_COMMUNITY_CHEST_POSITION.getPos(),
+                this.decks.get(1)));
+        temp.add(new DecksBox("COMMUNITY CHEST", BoxesPositions.SECOND_COMMUNITY_CHEST_POSITION.getPos(),
+                this.decks.get(1)));
+        temp.add(new DecksBox("COMMUNITY CHEST", BoxesPositions.THIRD_COMMUNITY_CHEST_POSITION.getPos(),
+                this.decks.get(1)));
+        temp.add(new TaxImpl("INCOME TAX", BoxesPositions.INCOME_TAX_POSITION.getPos(), AMOUNT_OF_FEES));
+        temp.add(new TaxImpl("SUPER TAX", BoxesPositions.SUPER_TAX_POSITION.getPos(), AMOUNT_OF_FEES));
+        temp.addAll(this.ownerships);
+//        this.allBoxes.addAll(Arrays.asList(boxes));
+        this.allBoxes = temp.stream().sorted(new Comparator<Box>() {
+
+            @Override
+            public int compare(Box o1, Box o2) {
+                return o1.getID() - o2.getID();
+            }
+            
+        }).collect(Collectors.toList());
     }
 
     private void inizializesDecks() {
@@ -667,4 +679,27 @@ public class ClassicStrategy implements GameStrategy {
     // });
     // }
     // }
+    
+    public static void main(String[] args) {
+        List<Player> l = new LinkedList<>();
+        l.add(new ClassicPlayer("v", new ClassicPawn(3), true));
+        ClassicStrategy c = new ClassicStrategy(l);
+        List<Box> b = c.getBoxes();
+        for(int i = 0; i < 40 ; i++) {
+            System.out.println(b.get(i).getName());
+            System.out.println(b.get(i).getID());
+        }
+        
+        List<Integer> n = new LinkedList<>();
+        n.add(3);
+        n.add(5);
+        n.add(1);
+        n.add(8);
+        n.add(2);
+        n.add(6);
+        
+        List<Integer> v = n.stream().sorted((i, i1) -> (i - i1)).collect(Collectors.toList());
+        
+        System.out.println(v);
+    }
 }

@@ -246,7 +246,7 @@ public class ControllerImpl implements Controller {
     //
     // public void nextAction() {
     // }
-    //
+    //  
     // /**
     // * .
     // */
@@ -275,20 +275,28 @@ public class ControllerImpl implements Controller {
             } else if (this.isTwiceDices()) {
                 this.actualPlayer.setPrison(false);
             } else {
-                this.endTurn();
+                this.endTurn();e
             }
         }
-
-        this.actualPosition = this.toRollDices();
-        for (Player play : this.players) {
-            if (!play.equals(actualPlayer)) {
-                if (play.getOwnerships().isPresent()) {
-                    for (Ownership ows : play.getOwnerships().get()) {
-                        if()
+        if(this.actualOwnership.getOwner().equals(this.actualPlayer)){
+            if ((this.actualOwnership.getContract().getCost()/2) > this.actualPlayer.getMoney() ) {
+                //+il costo medio
+                this.revokeMortgageOwnership(this.actualOwnership);
+                
+            } 
+        }
+            this.actualPosition = this.toRollDices();
+            for (Player play : this.players) {
+                if (!play.equals(actualPlayer)) {
+                    if (play.getOwnerships().isPresent()) {
+                        for (Ownership ows : play.getOwnerships().get()) {
+                            if()
+                        }
                     }
                 }
             }
-        }
+        
+    
         // Box box = this.actualOwnership;// non è cosi sicuramente
         if (this.actualOwnership instanceof Land) {
             final Land land = (Land) this.actualOwnership;

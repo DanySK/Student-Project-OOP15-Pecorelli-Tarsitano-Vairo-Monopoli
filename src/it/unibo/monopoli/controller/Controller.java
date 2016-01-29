@@ -77,7 +77,7 @@ public interface Controller {
      */
     int toRollDices();
 
-    /**
+    /**  
      * go To next player.
      * 
      * @return the integer for next player

@@ -179,26 +179,31 @@ public class ClassicStrategy implements GameStrategy {
                 this.addOwnerships(7, p);
                 p.setMoney(350);
             });
+            break;
         case 3:
             players.stream().forEach(p -> {
                 this.addOwnerships(6, p);
                 p.setMoney(300);
             });
+            break;
         case 4:
             players.stream().forEach(p -> {
                 this.addOwnerships(5, p);
                 p.setMoney(250);
             });
+            break;
         case 5:
             players.stream().forEach(p -> {
                 this.addOwnerships(4, p);
                 p.setMoney(200);
             });
+            break;
         case 6:
             players.stream().forEach(p -> {
                 this.addOwnerships(3, p);
                 p.setMoney(150);
             });
+            break;
         default:
             break;
         }

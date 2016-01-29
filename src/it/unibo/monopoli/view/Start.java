@@ -6,16 +6,18 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -24,10 +26,14 @@ import it.unibo.monopoli.view.listener.StartPlay;
 import it.unibo.monopoli.view.listener.VersionSelected;
 
 public class Start {
+	private static final int MAX_PLAYERS = 6;
+	private int cont = 2;
+
+	Map<String,Boolean> map = new HashMap<>();
 
     public static void main(String[] args) {
 
-        final MyFrame start = new MyFrame("Start - Monopoli", new BorderLayout(), new Dimension(800, 450));
+		final MyFrame start = new MyFrame("Start - Monopoli", new BorderLayout(), new Dimension(900, 450));
         start.setFont(new Font("Berlin Sans FB", Font.PLAIN, 14));
         start.setLocation(new Point(300, 100));
         start.getMainPanel().setLayout(new BorderLayout(0, 0));
@@ -76,23 +82,23 @@ public class Start {
         lblScegliLaVersione.setLabelFor(comboBoxVersion);
         comboBoxVersion.addItemListener(new VersionSelected());
         panelComboBox.add(comboBoxVersion);
-        comboBoxVersion.setModel(new DefaultComboBoxModel<String>() {
+		comboBoxVersion.setModel(new DefaultComboBoxModel<String>() {
 
             boolean selectionAllowed = true;
 
             @Override
             public void setSelectedItem(Object anObject) {
-                if (!C.NOT_SELECTABLE_OPTION.equals(anObject)) {
-                    super.setSelectedItem(anObject);
-                } else if (selectionAllowed) {
-                    // Allow this just once
-                    selectionAllowed = false;
-                    super.setSelectedItem(anObject);
-                }
+				if (!EVersion.NOT_SELECTABLE_OPTION.getName().equals(anObject)) {
+					super.setSelectedItem(anObject);
+				} else if (selectionAllowed) {
+					// Allow this just once
+					selectionAllowed = false;
+					super.setSelectedItem(anObject);
+				}
             }
 
         });
-        comboBoxVersion.addItem(C.NOT_SELECTABLE_OPTION);
+		comboBoxVersion.addItem(EVersion.NOT_SELECTABLE_OPTION.getName());
         Arrays.asList(EVersion.values()).forEach(v -> comboBoxVersion.addItem(v.getName()));
 
         final JPanel secondRow = new JPanel();
@@ -130,26 +136,33 @@ public class Start {
         final FlowLayout fl_playerP = new FlowLayout();
         playerP.setLayout(fl_playerP/* (FlowLayout.CENTER, 5, 5) */);
 
-        for (int i = 0; i < 2; i++) {
-            playerP.add(new InizializedPlayer().build());
-        }
-
+		playerP.add(new InizializedComputer().build());
+			
+		
         final JButton btnAddPlayer = new JButton("Add Player");
 
         btnAddPlayer.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+				
                 // TODO
-                // if ( numero < C.MAXPLAYER)
-                playerP.add(new InizializedPlayer().build());
-                playerP.revalidate();
+				if (playerP.getComponentCount() < MAX_PLAYERS) {
+					playerP.add(new InizializedPlayer().build());
+					playerP.revalidate();
+				} else {
+					new Dialog(new JFrame(), "Error", "Non puoi inserire più di 6 giocatori");
+				}
+//				System.out.println("" + playerP.getComponentCount());
+//				System.out.println("Add Player");
             }
         });
+		
+		
         panelBtnAddPlayer.add(btnAddPlayer);
 
         final JButton btnNewButton = new JButton("AVVIA PARTITA");
-        btnNewButton.addActionListener(new StartPlay());
+		btnNewButton.addActionListener(new StartPlay());
         btnNewButton.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 16));
         final GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
         gbc_btnNewButton.gridheight = 2;
@@ -160,5 +173,13 @@ public class Start {
 
         start.setVisible(true);
 
+	}
+	
+	public int Prova(){
+		return this.cont;
+	}
+	
+	public void Prova2(){
+		this.cont++;
     }
 }

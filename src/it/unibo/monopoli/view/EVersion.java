@@ -2,6 +2,7 @@ package it.unibo.monopoli.view;
 
 public enum EVersion {
 	
+	NOT_SELECTABLE_OPTION(" - Select an Option - "),
 	CLASSIC("Classic"), 
 	PROVA1("Prova1"), 
 	PROVA2("Prova2");

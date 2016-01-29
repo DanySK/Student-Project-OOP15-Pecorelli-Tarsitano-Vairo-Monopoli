@@ -35,7 +35,7 @@ public interface Controller {
 
     void addPlayer(String name, ClassicPawn pawn, boolean isHuman);
 
-    void initializedVersion(String versionEnum);
+    void initializedVersion(EVersion versionEnum);
 
     void addView(InPlay view);
 
@@ -77,7 +77,7 @@ public interface Controller {
      */
     int toRollDices();
 
-    /**
+    /**  
      * go To next player.
      * 
      * @return the integer for next player

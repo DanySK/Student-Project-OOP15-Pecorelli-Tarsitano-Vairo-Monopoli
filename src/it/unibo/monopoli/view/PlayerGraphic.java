@@ -17,19 +17,19 @@ import java.awt.GridLayout;
 import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
 
-public class Player extends JPanel {
+public class PlayerGraphic extends JPanel {
 
 	 String name = "Player";
 	 int value = 10000;
 
 	
 
-	public Player(String name, int value) {
+	public PlayerGraphic(String name, int value) {
 		this.name = name;
 		this.value = value;
 	}
 
-	public Player() {
+	public PlayerGraphic() {
 		final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 		
 		final JPanel player = new JPanel();

@@ -7,5 +7,7 @@ public interface InPlay {
     void setButton(List<String> name);
 
     void gameOver(it.unibo.monopoli.model.mainunits.Player player);
+    
+    List<String> getButtons();
 
 }

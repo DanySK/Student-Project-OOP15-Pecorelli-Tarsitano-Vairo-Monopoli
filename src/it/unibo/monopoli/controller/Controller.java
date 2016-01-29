@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.swing.JTextField;
 
-import it.unibo.monopoli.model.actions.AuctionOfOwnershipAndCard;
+import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.mainunits.Bank;
 import it.unibo.monopoli.model.mainunits.ClassicPawn;
 import it.unibo.monopoli.model.mainunits.Player;
@@ -35,7 +35,7 @@ public interface Controller {
 
     void addPlayer(String name, ClassicPawn pawn, boolean isHuman);
 
-    void initializedVersion(EVersion versionEnum);
+    void initializedVersion(String versionEnum);
 
     void addView(InPlay view);
 
@@ -107,7 +107,7 @@ public interface Controller {
      */
     void sellOwnership(Ownership ownership);
 
-    AuctionOfOwnershipAndCard auction(Ownership ownership);
+    AuctionOfOwnership auction(Ownership ownership);
 
     /**
      * This method allow to build house or hotel on {@link Land}.

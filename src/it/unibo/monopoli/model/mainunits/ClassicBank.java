@@ -87,7 +87,7 @@ public class ClassicBank implements Bank {
     @Override
     public Ownership getOwnership() {
         try {
-            return this.getOwnership(new Random().nextInt(N_MAX_OF_OWNERSHIP + 1));
+            return this.getOwnership(new Random().nextInt(this.ownerships.size()));
         } catch (IllegalArgumentException i) {
             if (!this.ownerships.isEmpty()) {
                 return this.getOwnership();

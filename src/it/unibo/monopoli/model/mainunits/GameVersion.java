@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import it.unibo.monopoli.model.actions.Action;
-import it.unibo.monopoli.model.actions.AuctionOfOwnershipAndCard;
+import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Box;
@@ -45,11 +45,11 @@ public interface GameVersion {
 
     List<Integer> toRollDices(Player player);
 
-    Action getNextBoxsAction(Box box, Player player);
-
+//    Action getNextBoxsAction(Box box, Player player);
+//
     Action getNextCardsAction(Box box, Card card, Player player);
     
     List<Deck> getDecks();
     
-    AuctionOfOwnershipAndCard toAuction(Ownership ownership, Player player);
+    AuctionOfOwnership toAuction(Ownership ownership, Player player);
 }

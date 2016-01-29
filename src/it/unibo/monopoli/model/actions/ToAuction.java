@@ -16,12 +16,12 @@ import it.unibo.monopoli.model.table.Ownership;
 public final class ToAuction implements Action {
 
     private final List<Player> players;
-    private final AuctionOfOwnershipAndCard auction;
+    private final AuctionOfOwnership auction;
     private final Optional<Ownership> ownership;
     // private final Optional<Card> card;
     private final Bank bank;
 
-    private ToAuction(final List<Player> players, final AuctionOfOwnershipAndCard auction, final Ownership ownership,
+    private ToAuction(final List<Player> players, final AuctionOfOwnership auction, final Ownership ownership,
             final Bank bank) {
         this.players = players;
         this.auction = auction;
@@ -45,14 +45,14 @@ public final class ToAuction implements Action {
      * @param players
      *            - the {@link Player} who started the auction
      * @param auction
-     *            - the {@link AuctionOfOwnershipAndCard}'s method to use
+     *            - the {@link AuctionOfOwnership}'s method to use
      * @param ownership
      *            -the {@link Ownership} {@link ToAuction}
      * @param bank
      *            - the {@link Bank} through which the sale takes place.
      * @return an instance of this class
      */
-    public static ToAuction ownerships(final List<Player> players, final AuctionOfOwnershipAndCard auction,
+    public static ToAuction ownerships(final List<Player> players, final AuctionOfOwnership auction,
             final Ownership ownership, final Bank bank) {
         return new ToAuction(players, auction, ownership, bank);
     }
@@ -87,15 +87,15 @@ public final class ToAuction implements Action {
     }
 
     /**
-     * Return an {@link AuctionOfOwnershipAndCard}'s class. The {@link Player}
+     * Return an {@link AuctionOfOwnership}'s class. The {@link Player}
      * in input is the one that started this auction, so he is the first to
      * begin.
      * 
      * @param player
      *            - the {@link Player} that started the auction
-     * @return a specific {@link AuctionOfOwnershipAndCard}.
+     * @return a specific {@link AuctionOfOwnership}.
      */
-    public AuctionOfOwnershipAndCard getAuction(final Player player) {
+    public AuctionOfOwnership getAuction(final Player player) {
         this.play(player);
         return this.auction;
     }

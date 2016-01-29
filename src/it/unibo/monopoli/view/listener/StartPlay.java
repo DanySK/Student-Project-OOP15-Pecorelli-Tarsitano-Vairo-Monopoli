@@ -18,19 +18,18 @@ import it.unibo.monopoli.view.InizializedPlayer;
 
 public class StartPlay implements ActionListener {
 	int count = 1;
-	
 
 	public StartPlay(JPanel player) {
 		super();
 		
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();
 
 		if (VersionSelected.getSelectedItem().equals(EVersion.NOT_SELECTABLE_OPTION)) {
-			new Dialog(new JFrame(), "Error", "Non hai selezionato la versione");
+            new Dialog(new JFrame(), "Error", "Non hai selezionato la versione");
 		} else {
 			Index i = new Index();
 			Controller contr = i.getController();

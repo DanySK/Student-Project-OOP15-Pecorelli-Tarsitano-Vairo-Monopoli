@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import it.unibo.monopoli.model.actions.Action;
-import it.unibo.monopoli.model.actions.AuctionOfOwnershipAndCard;
+import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.actions.ClassicAuction;
 import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
 import it.unibo.monopoli.model.actions.GoToPrison;
@@ -55,80 +55,10 @@ import it.unibo.monopoli.model.table.TaxImpl;
  */
 public class ClassicStrategy implements GameStrategy {
 
-    private static final int START_POSITION = 0;
-    private static final int PRISON_POSITION = 10;
-    private static final int NEUTRAL_AREA_POSITION = 20;
-    private static final int POLICE_POSITION = 30;
-    private static final int FIRST_CHANCE_POSITION = 7;
-    private static final int SECOND_CHANCE_POSITION = 22;
-    private static final int THIRD_CHANCE_POSITION = 36;
-    private static final int FIRST_COMMUNITY_CHEST_POSITION = 2;
-    private static final int SECOND_COMMUNITY_CHEST_POSITION = 17;
-    private static final int THIRD_COMMUNITY_CHEST_POSITION = 33;
-    private static final int INCOME_TAX_POSITION = 4;
-    private static final int SUPER_TAX_POSITION = 38;
+    
 
-    private static final int CARD1 = 1;
-    private static final int CARD2 = 2;
-    private static final int CARD3 = 3;
-    private static final int CARD4 = 4;
-    private static final int CARD5 = 5;
-    private static final int CARD6 = 6;
-    private static final int CARD7 = 7;
-    private static final int CARD8 = 8;
-    private static final int CARD9 = 9;
-    private static final int CARD10 = 10;
-    private static final int CARD11 = 11;
-    private static final int CARD12 = 12;
-    private static final int CARD13 = 13;
-    private static final int CARD14 = 14;
-    private static final int CARD15 = 15;
-    private static final int CARD16 = 16;
-    private static final int CARD17 = 17;
-    private static final int CARD18 = 18;
-    private static final int CARD19 = 19;
-    private static final int CARD20 = 20;
-    private static final int CARD21 = 21;
-    private static final int CARD22 = 22;
-    private static final int CARD23 = 23;
-    private static final int CARD24 = 24;
-    private static final int CARD25 = 25;
-    private static final int CARD26 = 26;
-    private static final int CARD27 = 27;
-    private static final int CARD28 = 28;
-    private static final int CARD29 = 29;
-    private static final int CARD30 = 30;
-    private static final int CARD31 = 31;
-    private static final int CARD32 = 32;
+    
 
-    private static final int OWNERSHIP_N_1 = 0;
-    private static final int OWNERSHIP_N_2 = 1;
-    private static final int OWNERSHIP_N_3 = 2;
-    private static final int OWNERSHIP_N_4 = 3;
-    private static final int OWNERSHIP_N_5 = 4;
-    private static final int OWNERSHIP_N_6 = 5;
-    private static final int OWNERSHIP_N_7 = 6;
-    private static final int OWNERSHIP_N_8 = 7;
-    private static final int OWNERSHIP_N_9 = 8;
-    private static final int OWNERSHIP_N_10 = 9;
-    private static final int OWNERSHIP_N_11 = 10;
-    private static final int OWNERSHIP_N_12 = 11;
-    private static final int OWNERSHIP_N_13 = 12;
-    private static final int OWNERSHIP_N_14 = 13;
-    private static final int OWNERSHIP_N_15 = 14;
-    private static final int OWNERSHIP_N_16 = 15;
-    private static final int OWNERSHIP_N_17 = 16;
-    private static final int OWNERSHIP_N_18 = 17;
-    private static final int OWNERSHIP_N_19 = 18;
-    private static final int OWNERSHIP_N_20 = 19;
-    private static final int OWNERSHIP_N_21 = 20;
-    private static final int OWNERSHIP_N_22 = 21;
-    private static final int OWNERSHIP_N_23 = 22;
-    private static final int OWNERSHIP_N_24 = 23;
-    private static final int OWNERSHIP_N_25 = 24;
-    private static final int OWNERSHIP_N_26 = 25;
-    private static final int OWNERSHIP_N_27 = 26;
-    private static final int OWNERSHIP_N_28 = 27;
 
     private static final int N_MAX_OF_HOUSES = 32;
     private static final int N_MAX_OF_HOTELS = 12;
@@ -473,7 +403,7 @@ public class ClassicStrategy implements GameStrategy {
     }
 
     @Override
-    public AuctionOfOwnershipAndCard toAuction(final Ownership ownership, final Player player) {
+    public AuctionOfOwnership toAuction(final Ownership ownership, final Player player) {
         return ToAuction.ownerships(this.players, new ClassicAuction(), ownership, this.bank).getAuction(player);
     }
 

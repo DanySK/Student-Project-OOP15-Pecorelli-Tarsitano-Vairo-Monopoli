@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import it.unibo.monopoli.model.actions.AuctionOfOwnershipAndCard;
+import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.actions.GoToPrison;
 import it.unibo.monopoli.model.actions.ToBePaid;
 import it.unibo.monopoli.model.actions.ToBuyProperties;
@@ -174,7 +174,7 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public AuctionOfOwnershipAndCard auction(final Ownership ownership) {
+    public AuctionOfOwnership auction(final Ownership ownership) {
         return this.version.toAuction(ownership, this.actualPlayer);
     }
 

@@ -14,7 +14,7 @@ public class ClassicPlayer implements Player{
 
     private final String name;
     private final Pawn pawn;
-    private final Optional<Set<Ownership>> ownerships;
+    private final Optional<List<Ownership>> ownerships;
     private final Optional<List<Card>> cards;
     private boolean alreadyRolled;
     private boolean isAPrisoner;
@@ -45,7 +45,7 @@ public class ClassicPlayer implements Player{
     }
 
     @Override
-    public Optional<Set<Ownership>> getOwnerships() {
+    public Optional<List<Ownership>> getOwnerships() {
         return this.ownerships;
     }
 
@@ -101,7 +101,7 @@ public class ClassicPlayer implements Player{
 
     @Override
     public void addOwnership(final Ownership ownership) {
-        this.ownerships.orElse(new HashSet<>()).add(ownership);
+        this.ownerships.orElse(new LinkedList<>()).add(ownership);
     }
 
     @Override

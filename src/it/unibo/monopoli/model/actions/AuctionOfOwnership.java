@@ -12,7 +12,7 @@ import it.unibo.monopoli.model.table.Ownership;
  * and {@link Card}s.
  *
  */
-public interface AuctionOfOwnershipAndCard {
+public interface AuctionOfOwnership {
 
     /**
      * This method initializes all the main components of the auction. This one
@@ -32,23 +32,23 @@ public interface AuctionOfOwnershipAndCard {
      */
     void initializedOwnershipsAuction(List<Player> players, Player firstPlayer, Ownership ownership, Bank bank);
 
-    /**
-     * This method initializes all the main components of the auction. This one
-     * need a list of the {@link Player}s that takes part to the auction, the
-     * {@link Player} who started the auction (so the first one) and the
-     * {@link Card} to auction.
-     * 
-     * @param players
-     *            - a list of the {@link Player}s that takes part to the auction
-     * @param firstPlayer
-     *            - the {@link Player} who started the auction (so the first
-     *            one)
-     * @param card
-     *            - the {@link Card} to auction
-     * @param bank
-     *            - the {@link Bank} through which the sale takes place.
-     */
-    void initializedCardsAuction(List<Player> players, Player firstPlayer, Card card, Bank bank);
+//    /**
+//     * This method initializes all the main components of the auction. This one
+//     * need a list of the {@link Player}s that takes part to the auction, the
+//     * {@link Player} who started the auction (so the first one) and the
+//     * {@link Card} to auction.
+//     * 
+//     * @param players
+//     *            - a list of the {@link Player}s that takes part to the auction
+//     * @param firstPlayer
+//     *            - the {@link Player} who started the auction (so the first
+//     *            one)
+//     * @param card
+//     *            - the {@link Card} to auction
+//     * @param bank
+//     *            - the {@link Bank} through which the sale takes place.
+//     */
+//    void initializedCardsAuction(List<Player> players, Player firstPlayer, Card card, Bank bank);
 
     /**
      * This method increments the amount of money to invest in the auction.
@@ -90,12 +90,12 @@ public interface AuctionOfOwnershipAndCard {
 
     /**
      * Returns true if this {@link Player} is able to do the
-     * {@link AuctionOfOwnershipAndCard}, otherwise returns false.
+     * {@link AuctionOfOwnership}, otherwise returns false.
      * 
      * @param player
      *            - the {@link Player} participating in auction
      * @return true if this {@link Player} is able to do the
-     *         {@link AuctionOfOwnershipAndCard}, false if he isn't able to
+     *         {@link AuctionOfOwnership}, false if he isn't able to
      */
     boolean isAbleToDoIt(Player player);
 

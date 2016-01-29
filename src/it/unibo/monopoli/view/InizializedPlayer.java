@@ -28,8 +28,6 @@ import javax.swing.border.Border;
  */
 public class InizializedPlayer {
     final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
-	private String name;
-	private boolean isUman;
 	
 	private static Map<String, Boolean> map = new HashMap<>();
 	private JTextField textNome;

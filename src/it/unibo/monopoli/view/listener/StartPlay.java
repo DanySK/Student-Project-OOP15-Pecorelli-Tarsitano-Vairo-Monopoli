@@ -19,7 +19,7 @@ import it.unibo.monopoli.view.InizializedPlayer;
 public class StartPlay implements ActionListener {
 	int count = 1;
 
-	public StartPlay(JPanel player) {
+	public StartPlay() {
 		super();
 		
 	}

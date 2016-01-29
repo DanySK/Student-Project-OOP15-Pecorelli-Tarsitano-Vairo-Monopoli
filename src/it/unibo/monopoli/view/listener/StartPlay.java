@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.model.mainunits.ClassicPawn;
+import it.unibo.monopoli.model.table.Start;
 import it.unibo.monopoli.view.Dialog;
 import it.unibo.monopoli.view.EVersion;
 import it.unibo.monopoli.view.InPlay;
@@ -57,6 +58,7 @@ public class StartPlay implements ActionListener {
             });
         }
         System.out.println("Version: " + VersionSelected.getSelectedItem());
+        
 
     }
     

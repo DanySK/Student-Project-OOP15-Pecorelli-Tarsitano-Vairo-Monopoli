@@ -26,14 +26,14 @@ import it.unibo.monopoli.view.listener.StartPlay;
 import it.unibo.monopoli.view.listener.VersionSelected;
 
 public class Start {
-	private static final int MAX_PLAYERS = 6;
-	private int cont = 2;
+    private static final int MAX_PLAYERS = 6;
+    private int cont = 2;
 
-	Map<String,Boolean> map = new HashMap<>();
+    Map<String, Boolean> map = new HashMap<>();
 
     public static void main(String[] args) {
 
-		final MyFrame start = new MyFrame("Start - Monopoli", new BorderLayout(), new Dimension(900, 450));
+        final MyFrame start = new MyFrame("Start - Monopoli", new BorderLayout(), new Dimension(900, 450));
         start.setFont(new Font("Berlin Sans FB", Font.PLAIN, 14));
         start.setLocation(new Point(300, 100));
         start.getMainPanel().setLayout(new BorderLayout(0, 0));
@@ -82,23 +82,23 @@ public class Start {
         lblScegliLaVersione.setLabelFor(comboBoxVersion);
         comboBoxVersion.addItemListener(new VersionSelected());
         panelComboBox.add(comboBoxVersion);
-		comboBoxVersion.setModel(new DefaultComboBoxModel<String>() {
+        comboBoxVersion.setModel(new DefaultComboBoxModel<String>() {
 
             boolean selectionAllowed = true;
 
             @Override
             public void setSelectedItem(Object anObject) {
-				if (!EVersion.NOT_SELECTABLE_OPTION.getName().equals(anObject)) {
-					super.setSelectedItem(anObject);
-				} else if (selectionAllowed) {
-					// Allow this just once
-					selectionAllowed = false;
-					super.setSelectedItem(anObject);
-				}
+                if (!EVersion.NOT_SELECTABLE_OPTION.getName().equals(anObject)) {
+                    super.setSelectedItem(anObject);
+                } else if (selectionAllowed) {
+                    // Allow this just once
+                    selectionAllowed = false;
+                    super.setSelectedItem(anObject);
+                }
             }
 
         });
-		comboBoxVersion.addItem(EVersion.NOT_SELECTABLE_OPTION.getName());
+        comboBoxVersion.addItem(EVersion.NOT_SELECTABLE_OPTION.getName());
         Arrays.asList(EVersion.values()).forEach(v -> comboBoxVersion.addItem(v.getName()));
 
         final JPanel secondRow = new JPanel();
@@ -136,33 +136,31 @@ public class Start {
         final FlowLayout fl_playerP = new FlowLayout();
         playerP.setLayout(fl_playerP/* (FlowLayout.CENTER, 5, 5) */);
 
-		playerP.add(new InizializedComputer().build());
-			
-		
+        playerP.add(new InizializedComputer().build());
+
         final JButton btnAddPlayer = new JButton("Add Player");
 
         btnAddPlayer.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-				
+
                 // TODO
-				if (playerP.getComponentCount() < MAX_PLAYERS) {
-					playerP.add(new InizializedPlayer().build());
-					playerP.revalidate();
-				} else {
-					new Dialog(new JFrame(), "Error", "Non puoi inserire più di 6 giocatori");
-				}
-//				System.out.println("" + playerP.getComponentCount());
-//				System.out.println("Add Player");
+                if (playerP.getComponentCount() < MAX_PLAYERS) {
+                    playerP.add(new InizializedPlayer().build());
+                    playerP.revalidate();
+                } else {
+                    new Dialog(new JFrame(), "Error", "Non puoi inserire più di 6 giocatori");
+                }
+                // System.out.println("" + playerP.getComponentCount());
+                // System.out.println("Add Player");
             }
         });
-		
-		
+
         panelBtnAddPlayer.add(btnAddPlayer);
 
         final JButton btnNewButton = new JButton("AVVIA PARTITA");
-		btnNewButton.addActionListener(new StartPlay());
+        btnNewButton.addActionListener(new StartPlay());
         btnNewButton.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 16));
         final GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
         gbc_btnNewButton.gridheight = 2;
@@ -173,13 +171,13 @@ public class Start {
 
         start.setVisible(true);
 
-	}
-	
-	public int Prova(){
-		return this.cont;
-	}
-	
-	public void Prova2(){
-		this.cont++;
+    }
+
+    public int Prova() {
+        return this.cont;
+    }
+
+    public void Prova2() {
+        this.cont++;
     }
 }

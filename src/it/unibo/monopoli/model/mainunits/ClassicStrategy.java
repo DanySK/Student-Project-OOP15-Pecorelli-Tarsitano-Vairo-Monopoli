@@ -617,4 +617,8 @@ public class ClassicStrategy implements GameStrategy {
 //            });
 //        }
 //    }
+    
+    public static void main(String[] args) {
+        System.out.println("ciao");
+    }
 }

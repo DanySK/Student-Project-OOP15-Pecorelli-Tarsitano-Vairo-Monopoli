@@ -84,16 +84,14 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
 
     @Override
     protected void whatToDoWithOwnership(final Player player) {
-        if (player.getOwnerships().isPresent() && player.getOwnerships().get().contains(this.ownership)) {
-            if (this.ownership.getGroup() instanceof LandGroup
+        if (this.ownership.getGroup() instanceof LandGroup
                     && !((LandGroup) this.ownership.getGroup()).getBuildings().isEmpty()) {
                 throw new IllegalArgumentException("You can't sell an ownership if in its group there are buildings");
-            }
-            player.removeOwnership(this.ownership);
-            this.bank.addOwnership(this.ownership);
-        } else {
-            throw new IllegalArgumentException();
+        } else if (this.ownership.isMortgaged()) {
+            throw new IllegalArgumentException("You can't sell a mortgaged ownership");
         }
+        player.removeOwnership(this.ownership);
+        this.bank.addOwnership(this.ownership);
     }
 
 }

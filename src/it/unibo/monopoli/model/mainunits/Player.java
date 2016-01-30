@@ -82,6 +82,15 @@ public interface Player extends Owner {
      * @return true if the {@link Player} is in prison
      */
     boolean isInPrison();
+
+    /**
+     * Returns the last card the the {@link Player} drew from a {@link Deck}
+     * @return
+     * @throws NullPointerException - if no {@link Card} was draw.
+     */
+    Card lastCardDrew();
+    
+    void setLastCardDrew(Card lastCard);
     
     List<Integer> lastDicesNumber();
     

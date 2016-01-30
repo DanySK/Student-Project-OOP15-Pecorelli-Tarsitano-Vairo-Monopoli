@@ -28,20 +28,17 @@ public class ClassicDicesStrategy implements DicesStrategy {
     }
 
     @Override
-    public void nowPlay(final List<Dice> dices, final Player player) {
-        if (dices.size() != 2) {
-            throw new IllegalArgumentException("This version needs two dices");
+    public void nowPlay(final Player player) {
+        if (!player.isInPrison()) {
+            player.getPawn().setPos(player.getPawn().getActualPos() + player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
         }
         if (this.twice(player)) {
-            if(player.isInPrison()) {
+            if (player.isInPrison()) {
                 player.setPrison(false);
+                player.getPawn().setPos(player.getPawn().getActualPos() + player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
             } else {
                 player.setDicesRoll(false);
             }
-            player.getPawn().setPos(player.getPawn().getActualPos() + player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
-        }
-        if (!player.isInPrison()) {
-            player.getPawn().setPos(player.getPawn().getActualPos() + player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
         }
     }
 

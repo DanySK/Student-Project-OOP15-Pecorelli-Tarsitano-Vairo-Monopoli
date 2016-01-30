@@ -1,6 +1,5 @@
 package it.unibo.monopoli.model.mainunits;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,7 +20,8 @@ public class GameVersionImpl implements GameVersion {
     private final GameStrategy strategy;
     private final List<Player> players;
     private Iterator<Player> iter;
-    private final List<Box> allBoxes;
+    private Player actualPlayer;
+//    private final List<Box> allBoxes;
 
     /**
      * Constructs an instance that will be able to give back the right version
@@ -35,7 +35,7 @@ public class GameVersionImpl implements GameVersion {
         this.strategy = strategy;
         this.players = strategy.getPlayers();
         this.iter = this.players.iterator();
-        this.allBoxes = strategy.getBoxes();
+//        this.allBoxes = strategy.getBoxes();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class GameVersionImpl implements GameVersion {
 
     @Override
     public List<Box> getAllBoxes() {
-        return Collections.unmodifiableList(this.allBoxes);
+        return this.strategy.getBoxes();
     }
 
     @Override
@@ -59,23 +59,23 @@ public class GameVersionImpl implements GameVersion {
     }
 
     @Override
-    public Player getNextPlayer() {
+    public Player getNextPlayer() { //PRIVATO?????????????
         if (!this.iter.hasNext()) {
             this.iter = this.players.iterator();
         }
-        return (Player) this.iter.next();
+        return this.actualPlayer = (Player) this.iter.next();
     }
 
     @Override
-    public Player endOfTurnAndNextPlayer(final Player player) {
-        player.setDicesRoll(false);
+    public Player endOfTurnAndNextPlayer() {
+        this.actualPlayer.setDicesRoll(false);
         return this.getNextPlayer();
     }
 
     @Override
-    public List<Integer> toRollDices(final Player player) {
-        new ToRollDices(new ClassicDicesStrategy()).play(player);
-        return player.lastDicesNumber();
+    public List<Integer> toRollDices() {
+        new ToRollDices(new ClassicDicesStrategy()).play(this.actualPlayer);
+        return this.actualPlayer.lastDicesNumber();
     }
 
     // @Override

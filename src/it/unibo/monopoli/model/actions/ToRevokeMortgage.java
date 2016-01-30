@@ -21,7 +21,7 @@ public class ToRevokeMortgage extends ToMortgageAndRevoke {
      *            - the {@link Ownership} with the mortgage to revoke
      */
     public ToRevokeMortgage(final Ownership ownership) {
-        super(-(ownership.getContract().getMortgageValue()));
+        super(-ownership.getContract().getMortgageValue());
         this.ownership = ownership;
     }
 

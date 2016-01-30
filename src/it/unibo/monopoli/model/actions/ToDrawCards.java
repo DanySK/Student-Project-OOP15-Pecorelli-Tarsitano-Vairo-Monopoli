@@ -28,20 +28,19 @@ public class ToDrawCards implements Action {
     @Override
     public void play(final Player player) {
         this.card = this.deck.getFirstCard();
-        // firstCard.setPlayer(player);
-        // firstCard.getActions().stream()
-        // .forEach(a -> a.play(player));
+        player.setLastCardDrew(this.card);
         this.deck.getCards().remove(this.card);
         this.deck.getCards().add(0, this.card);
     }
 
-    /**
-     * Returns the last {@link Card} drawn.
-     * 
-     * @return the last {@link Card} drawn
-     */
-    public Card getLastCardDrawn() {
-        return this.card;
-    }
+//    CE L'HA GIÀ IL GIOCATORE
+//    /**
+//     * Returns the last {@link Card} drawn.
+//     * 
+//     * @return the last {@link Card} drawn
+//     */
+//    public Card getLastCardDrawn() {
+//        return this.card;
+//    }
 
 }

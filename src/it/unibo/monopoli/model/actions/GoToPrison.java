@@ -28,7 +28,7 @@ public class GoToPrison implements Action {
     @Override
     public void play(final Player player) {
         player.setPrison(true);
-        MoveUpTo.moveUpToBox(prison);
+        MoveUpTo.moveUpToBox(prison).play(player);
     }
 
 }

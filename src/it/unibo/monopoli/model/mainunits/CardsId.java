@@ -41,13 +41,13 @@ public enum CardsId {
     CARD31(31),
     CARD32(32);
     
-    private final int value;
+    private final int cardId;
     
-    CardsId(final int value) {
-        this.value = value;
+    CardsId(final int id) {
+        this.cardId = id;
     }
     
-    public int getValue() {
-        return this.value;
+    public int getID() {
+        return this.cardId;
     }
 }

@@ -37,7 +37,7 @@ public class ToRollDices implements Action {
                   });
         player.setLastDicesNumber(dicesNumbers);
         player.setDicesRoll(true);
-        this.strategy.nowPlay(this.dices, player);
+        this.strategy.nowPlay(player);
     }
 
 }

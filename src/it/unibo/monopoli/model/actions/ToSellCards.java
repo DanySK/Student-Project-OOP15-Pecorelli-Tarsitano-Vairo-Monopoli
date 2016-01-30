@@ -33,7 +33,7 @@ public class ToSellCards extends ToBuyAndSellCards {
 
     @Override
     protected void strategy(final Player player) {
-        player.getCards().ifPresent(l -> player.removeCard(this.card));
+        player.removeCard(this.card);
     }
 
     // @Override

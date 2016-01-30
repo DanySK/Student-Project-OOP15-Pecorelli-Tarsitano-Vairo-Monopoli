@@ -1,5 +1,7 @@
 package it.unibo.monopoli.model.actions;
 
+import java.util.Objects;
+
 import it.unibo.monopoli.model.mainunits.Pawn;
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Box;
@@ -66,15 +68,12 @@ public final class MoveUpTo implements Action {
      * 
      * @param box
      *            - the {@link Box} to reach
-     * @throws IllegalArgumentException
+     * @throws NullPointerException
      *             - if the {@link Box} in input is null
      * @return an instance of {@link MoveUpTo}
      */
     public static MoveUpTo moveUpToBox(final Box box) {
-        if (box == null) {
-            throw new IllegalArgumentException("The box in input can't be null");
-        }
-        return new MoveUpTo(box);
+        return new MoveUpTo(Objects.requireNonNull(box));
     }
 
     /**
@@ -96,20 +95,19 @@ public final class MoveUpTo implements Action {
     public void play(final Player player) {
         if (this.box == null && this.stepsToTake == 0) {
             final int i = player.getPawn().getActualPos();
-            if ((i >= 0 && i <= FIRST_STATION) || (i > FOURTH_STATION && i <= LAST_BOX)) {
+            if ((i >= 0 && i < FIRST_STATION) || (i >= FOURTH_STATION && i <= LAST_BOX)) {
                 player.getPawn().setPos(FIRST_STATION);
             }
-            if (i > FIRST_STATION && i <= SECOND_STATION) {
+            if (i >= FIRST_STATION && i < SECOND_STATION) {
                 player.getPawn().setPos(SECOND_STATION);
             }
-            if (i > SECOND_STATION && i <= THIRD_STATION) {
+            if (i >= SECOND_STATION && i < THIRD_STATION) {
                 player.getPawn().setPos(THIRD_STATION);
             }
-            if (i > THIRD_STATION && i <= FOURTH_STATION) {
+            if (i >= THIRD_STATION && i < FOURTH_STATION) {
                 player.getPawn().setPos(FOURTH_STATION);
             }
-        }
-        if (this.box == null) {
+        } else if (this.box == null) {
             player.getPawn().setPos(player.getPawn().getActualPos() + this.stepsToTake);
         } else {
             player.getPawn().setPos(this.box.getID());

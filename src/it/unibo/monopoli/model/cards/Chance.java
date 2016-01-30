@@ -30,7 +30,7 @@ public class Chance implements Deck {
 
     @Override
     public List<Card> getCards() {
-        return Collections.unmodifiableList(this.cards);
+        return this.cards;
     }
 
     @Override

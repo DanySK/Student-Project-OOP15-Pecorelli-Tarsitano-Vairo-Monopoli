@@ -19,14 +19,15 @@ public class ToPay extends ToPayAndBePaid {
      * @param player
      *            - the {@link Player} that have to pay
      * @throws IllegalArgumentException
-     *             - if the player's moneys are less than the amount to pay
+     *             - if the amount is less than or equal to zero
+     * @throws IllegalArgumentException
+     *             - if the amount is more than the {@link Player}'s money
      */
-	public ToPay(final int amount){
-		super(amount);
-	}
-	
     public ToPay(final int amount, final Player player) {
         super(-amount);
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Only positive amount different of zero!");
+        }
         if (amount > player.getMoney()) {
             throw new IllegalArgumentException();
         }

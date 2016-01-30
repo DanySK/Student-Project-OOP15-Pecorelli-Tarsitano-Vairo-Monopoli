@@ -23,8 +23,8 @@ public abstract class MoneyAction implements Action {
 
     @Override
     public void play(final Player player) {
-        player.setMoney(player.getMoney() + this.amount);
         this.strategy(player);
+        player.setMoney(player.getMoney() + this.amount);
     }
 
     /**

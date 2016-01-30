@@ -43,13 +43,11 @@ public interface GameVersion {
     /**
      * Returns the {@link Player} which have to play.
      * 
-     * @param player
-     *            - the {@link Player} who played until then
      * @return the {@link Player} which have to play
      */
-    Player endOfTurnAndNextPlayer(Player player);
+    Player endOfTurnAndNextPlayer();
 
-    List<Integer> toRollDices(Player player);
+    List<Integer> toRollDices();
 
 //    Action getNextBoxsAction(Box box, Player player);
 //

@@ -15,6 +15,7 @@ public class ClassicPlayer implements Player{
     private final List<Card> cards;
     private boolean alreadyRolled;
     private boolean isAPrisoner;
+    private Card cardDrew;
     private final List<Integer> dicesNumbers;
     private int money;
     private boolean debtsPaid;
@@ -53,7 +54,7 @@ public class ClassicPlayer implements Player{
     }
 
     @Override
-    public void removeCard(Card card) {
+    public void removeCard(final Card card) {
         this.cards.remove(card);
         card.setPlayer(null);
     }
@@ -76,6 +77,16 @@ public class ClassicPlayer implements Player{
     @Override
     public boolean isInPrison() {
         return this.isAPrisoner;
+    }
+
+    @Override
+    public Card lastCardDrew() {
+        return this.cardDrew;
+    }
+
+    @Override
+    public void setLastCardDrew(final Card lastCard) {
+        this.cardDrew = lastCard;
     }
 
     @Override

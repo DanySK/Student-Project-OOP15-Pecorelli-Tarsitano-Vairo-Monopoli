@@ -82,8 +82,9 @@ public interface Controller {
      * 
      * @return the integer for next player
      */
-    Player endTurn();
+    void endTurn();
 
+    Box getActualBox();
     // /**
     // * Return the id of the actual player.
     // *

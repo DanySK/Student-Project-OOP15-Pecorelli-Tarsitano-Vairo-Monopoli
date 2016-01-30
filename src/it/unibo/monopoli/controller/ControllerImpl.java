@@ -129,7 +129,7 @@ public class ControllerImpl implements Controller {
     @Override
     public int toRollDices() {
 
-        this.lastDices = this.version.toRollDices(this.players.get(this.actualPlayer));
+        this.lastDices = this.version.toRollDices();
         this.actualPosition = this.players.get(this.actualPlayer).getPawn().getActualPos();
         System.out.println(this.actualPosition);
         this.boxes.forEach(b -> {
@@ -156,10 +156,10 @@ public class ControllerImpl implements Controller {
         this.view.ifPresent(v -> v.setButton(
                 this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.players.get(this.actualPlayer))));
         if (this.actualPlayer == this.players.size()) {
-            this.players.add(0, this.version.endOfTurnAndNextPlayer(this.players.get(this.actualPlayer)));
+            this.players.add(0, this.version.endOfTurnAndNextPlayer());
         } else {
             this.players.add(this.actualPlayer + 1,
-                    this.version.endOfTurnAndNextPlayer(this.players.get(this.actualPlayer)));
+                    this.version.endOfTurnAndNextPlayer());
 
         }
 

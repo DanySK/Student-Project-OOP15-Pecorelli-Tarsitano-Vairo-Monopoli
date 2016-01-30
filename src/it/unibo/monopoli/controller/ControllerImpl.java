@@ -461,10 +461,10 @@ public class ControllerImpl implements Controller {
     //
     // }
 
-    private List<String> getNextBoxsActions(final Box box, final Player player) {
-        final List<String> actions = new LinkedList<>();
+    private List<Actions> getNextBoxsActions(final Box box, final Player player) {
+        final List<Actions> actions = new LinkedList<>();
         if (!player.dicesAlreadyRolled()) {
-            actions.add("Tira dadi");
+            actions.add(Actions.ROLL_DICES);
             return actions;
         } else if (box instanceof Land) {
             final Land land = (Land) box;
@@ -472,7 +472,7 @@ public class ControllerImpl implements Controller {
                 this.toBuyOrToAuction(land, player, actions);
             } else if (land.getOwner().equals(player)) {
                 if (land.isMortgaged()) {
-                    actions.add("revoca");
+                    actions.add(Actions.REVOKE_MORTGAGE);
                 } else if (player.getOwnerships().containsAll(land.getGroup().getMembers())
                         && ((LandGroup) land.getGroup()).canBuiling() && this.bank.getLeftBuilding().size() > 0
                         && player.getMoney() >= ((LandContract) land.getContract()).getCostForEachBuilding()
@@ -480,14 +480,14 @@ public class ControllerImpl implements Controller {
                     this.bank.getLeftBuilding().forEach(b -> {
                         if ((((LandGroup) land.getGroup()).getBuildings().size() < 4 && b instanceof Home)
                                 || (b instanceof Hotel)) {
-                            actions.add("Costruisci");
+                            actions.add(Actions.BUILD);
                         }
                     });
                 }
                 if (!((LandGroup) land.getGroup()).getBuildings().isEmpty()) {
-                    actions.add("Vendi edifici");
+                    actions.add(Actions.SELL_BUILDING);
                 }
-                actions.add("Finisci turno");
+                actions.add(Actions.END_OF_TURN);
             } else {
                 final int amount = ((ClassicLandContract) land.getContract()).getIncome(new LandIncomeStrategy(land));
                 if (amount <= player.getMoney()) {
@@ -531,45 +531,38 @@ public class ControllerImpl implements Controller {
         }
         if (actions.isEmpty()) {
             player.setDebts(false);
-            actions.add("finisci turno");
+            actions.add(Actions.END_OF_TURN);
         }
         if (!player.getOwnerships().isEmpty()) {
             player.getOwnerships().stream().forEach(o -> {
                 if (o instanceof Land && ((LandGroup) o.getGroup()).getBuildings().isEmpty()) {
-                    actions.add("Ipoteca");
-                    actions.add("Vendi");
+                    actions.add(Actions.MORTGAGE);
+                    actions.add(Actions.SELL);
                 } else if (o instanceof Ownership) {
-                    actions.add("Ipoteca");
-                    actions.add("Vendi");
+                    actions.add(Actions.BUILD);
+                    actions.add(Actions.SELL);
                 }
                 if (o.isMortgaged()) {
-                    actions.add("Rimuove ipoteca");
+                    actions.add(Actions.REVOKE_MORTGAGE);
                 }
             });
         }
-        if (!player.getOwnerships().isEmpty()) {
-            this.players.forEach(p -> {
-                if (!p.getOwnerships().isEmpty()) {
-                    actions.add("Scambio");
-                }
-            });
-        }
-        actions.add("Finisci partita");
+        actions.add(Actions.END_OF_THE_GAME);
         return actions;
     }
 
-    private void toBuyOrToAuction(final Ownership ownership, final Player player, final List<String> actions) {
+    private void toBuyOrToAuction(final Ownership ownership, final Player player, final List<Actions> actions) {
         if (player.getMoney() >= ownership.getContract().getCost()) {
-            actions.add("Compra");
+            actions.add(Actions.BUY);
         }
-        actions.add("Asta");
+   //     actions.add("Asta");
     }
 
-    private void notMuchMoney(final Player player, final List<String> actions) {
+    private void notMuchMoney(final Player player, final List<Actions> actions) {
         if (!player.getOwnerships().isEmpty()) {
             player.getOwnerships().stream().filter(o -> o.getGroup() instanceof LandGroup)
                     .filter(o -> ((LandGroup) o.getGroup()).getBuildings().size() > 0).forEach(o -> {
-                        ((LandGroup) o.getGroup()).getBuildings().forEach(b -> actions.add("Vendi edificio"));
+                        ((LandGroup) o.getGroup()).getBuildings().forEach(b -> actions.add(Actions.SELL_BUILDING));
                     });
             if (actions.isEmpty()) {
                 player.getOwnerships().stream().forEach(o -> {
@@ -581,7 +574,7 @@ public class ControllerImpl implements Controller {
             // this.gameOver();
         }
     }
-
+    
     // public static void main(String[] args) {
     // LinkedList<Integer> l = new LinkedList<>();
     // l.add(1);

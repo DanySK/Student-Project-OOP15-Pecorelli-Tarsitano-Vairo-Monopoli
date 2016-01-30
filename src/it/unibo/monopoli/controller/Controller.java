@@ -32,14 +32,23 @@ public interface Controller {
      * @param isHuman
      *            .
      */
-
+    /**
+     * This method add {@link Player} in a list.
+     * @param name
+     *              -name of the {@link Player}
+     * @param pawn
+     *              -{@link Pawn} of the {@link Player}
+     * @param isHuman
+     *              -boolean for type of {@link Player}
+     */
     void addPlayer(String name, ClassicPawn pawn, boolean isHuman);
-
+    
+    
     void initializedVersion(EVersion versionEnum);
 
     void addView(InPlay view);
 
-    List<String> getButtons();
+    List<Actions> getButtons();
 
     /**
      * This method allow to get set of all Box.

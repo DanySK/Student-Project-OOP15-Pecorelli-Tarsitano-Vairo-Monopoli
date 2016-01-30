@@ -1,8 +1,6 @@
 package it.unibo.monopoli.model.mainunits;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.Deck;
@@ -37,12 +35,12 @@ public interface Player extends Owner {
     // void setPawn();
 
     /**
-     * Return the {@link Set} of {@link Ownership} belonging to the
-     * {@link Player}. This {@link Set} can be empty.
+     * Return the {@link List} of {@link Ownership} belonging to the
+     * {@link Player}.
      * 
-     * @return a {@link Set} of {@link Ownership}
+     * @return a {@link List} of {@link Ownership}
      */
-    Optional<List<Ownership>>  getOwnerships();
+    List<Ownership>  getOwnerships();
 
     /**
      * Adds a {@link Card} to the {@link Player}'s {@link Deck}.
@@ -55,11 +53,11 @@ public interface Player extends Owner {
     void removeCard(Card card);
 
     /**
-     * Return an {@link Optional}'s {@link List} of player's {@link Card}s.
+     * Return a {@link List} of player's {@link Card}s.
      * 
-     * @return an {@link Optional}'s {@link List}
+     * @return a {@link List} of {@link Card}s
      */
-    Optional<List<Card>> getCards();
+    List<Card> getCards();
 
     /**
      * Returns true if the {@link Player} has already rolled {@link Dice}s,

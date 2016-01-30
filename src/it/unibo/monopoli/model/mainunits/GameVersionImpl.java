@@ -3,13 +3,10 @@ package it.unibo.monopoli.model.mainunits;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
-import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
 import it.unibo.monopoli.model.actions.ToRollDices;
-import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.model.table.Ownership;
@@ -47,6 +44,21 @@ public class GameVersionImpl implements GameVersion {
     }
 
     @Override
+    public List<Box> getAllBoxes() {
+        return Collections.unmodifiableList(this.allBoxes);
+    }
+
+    @Override
+    public List<Deck> getDecks() {
+        return this.strategy.getDecks();
+    }
+
+    @Override
+    public AuctionOfOwnership toAuction(final Ownership ownership, final Player player) {
+        return this.strategy.toAuction(ownership, player);
+    }
+
+    @Override
     public Player getNextPlayer() {
         if (!this.iter.hasNext()) {
             this.iter = this.players.iterator();
@@ -61,35 +73,22 @@ public class GameVersionImpl implements GameVersion {
     }
 
     @Override
-    public List<Box> getAllBoxes() {
-        return Collections.unmodifiableList(this.allBoxes);
-    }
-    
     public List<Integer> toRollDices(final Player player) {
-        new ToRollDices(new ClassicDicesStrategy()).play(player);;
+        new ToRollDices(new ClassicDicesStrategy()).play(player);
         return player.lastDicesNumber();
     }
-    
-    @Override
-    public AuctionOfOwnership toAuction(final Ownership ownership, final Player player) {
-        return this.strategy.toAuction(ownership, player);
-    }
 
-//    @Override
-//    public Action getNextBoxsAction(final Box box, final Player player) {
-//        // TODO Auto-generated method stub
-//        return null;
-//    }
-
-    @Override
-    public Action getNextCardsAction(final Box box, final Card card, final Player player) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<Deck> getDecks() {
-        return this.strategy.getDecks();
-    }
+    // @Override
+    // public Action getNextBoxsAction(final Box box, final Player player) {
+    // // TODO Auto-generated method stub
+    // return null;
+    // }
+    //
+    // @Override
+    // public Action getNextCardsAction(final Box box, final Card card, final
+    // Player player) {
+    // // TODO Auto-generated method stub
+    // return null;
+    // }
 
 }

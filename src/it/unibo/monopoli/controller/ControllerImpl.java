@@ -211,6 +211,7 @@ public class ControllerImpl implements Controller {
         if (this.actualPlayer.isHuman()) {
         this.view.ifPresent(v -> v
                 .setButton(this.getNextBoxsActions((Ownership) this.boxes.get(actualPosition), this.actualPlayer)));
+        
         }
     }
 

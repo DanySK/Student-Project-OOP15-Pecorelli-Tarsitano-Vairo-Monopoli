@@ -667,6 +667,190 @@ public class ControllerImpl implements Controller {
             // this.gameOver();
         }
     }
+    
+    @Override
+//  public List<Action> getNextCardsActions(final Box box, final Card card, final Player player) {
+//      final List<Action> actions = new LinkedList<>();
+//      switch (card.getID()) {
+//      case CardsId.CARD2.getValue():
+//          MoveUpTo.moveUpToBox(this.allBoxes.get(37)).play(player);
+  
+//      case CardsId.CARD3.getValue():
+//          if (((Ownership) box).getOwner().equals(player)) {
+//              actions.addAll(this.getNextBoxsActions(box, player));
+//          } else {
+//              final int amount = 2
+//                      * ((Ownership) box).getContract().getIncome(new StationIncomeStrategy(((Ownership) box)));
+//              actions.add(new ToPay(amount, player));
+//              new ToBePaid(amount);
+//          }
+//          break;
+//      case CardsId.CARD4.getValue():
+//          player.addCard(card);
+//          break;
+//      case CACardsId.CARD5.getValue():
+//          actions.add(new ToPay(20, player));
+//          break;
+//      case CARD7:
+//          actions.add(new GoToPrison(this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos())));
+//      case CardsId.CARD8.getValue():
+//          player.getOwnerships().get().stream().filter(o -> o instanceof Land)
+//                  .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
+//                  .map(o -> ((LandGroup) o.getGroup()).getBuildings()).forEach(l -> {
+//                      l.forEach(b -> {
+//                          actions.add(new ToPay(b instanceof Home ? 25 : 100, player));
+//                      });
+//                  });
+//          break;
+//      case CardsId.CARD9.getValue():
+//          this.players.stream().filter(p -> !p.equals(player)).forEach(p -> {
+//              try {
+//                  new ToPay(CARD_TAX, player).play(player);
+//                  new ToBePaid(CARD_TAX).play(p);
+//              } catch (IllegalArgumentException i) {
+//                  this.notMuchMoney(player, actions);
+//              }
+//          });
+//          break;
+//      case CARCardsId.CARD10.getValue()D10:
+//          actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.START_POSITION.getPos())));
+//      case CARD11:
+//          actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(OWNERSHIP_N_18)));
+//      case CARD12:
+//          if (((Ownership) box).getOwner().equals(player)) {
+//              actions.addAll(this.getNextBoxsActions(box, player));
+//          } else {
+//              final int amount = 2
+//                      * ((Ownership) box).getContract().getIncome(new StationIncomeStrategy(((Ownership) box)));
+//              actions.add(new ToPay(amount, player));
+//              new ToBePaid(amount);
+//          }
+//          break;
+//      case CARD13:
+//          actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(OWNERSHIP_N_17)));
+//      case CARD14:
+//          actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(OWNERSHIP_N_9)));
+//      case CARD15:
+//          if (((Ownership) box).getOwner().equals(player)) {
+//              actions.addAll(this.getNextBoxsActions(box, player));
+//          } else {
+//              final int amount = (player.lastDicesNumber().stream().reduce((d, d1) -> d + d1).get() * 10);
+//              actions.add(new ToPay(amount, player));
+//              new ToBePaid(amount);
+//          }
+//          break;
+//      case CARD17:
+//          actions.add(new ToPay(50, player));
+//          break;
+//      case CARD18:
+//          actions.add(new ToPay(50, player));
+//          break;
+//      case CARD20:
+//          player.addCard(card);
+//          break;
+//      case CARD21:
+//          actions.add(new ToPay(100, player));
+//          break;
+//      case CARD23:
+//          actions.add(new GoToPrison(this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos())));
+//      case CARD24:
+//          player.getOwnerships().get().stream().filter(o -> o instanceof Land)
+//                  .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
+//                  .map(o -> ((LandGroup) o.getGroup()).getBuildings()).forEach(l -> {
+//                      l.forEach(b -> {
+//                          actions.add(new ToPay(b instanceof Home ? 40 : 115, player));
+//                      });
+//                  });
+//          break;
+//      case CARD25:
+//          this.players.stream().filter(p -> !p.equals(player)).forEach(p -> {
+//              try {
+//                  new ToPay(10, p).play(p);
+//                  new ToBePaid(10).play(player);
+//              } catch (IllegalArgumentException i) {
+//                  this.notMuchMoney(player, actions);
+//              }
+//          });
+//          break;
+//      case CARD26:
+//          actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.START_POSITION.getPos())));
+//      default:
+//          break;
+//      }
+//      return actions;
+//  }
+//  private void notMuchMoney(final Player player, final List<Action> actions) {
+//      if (player.getOwnerships().isPresent()) {
+//          player.getOwnerships().get().stream().filter(o -> o.getGroup() instanceof LandGroup)
+//                  .filter(o -> ((LandGroup) o.getGroup()).getBuildings().size() > 0).forEach(o -> {
+//                      ((LandGroup) o.getGroup()).getBuildings()
+//                              .forEach(b -> actions.add(ToSellProperties.sellABuilding(((Land) o), b, this.bank)));
+//                  });
+//          if (actions.isEmpty()) {
+//              player.getOwnerships().get().stream().forEach(o -> {
+//                  actions.add(ToSellProperties.sellAOwnership(o, this.bank));
+//              });
+//          }
+//      } else if (player.getCards().isPresent()) {
+//          player.getCards().get().forEach(c -> actions.add(ToAuction.cards(this.players, new ClassicAuction(), c)));
+//      } else {
+//          // FINE DEL GIOCO -> interfaccia funzionale (Action ?) + classe
+//          // anonima: rimuove il giocatore con il play)
+//          actions.add(p -> {
+//              this.players.remove(p);
+//          });
+//      }
+//  }
+  // private void notMuchMoney(final Player player, final List<Action>
+  // actions) {
+  // if (player.getOwnerships().isPresent()) {
+  // player.getOwnerships().get().stream().filter(o -> o.getGroup() instanceof
+  // LandGroup)
+  // .filter(o -> ((LandGroup) o.getGroup()).getBuildings().size() >
+  // 0).forEach(o -> {
+  // ((LandGroup) o.getGroup()).getBuildings()
+  // .forEach(b -> actions.add(ToSellProperties.sellABuilding(((Land) o), b,
+  // this.bank)));
+  // });
+  // if (actions.isEmpty()) {
+  // player.getOwnerships().get().stream().forEach(o -> {
+  // actions.add(ToSellProperties.sellAOwnership(o, this.bank));
+  // });
+  // }
+  // } else if (player.getCards().isPresent()) {
+  // player.getCards().get().forEach(c ->
+  // actions.add(ToAuction.cards(this.players, new ClassicAuction(), c)));
+  // } else {
+  // // FINE DEL GIOCO -> interfaccia funzionale (Action ?) + classe
+  // // anonima: rimuove il giocatore con il play)
+  // actions.add(p -> {
+  // this.players.remove(p);
+  // });
+  // }
+  // }
+//  
+//  public static void main(String[] args) {
+//      List<Player> l = new LinkedList<>();
+//      l.add(new ClassicPlayer("v", new ClassicPawn(3), true));
+//      ClassicStrategy c = new ClassicStrategy(l);
+//      List<Box> b = c.getBoxes();
+//      for(int i = 0; i < 40 ; i++) {
+//          System.out.println(b.get(i).getName());
+//          System.out.println(b.get(i).getID());
+//      }
+//      
+//      List<Integer> n = new LinkedList<>();
+//      n.add(3);
+//      n.add(5);
+//      n.add(1);
+//      n.add(8);
+//      n.add(2);
+//      n.add(6);
+//      
+//      List<Integer> v = n.stream().sorted((i, i1) -> (i - i1)).collect(Collectors.toList());
+//      
+//      System.out.println(v);
+//  }
 
     public static void main(String[] args) {
         // LinkedList<Integer> l = new LinkedList<>();

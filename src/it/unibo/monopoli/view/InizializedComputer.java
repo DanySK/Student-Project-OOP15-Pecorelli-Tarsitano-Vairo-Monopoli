@@ -6,6 +6,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -45,7 +47,7 @@ public class InizializedComputer {
      * 
      * @return -return a Player's panel
      */
-    public JPanel build() {
+    public JPanel build(JPanel playerP) {
         final JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(120, 150));
 
@@ -102,6 +104,28 @@ public class InizializedComputer {
         rdbtnComputer.setEnabled(false);
         rdbtnUmano.setEnabled(false);
 
+        final JButton remove = new JButton("Remove");
+        remove.setFont(new Font("Times New Roman", Font.BOLD, 10));
+        remove.setPreferredSize(new Dimension(70, 22));
+        southP.add(remove);
+        
+        
+        remove.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                InizializedPlayer.getMap().remove(textNome.getText(), isUman);
+                panel.setVisible(false);
+                playerP.remove(panel);
+                Go.setNumPlayers(-1);
+                playerP.revalidate();
+                System.out.println("Remove: " + playerP.getComponentCount());
+                System.out.println("RemoveGet: "+ Go.getNumPlayers());
+
+            }
+
+        });
+        
         if (rdbtnComputer.isSelected()) {
             isUman = false;
         } else {

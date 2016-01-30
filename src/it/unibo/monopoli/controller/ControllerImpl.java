@@ -484,7 +484,7 @@ public class ControllerImpl implements Controller {
                 this.toBuyOrToAuction(land, player, actions);
             } else if (land.getOwner().equals(player)) {
                 if (land.isMortgaged()) {
-                    actions.add("revoca");
+                    actions.add("revoca"); 
                 } else if (player.getOwnerships().get().containsAll(land.getGroup().getMembers())
                         && ((LandGroup) land.getGroup()).canBuiling() && this.bank.getLeftBuilding().size() > 0
                         && player.getMoney() >= ((LandContract) land.getContract()).getCostForEachBuilding()

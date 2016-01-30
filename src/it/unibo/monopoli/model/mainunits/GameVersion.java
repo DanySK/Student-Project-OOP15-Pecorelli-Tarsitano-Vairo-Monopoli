@@ -18,6 +18,14 @@ import it.unibo.monopoli.model.table.Ownership;
 public interface GameVersion {
 
     /**
+     * This method return an instance of the only one {@link Bank}, specific of
+     * this version.
+     * 
+     * @return a {@link Bank}
+     */
+    Bank getBank();
+
+    /**
      * This method return all the {@link Box}es required for the specific
      * version. These {@link Box}es bring with them also the informations about
      * {@link Contract}s, {@link Action}s and {@link Group}s.
@@ -26,13 +34,9 @@ public interface GameVersion {
      */
     List<Box> getAllBoxes();
 
-    /**
-     * This method return an instance of the only one {@link Bank}, specific of
-     * this version.
-     * 
-     * @return a {@link Bank}
-     */
-    Bank getBank();
+    List<Deck> getDecks();
+
+    AuctionOfOwnership toAuction(Ownership ownership, Player player);
 
     Player getNextPlayer();
 
@@ -49,9 +53,7 @@ public interface GameVersion {
 
 //    Action getNextBoxsAction(Box box, Player player);
 //
-    Action getNextCardsAction(Box box, Card card, Player player);
+//    Action getNextCardsAction(Box box, Card card, Player player);
+//    
     
-    List<Deck> getDecks();
-    
-    AuctionOfOwnership toAuction(Ownership ownership, Player player);
 }

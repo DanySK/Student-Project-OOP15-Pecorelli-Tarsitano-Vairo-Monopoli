@@ -1,11 +1,8 @@
 package it.unibo.monopoli.model.mainunits;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.table.Ownership;
@@ -14,8 +11,8 @@ public class ClassicPlayer implements Player{
 
     private final String name;
     private final Pawn pawn;
-    private final Optional<List<Ownership>> ownerships;
-    private final Optional<List<Card>> cards;
+    private final List<Ownership> ownerships;
+    private final List<Card> cards;
     private boolean alreadyRolled;
     private boolean isAPrisoner;
     private final List<Integer> dicesNumbers;
@@ -26,8 +23,8 @@ public class ClassicPlayer implements Player{
     public ClassicPlayer(final String name, final Pawn pawn, final boolean isHuman) {
         this.name = name;
         this.pawn = pawn;
-        this.ownerships = Optional.empty();
-        this.cards = Optional.empty();
+        this.ownerships = new LinkedList<>();
+        this.cards = new LinkedList<>();
         this.alreadyRolled = false;
         this.isAPrisoner = false;
         this.dicesNumbers = new LinkedList<>();
@@ -45,24 +42,24 @@ public class ClassicPlayer implements Player{
     }
 
     @Override
-    public Optional<List<Ownership>> getOwnerships() {
+    public List<Ownership> getOwnerships() {
         return this.ownerships;
     }
 
     @Override
     public void addCard(final Card card) {
-        this.cards.orElse(new LinkedList<>()).add(card);
+        this.cards.add(card);
         card.setPlayer(this);
     }
 
     @Override
     public void removeCard(Card card) {
-        this.cards.get().remove(card);
+        this.cards.remove(card);
         card.setPlayer(null);
     }
 
     @Override
-    public Optional<List<Card>> getCards() {
+    public List<Card> getCards() {
         return this.cards;
     }
 
@@ -101,12 +98,12 @@ public class ClassicPlayer implements Player{
 
     @Override
     public void addOwnership(final Ownership ownership) {
-        this.ownerships.orElse(new LinkedList<>()).add(ownership);
+        this.ownerships.add(ownership);
     }
 
     @Override
     public void removeOwnership(final Ownership ownership) {
-        this.ownerships.get().remove(ownership);
+        this.ownerships.remove(ownership);
     }
 
     @Override

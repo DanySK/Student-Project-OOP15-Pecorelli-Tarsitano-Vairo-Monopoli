@@ -100,49 +100,35 @@ public class ClassicStrategy implements GameStrategy {
         this.inizializesBoxes();
     }
 
-    private void inizializesPlayers(final List<Player> players) {
-        switch (players.size()) {
-        case 2:
-            players.stream().forEach(p -> {
-                this.addOwnerships(7, p);
-                p.setMoney(350);
-            });
-            break;
-        case 3:
-            players.stream().forEach(p -> {
-                this.addOwnerships(6, p);
-                p.setMoney(300);
-            });
-            break;
-        case 4:
-            players.stream().forEach(p -> {
-                this.addOwnerships(5, p);
-                p.setMoney(250);
-            });
-            break;
-        case 5:
-            players.stream().forEach(p -> {
-                this.addOwnerships(4, p);
-                p.setMoney(200);
-            });
-            break;
-        case 6:
-            players.stream().forEach(p -> {
-                this.addOwnerships(3, p);
-                p.setMoney(150);
-            });
-            break;
-        default:
-            break;
-        }
-    }
-
-    private void addOwnerships(final int nOfOwnership, final Player player) {
-        for (int i = 0; i < nOfOwnership; i++) {
-            final Ownership ow = this.bank.getOwnership();
-            player.addOwnership(ow);
-            ow.setOwner(player);
-        }
+    private void inizializesOwnerships() {
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_1.getPos(), new ClassicLand("OLD KENT ROAD", 1, this.bank, Color.DARK_GRAY));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_2.getPos(), new ClassicLand("WHITECHAPEL ROAD", 3, this.bank, Color.DARK_GRAY));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_3.getPos(), new Station("KINGS CROSS STATION", 5, this.bank));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_4.getPos(), new ClassicLand("THE ANGEL, ISLINGTON", 6, this.bank, Color.CYAN));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_5.getPos(), new ClassicLand("EUSTON ROAD", 8, this.bank, Color.CYAN));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_6.getPos(), new ClassicLand("PENTONVILLE ROAD", 9, this.bank, Color.CYAN));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_7.getPos(), new ClassicLand("PALL MALL", 11, this.bank, Color.MAGENTA));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_8.getPos(), new Company("ELECTRIC COMPANY", 12, this.bank));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_9.getPos(), new ClassicLand("WHITEHALL", 13, this.bank, Color.MAGENTA));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_10.getPos(), new ClassicLand("NORTHUMRL'D AVENUE", 14, this.bank, Color.MAGENTA));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_11.getPos(), new Station("MARYLEBONE STATION", 15, this.bank));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_12.getPos(), new ClassicLand("BOW STREET", 16, this.bank, Color.ORANGE));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_13.getPos(), new ClassicLand("MARLBOROUGH STREET", 18, this.bank, Color.ORANGE));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_14.getPos(), new ClassicLand("VINE STREET", 19, this.bank, Color.ORANGE));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_15.getPos(), new ClassicLand("STRAND", 21, this.bank, Color.RED));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_16.getPos(), new ClassicLand("FLEET STREET", 23, this.bank, Color.RED));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_17.getPos(), new ClassicLand("TRAFALGAR SQUARE", 24, this.bank, Color.RED));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_18.getPos(), new Station("FENCHURCH ST. STATION", 25, this.bank));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_19.getPos(), new ClassicLand("LEICESTER SQUARE", 26, this.bank, Color.YELLOW));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_20.getPos(), new ClassicLand("COVENTRY STREET", 27, this.bank, Color.YELLOW));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_21.getPos(), new Company("WATER COMPANY", 28, this.bank));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_22.getPos(), new ClassicLand("PICCADILLY", 29, this.bank, Color.YELLOW));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_23.getPos(), new ClassicLand("REGENT STREET", 31, this.bank, Color.GREEN));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_24.getPos(), new ClassicLand("OXFORD STREET", 32, this.bank, Color.GREEN));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_25.getPos(), new ClassicLand("BOND STREET", 34, this.bank, Color.GREEN));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_26.getPos(), new Station("LIVERPOOL ST. STATION", 35, this.bank));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_27.getPos(), new ClassicLand("PARK LANE", 37, this.bank, Color.BLUE));
+        this.ownerships.add(BoxesPositions.OWNERSHIP_N_28.getPos(), new ClassicLand("MAYFAIR", 39, this.bank, Color.BLUE));
     }
 
     private void inizializesGroups() {
@@ -284,37 +270,6 @@ public class ClassicStrategy implements GameStrategy {
         this.ownerships.get(BoxesPositions.OWNERSHIP_N_28.getPos()).setContract(this.contracts.get(BoxesPositions.OWNERSHIP_N_28.getPos()));
     }
 
-    private void inizializesOwnerships() {
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_1.getPos(), new ClassicLand("OLD KENT ROAD", 1, this.bank, Color.DARK_GRAY));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_2.getPos(), new ClassicLand("WHITECHAPEL ROAD", 3, this.bank, Color.DARK_GRAY));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_3.getPos(), new Station("KINGS CROSS STATION", 5, this.bank));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_4.getPos(), new ClassicLand("THE ANGEL, ISLINGTON", 6, this.bank, Color.CYAN));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_5.getPos(), new ClassicLand("EUSTON ROAD", 8, this.bank, Color.CYAN));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_6.getPos(), new ClassicLand("PENTONVILLE ROAD", 9, this.bank, Color.CYAN));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_7.getPos(), new ClassicLand("PALL MALL", 11, this.bank, Color.MAGENTA));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_8.getPos(), new Company("ELECTRIC COMPANY", 12, this.bank));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_9.getPos(), new ClassicLand("WHITEHALL", 13, this.bank, Color.MAGENTA));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_10.getPos(), new ClassicLand("NORTHUMRL'D AVENUE", 14, this.bank, Color.MAGENTA));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_11.getPos(), new Station("MARYLEBONE STATION", 15, this.bank));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_12.getPos(), new ClassicLand("BOW STREET", 16, this.bank, Color.ORANGE));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_13.getPos(), new ClassicLand("MARLBOROUGH STREET", 18, this.bank, Color.ORANGE));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_14.getPos(), new ClassicLand("VINE STREET", 19, this.bank, Color.ORANGE));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_15.getPos(), new ClassicLand("STRAND", 21, this.bank, Color.RED));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_16.getPos(), new ClassicLand("FLEET STREET", 23, this.bank, Color.RED));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_17.getPos(), new ClassicLand("TRAFALGAR SQUARE", 24, this.bank, Color.RED));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_18.getPos(), new Station("FENCHURCH ST. STATION", 25, this.bank));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_19.getPos(), new ClassicLand("LEICESTER SQUARE", 26, this.bank, Color.YELLOW));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_20.getPos(), new ClassicLand("COVENTRY STREET", 27, this.bank, Color.YELLOW));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_21.getPos(), new Company("WATER COMPANY", 28, this.bank));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_22.getPos(), new ClassicLand("PICCADILLY", 29, this.bank, Color.YELLOW));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_23.getPos(), new ClassicLand("REGENT STREET", 31, this.bank, Color.GREEN));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_24.getPos(), new ClassicLand("OXFORD STREET", 32, this.bank, Color.GREEN));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_25.getPos(), new ClassicLand("BOND STREET", 34, this.bank, Color.GREEN));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_26.getPos(), new Station("LIVERPOOL ST. STATION", 35, this.bank));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_27.getPos(), new ClassicLand("PARK LANE", 37, this.bank, Color.BLUE));
-        this.ownerships.add(BoxesPositions.OWNERSHIP_N_28.getPos(), new ClassicLand("MAYFAIR", 39, this.bank, Color.BLUE));
-    }
-
     private void inizializesBuildings() {
         for (int i = 0; i < N_MAX_OF_HOUSES; i++) {
             this.homes.add(new Home());
@@ -324,59 +279,49 @@ public class ClassicStrategy implements GameStrategy {
         }
     }
 
-    @Override
-    public List<Player> getPlayers() {
-        return Collections.unmodifiableList(this.players);
+    private void inizializesPlayers(final List<Player> players) {
+        switch (players.size()) {
+        case 2:
+            players.stream().forEach(p -> {
+                this.addOwnerships(7, p);
+                p.setMoney(350);
+            });
+            break;
+        case 3:
+            players.stream().forEach(p -> {
+                this.addOwnerships(6, p);
+                p.setMoney(300);
+            });
+            break;
+        case 4:
+            players.stream().forEach(p -> {
+                this.addOwnerships(5, p);
+                p.setMoney(250);
+            });
+            break;
+        case 5:
+            players.stream().forEach(p -> {
+                this.addOwnerships(4, p);
+                p.setMoney(200);
+            });
+            break;
+        case 6:
+            players.stream().forEach(p -> {
+                this.addOwnerships(3, p);
+                p.setMoney(150);
+            });
+            break;
+        default:
+            break;
+        }
     }
 
-    @Override
-    public Bank getBank() {
-        return this.bank;
-    }
-
-    @Override
-    public List<Box> getBoxes() {
-        return this.allBoxes;
-    }
-
-    @Override
-    public List<Deck> getDecks() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    private void inizializesBoxes() {
-        final List<Box> temp = new LinkedList<>();
-//        final Box[] boxes = new Box[40];
-//        this.ownerships.stream().forEach(o -> {
-//            boxes[o.getID()] = o;
-//        });
-        temp.add(new Start("GO", BoxesPositions.START_POSITION.getPos()));
-        final PrisonOrTransit prison = new PrisonOrTransit("IN JAIL OR JUST VISITING", BoxesPositions.PRISON_POSITION.getPos());
-        temp.add(prison);
-        temp.add(new NeutralArea("FREE PARKING", BoxesPositions.NEUTRAL_AREA_POSITION.getPos()));
-        temp.add(new Police("GO TO JAIL", BoxesPositions.POLICE_POSITION.getPos(), prison));
-        temp.add(new DecksBox("CHANCE", BoxesPositions.FIRST_CHANCE_POSITION.getPos(), this.decks.get(0)));
-        temp.add(new DecksBox("CHANCE", BoxesPositions.SECOND_CHANCE_POSITION.getPos(), this.decks.get(0)));
-        temp.add(new DecksBox("CHANCE", BoxesPositions.THIRD_CHANCE_POSITION.getPos(), this.decks.get(0)));
-        temp.add(new DecksBox("COMMUNITY CHEST", BoxesPositions.FIRST_COMMUNITY_CHEST_POSITION.getPos(),
-                this.decks.get(1)));
-        temp.add(new DecksBox("COMMUNITY CHEST", BoxesPositions.SECOND_COMMUNITY_CHEST_POSITION.getPos(),
-                this.decks.get(1)));
-        temp.add(new DecksBox("COMMUNITY CHEST", BoxesPositions.THIRD_COMMUNITY_CHEST_POSITION.getPos(),
-                this.decks.get(1)));
-        temp.add(new TaxImpl("INCOME TAX", BoxesPositions.INCOME_TAX_POSITION.getPos(), AMOUNT_OF_FEES));
-        temp.add(new TaxImpl("SUPER TAX", BoxesPositions.SUPER_TAX_POSITION.getPos(), AMOUNT_OF_FEES));
-        temp.addAll(this.ownerships);
-//        this.allBoxes.addAll(Arrays.asList(boxes));
-        this.allBoxes = temp.stream().sorted(new Comparator<Box>() {
-
-            @Override
-            public int compare(Box o1, Box o2) {
-                return o1.getID() - o2.getID();
-            }
-            
-        }).collect(Collectors.toList());
+    private void addOwnerships(final int nOfOwnership, final Player player) {
+        for (int i = 0; i < nOfOwnership; i++) {
+            final Ownership ow = this.bank.getOwnership();
+            player.addOwnership(ow);
+            ow.setOwner(player);
+        }
     }
 
     private void inizializesDecks() {
@@ -443,6 +388,60 @@ public class ClassicStrategy implements GameStrategy {
 
         this.decks.add(0, chance);
         this.decks.add(1, chest);
+    }
+
+    private void inizializesBoxes() {
+        final List<Box> temp = new LinkedList<>();
+//        final Box[] boxes = new Box[40];
+//        this.ownerships.stream().forEach(o -> {
+//            boxes[o.getID()] = o;
+//        });
+        temp.add(new Start("GO", BoxesPositions.START_POSITION.getPos()));
+        final PrisonOrTransit prison = new PrisonOrTransit("IN JAIL OR JUST VISITING", BoxesPositions.PRISON_POSITION.getPos());
+        temp.add(prison);
+        temp.add(new NeutralArea("FREE PARKING", BoxesPositions.NEUTRAL_AREA_POSITION.getPos()));
+        temp.add(new Police("GO TO JAIL", BoxesPositions.POLICE_POSITION.getPos(), prison));
+        temp.add(new DecksBox("CHANCE", BoxesPositions.FIRST_CHANCE_POSITION.getPos(), this.decks.get(0)));
+        temp.add(new DecksBox("CHANCE", BoxesPositions.SECOND_CHANCE_POSITION.getPos(), this.decks.get(0)));
+        temp.add(new DecksBox("CHANCE", BoxesPositions.THIRD_CHANCE_POSITION.getPos(), this.decks.get(0)));
+        temp.add(new DecksBox("COMMUNITY CHEST", BoxesPositions.FIRST_COMMUNITY_CHEST_POSITION.getPos(),
+                this.decks.get(1)));
+        temp.add(new DecksBox("COMMUNITY CHEST", BoxesPositions.SECOND_COMMUNITY_CHEST_POSITION.getPos(),
+                this.decks.get(1)));
+        temp.add(new DecksBox("COMMUNITY CHEST", BoxesPositions.THIRD_COMMUNITY_CHEST_POSITION.getPos(),
+                this.decks.get(1)));
+        temp.add(new TaxImpl("INCOME TAX", BoxesPositions.INCOME_TAX_POSITION.getPos(), AMOUNT_OF_FEES));
+        temp.add(new TaxImpl("SUPER TAX", BoxesPositions.SUPER_TAX_POSITION.getPos(), AMOUNT_OF_FEES));
+        temp.addAll(this.ownerships);
+//        this.allBoxes.addAll(Arrays.asList(boxes));
+        this.allBoxes = temp.stream().sorted(new Comparator<Box>() {
+
+            @Override
+            public int compare(final Box o1, final Box o2) {
+                return o1.getID() - o2.getID();
+            }
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+        return Collections.unmodifiableList(this.players);
+    }
+
+    @Override
+    public Bank getBank() {
+        return this.bank;
+    }
+
+    @Override
+    public List<Box> getBoxes() {
+        return this.allBoxes;
+    }
+
+    @Override
+    public List<Deck> getDecks() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override

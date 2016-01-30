@@ -88,9 +88,10 @@ public class ControllerImpl implements Controller {
         this.boxes = this.version.getAllBoxes();
         this.decks = this.version.getDecks();
         this.actualPlayer = this.version.getNextPlayer();
-//        if (!this.actualPlayer.isHuman()) {
-//            this.computerPlayer();
-//        }
+        this.view = null;
+        // if (!this.actualPlayer.isHuman()) {
+        // this.computerPlayer();
+        // }
     }
 
     @Override
@@ -99,9 +100,9 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public List<String> getButtons() {
-        final List<String> buttons = new LinkedList<>();
-        Arrays.asList(Actions.values()).forEach(b -> buttons.add(b.getText()));
+    public List<Actions> getButtons() {
+        final List<Actions> buttons = new LinkedList<>();
+        Arrays.asList(Actions.values()).forEach(b -> buttons.add(b));
         return buttons;
     }
 
@@ -122,7 +123,7 @@ public class ControllerImpl implements Controller {
 
     @Override
     public int toRollDices() {
-        
+
         this.lastDices = this.version.toRollDices(this.actualPlayer);
         this.actualPosition = this.actualPlayer.getPawn().getActualPos();
         System.out.println(this.actualPosition);
@@ -136,12 +137,17 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public Box getActualBox(){
+    public Box getActualBox() {
         return this.boxes.get(this.actualPosition);
     }
+
+    public void setActualPosition(int position) {
+        this.actualPosition = position;
+    }
+
     @Override
     public void endTurn() {
-        
+
         this.view.ifPresent(
                 v -> v.setButton(this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.actualPlayer)));
         this.actualPlayer = version.endOfTurnAndNextPlayer();
@@ -152,21 +158,37 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void buyOwnership() {
-        ToBuyProperties.buyAOwnership(((Ownership) this.boxes.get(actualPosition)).getContract().getCost(),
-                ((Ownership) this.boxes.get(actualPosition))).play(this.actualPlayer);
-        if (this.actualPlayer.isHuman()) {
-            this.view.ifPresent(v -> v.setButton(
-                    this.getNextBoxsActions(((Ownership) this.boxes.get(actualPosition)), this.actualPlayer)));
+        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
+
+        if (actions.contains(Actions.BUY)) {
+            ToBuyProperties.buyAOwnership(((Ownership) this.boxes.get(actualPosition)).getContract().getCost(),
+                    ((Ownership) this.boxes.get(actualPosition))).play(this.actualPlayer);
+            if (this.actualPlayer.isHuman()) {
+                if (this.view != null) {
+                    this.view.ifPresent(v -> v.setButton(
+                            this.getNextBoxsActions(((Ownership) this.boxes.get(actualPosition)), this.actualPlayer)));
+                }
+            }
+
+        } else {
+            throw new IllegalArgumentException();
         }
+
     }
 
     @Override
     public void sellOwnership() {
-        ToSellProperties.sellAOwnership(((Ownership) this.boxes.get(actualPosition)).getContract().getCost(),
-                (Ownership) this.boxes.get(actualPosition), this.bank).play(this.actualPlayer);
-        
-        this.view.ifPresent(v -> v
-                .setButton(this.getNextBoxsActions(((Ownership) this.boxes.get(actualPosition)), this.actualPlayer)));
+
+        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
+        if (actions.contains(Actions.SELL)) {
+            ToSellProperties.sellAOwnership(((Ownership) this.boxes.get(actualPosition)).getContract().getCost(),
+                    (Ownership) this.boxes.get(actualPosition), this.bank).play(this.actualPlayer);
+
+            this.view.ifPresent(v -> v.setButton(
+                    this.getNextBoxsActions(((Ownership) this.boxes.get(actualPosition)), this.actualPlayer)));
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
@@ -176,42 +198,64 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void build() {
-        ToBuyProperties.buyABuilding((Land) this.boxes.get(actualPosition), this.bank).play(this.actualPlayer);
-        this.alreadyBuilt = true;
-        if (this.actualPlayer.isHuman()) {
-        this.view.ifPresent(
-                v -> v.setButton(this.getNextBoxsActions((Land) this.boxes.get(actualPosition), this.actualPlayer)));
+
+        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
+        if (actions.contains(Actions.BUILD)) {
+            ToBuyProperties.buyABuilding((Land) this.boxes.get(actualPosition), this.bank).play(this.actualPlayer);
+            this.alreadyBuilt = true;
+            if (this.actualPlayer.isHuman()) {
+                this.view.ifPresent(v -> v
+                        .setButton(this.getNextBoxsActions((Land) this.boxes.get(actualPosition), this.actualPlayer)));
+            }
+            this.alreadyBuilt = false;
+        } else {
+            throw new IllegalArgumentException();
         }
-        this.alreadyBuilt = false;
+
     }
 
     @Override
     public void sellBuilding() {
-        Land land = (Land) this.boxes.get(actualPosition);
-        ToSellProperties.sellABuilding(land, ((LandGroup) land.getGroup()).getBuildings().get(0), this.bank)
-                .play(this.actualPlayer);
-        this.view.ifPresent(
-                v -> v.setButton(this.getNextBoxsActions((Land) this.boxes.get(actualPosition), this.actualPlayer)));
+
+        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
+        if (actions.contains(Actions.SELL_BUILDING)) {
+            Land land = (Land) this.boxes.get(actualPosition);
+            ToSellProperties.sellABuilding(land, ((LandGroup) land.getGroup()).getBuildings().get(0), this.bank)
+                    .play(this.actualPlayer);
+            this.view.ifPresent(v -> v
+                    .setButton(this.getNextBoxsActions((Land) this.boxes.get(actualPosition), this.actualPlayer)));
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
     public void mortgageOwnership() {
-        
-        new ToMortgage((Ownership) this.boxes.get(actualPosition)).play(this.actualPlayer);
-        if (this.actualPlayer.isHuman()) {
-        this.view.ifPresent(v -> v
-                .setButton(this.getNextBoxsActions((Ownership) this.boxes.get(actualPosition), this.actualPlayer)));
+
+        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
+        if (actions.contains(Actions.MORTGAGE)) {
+            new ToMortgage((Ownership) this.boxes.get(actualPosition)).play(this.actualPlayer);
+            if (this.actualPlayer.isHuman()) {
+                this.view.ifPresent(v -> v.setButton(
+                        this.getNextBoxsActions((Ownership) this.boxes.get(actualPosition), this.actualPlayer)));
+            }
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 
     @Override
     public void revokeMortgageOwnership() {
 
-        new ToRevokeMortgage((Ownership) this.boxes.get(actualPosition)).play(this.actualPlayer);
-        if (this.actualPlayer.isHuman()) {
-        this.view.ifPresent(v -> v
-                .setButton(this.getNextBoxsActions((Ownership) this.boxes.get(actualPosition), this.actualPlayer)));
-        
+        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
+        if (actions.contains(Actions.REVOKE_MORTGAGE)) {
+            new ToRevokeMortgage((Ownership) this.boxes.get(actualPosition)).play(this.actualPlayer);
+            if (this.actualPlayer.isHuman()) {
+                this.view.ifPresent(v -> v.setButton(
+                        this.getNextBoxsActions((Ownership) this.boxes.get(actualPosition), this.actualPlayer)));
+            }
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 
@@ -556,7 +600,7 @@ public class ControllerImpl implements Controller {
         if (player.getMoney() >= ownership.getContract().getCost()) {
             actions.add(Actions.BUY);
         }
-   //     actions.add("Asta");
+        // actions.add("Asta");
     }
 
     private void notMuchMoney(final Player player, final List<Actions> actions) {
@@ -575,7 +619,7 @@ public class ControllerImpl implements Controller {
             // this.gameOver();
         }
     }
-    
+
     // public static void main(String[] args) {
     // LinkedList<Integer> l = new LinkedList<>();
     // l.add(1);

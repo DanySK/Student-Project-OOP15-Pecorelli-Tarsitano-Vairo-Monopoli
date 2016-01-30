@@ -43,7 +43,7 @@ public interface Controller {
      */
     void addPlayer(String name, ClassicPawn pawn, boolean isHuman);
     
-    
+    void setActualPosition(int position);
     void initializedVersion(EVersion versionEnum);
 
     void addView(InPlay view);

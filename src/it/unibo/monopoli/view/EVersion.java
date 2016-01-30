@@ -1,20 +1,19 @@
 package it.unibo.monopoli.view;
 
 public enum EVersion {
-	
-	NOT_SELECTABLE_OPTION(" - Select an Option - "),
-	CLASSIC("Classic"), 
-	PROVA1("Prova1"), 
-	PROVA2("Prova2");
 
-	private String name;
+    NOT_SELECTABLE_OPTION(" - Select an Option - "), CLASSIC("Classic");
+    // PROVA1("Prova1"),
+    // PROVA2("Prova2");
 
-	private EVersion(final String name) {
-		this.name = name;
+    private String name;
 
-	}
+    private EVersion(final String name) {
+        this.name = name;
 
-	public String getName() {
-		return this.name;
-	}
+    }
+
+    public String getName() {
+        return this.name;
+    }
 }

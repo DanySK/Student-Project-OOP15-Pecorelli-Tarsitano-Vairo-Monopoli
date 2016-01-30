@@ -11,43 +11,45 @@ import javax.swing.border.Border;
 
 import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.view.JShape.Shapes;
+/**
+ * 
+ * 
+ *
+ */
+public class BoxGraphic extends AbstractGraphicCard {
 
-public class BoxGraphic   extends AbstractGraphicCard  {
+    private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+    private Box box;
+    private int id;
+/**
+ * 
+ * @param box
+ * @param pos
+ */
+    public BoxGraphic(Box box, Position pos, int id) {
+        super(pos);
+        this.box = box;
+        this.id = id;
 
+    }
 
-	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-	private Box box;
-	
-	public BoxGraphic(Box box, Position pos){
-		super(pos);
-		this.box = box;
-		
-	}
-	
-		
-	@Override
-	public JPanel build(){
-		JPanel card = getRotatedPanel();
-		card.setPreferredSize(new Dimension(70, 70));
-		card.setLayout(new GridLayout(2, 1));
-		
-		
-		JLabel nameP = new JLabel(box.getName());
-		card.add(nameP);
-		
-		JPanel emptyP = new JPanel();
-		card.add(emptyP);
-		
-		emptyP.add(new JShape(Shapes.ROMBO));
+    @Override
+    public JPanel build() {
+        JPanel card = getRotatedPanel();
+        card.setPreferredSize(new Dimension(70, 70));
+        card.setLayout(new GridLayout(2, 1));
 
-		card.setBorder(border);
-		card.setVisible(true);
-			
-		return card;
-		
-		
-	}
+        JLabel nameP = new JLabel(box.getName());
+        card.add(nameP);
 
-	
+        JPanel emptyP = new JPanel();
+        card.add(emptyP);
+
+        card.setBorder(border);
+        card.setVisible(true);
+
+        return card;
+
+    }
 
 }

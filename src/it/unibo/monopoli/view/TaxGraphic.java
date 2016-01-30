@@ -14,41 +14,38 @@ import it.unibo.monopoli.view.JShape.Shapes;
 
 public class TaxGraphic extends AbstractGraphicCard {
 
+    private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+    private Tax tax;
+    private int id;
 
-	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-	private Tax tax;
-	
-	public TaxGraphic(Tax tax, Position pos){
-		super(pos);
-		this.tax = tax;
-		
-	}
-	
-		
-	@Override
-	public JPanel build(){
-		JPanel card = getRotatedPanel();
-		card.setPreferredSize(new Dimension(RotatedPanel.getDim()));
-		card.setLayout(new GridLayout(4, 1));
+    public TaxGraphic(Tax tax, Position pos, int id) {
+        super(pos);
+        this.tax = tax;
+        this.id = id;
 
-		JLabel nameP = new JLabel(tax.getName());
-		card.add(nameP);
-		
-		JPanel emptyP = new JPanel();
-		card.add(emptyP);
-		
-		JLabel valueP = new JLabel(""+tax.getCost());
-		card.add(valueP);
-		
-		emptyP.add(new JShape(Shapes.ROMBO));
-		card.setBorder(border);
-		card.setVisible(true);
-			
-		return card;
-		
-		
-	}
+    }
 
-	
+    @Override
+    public JPanel build() {
+        JPanel card = getRotatedPanel();
+        card.setPreferredSize(new Dimension(RotatedPanel.getDim()));
+        card.setLayout(new GridLayout(4, 1));
+
+        JLabel nameP = new JLabel(tax.getName());
+        card.add(nameP);
+
+        JPanel emptyP = new JPanel();
+        card.add(emptyP);
+
+        JLabel valueP = new JLabel("" + tax.getCost());
+        card.add(valueP);
+
+        
+        card.setBorder(border);
+        card.setVisible(true);
+
+        return card;
+
+    }
 
 }

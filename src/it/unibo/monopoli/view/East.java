@@ -1,15 +1,16 @@
 package it.unibo.monopoli.view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import it.unibo.monopoli.controller.Controller;
+
 public class East extends JPanel {
 
-    public East() {
+    public East(final Controller controller) {
 
         // setPreferredSize(new Dimension(370, 415));
         this.setLayout(new BorderLayout());
@@ -19,12 +20,14 @@ public class East extends JPanel {
         panelBank.setLayout(new BorderLayout());
         panelBank.add(new PlayerGraphic("Bank", 10000).build(), BorderLayout.CENTER);
         this.add(panelBank, BorderLayout.NORTH);
-
+        int j = InizializedPlayer.getMap().size();
         final JPanel panelPlayer = new JPanel();
-        panelPlayer.setLayout(new GridLayout(5, 1));
-
+        panelPlayer.setLayout(new GridLayout(j, 1));
+        
+        
+        
         for (int i = 0; i < InizializedPlayer.getMap().size(); i++) {
-            panelPlayer.add(new PlayerGraphic("Laura", 5).build());
+            panelPlayer.add(new PlayerGraphic(controller.getPlayers(), i).build());
         }
         this.add(new JScrollPane(panelPlayer), BorderLayout.CENTER);
 

@@ -15,35 +15,34 @@ import it.unibo.monopoli.model.table.Ownership;
 import it.unibo.monopoli.view.JShape.Shapes;
 
 public class DecksGraphic extends AbstractGraphicCard {
-	
-	private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-	private DecksBox deck;
-	
-	public DecksGraphic( DecksBox deck, Position pos) {
-		super(pos);
-		this.deck = deck;
-	}
 
-	@Override
-	public JPanel build() {
-		JPanel card = getRotatedPanel();
-		card.setPreferredSize(new Dimension(RotatedPanel.getDim()));
-		card.setLayout(new GridLayout(2, 1));
-		
-			
-		JLabel nameP = new JLabel(deck.getName());
-		card.add(nameP);
-		
-		JPanel emptyP = new JPanel();
-		card.add(emptyP);
-		
-		emptyP.add(new JShape(Shapes.ROMBO));
-		emptyP.add(new JShape(Shapes.ROMBO));
-		card.setBorder(border);
-		card.setVisible(true);
-			
-		return card;
+    private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+    private DecksBox deck;
+    private int id;
 
-	}
+    public DecksGraphic(DecksBox deck, Position pos, int id) {
+        super(pos);
+        this.deck = deck;
+        this.id = id;
+    }
+
+    @Override
+    public JPanel build() {
+        JPanel card = getRotatedPanel();
+        card.setPreferredSize(new Dimension(RotatedPanel.getDim()));
+        card.setLayout(new GridLayout(2, 1));
+
+        JLabel nameP = new JLabel(deck.getName());
+        card.add(nameP);
+
+        JPanel emptyP = new JPanel();
+        card.add(emptyP);
+
+        card.setBorder(border);
+        card.setVisible(true);
+
+        return card;
+
+    }
 
 }

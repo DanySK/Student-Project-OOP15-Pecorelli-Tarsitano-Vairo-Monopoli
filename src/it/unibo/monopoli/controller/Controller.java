@@ -42,7 +42,7 @@ public interface Controller {
      *              -boolean for type of {@link Player}
      */
     void addPlayer(String name, ClassicPawn pawn, boolean isHuman);
-    
+    List<Actions> getNextBoxsActions(final Box box, final Player player);
     void setActualPosition(int position);
     void initializedVersion(EVersion versionEnum);
 
@@ -159,5 +159,7 @@ public interface Controller {
     // * @return new position
     // */
     // int getNewPosition();
+
+    Player getActualPlayer();
 
 }

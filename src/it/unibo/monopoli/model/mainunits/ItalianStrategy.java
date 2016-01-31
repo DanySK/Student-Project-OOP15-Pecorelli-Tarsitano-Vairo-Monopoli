@@ -12,7 +12,7 @@ import it.unibo.monopoli.model.actions.ClassicAuction;
 import it.unibo.monopoli.model.actions.ToAuction;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.cards.ImprevistiCards;
-import it.unibo.monopoli.model.cards.ProbabilitàCards;
+import it.unibo.monopoli.model.cards.ProbabilitaCards;
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.ChanceCards;
 import it.unibo.monopoli.model.cards.ClassicCard;
@@ -72,18 +72,17 @@ public class ItalianStrategy implements GameStrategy {
      *            - a {@link List} of all the current {@link Player}s
      */
     public ItalianStrategy(final List<Player> players) {
+        this.homes = new LinkedList<>();
+        this.hotels = new LinkedList<>();
+        this.inizializesBuildings();
+        this.bank = new ClassicBank(this.homes, this.hotels);
         this.ownerships = new LinkedList<>();
         this.inizializesOwnerships();
+        this.bank.setOwnerships(this.ownerships);
         this.groups = new LinkedList<>();
         this.inizializesGroups();
         this.contracts = new LinkedList<>();
         this.inizializesContracts();
-        this.homes = new LinkedList<>();
-        this.hotels = new LinkedList<>();
-        this.inizializesBuildings();
-        final List<Ownership> banksOwnerships = new LinkedList<>();
-        banksOwnerships.addAll(this.ownerships);
-        this.bank = new ClassicBank(banksOwnerships, this.homes, this.hotels);
         this.players = players;
         this.inizializesPlayers(players);
         this.decks = new LinkedList<>();
@@ -426,38 +425,38 @@ public class ItalianStrategy implements GameStrategy {
                 ImprevistiCards.CARD16.getActions()));
         this.decks.add(new ClassicDeck(ClassicDecks.CHANCE.getName(), chance));
         final List<Card> chest = new LinkedList<>();
-        chest.add(new ClassicCard(ProbabilitàCards.CARD1.getDescription(), ProbabilitàCards.CARD1.getID(),
-                ProbabilitàCards.CARD1.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD2.getDescription(), ProbabilitàCards.CARD2.getID(),
-                ProbabilitàCards.CARD2.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD3.getDescription(), ProbabilitàCards.CARD3.getID(),
-                ProbabilitàCards.CARD3.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD4.getDescription(), ProbabilitàCards.CARD4.getID(),
-                ProbabilitàCards.CARD4.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD5.getDescription(), ProbabilitàCards.CARD5.getID(),
-                ProbabilitàCards.CARD5.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD6.getDescription(), ProbabilitàCards.CARD6.getID(),
-                ProbabilitàCards.CARD6.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD7.getDescription(), ProbabilitàCards.CARD7.getID(),
-                ProbabilitàCards.CARD7.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD8.getDescription(), ProbabilitàCards.CARD8.getID(),
-                ProbabilitàCards.CARD8.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD9.getDescription(), ProbabilitàCards.CARD9.getID(),
-                ProbabilitàCards.CARD9.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD10.getDescription(), ProbabilitàCards.CARD10.getID(),
-                ProbabilitàCards.CARD10.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD11.getDescription(), ProbabilitàCards.CARD11.getID(),
-                ProbabilitàCards.CARD11.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD12.getDescription(), ProbabilitàCards.CARD12.getID(),
-                ProbabilitàCards.CARD12.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD13.getDescription(), ProbabilitàCards.CARD13.getID(),
-                ProbabilitàCards.CARD13.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD14.getDescription(), ProbabilitàCards.CARD14.getID(),
-                ProbabilitàCards.CARD14.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD15.getDescription(), ProbabilitàCards.CARD15.getID(),
-                ProbabilitàCards.CARD15.getActions()));
-        chest.add(new ClassicCard(ProbabilitàCards.CARD16.getDescription(), ProbabilitàCards.CARD16.getID(),
-                ProbabilitàCards.CARD16.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD1.getDescription(), ProbabilitaCards.CARD1.getID(),
+                ProbabilitaCards.CARD1.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD2.getDescription(), ProbabilitaCards.CARD2.getID(),
+                ProbabilitaCards.CARD2.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD3.getDescription(), ProbabilitaCards.CARD3.getID(),
+                ProbabilitaCards.CARD3.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD4.getDescription(), ProbabilitaCards.CARD4.getID(),
+                ProbabilitaCards.CARD4.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD5.getDescription(), ProbabilitaCards.CARD5.getID(),
+                ProbabilitaCards.CARD5.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD6.getDescription(), ProbabilitaCards.CARD6.getID(),
+                ProbabilitaCards.CARD6.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD7.getDescription(), ProbabilitaCards.CARD7.getID(),
+                ProbabilitaCards.CARD7.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD8.getDescription(), ProbabilitaCards.CARD8.getID(),
+                ProbabilitaCards.CARD8.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD9.getDescription(), ProbabilitaCards.CARD9.getID(),
+                ProbabilitaCards.CARD9.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD10.getDescription(), ProbabilitaCards.CARD10.getID(),
+                ProbabilitaCards.CARD10.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD11.getDescription(), ProbabilitaCards.CARD11.getID(),
+                ProbabilitaCards.CARD11.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD12.getDescription(), ProbabilitaCards.CARD12.getID(),
+                ProbabilitaCards.CARD12.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD13.getDescription(), ProbabilitaCards.CARD13.getID(),
+                ProbabilitaCards.CARD13.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD14.getDescription(), ProbabilitaCards.CARD14.getID(),
+                ProbabilitaCards.CARD14.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD15.getDescription(), ProbabilitaCards.CARD15.getID(),
+                ProbabilitaCards.CARD15.getActions()));
+        chest.add(new ClassicCard(ProbabilitaCards.CARD16.getDescription(), ProbabilitaCards.CARD16.getID(),
+                ProbabilitaCards.CARD16.getActions()));
         this.decks.add(new ClassicDeck(ClassicDecks.COMMUNITY_CHEST.getName(), chest));
     }
 

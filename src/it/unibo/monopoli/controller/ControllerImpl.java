@@ -164,11 +164,10 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void endTurn() {
-        this.actualPlayer = this.version.getNextPlayer();
+        this.actualPlayer = this.version.endOfTurnAndNextPlayer();
         if (!this.actualPlayer.isHuman()) {
             this.computerPlayer();
         } else {
-            this.actualPlayer.setDicesRoll(false);
             this.view.ifPresent(
                     v -> v.setButton(this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.actualPlayer)));
         }

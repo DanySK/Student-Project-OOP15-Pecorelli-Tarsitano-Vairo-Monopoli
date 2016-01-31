@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.actions.GoToPrison;
 import it.unibo.monopoli.model.actions.ToBePaid;
@@ -15,6 +16,7 @@ import it.unibo.monopoli.model.actions.ToMortgage;
 import it.unibo.monopoli.model.actions.ToPay;
 import it.unibo.monopoli.model.actions.ToRevokeMortgage;
 import it.unibo.monopoli.model.actions.ToSellProperties;
+import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.mainunits.Bank;
 import it.unibo.monopoli.model.mainunits.ClassicPawn;
@@ -41,7 +43,6 @@ import it.unibo.monopoli.model.table.StationIncomeStrategy;
 import it.unibo.monopoli.model.table.TaxImpl;
 import it.unibo.monopoli.view.EVersion;
 import it.unibo.monopoli.view.InPlay;
-import it.unibo.monopoli.view.InPlayImpl;
 
 /**
  * */
@@ -63,6 +64,7 @@ public class ControllerImpl implements Controller {
     private List<Deck> decks;
     private Optional<InPlay> view;
     private boolean alreadyBuilt;
+    private Card card;
 
     /**
      * 
@@ -518,7 +520,19 @@ public class ControllerImpl implements Controller {
         }
         this.endTurn();
     }
-
+    public Card getLastCardDrawn() {
+        return this.card;
+  }
+    public void drawCard(){
+        if(this.card.getActions().isPresent()){
+        List<Action> list=this.card.getActions().get();
+         for(Action a :list){
+             a.play(this.getActualPlayer());
+            
+        }
+        }
+        
+    }
     // /**
     // * Method for choose the winner.
     // *

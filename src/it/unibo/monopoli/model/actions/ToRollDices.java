@@ -5,6 +5,7 @@ import java.util.List;
 
 import it.unibo.monopoli.model.mainunits.Dice;
 import it.unibo.monopoli.model.mainunits.Player;
+import it.unibo.monopoli.model.table.Box;
 
 /**
  * This class represent one of the {@link Action}s of the game. This one is for
@@ -13,8 +14,11 @@ import it.unibo.monopoli.model.mainunits.Player;
  */
 public class ToRollDices implements Action {
 
+    private static final int POLICE_POSITION = 30;
+
     private final DicesStrategy strategy;
     private final List<Dice> dices;
+    private final Box prison;
 
     /**
      * Constructs a new instance of {@link ToRollDices}'s {@link Action}. The
@@ -23,9 +27,10 @@ public class ToRollDices implements Action {
      * @param strategy
      *            - the {@link DicesStrategy} to use
      */
-    public ToRollDices(final DicesStrategy strategy) {
+    public ToRollDices(final DicesStrategy strategy, final Box prison) {
         this.strategy = strategy;
         this.dices = strategy.getDices();
+        this.prison = prison;
     }
 
     @Override
@@ -38,6 +43,13 @@ public class ToRollDices implements Action {
         player.setLastDicesNumber(dicesNumbers);
         player.setDicesRoll(true);
         this.strategy.nowPlay(player);
+        if (this.policePos(player)) {
+            new GoToPrison(this.prison);
+        }
+    }
+
+    private boolean policePos(final Player player) {
+        return player.getPawn().getActualPos() == POLICE_POSITION; 
     }
 
 }

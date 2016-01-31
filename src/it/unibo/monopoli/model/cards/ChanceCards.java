@@ -34,8 +34,8 @@ public enum ChanceCards {
             12, MoveUpTo.theNearestStation()),
     CARD13("GO TO THE TRAFALGAR SQUARE: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), 13),
     CARD14("GO TO THE WHITEHALL: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), 14),
-    CARD15("ADVANCE TO THE NEAREST STATION: IF IT'S FREE, YOU CAN BUY IT; IF IT IS OWNED BY ANOTHER PLAYER, LAUNCHING THE DICES AND PAY THE OWNER 10 TIMES THE NUMBER RELEASED",
-            15, MoveUpTo.theNearestStation(), new ToRollDices(new ClassicDicesStrategy())),
+    CARD15("ADVANCE TO THE NEAREST STATION: IF IT'S FREE, YOU CAN BUY IT; IF IT IS OWNED BY ANOTHER PLAYER, PAY THE OWNER 10 TIMES THE NUMBER RELEASED WITH DICES",
+            15, MoveUpTo.theNearestStation()),
     CARD16("MATURANO THE COUPONS OF YOUR REAL ESTATE FUNDS: COLLECT $150", 16, new ToBePaid(150));
 
     private final String description;

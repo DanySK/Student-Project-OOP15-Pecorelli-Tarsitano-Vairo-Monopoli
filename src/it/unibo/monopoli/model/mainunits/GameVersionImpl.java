@@ -3,9 +3,9 @@ package it.unibo.monopoli.model.mainunits;
 import java.util.Iterator;
 import java.util.List;
 
+import it.unibo.monopoli.controller.Actions;
 import it.unibo.monopoli.model.actions.AuctionOfOwnership;
-import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
-import it.unibo.monopoli.model.actions.ToRollDices;
+import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.model.table.Ownership;
@@ -63,7 +63,8 @@ public class GameVersionImpl implements GameVersion {
         if (!this.iter.hasNext()) {
             this.iter = this.players.iterator();
         }
-        return this.actualPlayer = (Player) this.iter.next();
+        this.actualPlayer = (Player) this.iter.next();
+        return this.actualPlayer;
     }
 
     @Override
@@ -82,12 +83,16 @@ public class GameVersionImpl implements GameVersion {
     // // TODO Auto-generated method stub
     // return null;
     // }
-    //
-    // @Override
-    // public Action getNextCardsAction(final Box box, final Card card, final
-    // Player player) {
-    // // TODO Auto-generated method stub
-    // return null;
-    // }
+
+     @Override
+     public boolean getNextCardsAction(final Box box, final Card card, final Player player) {
+        return this.strategy.getNextCardsActions(box, card, player);
+     }
+
+     @Override
+     public boolean haveEnoughMoney(final Player player, final int moneyToPay) {
+         return this.strategy.haveEnoughMoney(player, moneyToPay);
+     }
+
 
 }

@@ -9,7 +9,7 @@ package it.unibo.monopoli.model.table;
 public class NeutralArea implements Box {
 
     private final String name;
-    private final int ID;
+    private final int id;
 //    private final Set<Action> allowedActions;
 //    private final Set<Action> obligatoryActions;
 
@@ -19,12 +19,12 @@ public class NeutralArea implements Box {
      * 
      * @param name
      *            - of this {@link Box}
-     * @param ID
+     * @param id
      *            - of this {@link Box}
      */
-    public NeutralArea(final String name, final int ID) {
+    public NeutralArea(final String name, final int id) {
         this.name = name;
-        this.ID = ID;
+        this.id = id;
 //        this.allowedActions = new HashSet<>();
 //        this.obligatoryActions = new HashSet<>();
     }
@@ -36,7 +36,7 @@ public class NeutralArea implements Box {
 
     @Override
     public int getID() {
-        return this.ID;
+        return this.id;
     }
 
 //    @Override

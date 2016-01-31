@@ -9,20 +9,24 @@ import java.util.stream.Collectors;
 
 import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.actions.ClassicAuction;
-import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
+import it.unibo.monopoli.model.actions.EvadeTaxes;
+import it.unibo.monopoli.model.actions.GoToPrison;
 import it.unibo.monopoli.model.actions.ItalianDicesStrategy;
+import it.unibo.monopoli.model.actions.MoveUpTo;
 import it.unibo.monopoli.model.actions.ToAuction;
+import it.unibo.monopoli.model.actions.ToBePaid;
+import it.unibo.monopoli.model.actions.ToPay;
 import it.unibo.monopoli.model.actions.ToRollDices;
+import it.unibo.monopoli.model.actions.ToSellProperties;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.cards.ImprevistiCards;
 import it.unibo.monopoli.model.cards.ProbabilitaCards;
 import it.unibo.monopoli.model.cards.Card;
-import it.unibo.monopoli.model.cards.ChanceCards;
 import it.unibo.monopoli.model.cards.ClassicCard;
 import it.unibo.monopoli.model.cards.ClassicDeck;
 import it.unibo.monopoli.model.cards.ClassicDecks;
-import it.unibo.monopoli.model.cards.CommunityChestCards;
 import it.unibo.monopoli.model.table.Box;
+import it.unibo.monopoli.model.table.Building;
 import it.unibo.monopoli.model.table.ClassicContract;
 import it.unibo.monopoli.model.table.ClassicLand;
 import it.unibo.monopoli.model.table.ClassicLandContract;
@@ -33,12 +37,15 @@ import it.unibo.monopoli.model.table.DecksBox;
 import it.unibo.monopoli.model.table.Group;
 import it.unibo.monopoli.model.table.Home;
 import it.unibo.monopoli.model.table.Hotel;
-import it.unibo.monopoli.model.table.NeutralArea;
+import it.unibo.monopoli.model.table.ItalianNeutralArea;
+import it.unibo.monopoli.model.table.Land;
+import it.unibo.monopoli.model.table.LandGroup;
 import it.unibo.monopoli.model.table.Ownership;
 import it.unibo.monopoli.model.table.Police;
 import it.unibo.monopoli.model.table.PrisonOrTransit;
 import it.unibo.monopoli.model.table.Start;
 import it.unibo.monopoli.model.table.Station;
+import it.unibo.monopoli.model.table.StationIncomeStrategy;
 import it.unibo.monopoli.model.table.TaxImpl;
 
 /**
@@ -56,6 +63,39 @@ public class ItalianStrategy implements GameStrategy {
     private static final int MAX_PLAYERS = 6;
     private static final int CALCULATE_OWNERSHIP = 9;
     private static final int CALCULATE_MONEY = 50;
+
+    private static final int CARD2 = 2;
+    private static final int CARD3 = 3;
+    private static final int CARD4 = 4;
+    private static final int CARD5 = 5;
+    private static final int CARD7 = 7;
+    private static final int CARD8 = 8;
+    private static final int CARD9 = 9;
+    private static final int CARD10 = 10;
+    private static final int CARD11 = 11;
+    private static final int CARD12 = 12;
+    private static final int CARD13 = 13;
+    private static final int CARD14 = 14;
+    private static final int CARD15 = 15;
+    private static final int CARD17 = 17;
+    private static final int CARD18 = 18;
+    private static final int CARD20 = 20;
+    private static final int CARD21 = 21;
+    private static final int CARD23 = 23;
+    private static final int CARD24 = 24;
+    private static final int CARD25 = 25;
+    private static final int CARD26 = 26;
+
+    private static final int CHANCE2_STEPS = 37;
+    private static final int CHANCE5_PAY = 20;
+    private static final int CHANCE8_HOME = 25;
+    private static final int CHANCE8_HOTEL = 100;
+    private static final int CHANCE9_TAX = 50;
+    private static final int CHEST1_2_PAY = 50;
+    private static final int CHEST8_HOME = 40;
+    private static final int CHEST8_HOTEL = 115;
+
+ 
 
     private final List<Player> players;
     private final List<Ownership> ownerships;
@@ -473,7 +513,7 @@ public class ItalianStrategy implements GameStrategy {
         final PrisonOrTransit prison = new PrisonOrTransit("IN JAIL OR JUST VISITING",
                 BoxesPositions.PRISON_POSITION.getPos());
         temp.add(prison);
-        temp.add(new NeutralArea("PARCHEGGIO GRATUITO", BoxesPositions.NEUTRAL_AREA_POSITION.getPos()));
+        temp.add(new ItalianNeutralArea("PARCHEGGIO GRATUITO", BoxesPositions.NEUTRAL_AREA_POSITION.getPos()));
         temp.add(new Police("IN PRIGIONE!", BoxesPositions.POLICE_POSITION.getPos(), prison));
         temp.add(new DecksBox("IMPREVISTI", BoxesPositions.FIRST_CHANCE_POSITION.getPos(), this.decks.get(0)));
         temp.add(new DecksBox("IMPREVISTI", BoxesPositions.SECOND_CHANCE_POSITION.getPos(), this.decks.get(0)));
@@ -522,8 +562,177 @@ public class ItalianStrategy implements GameStrategy {
     }
 
     @Override
-    public List<Integer> toRollDices(Player player) {
-        new ToRollDices(new ItalianDicesStrategy(this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos()))).play(player);
+    public List<Integer> toRollDices(final Player player) {
+        final Box prison = this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos());
+        new ToRollDices(new ItalianDicesStrategy(prison), prison).play(player);
         return player.lastDicesNumber();
+    }
+
+    @Override
+    public boolean getNextCardsActions(final Box box, final Card card, final Player player) {
+        final ItalianNeutralArea neutral = ((ItalianNeutralArea) this.allBoxes.get(BoxesPositions.NEUTRAL_AREA_POSITION.getPos()));
+        switch (card.getID()) {
+        case CARD2:
+            MoveUpTo.moveUpToBox(this.allBoxes.get(CHANCE2_STEPS)).play(player);
+            break;
+        case CARD3:
+            if (!((Ownership) box).getOwner().equals(player) && !((Ownership) box).getOwner().equals(this.bank)) {
+                final int amount = 2
+                        * ((Ownership) box).getContract().getIncome(new StationIncomeStrategy(((Ownership) box)));
+                new ToBePaid(amount).play(player); //IL GIOCATORE DEVE ESSERE COMUNQUE PAGATO
+                if (!this.tryToPay(player, amount)) {
+                    return true;
+                }
+            }
+            break;
+        case CARD4:
+            player.addCard(card);
+            break;
+        case CARD5:
+            if (!this.tryToEvadeTaxes(player, CHANCE9_TAX)) {
+                return true;
+            }
+            new EvadeTaxes(CHANCE5_PAY, neutral).play(player);
+            break;
+        case CARD7:
+            new GoToPrison(this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos())).play(player);
+        case CARD8:
+            final List<List<Building>> building = player.getOwnerships().stream().filter(o -> o instanceof Land)
+                    .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
+                    .map(o -> ((LandGroup) o.getGroup()).getBuildings()).collect(Collectors.toList());
+            for (final List<Building> l: building) {
+                for (final Building b: l) {
+                    if (!this.tryToEvadeTaxes(player, b instanceof Home ? CHANCE8_HOME : CHANCE8_HOTEL)) {
+                        return true;
+                    }
+                }
+            }
+            break;
+        case CARD9:
+            for (final Player p: this.players) {
+                if (!p.equals(player)) {
+                    new ToBePaid(CHANCE9_TAX).play(player);
+                    if (!this.tryToPay(p, CHANCE9_TAX)) {
+                        return true;
+                    }
+                }
+            }
+            break;
+        case CARD10:
+            MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.START_POSITION.getPos())).play(player);
+        case CARD11:
+            MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.OWNERSHIP18_POSITION.getPos())).play(player);
+        case CARD12:
+            if (!((Ownership) box).getOwner().equals(player) && !((Ownership) box).getOwner().equals(this.bank)) {
+                final int amount = 2
+                        * ((Ownership) box).getContract().getIncome(new StationIncomeStrategy(((Ownership) box)));
+                new ToBePaid(amount).play(player);
+                if (!this.tryToPay(player, amount)) {
+                    return true;
+                }
+            }
+            break;
+        case CARD13:
+            MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.OWNERSHIP17_POSITION.getPos())).play(player);
+        case CARD14:
+            MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.OWNERSHIP9_POSITION.getPos())).play(player);
+        case CARD15:
+            if (!((Ownership) box).getOwner().equals(player) && !((Ownership) box).getOwner().equals(this.bank)) {
+                final int amount = (player.lastDicesNumber().stream().reduce((d, d1) -> d + d1).get() * 10);
+                new ToBePaid(amount).play(player);
+                if (!this.tryToPay(player, amount)) {
+                    return true;
+                }
+            }
+            break;
+        case CARD17:
+            if (!this.tryToEvadeTaxes(player, CHEST1_2_PAY)) {
+                return true;
+            }
+            break;
+        case CARD18:
+            if (!this.tryToEvadeTaxes(player, CHEST1_2_PAY)) {
+                return true;
+            }
+            break;
+        case CARD20:
+            player.addCard(card);
+            break;
+        case CARD21:
+            if (!this.tryToEvadeTaxes(player, 100)) {
+                return true;
+            }
+            break;
+        case CARD23:
+            new GoToPrison(this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos())).play(player);
+        case CARD24:
+            final List<List<Building>> buildings = player.getOwnerships().stream().filter(o -> o instanceof Land)
+                    .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
+                    .map(o -> ((LandGroup) o.getGroup()).getBuildings()).collect(Collectors.toList());
+            for (final List<Building> l: buildings) {
+                for (final Building b: l) {
+                    if (!this.tryToEvadeTaxes(player, b instanceof Home ? CHEST8_HOME : CHEST8_HOTEL)) {
+                        return true;
+                    }
+                }
+            }
+            break;
+        case CARD25:
+            for (final Player p: this.players) {
+                if (!p.equals(player)) {
+                    new ToBePaid(10).play(player);
+                    if (!this.tryToPay(p, 10)) {
+                        return true;
+                    }
+                }
+            }
+            break;
+        case CARD26:
+            MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.START_POSITION.getPos())).play(player);
+        default:
+            break;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean haveEnoughMoney(final Player player, final int moneyToPay) {
+        if (!player.getOwnerships().isEmpty()) {
+            player.getOwnerships().stream()
+                                  .filter(o -> o.getGroup() instanceof LandGroup)
+                                  .filter(o -> ((LandGroup) o.getGroup()).getBuildings().size() > 0)
+                                  .forEach(o -> {
+                                      ((LandGroup) o.getGroup()).getBuildings().forEach(b -> {
+                                          if (player.getMoney() <= moneyToPay) {
+                                              ToSellProperties.sellABuilding(((Land) o), b, this.bank);
+                                          }
+                                      });
+                                    });
+        player.getOwnerships().stream()
+                              .forEach(o -> {
+                                  if (player.getMoney() <= moneyToPay) {
+                                      ToSellProperties.sellAOwnership(o.getContract().getCost(), o, this.bank);
+                                  }
+                              });
+        }
+        return player.getMoney() > moneyToPay;
+     }
+
+    private boolean tryToPay(final Player player, final int amoun) {
+        try {
+            new ToPay(10, player).play(player);
+            return true;
+        } catch (IllegalArgumentException i) {
+            return this.haveEnoughMoney(player, amoun) ? this.tryToPay(player, amoun) : false;
+        }
+    }
+
+    private boolean tryToEvadeTaxes(final Player player, final int amount) {
+        try {
+            new EvadeTaxes(amount, ((ItalianNeutralArea) this.allBoxes.get(BoxesPositions.NEUTRAL_AREA_POSITION.getPos())));
+            return true;
+        } catch (IllegalArgumentException i) {
+            return this.haveEnoughMoney(player, amount) ? this.tryToPay(player, amount) : false;
+        }
     }
 }

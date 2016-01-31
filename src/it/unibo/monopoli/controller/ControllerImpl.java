@@ -72,7 +72,7 @@ public class ControllerImpl implements Controller {
      */
     public ControllerImpl() {
         this.players = new LinkedList<>();
-        this.view = Optional.empty() ; 
+        this.view = Optional.empty();
     }
 
     @Override

@@ -3,6 +3,7 @@ package it.unibo.monopoli.model.mainunits;
 import java.util.List;
 import java.util.Set;
 
+import it.unibo.monopoli.controller.Actions;
 import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.cards.Card;
@@ -51,7 +52,9 @@ public interface GameVersion {
 
 //    Action getNextBoxsAction(Box box, Player player);
 //
-//    Action getNextCardsAction(Box box, Card card, Player player);
-//    
+    boolean getNextCardsAction(Box box, Card card, Player player);
+    
+    boolean haveEnoughMoney(Player player, int moneyToPay);
+    
     
 }

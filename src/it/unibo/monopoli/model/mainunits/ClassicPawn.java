@@ -2,6 +2,8 @@ package it.unibo.monopoli.model.mainunits;
 
 public class ClassicPawn implements Pawn {
 
+    private static final int LAST_POSITION = 39;
+
     private final int id;
     private int actualPos;
     private int previousPos;
@@ -31,6 +33,13 @@ public class ClassicPawn implements Pawn {
     public void setPos(final int newPosizion) {
         this.previousPos = this.actualPos;
         this.actualPos = newPosizion;
+        if (this.isPassedFromStartBox()) {
+            this.actualPos = this.actualPos - LAST_POSITION - 1;
+        }
+    }
+
+    private boolean isPassedFromStartBox() {
+        return this.actualPos > LAST_POSITION;
     }
 
 }

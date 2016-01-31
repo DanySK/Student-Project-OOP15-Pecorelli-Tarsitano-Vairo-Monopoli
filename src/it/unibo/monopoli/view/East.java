@@ -18,7 +18,7 @@ public class East extends JPanel {
         final JPanel panelBank = new JPanel();
         // panelBank.setPreferredSize(new Dimension(10, 100));
         panelBank.setLayout(new BorderLayout());
-        panelBank.add(new PlayerGraphic("Bank", 10000).build(), BorderLayout.CENTER);
+//        panelBank.add(new PlayerGraphic("Bank", 10000).build(), BorderLayout.CENTER);
         this.add(panelBank, BorderLayout.NORTH);
         int j = InizializedPlayer.getMap().size();
         final JPanel panelPlayer = new JPanel();
@@ -27,11 +27,12 @@ public class East extends JPanel {
         
         System.out.println("Size.map: " + InizializedPlayer.getMap().size());
         for (int i = 0; i < InizializedPlayer.getMap().size(); i++) {
-            panelPlayer.add(new PlayerGraphic(controller.getPlayers(), i).build());
+            panelPlayer.add(new PlayerGraphic(controller).build(controller.getAllBoxes(),controller.getPlayers(), i));
         }
         this.add(new JScrollPane(panelPlayer), BorderLayout.CENTER);
 
     }
+    
 
     public JPanel build() {
         // final JPanel panelE = new JPanel();

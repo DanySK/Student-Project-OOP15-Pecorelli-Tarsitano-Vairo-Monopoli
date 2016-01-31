@@ -60,6 +60,7 @@ public class StartPlay implements ActionListener {
                 System.out.println("" + p.getPawn().getID());
 
             });
+            
             contr.endTurn();
 
         }

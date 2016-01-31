@@ -75,7 +75,7 @@ public class InizializedComputer {
 
         final JLabel lblNome = new JLabel("Nome:");
         lblNome.setFont(new Font("Berlin Sans FB", Font.PLAIN, 13));
-        centerP_row1.add(lblNome);
+        northP.add(lblNome);
 
         JTextField textNome = new JTextField();
         textNome.setPreferredSize(new Dimension(0,30));
@@ -83,6 +83,7 @@ public class InizializedComputer {
         centerP_row1.add(textNome);
         textNome.setColumns(10);
         textNome.setText("Computer");
+        centerP.add(textNome,BorderLayout.NORTH);
         textNome.setEditable(false);
 
         final JPanel centerP_row2 = new JPanel();
@@ -120,13 +121,17 @@ public class InizializedComputer {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                InizializedPlayer.getMap().remove(textNome.getText(), isUman);
+                InizializedPlayer.getMap().remove(1+C.SPLITTOKEN+"Computer");
                 panel.setVisible(false);
                 playerP.remove(panel);
                 Go.addNumPlayers(-1);
                 playerP.revalidate();
                 System.out.println("Remove: " + playerP.getComponentCount());
                 System.out.println("RemoveGet: "+ Go.getNumPlayers());
+                System.out.println("TextNome: " + textNome.getText());
+                System.out.println(1+C.SPLITTOKEN+textNome.getText());
+                System.out.println("Size map Remove Computer: " + InizializedPlayer.getMap().size());
+                System.out.println("Size map Remove Computer: " + InizializedPlayer.getMap().get("1"+C.SPLITTOKEN+"Computer"));
 
             }
 

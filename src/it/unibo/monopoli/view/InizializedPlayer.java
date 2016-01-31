@@ -35,6 +35,7 @@ public class InizializedPlayer {
     private boolean isUman;
     private JRadioButton rdbtnComputer;
     private JRadioButton rdbtnUman;
+    private String positionAndName;
 /**
  * 
  */
@@ -91,7 +92,8 @@ public class InizializedPlayer {
                     }
 
                     // alla mappa passo N?NOMEGIOCATORE, MI E' UTILE PER DECIDERE IL COLORE DELLE PEDINE
-                    map.put((Go.getNumPlayers() - 1) + C.SPLITTOKEN + textNome.getText(), isUman);
+                    positionAndName = (Go.getNumPlayers() - 1) + C.SPLITTOKEN + textNome.getText();
+                    map.put(positionAndName, isUman);
                     System.out.println("" + textNome.getText());
                     System.out.println("" + isUman);
                     save.setVisible(false);
@@ -109,7 +111,7 @@ public class InizializedPlayer {
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-                map.remove(textNome.getText(), isUman);
+                map.remove(positionAndName);
                 panel.setVisible(false);
                 playerP.remove(panel);
                 Go.addNumPlayers(-1);
@@ -134,16 +136,16 @@ public class InizializedPlayer {
 
         final JLabel lblNome = new JLabel("Nome:");
         lblNome.setFont(new Font("Berlin Sans FB", Font.PLAIN, 13));
-        centerP_row1.add(lblNome);
+        northP.add(lblNome);
 
         textNome = new JTextField();
         textNome.setPreferredSize(new Dimension(0,30));
         textNome.setHorizontalAlignment(SwingConstants.CENTER);
-        centerP_row1.add(textNome);
+        centerP.add(textNome,BorderLayout.NORTH);
         textNome.setColumns(10);
 
         final JPanel centerP_row2 = new JPanel();
-        centerP.add(centerP_row2,BorderLayout.CENTER);
+        
         
         rdbtnUman = new JRadioButton("Umano");
         rdbtnUman.setSelected(true);
@@ -153,7 +155,7 @@ public class InizializedPlayer {
 
         rdbtnComputer = new JRadioButton("Computer");
         centerP_row2.add(rdbtnComputer);
-
+        centerP.add(centerP_row2,BorderLayout.CENTER);
         final ButtonGroup group = new ButtonGroup();
         group.add(rdbtnComputer);
         group.add(rdbtnUman);

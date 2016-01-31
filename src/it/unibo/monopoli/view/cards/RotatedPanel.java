@@ -10,13 +10,19 @@ public class RotatedPanel extends JPanel {
 
     private int rotation; // oppure -90 per la rotazione inversa
     private Dimension dim;
+    private Dimension dimension;
 
-    public RotatedPanel(int rotation, Dimension dim) {
+    public RotatedPanel(int rotation, Dimension dimension, Dimension dim) {
         this.rotation = rotation;
-        this.setPreferredSize(dim);
+        this.dimension = dimension;
+        this.setPreferredSize(dimension);
         this.dim = dim;
     }
 
+    public Dimension getDimension() {
+        return dimension;
+    }
+    
     public Dimension getDim() {
         return dim;
     }

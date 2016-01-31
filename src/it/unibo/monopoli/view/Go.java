@@ -177,6 +177,7 @@ public class Go {
         GridC.add(btnNewButton, gbc_btnNewButton);
 
         start.setVisible(true);
+       
     }
 
     public static void main(String[] args) {

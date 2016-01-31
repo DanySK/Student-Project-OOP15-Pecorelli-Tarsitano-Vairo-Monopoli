@@ -105,9 +105,10 @@ public class Index {
                  * posizione int new pos = controller.toRollDices(); prendo la
                  * nuova tessera e ivoco tesseta.addPawn(actualPlater)
                  */
+                System.out.println("Player Roll Dicies: " + controller.getActualPlayer().getName());
                 Player p = controller.getActualPlayer();
                 HashMap<Integer, IBoxGraphic> tessere = tabellone.getCardsGraphic();
-                tessere.get(controller.getActualPosition()).removePawn(p);
+                tessere.get(controller.getActualPlayer().getPawn().getActualPos()/*controller.getActualPosition()*/).removePawn(p);
                 int pos = controller.toRollDices();
                 System.out.println("new pos: " + pos);
                 tessere.get(pos).addPawn(controller.getActualPlayer());
@@ -133,7 +134,7 @@ public class Index {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.endTurn();
-
+                System.out.println("Player End Turn: " + controller.getActualPlayer().getName());
                 
                 
                 buttonList.forEach(b -> b.setEnabled(false));

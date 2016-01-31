@@ -82,7 +82,6 @@ public class ProvaTabellone {
     public JPanel initialize() {
         int i = 0;
         int j = 0;
-
         final JPanel panel = new JPanel();
         final JPanel panelM = new JPanel();
         panelM.setLayout(new BorderLayout());
@@ -96,6 +95,8 @@ public class ProvaTabellone {
         gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
         gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
                 Double.MIN_VALUE };
+        
+        
 
         panel.setLayout(gbl_panel);
 
@@ -143,11 +144,18 @@ public class ProvaTabellone {
                     newcard = new DecksGraphic((DecksBox) card, pos, id);
                 } else {
                     newcard = new BoxGraphic(card, pos, id);
-                    if (id == 0) 
-                        controller.getPlayers().forEach(p -> newcard.addPawn(p));
-                        
+                    if (id == 0) {
+                       controller.getPlayers().forEach(p -> newcard.addPawn(p));
+                       
+                    }
+                           
                 }
-
+//                controller.getPlayers().forEach(p -> {
+//                    if (newcard.getID() == 0){
+//                        newcard.addPawn(p);  
+//                    }
+//                });
+//              controller.getPlayers().forEach(p -> newcard.addPawn(p));
                 // aggiungi la carta nella griglia, alla posizione r, c
                 GridBagConstraints gbc = new GridBagConstraints();
                 gbc.insets = new Insets(0, 0, 0, 0);
@@ -157,6 +165,8 @@ public class ProvaTabellone {
                 cardsGraphic.put(newcard.getID(), newcard);
 
             });
+            
+
 
         }
         // IBoxGraphic casella20;

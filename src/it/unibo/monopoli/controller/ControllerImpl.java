@@ -66,6 +66,7 @@ public class ControllerImpl implements Controller {
     private Optional<InPlay> view;
     private boolean alreadyBuilt;
     private Card card;
+    private List<Actions> actions;
 
     /**
      * 
@@ -181,8 +182,7 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void buyOwnership() {
-        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
-
+        
         if (actions.contains(Actions.BUY)) {
             ToBuyProperties.buyAOwnership(((Ownership) this.boxes.get(actualPosition)).getContract().getCost(),
                     ((Ownership) this.boxes.get(actualPosition))).play(this.actualPlayer);
@@ -202,7 +202,6 @@ public class ControllerImpl implements Controller {
     @Override
     public void sellOwnership() {
 
-        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
         if (actions.contains(Actions.SELL)) {
             ToSellProperties.sellAOwnership(((Ownership) this.boxes.get(actualPosition)).getContract().getCost(),
                     (Ownership) this.boxes.get(actualPosition), this.bank).play(this.actualPlayer);
@@ -222,7 +221,6 @@ public class ControllerImpl implements Controller {
     @Override
     public void build() {
 
-        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
         if (actions.contains(Actions.BUILD)) {
             ToBuyProperties.buyABuilding((Land) this.boxes.get(actualPosition), this.bank).play(this.actualPlayer);
             this.alreadyBuilt = true;
@@ -240,7 +238,6 @@ public class ControllerImpl implements Controller {
     @Override
     public void sellBuilding() {
 
-        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
         if (actions.contains(Actions.SELL_BUILDING)) {
             Land land = (Land) this.boxes.get(actualPosition);
             ToSellProperties.sellABuilding(land, ((LandGroup) land.getGroup()).getBuildings().get(0), this.bank)
@@ -255,7 +252,6 @@ public class ControllerImpl implements Controller {
     @Override
     public void mortgageOwnership() {
 
-        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
         if (actions.contains(Actions.MORTGAGE)) {
             new ToMortgage((Ownership) this.boxes.get(actualPosition)).play(this.actualPlayer);
             if (this.actualPlayer.isHuman()) {
@@ -270,7 +266,6 @@ public class ControllerImpl implements Controller {
     @Override
     public void revokeMortgageOwnership() {
 
-        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
         if (actions.contains(Actions.REVOKE_MORTGAGE)) {
             new ToRevokeMortgage((Ownership) this.boxes.get(actualPosition)).play(this.actualPlayer);
             if (this.actualPlayer.isHuman()) {
@@ -546,7 +541,7 @@ public class ControllerImpl implements Controller {
     // }
 
     public List<Actions> getNextBoxsActions(final Box box, final Player player) {
-        final List<Actions> actions = new LinkedList<>();
+        actions = new LinkedList<>();
         actions.clear();
         if (!player.dicesAlreadyRolled()) {
             actions.add(Actions.ROLL_DICES);

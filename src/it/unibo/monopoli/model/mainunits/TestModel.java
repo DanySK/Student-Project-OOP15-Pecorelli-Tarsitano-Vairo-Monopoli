@@ -2,7 +2,6 @@ package it.unibo.monopoli.model.mainunits;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -59,10 +58,10 @@ public class TestModel {
     private static final int N_OF_CARDS_IN_ONE_DECK = 16;
 
     /**
-     * This is the test for 5 platers.
+     * This is the test for model's part.
      */
     @Test
-    public void test5Players() {
+    public void test() {
         final List<Player> players = new LinkedList<>();
         GameVersion version;
 
@@ -87,7 +86,7 @@ public class TestModel {
         players.remove(SEVENTH_PLAYER);
         players.remove(PAWN_ID_AND_N_PLAYER_6);
         version = new GameVersionImpl(new ClassicStrategy(players));
-        assertSame(players.size(), PLAYERS_5);
+        assertEquals(players.size(), PLAYERS_5);
         final Bank bank = version.getBank();
 
         //Tests players' money and ownerships
@@ -172,29 +171,25 @@ public class TestModel {
         assertEquals(decks.get(0).getCards().size(), decks.get(1).getCards().size());
         assertEquals(decks.get(0).getCards().size(), N_OF_CARDS_IN_ONE_DECK);
 
-        //Tests all the boxes of the game's table
-        version.getAllBoxes().get(0)
-
         //Tests MoveUpTo.takeSteps and MoveUpTo.theNearestStation
         final int amount = testPlayer.getMoney();
         MoveUpTo.takeSteps(2).play(testPlayer);
         assertEquals(testPlayer.getPawn().getActualPos(), testPlayer.getPawn().getPreviousPos() + 2);
-        assertEquals(testPlayer.getPawn().getActualPos(), 24);
         assertEquals(amount, testPlayer.getMoney());
         MoveUpTo.theNearestStation().play(testPlayer);
-        assertEquals(testPlayer.getPawn().getActualPos(), 25);
+        assertEquals(testPlayer.getPawn().getActualPos(), BoxesPositions.OWNERSHIP18_POSITION.getPos());
         assertEquals(amount, testPlayer.getMoney());
         MoveUpTo.theNearestStation().play(testPlayer);
-        assertEquals(testPlayer.getPawn().getActualPos(), 35);
+        assertEquals(testPlayer.getPawn().getActualPos(), BoxesPositions.OWNERSHIP26_POSITION.getPos());
         assertEquals(amount, testPlayer.getMoney());
 
         //PassFromStart
         final int newAmount = amount + Start.getMuchToPick();
         MoveUpTo.theNearestStation().play(testPlayer);
-        assertEquals(testPlayer.getPawn().getActualPos(), 5);
+        assertEquals(testPlayer.getPawn().getActualPos(), BoxesPositions.OWNERSHIP3_POSITION.getPos());
         assertEquals(newAmount, testPlayer.getMoney());
         MoveUpTo.theNearestStation().play(testPlayer);
-        assertEquals(testPlayer.getPawn().getActualPos(), 15);
+        assertEquals(testPlayer.getPawn().getActualPos(), BoxesPositions.OWNERSHIP11_POSITION.getPos());
 
         //Tests ToPay and ToBePaid
         final int money = 40;
@@ -270,10 +265,16 @@ public class TestModel {
         assertFalse(testPlayer.getOwnerships().contains(ow));
 
         //Tests ToDrawCard
-        final Card oneToPick = decks.get(0).getCards().get(N_OF_CARDS_IN_ONE_DECK - 1);
+        final Card oneToPick = decks.get(0).getCards().get(0);
         new ToDrawCards(decks.get(0)).play(testPlayer);
         assertEquals(oneToPick, testPlayer.lastCardDrew());
-        assertEquals(oneToPick, decks.get(0).getCards().get(0));
+        for (int i = 0; i < N_OF_CARDS_IN_ONE_DECK - 1; i++) {
+            new ToDrawCards(decks.get(0)).play(testPlayer);
+        }
+        final Card lastToPick = decks.get(0).getCards().get(N_OF_CARDS_IN_ONE_DECK - 1);
+        assertEquals(lastToPick, testPlayer.lastCardDrew());
+        new ToDrawCards(decks.get(0)).play(testPlayer);
+        assertEquals(oneToPick, testPlayer.lastCardDrew());
 
         //Tests ClassicCard
         try {
@@ -285,6 +286,13 @@ public class TestModel {
         assertEquals(oneToPick.getPlayer().get(), testPlayer);
         assertEquals(1, testPlayer.getCards().size());
         assertEquals(oneToPick, testPlayer.getCards().get(0));
+        for (int i = 0; i < N_OF_CARDS_IN_ONE_DECK - 1; i++) {
+            new ToDrawCards(decks.get(0)).play(testPlayer);
+        }
+        assertEquals(decks.get(0).getCards().get(N_OF_CARDS_IN_ONE_DECK - 1), testPlayer.lastCardDrew());
+        new ToDrawCards(decks.get(0)).play(testPlayer);
+        assertFalse(oneToPick.equals(testPlayer.lastCardDrew()));
+        assertEquals(decks.get(0).getCards().get(1), testPlayer.lastCardDrew());
         testPlayer.removeCard(oneToPick);
         try {
             oneToPick.getPlayer().get();

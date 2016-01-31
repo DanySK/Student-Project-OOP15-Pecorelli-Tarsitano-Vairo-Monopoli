@@ -29,8 +29,8 @@ public class ToDrawCards implements Action {
     public void play(final Player player) {
         this.card = this.deck.getFirstCard();
         player.setLastCardDrew(this.card);
-        this.deck.getCards().remove(this.card);
-        this.deck.getCards().add(0, this.card);
+//        this.deck.getCards().remove(this.card);
+//        this.deck.getCards().add(0, this.card);
     }
 
 //    CE L'HA GIÀ IL GIOCATORE

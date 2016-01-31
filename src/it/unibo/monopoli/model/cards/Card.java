@@ -44,9 +44,9 @@ public interface Card {
     Optional<List<Action>> getActions();
 
     /**
-     * Returns the {@link Optional} {@link Player} who draw the {@link Card}.
+     * Returns the {@link Optional} {@link Player} owner of this {@link Card}.
      * 
-     * @return the {@link Player} who draw the {@link Card}
+     * @return the {@link Player} owner of this {@link Card}
      */
     Optional<Player> getPlayer();
 

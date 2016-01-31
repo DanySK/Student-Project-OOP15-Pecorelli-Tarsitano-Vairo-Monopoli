@@ -116,6 +116,7 @@ public class InizializedPlayer {
                 playerP.revalidate();
                 System.out.println("Remove: " + playerP.getComponentCount());
                 System.out.println("RemoveGet: " + Go.getNumPlayers());
+                System.out.println("Remove: size Map: " + InizializedPlayer.getMap().size());
 
             }
 

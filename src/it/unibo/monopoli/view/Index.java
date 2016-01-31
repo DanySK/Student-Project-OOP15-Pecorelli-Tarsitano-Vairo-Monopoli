@@ -134,14 +134,19 @@ public class Index {
             public void actionPerformed(ActionEvent e) {
                 controller.endTurn();
 
+                
+                
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        if (bu.equals(but)) {
-                            but.setEnabled(true);
-                        }
-                    });
+//                      System.out.println("bu.getText: " + bu.getText());
+//                      System.out.println("but.getName: " + but.getText());
+                      if (bu.getText().equals(but.getText())) {
+//                          System.out.println("*****IF******: " + but.getText());
+                          but.setEnabled(true);
+                      }
+                  });
                 });
             }
         });

@@ -1,4 +1,4 @@
-package it.unibo.monopoli.view;
+package it.unibo.monopoli.view.cards;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -9,22 +9,16 @@ import javax.swing.JPanel;
 public class RotatedPanel extends JPanel {
 
     private int rotation; // oppure -90 per la rotazione inversa
-    private static Dimension dim;
+    private Dimension dim;
 
     public RotatedPanel(int rotation, Dimension dim) {
-        // this.setPreferredSize(dim);
         this.rotation = rotation;
+        this.setPreferredSize(dim);
         this.dim = dim;
-
     }
 
-    public RotatedPanel() {
-        // this(90);
-    }
-
-    public static Dimension getDim() {
+    public Dimension getDim() {
         return dim;
-        // return null;
     }
 
     @Override
@@ -37,6 +31,7 @@ public class RotatedPanel extends JPanel {
         float y = this.getHeight() / 2.0f;
 
         g2d.rotate(Math.toRadians(rotation), x, y);
-
+        
+        super.paintComponent(g2d);
     }
 }

@@ -4,13 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -40,6 +39,8 @@ public class Index {
         final MyFrame frame = new MyFrame("Monopoli", new BorderLayout(), new Dimension(1200, 720));
         List<Player> player = new ArrayList();
         Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+
+        ProvaTabellone tabellone = new ProvaTabellone(11, 11, this.controller);
 
         // JPanelMain South
         final JPanel southP = new JPanel();
@@ -94,19 +95,6 @@ public class Index {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int pos = controller.toRollDices();
-                System.out.println("pos: " + pos);
-
-                buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
-                l.forEach(bu -> {
-                    buttonList.forEach(but -> {
-                        if (bu.equals(but)) {
-                            but.setEnabled(true);
-                        }
-                    });
-                });
-
                 // TODO
                 /*
                  * 1 prendere posizione attuale int oldpos =
@@ -117,29 +105,22 @@ public class Index {
                  * posizione int new pos = controller.toRollDices(); prendo la
                  * nuova tessera e ivoco tesseta.addPawn(actualPlater)
                  */
+                Player p = controller.getActualPlayer();
+                HashMap<Integer, IBoxGraphic> tessere = tabellone.getCardsGraphic();
+                tessere.get(controller.getActualPosition()).removePawn(p);
+                int pos = controller.toRollDices();
+                System.out.println("new pos: " + pos);
+                tessere.get(pos).addPawn(controller.getActualPlayer());
 
-                System.out.println("pos: " + pos);
-                System.out.println(MonopoliIterator.getPointById(pos));
-                Set<IBoxGraphic> tessere = ProvaTabellone.getCardsGraphic();
-                
-                if (tessere != null) {
-                  int i1 = 0;
-                  tessere.forEach(card -> {
-                      int riga = 0, colonna = 0;
-                      System.out.println("forEach: Position: " + card.getPosition());
-                      System.out.println("forEach: pos: " + pos);
-                      if (card.getPosition().equals(pos)) {
-                          System.out.println("getPosition: " + card.getPosition());
-//                         card.addPawn(p);
-      
-                      }
-                  });
-      
-              }
-                
-                // tessera in posizione pos...
-                // newCard.addPawn(p);
-
+                buttonList.forEach(b -> b.setEnabled(false));
+                List<Actions> l = StartPlay.getInPlay().getButtons();
+                l.forEach(bu -> {
+                    buttonList.forEach(but -> {
+                        if (bu.equals(but)) {
+                            but.setEnabled(true);
+                        }
+                    });
+                });
             }
         });
 
@@ -309,8 +290,7 @@ public class Index {
         // southP.setPreferredSize(dimSouth);
         // Center
         JPanel centerP = new JPanel();
-        JPanel tabellone = new ProvaTabellone(11, 11, this.controller).initialize();
-        centerP.add(tabellone, BorderLayout.CENTER);
+        centerP.add(tabellone.initialize(), BorderLayout.CENTER);
 
         // East
         frame.getContentPane().add(new East(this.controller), BorderLayout.EAST);
@@ -324,10 +304,6 @@ public class Index {
     public Controller getController() {
         return this.controller;
 
-    }
-    
-    public static void main(String[] args) {
-        new Index();
     }
 
 }

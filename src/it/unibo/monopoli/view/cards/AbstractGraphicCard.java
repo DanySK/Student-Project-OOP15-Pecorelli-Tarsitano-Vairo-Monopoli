@@ -3,13 +3,16 @@ package it.unibo.monopoli.view.cards;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JPanel;
 
 import it.unibo.monopoli.model.mainunits.Player;
+import it.unibo.monopoli.model.table.Box;
+import it.unibo.monopoli.view.C;
 import it.unibo.monopoli.view.JShape;
-import it.unibo.monopoli.view.RotatedPanel;
 
 /**
  *
@@ -18,6 +21,7 @@ import it.unibo.monopoli.view.RotatedPanel;
 public abstract class AbstractGraphicCard implements IBoxGraphic {
     private Map<Player, JShape> pawns;
     private Position pos = null;
+    private Box card;
     /**
      * panel in cui gestisco le pedine, il riferimento a questo pannello si
      * trova qui perchè è in questa classe che gestisco le pedine
@@ -28,10 +32,11 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
      * 
      * @param pos
      */
-    public AbstractGraphicCard(Position pos) {
+    public AbstractGraphicCard(Box card, Position pos) {
         this.pos = pos;
         pawns = new HashMap<Player, JShape>();
         emptyP = new JPanel();
+        this.card = card;
     }
 
     /**
@@ -45,19 +50,19 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
  * 
  * @return
  */
-    protected JPanel getRotatedPanel() {
-        Dimension dim = null;
+    protected RotatedPanel getRotatedPanel() {
+        Dimension dim = new Dimension(C.BOX_WIDTH, C.BOX_HEIGHT);
         if (pos == Position.NORTH) {
-            dim = new Dimension(50, 70);
+            dim = new Dimension(C.BOX_WIDTH, C.BOX_HEIGHT);
             return new RotatedPanel(180, dim);
         } else if (pos == Position.EAST) {
-            dim = new Dimension(70, 50);
+            dim = new Dimension(C.BOX_HEIGHT, C.BOX_WIDTH);
             return new RotatedPanel(-90, dim);
         } else if (pos == Position.WEST) {
-            dim = new Dimension(70, 50);
+            dim = new Dimension(C.BOX_HEIGHT, C.BOX_WIDTH);
             return new RotatedPanel(90, dim);
         } else {
-            dim = new Dimension(50, 70);
+            dim = new Dimension(C.BOX_WIDTH, C.BOX_HEIGHT);
             return new RotatedPanel(0, dim);
 
         }
@@ -65,16 +70,12 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
 
     @Override
     public void addPawn(final Player p) {
-        Color c = null;
         int id = p.getPawn().getID(); // prendo l'id del colore della pedina
-        // TODO
-        if (id == 0) {
-            c = Color.green;
-        }
-
+        Color c = C.COLORS[id];
         JShape pawn = new JShape(c); // creo la pedina
         pawns.put(p, pawn); // aggiungo pedina alla mappa
         emptyP.add(pawn); // disegno la pedina (aggiungendola al pannello)
+        emptyP.validate();
     }
 
     @Override
@@ -83,5 +84,17 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
                                     // giocatore
         emptyP.remove(pawn); // rimuovo la pedina dal pannello
         pawns.remove(p); // rimuovo il riferimento alla pedina dalla mappa
+        emptyP.validate();
+    }
+    
+
+    @Override
+    public String getName() {
+        return card.getName();
+    }
+
+    @Override
+    public int getID() {
+        return card.getID();
     }
 }

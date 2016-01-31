@@ -39,10 +39,11 @@ public class StartPlay implements ActionListener {
         } else {
             Index i = new Index();
             Controller contr = i.getController();
+          
             Set<Entry<String, Boolean>> s = InizializedPlayer.getMap().entrySet();
             s.forEach(g -> {
-                contr.addPlayer(g.getKey(), new ClassicPawn(0), g.getValue());
-
+                String[] values = g.getKey().split(C.SPLITTOKEN);
+                contr.addPlayer(values[1], new ClassicPawn(Integer.parseInt(values[0])), g.getValue());
             });
             switch (VersionSelected.getSelectedItem()) {
             case "Classic":

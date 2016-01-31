@@ -12,7 +12,6 @@ import javax.swing.border.Border;
 import it.unibo.monopoli.model.table.DecksBox;
 import it.unibo.monopoli.model.table.Land;
 import it.unibo.monopoli.model.table.Ownership;
-import it.unibo.monopoli.view.RotatedPanel;
 import it.unibo.monopoli.view.JShape.Shapes;
 import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
 
@@ -23,15 +22,15 @@ public class DecksGraphic extends AbstractGraphicCard {
     private int id;
 
     public DecksGraphic(DecksBox deck, Position pos, int id) {
-        super(pos);
+        super(deck, pos);
         this.deck = deck;
         this.id = id;
     }
 
     @Override
     public JPanel build() {
-        JPanel card = getRotatedPanel();
-        card.setPreferredSize(new Dimension(RotatedPanel.getDim()));
+        RotatedPanel card = getRotatedPanel();
+        card.setPreferredSize(new Dimension(card.getDim()));
         card.setLayout(new GridLayout(2, 1));
 
         JLabel nameP = new JLabel(deck.getName());
@@ -41,7 +40,6 @@ public class DecksGraphic extends AbstractGraphicCard {
 
         card.setBorder(border);
         card.setVisible(true);
-
         return card;
 
     }

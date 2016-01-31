@@ -58,17 +58,7 @@ public class PlayerGraphic extends JPanel {
         gbc_row1.gridy = 0;
         player.add(row1, gbc_row1);
         row1.setLayout(new GridLayout(1, 2, 0, 0));
-
-        final JLabel lblCol = new JLabel(this.name);
-        lblCol.setFont(new Font("Papyrus", Font.BOLD, 18));
-        row1.add(lblCol);
-        System.out.println("i: " + i);
-        System.out.println("name: " + list.get(i).getName());
-
-        final JLabel lblCol_1 = new JLabel("" + this.value);
-        lblCol_1.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 14));
-        row1.add(lblCol_1);
-
+        
         final JPanel row2 = new JPanel();
         row2.setBorder(new LineBorder(new Color(0, 0, 0)));
         final GridBagConstraints gbc_row2 = new GridBagConstraints();
@@ -427,7 +417,7 @@ public class PlayerGraphic extends JPanel {
         player.add(row1, gbc_row1);
         row1.setLayout(new GridLayout(1, 2, 0, 0));
 
-        final JLabel lblCol = new JLabel();
+        final JLabel lblCol = new JLabel(this.name);
         lblCol.setFont(new Font("Papyrus", Font.BOLD, 18));
         row1.add(lblCol);
 

@@ -5,16 +5,15 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-import javax.swing.plaf.synth.SynthSpinnerUI;
 
+import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.model.table.DecksBox;
 import it.unibo.monopoli.model.table.Land;
@@ -23,17 +22,16 @@ import it.unibo.monopoli.model.table.TaxImpl;
 import it.unibo.monopoli.view.cards.BoxGraphic;
 import it.unibo.monopoli.view.cards.DecksGraphic;
 import it.unibo.monopoli.view.cards.IBoxGraphic;
+import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
 import it.unibo.monopoli.view.cards.LandGraphic;
 import it.unibo.monopoli.view.cards.OwnershipGraphic;
 import it.unibo.monopoli.view.cards.TaxGraphic;
-import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
-import it.unibo.monopoli.controller.*;
 
 public class ProvaTabellone {
 
     private final Controller controller;
     private List<Box> cards;
-    private static Set<IBoxGraphic> cardsGraphic;
+    private HashMap<Integer, IBoxGraphic> cardsGraphic;
     private int col, row;
     private int c, r;
 
@@ -45,6 +43,7 @@ public class ProvaTabellone {
         this.row = row;
         this.controller = controller;
         this.cards = this.controller.getAllBoxes();
+        this.cardsGraphic = new HashMap<Integer, IBoxGraphic>();
     }
 
     // public IBoxGraphic pedina(int c, int r, int id) {
@@ -144,6 +143,9 @@ public class ProvaTabellone {
                     newcard = new DecksGraphic((DecksBox) card, pos, id);
                 } else {
                     newcard = new BoxGraphic(card, pos, id);
+                    if (id == 0) 
+                        controller.getPlayers().forEach(p -> newcard.addPawn(p));
+                        
                 }
 
                 // aggiungi la carta nella griglia, alla posizione r, c
@@ -152,7 +154,7 @@ public class ProvaTabellone {
                 gbc.gridx = c;
                 gbc.gridy = r;
                 panel.add(newcard.build(), gbc);
-                cardsGraphic.add(newcard);
+                cardsGraphic.put(newcard.getID(), newcard);
 
             });
 
@@ -531,7 +533,7 @@ public class ProvaTabellone {
         return panel;
     }
 
-    public static Set<IBoxGraphic> getCardsGraphic() {
+    public HashMap<Integer, IBoxGraphic> getCardsGraphic() {
         return cardsGraphic;
     }
 

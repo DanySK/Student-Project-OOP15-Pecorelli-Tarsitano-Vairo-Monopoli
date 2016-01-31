@@ -92,6 +92,7 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
         }
         player.removeOwnership(this.ownership);
         this.bank.addOwnership(this.ownership);
+        this.ownership.setOwner(bank);
     }
 
 }

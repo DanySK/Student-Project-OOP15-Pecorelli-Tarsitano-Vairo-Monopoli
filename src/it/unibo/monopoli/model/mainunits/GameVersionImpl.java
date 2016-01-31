@@ -74,8 +74,7 @@ public class GameVersionImpl implements GameVersion {
 
     @Override
     public List<Integer> toRollDices() {
-        new ToRollDices(new ClassicDicesStrategy()).play(this.actualPlayer);
-        return this.actualPlayer.lastDicesNumber();
+        return this.strategy.toRollDices(this.actualPlayer);
     }
 
     // @Override

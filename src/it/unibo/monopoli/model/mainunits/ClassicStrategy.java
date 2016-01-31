@@ -10,11 +10,13 @@ import java.util.stream.Collectors;
 import it.unibo.monopoli.controller.Actions;
 import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.actions.ClassicAuction;
+import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
 import it.unibo.monopoli.model.actions.GoToPrison;
 import it.unibo.monopoli.model.actions.MoveUpTo;
 import it.unibo.monopoli.model.actions.ToAuction;
 import it.unibo.monopoli.model.actions.ToBePaid;
 import it.unibo.monopoli.model.actions.ToPay;
+import it.unibo.monopoli.model.actions.ToRollDices;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.ChanceCards;
@@ -525,6 +527,12 @@ public class ClassicStrategy implements GameStrategy {
     @Override
     public AuctionOfOwnership toAuction(final Ownership ownership, final Player player) {
         return ToAuction.ownerships(this.players, new ClassicAuction(), ownership, this.bank).getAuction(player);
+    }
+
+    @Override
+    public List<Integer> toRollDices(final Player player) {
+        new ToRollDices(new ClassicDicesStrategy()).play(player);
+        return player.lastDicesNumber();
     }
 
     // private boolean twice(final Player player) {

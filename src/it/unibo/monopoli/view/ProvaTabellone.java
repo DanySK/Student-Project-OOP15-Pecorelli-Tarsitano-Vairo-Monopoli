@@ -148,7 +148,7 @@ public class ProvaTabellone {
                 gbc.gridy = r;
                 JPanel cardGraphic = newcard.build();
                 panel.add(cardGraphic, gbc);
-                cardsGraphic.add((IBoxGraphic) cardGraphic);
+//                cardsGraphic.add((IBoxGraphic) cardGraphic);
 
             });
 

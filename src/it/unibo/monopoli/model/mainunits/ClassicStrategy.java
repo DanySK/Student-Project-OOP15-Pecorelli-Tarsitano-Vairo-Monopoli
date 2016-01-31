@@ -68,14 +68,6 @@ public class ClassicStrategy implements GameStrategy {
     private static final int CALCULATE_OWNERSHIP = 9;
     private static final int CALCULATE_MONEY = 50;
 
-    private static final int CARD1_STEPS = -3;
-    private static final int CARD6_19_22_PAY = 50;
-    private static final int CARD16_PAY = 150;
-    private static final int CARD27_PAY = 25;
-    private static final int CARD28_PAY = 200;
-    private static final int CARD31_PAY = 20;
-    private static final int CARD_TAX = 50;
-
     private final List<Player> players;
     private final List<Ownership> ownerships;
     private final List<Group> groups;
@@ -601,15 +593,24 @@ public class ClassicStrategy implements GameStrategy {
     // return actions;
     // }
 
+    private static final int CARD2_STEPS = 37;
+    private static final int CARD5_PAY = 20;
+    private static final int CARD8_HOME = 25;
+    private static final int CARD8_HOTEL = 100;
+    private static final int CARD27_PAY = 25;
+    private static final int CARD28_PAY = 200;
+    private static final int CARD31_PAY = 20;
+    private static final int CARD_TAX = 50;
+
     public List<Actions> getNextCardsActions(final Box box, final Card card, final Player player) {
         final List<Action> actions = new LinkedList<>();
         if (card instanceof ChanceCards) {
             ChanceCards chance = (ChanceCards) card;
             switch (chance) {
             case CARD2:
-                MoveUpTo.moveUpToBox(this.allBoxes.get(37)).play(player);
+                MoveUpTo.moveUpToBox(this.allBoxes.get(CARD2_STEPS)).play(player);
                 break;
-            case ChanceCards.CARD3.getValue():
+            case CARD3:
                 if (((Ownership) box).getOwner().equals(player)) {
                     actions.addAll(this.getNextBoxsActions(box, player));
                 } else {
@@ -619,57 +620,61 @@ public class ClassicStrategy implements GameStrategy {
                     new ToBePaid(amount).play(player);
                 }
                 break;
-            case ChanceCards.CARD4.getValue():
+            case CARD4:
                 player.addCard(card);
                 break;
-            case ChanceCards.CARD5.getValue():
-                new ToPay(20, player).play(player);
+            case CARD5:
+                new ToPay(CARD5_PAY, player).play(player);
                 break;
             case CARD7:
                 new GoToPrison(this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos())).play(player);
-            case ChanceCards.CARD8.getValue():
-                player.getOwnerships().get().stream().filter(o -> o instanceof Land)
-                        .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
-                        .map(o -> ((LandGroup) o.getGroup()).getBuildings()).forEach(l -> {
-                            l.forEach(b -> {
-                                new ToPay(b instanceof Home ? 25 : 100, player).play(player);
+            case CARD8:
+                player.getOwnerships().stream()
+                                      .filter(o -> o instanceof Land)
+                                      .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
+                                      .map(o -> ((LandGroup) o.getGroup()).getBuildings())
+                                      .forEach(l -> {
+                                          l.forEach(b -> {
+                                              new ToPay(b instanceof Home ? CARD8_HOME : CARD8_HOTEL, player).play(player);
+                                          });
+                                      });
+                break;
+            case CARD9:
+                this.players.stream()
+                            .filter(p -> !p.equals(player))
+                            .forEach(p -> {
+                                try {
+                                    new ToPay(CARD_TAX, player).play(player);
+                                    new ToBePaid(CARD_TAX).play(p);
+                                } catch (IllegalArgumentException i) {
+                                    actions.add(this.notMuchMoney(player, actions));
+                                }
                             });
-                        });
                 break;
-            case ChanceCards.CARD9.getValue():
-                this.players.stream().filter(p -> !p.equals(player)).forEach(p -> {
-                    try {
-                        new ToPay(CARD_TAX, player).play(player);
-                        new ToBePaid(CARD_TAX).play(p);
-                    } catch (IllegalArgumentException i) {
-                        this.notMuchMoney(player, actions);
-                    }
-                });
-                break;
-            case CARCardsId.CARD10.getValue():
-                actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.START_POSITION.getPos())));
+            case CARD10:
+                MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.START_POSITION.getPos())).play(player);
             case CARD11:
-                actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(OWNERSHIP_N_18)));
+                MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.OWNERSHIP18_POSITION.getPos())).play(player);
             case CARD12:
                 if (((Ownership) box).getOwner().equals(player)) {
                     actions.addAll(this.getNextBoxsActions(box, player));
                 } else {
                     final int amount = 2
                             * ((Ownership) box).getContract().getIncome(new StationIncomeStrategy(((Ownership) box)));
-                    actions.add(new ToPay(amount, player));
+                    new ToPay(amount, player).play(player);
                     new ToBePaid(amount);
                 }
                 break;
             case CARD13:
-                actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(OWNERSHIP_N_17)));
+                MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.OWNERSHIP17_POSITION.getPos())).play(player);
             case CARD14:
-                actions.add(MoveUpTo.moveUpToBox(this.allBoxes.get(OWNERSHIP_N_9)));
+                MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.OWNERSHIP9_POSITION.getPos())).play(player);
             case CARD15:
                 if (((Ownership) box).getOwner().equals(player)) {
                     actions.addAll(this.getNextBoxsActions(box, player));
                 } else {
                     final int amount = (player.lastDicesNumber().stream().reduce((d, d1) -> d + d1).get() * 10);
-                    actions.add(new ToPay(amount, player));
+                    new ToPay(amount, player).play(player);
                     new ToBePaid(amount);
                 }
                 break;
@@ -706,7 +711,7 @@ public class ClassicStrategy implements GameStrategy {
                         new ToPay(10, p).play(p);
                         new ToBePaid(10).play(player);
                     } catch (IllegalArgumentException i) {
-                        this.notMuchMoney(player, actions);
+                        actions.add(this.notMuchMoney(player, actions));
                     }
                 });
                 break;

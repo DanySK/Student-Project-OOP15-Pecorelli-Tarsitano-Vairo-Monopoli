@@ -1,5 +1,6 @@
 package it.unibo.monopoli.model.cards;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,20 +8,24 @@ import java.util.List;
  * This is a specific implementation of one of classic game's {@link Deck}s.
  *
  */
-public class CommunityChest implements Deck {
+public enum Decks implements Deck {
+    COMMUNITY_CHEST("Community Chest", Arrays.asList(CommunityChestCards.values())),
+    CHANCE("Chance", Arrays.asList(ChanceCards.values()));
 
+    private final String name;
     private final List<Card> cards;
 
     /**
      * Constructs an instance of {@link Deck} named {@link CommunityChest}.
      */
-    public CommunityChest() {
-        this.cards = new LinkedList<>();
+    Decks(final String name, final List<Card> cards) {
+        this.name = name;
+        this.cards = cards;
     }
 
     @Override
     public String getName() {
-        return "Community Chest";
+        return this.name;
     }
 
     @Override

@@ -81,9 +81,11 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
     @Override
     public void removePawn(Player p) {
         JShape pawn = pawns.get(p); // prendo la pedina corrispondente al
-                                    // giocatore
-        emptyP.remove(pawn); // rimuovo la pedina dal pannello
+        pawn.setVisible(false);                            // giocatore
+        emptyP.remove(pawn);// rimuovo la pedina dal pannello
+        
         pawns.remove(p); // rimuovo il riferimento alla pedina dalla mappa
+        
         emptyP.validate();
     }
     

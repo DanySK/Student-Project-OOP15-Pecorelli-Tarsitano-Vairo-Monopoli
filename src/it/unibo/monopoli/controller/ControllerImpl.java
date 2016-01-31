@@ -162,7 +162,7 @@ public class ControllerImpl implements Controller {
         this.view.ifPresent(v -> v.setButton(
                 this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.players.get(this.actualPlayer))));
         }
-        if(this.actualPlayer== this.players.size()){
+        if(this.actualPlayer== this.players.size()-1){
             this.actualPlayer=0;
         }else{
             this.actualPlayer++;

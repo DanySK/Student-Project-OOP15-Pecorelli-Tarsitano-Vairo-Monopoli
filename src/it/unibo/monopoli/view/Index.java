@@ -47,7 +47,7 @@ public class Index {
         southP.setPreferredSize(new Dimension(frame.getWidth(), 65));
         southP.setLayout(new FlowLayout());
         JButton rollDices = new JButton(Actions.ROLL_DICES.getText());
-        JButton endTurn = new JButton(Actions.END_OF_TURN.getText());
+        JButton END_OF_TURN = new JButton(Actions.END_OF_TURN.getText());
         JButton buy = new JButton(Actions.BUY.getText());
         JButton sell = new JButton(Actions.SELL.getText());
         JButton auction = new JButton(Actions.AUCTION.getText());
@@ -58,7 +58,7 @@ public class Index {
         JButton endGame = new JButton(Actions.END_OF_THE_GAME.getText());
 
         southP.add(rollDices);
-        southP.add(endTurn);
+        southP.add(END_OF_TURN);
         southP.add(buy);
         southP.add(sell);
         southP.add(auction);
@@ -69,7 +69,7 @@ public class Index {
         southP.add(endGame);
 
         buttonList.add(rollDices);
-        buttonList.add(endTurn);
+        buttonList.add(END_OF_TURN);
         buttonList.add(buy);
         buttonList.add(sell);
         buttonList.add(auction);
@@ -80,7 +80,7 @@ public class Index {
         buttonList.add(endGame);
 
         rollDices.setEnabled(true);
-        endTurn.setEnabled(false);
+        END_OF_TURN.setEnabled(false);
         buy.setEnabled(false);
         sell.setEnabled(false);
         auction.setEnabled(false);
@@ -114,9 +114,13 @@ public class Index {
 
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = StartPlay.getInPlay().getButtons();
+                System.out.println(l);
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        if (bu.equals(but)) {
+//                        System.out.println("bu.getText: " + bu.getText());
+//                        System.out.println("but.getName: " + but.getText());
+                        if (bu.getText().equals(but.getText())) {
+//                            System.out.println("*****IF******: " + but.getText());
                             but.setEnabled(true);
                         }
                     });
@@ -124,7 +128,7 @@ public class Index {
             }
         });
 
-        endTurn.addActionListener(new ActionListener() {
+        END_OF_TURN.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -152,10 +156,13 @@ public class Index {
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        if (bu.equals(but)) {
-                            but.setEnabled(true);
-                        }
-                    });
+//                      System.out.println("bu.getText: " + bu.getText());
+//                      System.out.println("but.getName: " + but.getText());
+                      if (bu.getText().equals(but.getText())) {
+//                          System.out.println("*****IF******: " + but.getText());
+                          but.setEnabled(true);
+                      }
+                  });
                 });
             }
         });
@@ -170,10 +177,13 @@ public class Index {
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        if (bu.equals(but)) {
-                            but.setEnabled(true);
-                        }
-                    });
+//                      System.out.println("bu.getText: " + bu.getText());
+//                      System.out.println("but.getName: " + but.getText());
+                      if (bu.getText().equals(but.getText())) {
+//                          System.out.println("*****IF******: " + but.getText());
+                          but.setEnabled(true);
+                      }
+                  });
                 });
             }
         });
@@ -188,10 +198,13 @@ public class Index {
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        if (bu.equals(but)) {
-                            but.setEnabled(true);
-                        }
-                    });
+//                      System.out.println("bu.getText: " + bu.getText());
+//                      System.out.println("but.getName: " + but.getText());
+                      if (bu.getText().equals(but.getText())) {
+//                          System.out.println("*****IF******: " + but.getText());
+                          but.setEnabled(true);
+                      }
+                  });
                 });
             }
         });
@@ -206,10 +219,13 @@ public class Index {
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        if (bu.equals(but)) {
-                            but.setEnabled(true);
-                        }
-                    });
+//                      System.out.println("bu.getText: " + bu.getText());
+//                      System.out.println("but.getName: " + but.getText());
+                      if (bu.getText().equals(but.getText())) {
+//                          System.out.println("*****IF******: " + but.getText());
+                          but.setEnabled(true);
+                      }
+                  });
                 });
             }
         });
@@ -224,10 +240,13 @@ public class Index {
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        if (bu.equals(but)) {
-                            but.setEnabled(true);
-                        }
-                    });
+//                      System.out.println("bu.getText: " + bu.getText());
+//                      System.out.println("but.getName: " + but.getText());
+                      if (bu.getText().equals(but.getText())) {
+//                          System.out.println("*****IF******: " + but.getText());
+                          but.setEnabled(true);
+                      }
+                  });
                 });
             }
         });
@@ -242,10 +261,13 @@ public class Index {
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        if (bu.equals(but)) {
-                            but.setEnabled(true);
-                        }
-                    });
+//                      System.out.println("bu.getText: " + bu.getText());
+//                      System.out.println("but.getName: " + but.getText());
+                      if (bu.getText().equals(but.getText())) {
+//                          System.out.println("*****IF******: " + but.getText());
+                          but.setEnabled(true);
+                      }
+                  });
                 });
             }
         });
@@ -260,10 +282,13 @@ public class Index {
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        if (bu.equals(but)) {
-                            but.setEnabled(true);
-                        }
-                    });
+//                      System.out.println("bu.getText: " + bu.getText());
+//                      System.out.println("but.getName: " + but.getText());
+                      if (bu.getText().equals(but.getText())) {
+//                          System.out.println("*****IF******: " + but.getText());
+                          but.setEnabled(true);
+                      }
+                  });
                 });
             }
         });
@@ -278,10 +303,13 @@ public class Index {
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        if (bu.equals(but)) {
-                            but.setEnabled(true);
-                        }
-                    });
+//                      System.out.println("bu.getText: " + bu.getText());
+//                      System.out.println("but.getName: " + but.getText());
+                      if (bu.getText().equals(but.getText())) {
+//                          System.out.println("*****IF******: " + but.getText());
+                          but.setEnabled(true);
+                      }
+                  });
                 });
             }
         });

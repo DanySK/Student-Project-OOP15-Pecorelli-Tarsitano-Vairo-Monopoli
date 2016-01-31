@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -27,14 +28,16 @@ import javax.swing.border.Border;
  *
  */
 public class InizializedPlayer {
-    final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
+    private final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 
     private static Map<String, Boolean> map = new HashMap<>();
     private JTextField textNome;
     private boolean isUman;
-    JRadioButton rdbtnComputer;
-    JRadioButton rdbtnUman;
-
+    private JRadioButton rdbtnComputer;
+    private JRadioButton rdbtnUman;
+/**
+ * 
+ */
     public InizializedPlayer() {
         // TODO Auto-generated constructor stub
     }
@@ -43,9 +46,9 @@ public class InizializedPlayer {
      * Method that build the Player's panel where there are the information
      * about player situation
      * 
-     * @return -return a Player's panel
+     * @return JPanel playerP
      */
-    public JPanel build() {
+    public JPanel build(final JPanel playerP) {
         final JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(120, 150));
 
@@ -65,7 +68,7 @@ public class InizializedPlayer {
         save.setFont(new Font("Times New Roman", Font.BOLD, 10));
         save.setPreferredSize(new Dimension(70, 22));
         southP.add(save);
-        
+
         final JButton remove = new JButton("Remove");
         remove.setFont(new Font("Times New Roman", Font.BOLD, 10));
         remove.setPreferredSize(new Dimension(70, 22));
@@ -75,33 +78,45 @@ public class InizializedPlayer {
         save.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
 
-                if (rdbtnUman.isSelected()) {
-                    isUman = true;
+                if (textNome.getText().isEmpty()) {
+                    new Dialog(new JFrame(), "Error", "Error! You must enter the name of the player");
                 } else {
-                    isUman = false;
+                    if (rdbtnUman.isSelected()) {
+                        isUman = true;
+                    } else {
+                        isUman = false;
+                    }
+
+                    map.put(textNome.getText(), isUman);
+                    System.out.println("" + textNome.getText());
+                    System.out.println("" + isUman);
+                    save.setVisible(false);
+                    remove.setVisible(true);
+                    textNome.setEditable(false);
+                    rdbtnComputer.setEnabled(false);
+                    rdbtnUman.setEnabled(false);
+
                 }
 
-                map.put(textNome.getText(), isUman);
-                System.out.println("" + textNome.getText());
-                System.out.println("" + isUman);
-                save.setVisible(false);
-                remove.setVisible(true);
-                textNome.setEditable(false);
-                rdbtnComputer.setEnabled(false);
-                rdbtnUman.setEnabled(false);
             }
         });
-        
+
         remove.addActionListener(new ActionListener() {
-            
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 map.remove(textNome.getText(), isUman);
-                
-                
+                panel.setVisible(false);
+                playerP.remove(panel);
+                Go.setNumPlayers(-1);
+                playerP.revalidate();
+                System.out.println("Remove: " + playerP.getComponentCount());
+                System.out.println("RemoveGet: " + Go.getNumPlayers());
+
             }
+
         });
 
         final JPanel eastP = new JPanel();

@@ -3,11 +3,14 @@ package it.unibo.monopoli.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -18,6 +21,7 @@ import it.unibo.monopoli.controller.Actions;
 import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.controller.ControllerImpl;
 import it.unibo.monopoli.model.mainunits.Player;
+import it.unibo.monopoli.view.cards.IBoxGraphic;
 import it.unibo.monopoli.view.listener.StartPlay;
 
 public class Index {
@@ -33,12 +37,14 @@ public class Index {
 
     public void build() {
 
-        final MyFrame frame = new MyFrame("Monopoli", new BorderLayout(), new Dimension(1200, 700));
+        final MyFrame frame = new MyFrame("Monopoli", new BorderLayout(), new Dimension(1200, 720));
         List<Player> player = new ArrayList();
         Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 
         // JPanelMain South
         final JPanel southP = new JPanel();
+        southP.setPreferredSize(new Dimension(frame.getWidth(), 65));
+        southP.setLayout(new FlowLayout());
         JButton rollDices = new JButton(Actions.ROLL_DICES.getText());
         JButton endTurn = new JButton(Actions.END_OF_TURN.getText());
         JButton buy = new JButton(Actions.BUY.getText());
@@ -71,7 +77,7 @@ public class Index {
         buttonList.add(mortgage);
         buttonList.add(revoke);
         buttonList.add(endGame);
-        
+
         rollDices.setEnabled(true);
         endTurn.setEnabled(false);
         buy.setEnabled(false);
@@ -82,18 +88,17 @@ public class Index {
         mortgage.setEnabled(false);
         revoke.setEnabled(false);
         endGame.setEnabled(false);
-        
 
         rollDices.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                
-                controller.toRollDices();
+
+                int pos = controller.toRollDices();
+                System.out.println("pos: " + pos);
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -101,6 +106,40 @@ public class Index {
                         }
                     });
                 });
+
+                // TODO
+                /*
+                 * 1 prendere posizione attuale int oldpos =
+                 * actualPlayer.getPawn().getActualPos() prendo la tessera
+                 * corrispondente alla posizione e invoco
+                 * 
+                 * tessera.removePawn(actualPlayer) 2 prendere prossima
+                 * posizione int new pos = controller.toRollDices(); prendo la
+                 * nuova tessera e ivoco tesseta.addPawn(actualPlater)
+                 */
+
+                System.out.println("pos: " + pos);
+                System.out.println(MonopoliIterator.getPointById(pos));
+                Set<IBoxGraphic> tessere = ProvaTabellone.getCardsGraphic();
+                
+                if (tessere != null) {
+                  int i1 = 0;
+                  tessere.forEach(card -> {
+                      int riga = 0, colonna = 0;
+                      System.out.println("forEach: Position: " + card.getPosition());
+                      System.out.println("forEach: pos: " + pos);
+                      if (card.getPosition().equals(pos)) {
+                          System.out.println("getPosition: " + card.getPosition());
+//                         card.addPawn(p);
+      
+                      }
+                  });
+      
+              }
+                
+                // tessera in posizione pos...
+                // newCard.addPawn(p);
+
             }
         });
 
@@ -111,7 +150,7 @@ public class Index {
                 controller.endTurn();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -129,7 +168,7 @@ public class Index {
                 controller.buyOwnership();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -147,7 +186,7 @@ public class Index {
                 controller.sellOwnership();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -165,7 +204,7 @@ public class Index {
                 controller.auction();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -183,7 +222,7 @@ public class Index {
                 controller.build();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -201,7 +240,7 @@ public class Index {
                 controller.sellBuilding();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -219,7 +258,7 @@ public class Index {
                 controller.mortgageOwnership();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -237,7 +276,7 @@ public class Index {
                 controller.revokeMortgageOwnership();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -255,7 +294,7 @@ public class Index {
                 controller.endGame();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -267,14 +306,14 @@ public class Index {
         });
 
         Dimension dimSouth = new Dimension(0, 50);
-        southP.setPreferredSize(dimSouth);
+        // southP.setPreferredSize(dimSouth);
         // Center
         JPanel centerP = new JPanel();
         JPanel tabellone = new ProvaTabellone(11, 11, this.controller).initialize();
-        centerP.add(tabellone);
+        centerP.add(tabellone, BorderLayout.CENTER);
 
         // East
-        frame.getContentPane().add(new East(), BorderLayout.EAST);
+        frame.getContentPane().add(new East(this.controller), BorderLayout.EAST);
         frame.getMainPanel().add(centerP, BorderLayout.CENTER);
         frame.getMainPanel().add(southP, BorderLayout.SOUTH);
 
@@ -285,6 +324,10 @@ public class Index {
     public Controller getController() {
         return this.controller;
 
+    }
+    
+    public static void main(String[] args) {
+        new Index();
     }
 
 }

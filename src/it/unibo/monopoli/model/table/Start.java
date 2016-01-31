@@ -72,4 +72,4 @@ public class Start implements Box {
         return MONEY_TO_PICK_UP;
     }
 
-}
+ }

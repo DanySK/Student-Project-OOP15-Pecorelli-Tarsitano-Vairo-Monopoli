@@ -41,6 +41,7 @@ import it.unibo.monopoli.model.table.StationIncomeStrategy;
 import it.unibo.monopoli.model.table.TaxImpl;
 import it.unibo.monopoli.view.EVersion;
 import it.unibo.monopoli.view.InPlay;
+import it.unibo.monopoli.view.InPlayImpl;
 
 /**
  * */
@@ -97,11 +98,10 @@ public class ControllerImpl implements Controller {
         
         this.boxes = this.version.getAllBoxes();
         this.decks = this.version.getDecks();
-        this.players.add(this.actualPlayer, this.version.getNextPlayer());
-        this.view = null;
-        // if (!this.actualPlayer.isHuman()) {
-        // this.computerPlayer();
-        // }
+        this.actualPlayer=this.players.indexOf(this.version.getNextPlayer());
+         if (!this.players.get(this.actualPlayer).isHuman()) {
+         this.computerPlayer();
+         }
     }
 
     @Override
@@ -138,11 +138,11 @@ public class ControllerImpl implements Controller {
         this.actualPosition = this.players.get(this.actualPlayer).getPawn().getActualPos();
         System.out.println(this.actualPosition);
         if (this.view!=null){
-        this.boxes.forEach(b -> {
+        for(Box b :this.boxes){
             if (b.getID() == this.actualPosition) {
                 this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions(b, this.players.get(this.actualPlayer))));
             }
-        });
+        }
         }
         return this.actualPosition;
     }
@@ -162,9 +162,15 @@ public class ControllerImpl implements Controller {
         this.view.ifPresent(v -> v.setButton(
                 this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.players.get(this.actualPlayer))));
         }
-        Player p=this.version.endOfTurnAndNextPlayer();
-        this.actualPlayer=this.players.indexOf(p);
-        
+        if(this.actualPlayer== this.players.size()){
+            this.actualPlayer=0;
+        }else{
+            this.actualPlayer++;
+        }
+//        Player p=this.version.endOfTurnAndNextPlayer();
+//        this.actualPlayer=this.players.indexOf(p);
+//        
+        //this.getActualPlayer().setDicesRoll(false);
         if (!this.players.get(this.actualPlayer).isHuman()) {
             this.computerPlayer();
         }

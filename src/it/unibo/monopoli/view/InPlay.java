@@ -10,6 +10,6 @@ public interface InPlay {
 
     void gameOver(it.unibo.monopoli.model.mainunits.Player player);
     
-    List<String> getButtons();
+    List<Actions> getButtons();
 
 }

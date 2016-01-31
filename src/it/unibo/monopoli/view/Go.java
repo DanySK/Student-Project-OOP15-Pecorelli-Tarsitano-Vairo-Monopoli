@@ -10,6 +10,7 @@ import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.spi.NumberFormatProvider;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,10 +26,14 @@ import javax.swing.SwingConstants;
 import it.unibo.monopoli.view.listener.StartPlay;
 import it.unibo.monopoli.view.listener.VersionSelected;
 
-public class Start {
+public class Go {
+    private static int numPlayer;
+
+    private int numPlayers = 0;
+
     private static final int MAX_PLAYERS = 6;
     private int cont = 2;
-
+    
     Map<String, Boolean> map = new HashMap<>();
 
     public static void main(String[] args) {
@@ -88,7 +93,7 @@ public class Start {
 
             @Override
             public void setSelectedItem(Object anObject) {
-                if (!EVersion.NOT_SELECTABLE_OPTION.getName().equals(anObject)) {
+                if (!C.NOT_SELECTABLE_OPTION.equals(anObject)) {
                     super.setSelectedItem(anObject);
                 } else if (selectionAllowed) {
                     // Allow this just once
@@ -98,7 +103,7 @@ public class Start {
             }
 
         });
-        comboBoxVersion.addItem(EVersion.NOT_SELECTABLE_OPTION.getName());
+        //comboBoxVersion.addItem(EVersion.NOT_SELECTABLE_OPTION.getName());
         Arrays.asList(EVersion.values()).forEach(v -> comboBoxVersion.addItem(v.getName()));
 
         final JPanel secondRow = new JPanel();
@@ -136,7 +141,10 @@ public class Start {
         final FlowLayout fl_playerP = new FlowLayout();
         playerP.setLayout(fl_playerP/* (FlowLayout.CENTER, 5, 5) */);
 
-        playerP.add(new InizializedComputer().build());
+        playerP.add(new InizializedComputer().build(playerP));
+        setNumPlayers(1);
+        System.out.println("" + getNumPlayers());
+        
 
         final JButton btnAddPlayer = new JButton("Add Player");
 
@@ -146,11 +154,16 @@ public class Start {
             public void actionPerformed(ActionEvent e) {
 
                 // TODO
+                // Controllo sulla textbox..se è vuota non può aggiungere un nuovo Player
                 if (playerP.getComponentCount() < MAX_PLAYERS) {
-                    playerP.add(new InizializedPlayer().build());
+                    playerP.add(new InizializedPlayer().build(playerP));
                     playerP.revalidate();
+                    setNumPlayers(1);
+                    System.out.println("Add:" + playerP.getComponentCount());
+                    System.out.println("AddGet: " + getNumPlayers() );
+                    
                 } else {
-                    new Dialog(new JFrame(), "Error", "Non puoi inserire più di 6 giocatori");
+                    new Dialog(new JFrame(), "Error", "Error! You can not enter more than 6 players");
                 }
                 // System.out.println("" + playerP.getComponentCount());
                 // System.out.println("Add Player");
@@ -179,5 +192,19 @@ public class Start {
 
     public void Prova2() {
         this.cont++;
+    }
+
+    /**
+     * @return the numPlayers
+     */
+    public static int getNumPlayers() {
+        return numPlayer;
+    }
+
+    /**
+     * @param numPlayers the numPlayers to set
+     */
+    public static void setNumPlayers(int numPlayers) {
+       numPlayer = numPlayer + numPlayers;
     }
 }

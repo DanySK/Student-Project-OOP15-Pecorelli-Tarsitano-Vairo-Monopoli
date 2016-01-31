@@ -13,31 +13,32 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Dialog extends JDialog implements ActionListener {
-	public Dialog(JFrame parent, String title, String message) {
-	    super(parent, title, true);
-	    if (parent != null) {
-	      Dimension parentSize = parent.getSize(); 
-	      Point p = parent.getLocation(); 
-	      setLocation(p.x + parentSize.width / 4, p.y + parentSize.height / 4);
-	    }
-	    JPanel messagePane = new JPanel();
-	    messagePane.add(new JLabel(message));
-	    getContentPane().add(messagePane);
-	    JPanel buttonPane = new JPanel();
-	    JButton button = new JButton("OK"); 
-	    buttonPane.add(button); 
-	    button.addActionListener(this);
-	    getContentPane().add(buttonPane, BorderLayout.SOUTH);
-	    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-	    pack(); 
-	    setVisible(true);
-	  }
-	  public void actionPerformed(ActionEvent e) {
-	    setVisible(false); 
-	    dispose(); 
-	  }
-//	  public static void main(String[] a) {
-//	    Dialog dlg = new Dialog(new JFrame(), "title", "message");
-//	  }
+    public Dialog(JFrame parent, String title, String message) {
+        super(parent, title, true);
+        if (parent != null) {
+            Dimension parentSize = parent.getSize();
+            Point p = parent.getLocation();
+            setLocation(650, 300);
+        }
+        JPanel messagePane = new JPanel();
+        messagePane.add(new JLabel(message));
+        getContentPane().add(messagePane);
+        JPanel buttonPane = new JPanel();
+        JButton button = new JButton("OK");
+        buttonPane.add(button);
+        button.addActionListener(this);
+        getContentPane().add(buttonPane, BorderLayout.SOUTH);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        pack();
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        setVisible(false);
+        dispose();
+    }
+    // public static void main(String[] a) {
+    // Dialog dlg = new Dialog(new JFrame(), "title", "message");
+    // }
 
 }

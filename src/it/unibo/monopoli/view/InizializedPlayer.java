@@ -30,7 +30,7 @@ import javax.swing.border.Border;
 public class InizializedPlayer {
     private final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 
-    private static Map<String, Boolean> map = new HashMap<>();
+    private static Map<String,Boolean> map = new HashMap<>();
     private JTextField textNome;
     private boolean isUman;
     private JRadioButton rdbtnComputer;
@@ -39,7 +39,8 @@ public class InizializedPlayer {
  * 
  */
     public InizializedPlayer() {
-        // TODO Auto-generated constructor stub
+        
+        
     }
 
     /**
@@ -89,7 +90,8 @@ public class InizializedPlayer {
                         isUman = false;
                     }
 
-                    map.put(textNome.getText(), isUman);
+                    // alla mappa passo N?NOMEGIOCATORE, MI E' UTILE PER DECIDERE IL COLORE DELLE PEDINE
+                    map.put((Go.getNumPlayers() - 1) + C.SPLITTOKEN + textNome.getText(), isUman);
                     System.out.println("" + textNome.getText());
                     System.out.println("" + isUman);
                     save.setVisible(false);
@@ -110,7 +112,7 @@ public class InizializedPlayer {
                 map.remove(textNome.getText(), isUman);
                 panel.setVisible(false);
                 playerP.remove(panel);
-                Go.setNumPlayers(-1);
+                Go.addNumPlayers(-1);
                 playerP.revalidate();
                 System.out.println("Remove: " + playerP.getComponentCount());
                 System.out.println("RemoveGet: " + Go.getNumPlayers());
@@ -124,24 +126,24 @@ public class InizializedPlayer {
 
         final JPanel centerP = new JPanel();
         panel.add(centerP, BorderLayout.CENTER);
-        centerP.setLayout(new GridLayout(2, 1, 0, 0));
-
+        centerP.setLayout(new BorderLayout());
+        
         final JPanel centerP_row1 = new JPanel();
-        centerP.add(centerP_row1);
+        centerP.add(centerP_row1,BorderLayout.NORTH);
 
         final JLabel lblNome = new JLabel("Nome:");
         lblNome.setFont(new Font("Berlin Sans FB", Font.PLAIN, 13));
         centerP_row1.add(lblNome);
 
         textNome = new JTextField();
-        textNome.setPreferredSize(new Dimension(10, 20));
+        textNome.setPreferredSize(new Dimension(0,30));
         textNome.setHorizontalAlignment(SwingConstants.CENTER);
         centerP_row1.add(textNome);
         textNome.setColumns(10);
 
         final JPanel centerP_row2 = new JPanel();
-        centerP.add(centerP_row2);
-
+        centerP.add(centerP_row2,BorderLayout.CENTER);
+        
         rdbtnUman = new JRadioButton("Umano");
         rdbtnUman.setSelected(true);
         rdbtnUman.setHorizontalAlignment(SwingConstants.LEFT);
@@ -154,9 +156,12 @@ public class InizializedPlayer {
         final ButtonGroup group = new ButtonGroup();
         group.add(rdbtnComputer);
         group.add(rdbtnUman);
-
         rdbtnUman.setSelected(true);
 
+        final JPanel color = new JPanel();
+        color.setBackground(C.COLORS[Go.getNumPlayers()]);
+        centerP.add(color,BorderLayout.SOUTH);
+        
         panel.setVisible(true);
         return panel;
 

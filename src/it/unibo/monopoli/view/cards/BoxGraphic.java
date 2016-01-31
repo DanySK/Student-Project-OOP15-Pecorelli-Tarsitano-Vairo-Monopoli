@@ -28,7 +28,7 @@ public class BoxGraphic extends AbstractGraphicCard {
  * @param pos
  */
     public BoxGraphic(Box box, Position pos, int id) {
-        super(pos);
+        super(box, pos);
         this.box = box;
         this.id = id;
 

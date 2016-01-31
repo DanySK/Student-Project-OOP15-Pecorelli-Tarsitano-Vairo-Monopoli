@@ -68,17 +68,17 @@ public class InizializedComputer {
 
         final JPanel centerP = new JPanel();
         panel.add(centerP, BorderLayout.CENTER);
-        centerP.setLayout(new GridLayout(2, 1, 0, 0));
+        centerP.setLayout(new BorderLayout());
 
         final JPanel centerP_row1 = new JPanel();
-        centerP.add(centerP_row1);
+        centerP.add(centerP_row1,BorderLayout.NORTH);
 
         final JLabel lblNome = new JLabel("Nome:");
         lblNome.setFont(new Font("Berlin Sans FB", Font.PLAIN, 13));
         centerP_row1.add(lblNome);
 
         JTextField textNome = new JTextField();
-        textNome.setPreferredSize(new Dimension(10, 20));
+        textNome.setPreferredSize(new Dimension(0,30));
         textNome.setHorizontalAlignment(SwingConstants.CENTER);
         centerP_row1.add(textNome);
         textNome.setColumns(10);
@@ -86,24 +86,30 @@ public class InizializedComputer {
         textNome.setEditable(false);
 
         final JPanel centerP_row2 = new JPanel();
-        centerP.add(centerP_row2);
+        centerP.add(centerP_row2,BorderLayout.CENTER);
+        
+        JRadioButton rdbtnUman = new JRadioButton("Umano");
+        rdbtnUman.setHorizontalAlignment(SwingConstants.LEFT);
+        rdbtnUman.setAlignmentY(Component.TOP_ALIGNMENT);
+        rdbtnUman.setEnabled(false);
+        centerP_row2.add(rdbtnUman);
 
-        final JRadioButton rdbtnUmano = new JRadioButton("Umano");
-        rdbtnUmano.setSelected(true);
-        rdbtnUmano.setHorizontalAlignment(SwingConstants.LEFT);
-        rdbtnUmano.setAlignmentY(Component.TOP_ALIGNMENT);
-        centerP_row2.add(rdbtnUmano);
-
-        final JRadioButton rdbtnComputer = new JRadioButton("Computer");
+        JRadioButton rdbtnComputer = new JRadioButton("Computer");
+        rdbtnUman.setHorizontalAlignment(SwingConstants.LEFT);
+        rdbtnUman.setAlignmentY(Component.TOP_ALIGNMENT);
         centerP_row2.add(rdbtnComputer);
+        rdbtnComputer.setSelected(true);
+        rdbtnComputer.setEnabled(false);
 
         final ButtonGroup group = new ButtonGroup();
         group.add(rdbtnComputer);
-        group.add(rdbtnUmano);
-        rdbtnComputer.setSelected(true);
-        rdbtnComputer.setEnabled(false);
-        rdbtnUmano.setEnabled(false);
+        group.add(rdbtnUman);
+        
 
+        final JPanel color = new JPanel();
+        color.setBackground(C.COLORS[Go.getNumPlayers()]);
+        centerP.add(color,BorderLayout.SOUTH);
+        
         final JButton remove = new JButton("Remove");
         remove.setFont(new Font("Times New Roman", Font.BOLD, 10));
         remove.setPreferredSize(new Dimension(70, 22));
@@ -117,7 +123,7 @@ public class InizializedComputer {
                 InizializedPlayer.getMap().remove(textNome.getText(), isUman);
                 panel.setVisible(false);
                 playerP.remove(panel);
-                Go.setNumPlayers(-1);
+                Go.addNumPlayers(-1);
                 playerP.revalidate();
                 System.out.println("Remove: " + playerP.getComponentCount());
                 System.out.println("RemoveGet: "+ Go.getNumPlayers());
@@ -132,7 +138,7 @@ public class InizializedComputer {
             isUman = true;
         }
         
-        InizializedPlayer.getMap().put(textNome.getText(), isUman);
+        InizializedPlayer.getMap().put(Go.getNumPlayers()+C.SPLITTOKEN+textNome.getText(), isUman);
 
         panel.setVisible(true);
         return panel;

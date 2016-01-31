@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import it.unibo.monopoli.model.table.Ownership;
-import it.unibo.monopoli.view.RotatedPanel;
 import it.unibo.monopoli.view.JShape.Shapes;
 import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
 
@@ -21,7 +20,7 @@ public class OwnershipGraphic extends AbstractGraphicCard {
     private int id;
 
     public OwnershipGraphic(Ownership own, Position pos, int id) {
-        super(pos);
+        super(own, pos);
         this.own = own;
         this.id = id;
 
@@ -29,8 +28,8 @@ public class OwnershipGraphic extends AbstractGraphicCard {
 
     @Override
     public JPanel build() {
-        JPanel card = getRotatedPanel();
-        card.setPreferredSize(new Dimension(RotatedPanel.getDim()));
+        RotatedPanel card = getRotatedPanel();
+        card.setPreferredSize(new Dimension(card.getDim()));
         card.setLayout(new GridLayout(4, 1));
 
         // JLabel colorP = new JLabel();

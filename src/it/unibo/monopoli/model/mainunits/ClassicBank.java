@@ -26,23 +26,24 @@ public class ClassicBank implements Bank {
     private final List<? extends Building> hotels;
 
     /**
-     * Constructs an instance of a {@link ClassicBank} that want in input a
-     * {@link List} of the {@link Ownership}s used in the game.
-     * 
-     * @param ownerships
-     *            - a {@link List} of the {@link Ownership}s used in the game
+     * Constructs an instance of a {@link ClassicBank}.
      * @param homes
      *            - a {@link List} of the {@link Home}s used in the game
      * @param hotels
      *            - a {@link List} of the {@link Hotel}s used in the game
      */
-    public ClassicBank(final List<Ownership> ownerships, final List<Home> homes, final List<Hotel> hotels) {
-        this.ownerships = ownerships;
+    public ClassicBank(final List<Home> homes, final List<Hotel> hotels) {
+        this.ownerships = new LinkedList<>();
         this.homes = homes;
         this.hotels = hotels;
         this.buildings = new LinkedList<>();
         this.buildings.addAll(this.homes);
         this.buildings.addAll(this.hotels);
+    }
+
+    @Override
+    public void setOwnerships(final List<Ownership> ownerships) {
+        this.ownerships.addAll(ownerships);
     }
 
     @Override

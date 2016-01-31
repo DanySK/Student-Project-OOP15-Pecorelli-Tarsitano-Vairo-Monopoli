@@ -95,7 +95,6 @@ public class ControllerImpl implements Controller {
             break;
         }
         this.bank = this.version.getBank();
-        
         this.boxes = this.version.getAllBoxes();
         this.decks = this.version.getDecks();
         this.actualPlayer=this.players.indexOf(this.version.getNextPlayer());

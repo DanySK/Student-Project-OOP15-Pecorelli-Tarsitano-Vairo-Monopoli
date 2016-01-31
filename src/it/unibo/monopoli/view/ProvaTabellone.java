@@ -144,7 +144,6 @@ public class ProvaTabellone {
                     newcard = new DecksGraphic((DecksBox) card, pos, id);
                 } else {
                     newcard = new BoxGraphic(card, pos, id);
-
                 }
 
                 // aggiungi la carta nella griglia, alla posizione r, c
@@ -152,9 +151,8 @@ public class ProvaTabellone {
                 gbc.insets = new Insets(0, 0, 0, 0);
                 gbc.gridx = c;
                 gbc.gridy = r;
-                JPanel cardGraphic = newcard.build();
-                panel.add(cardGraphic, gbc);
-//                cardsGraphic.add((IBoxGraphic) cardGraphic);
+                panel.add(newcard.build(), gbc);
+                cardsGraphic.add(newcard);
 
             });
 

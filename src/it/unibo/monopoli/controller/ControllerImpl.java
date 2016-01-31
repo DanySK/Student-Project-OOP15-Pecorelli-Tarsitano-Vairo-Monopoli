@@ -43,6 +43,7 @@ import it.unibo.monopoli.model.table.StationIncomeStrategy;
 import it.unibo.monopoli.model.table.TaxImpl;
 import it.unibo.monopoli.view.EVersion;
 import it.unibo.monopoli.view.InPlay;
+import it.unibo.monopoli.view.InizializedPlayer;
 
 /**
  * */
@@ -71,6 +72,7 @@ public class ControllerImpl implements Controller {
      */
     public ControllerImpl() {
         this.players = new LinkedList<>();
+        this.view = Optional.empty() ; 
     }
 
     @Override

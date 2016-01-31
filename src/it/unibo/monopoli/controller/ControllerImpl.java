@@ -72,7 +72,7 @@ public class ControllerImpl implements Controller {
      */
     public ControllerImpl() {
         this.players = new LinkedList<>();
-        this.view = Optional.empty() ; 
+        this.view = Optional.empty();
     }
 
     @Override
@@ -142,13 +142,12 @@ public class ControllerImpl implements Controller {
         this.lastDices = this.version.toRollDices();
         this.actualPosition = this.actualPlayer.getPawn().getActualPos();
         System.out.println(this.actualPosition);
-        
-            for (Box b : this.boxes) {
-                if (b.getID() == this.actualPosition) {
-                    this.view.ifPresent(
-                            v -> v.setButton(this.getNextBoxsActions(b, this.actualPlayer)));
-                }
-            
+
+        for (Box b : this.boxes) {
+            if (b.getID() == this.actualPosition) {
+                this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions(b, this.actualPlayer)));
+            }
+
         }
         return this.actualPosition;
     }
@@ -164,34 +163,34 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void endTurn() {
-        this.actualPlayer= this.version.getNextPlayer();
+        this.actualPlayer = this.version.getNextPlayer();
         if (!this.actualPlayer.isHuman()) {
             this.computerPlayer();
-        }else  {
-            this.view.ifPresent(v -> v.setButton(
-                    this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.actualPlayer)));
+        } else {
+            this.actualPlayer.setDicesRoll(false);
+            this.view.ifPresent(
+                    v -> v.setButton(this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.actualPlayer)));
         }
-       // Player p=this.version.endOfTurnAndNextPlayer();
+        System.out.println(this.actualPlayer.getName());
+        // Player p=this.version.endOfTurnAndNextPlayer();
         // this.actualPlayer=this.players.indexOf(p);
         //
         // this.getActualPlayer().setDicesRoll(false);
-       
+
     }
 
     @Override
     public void buyOwnership() {
-        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)),
-                this.actualPlayer);
+        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
 
         if (actions.contains(Actions.BUY)) {
             ToBuyProperties.buyAOwnership(((Ownership) this.boxes.get(actualPosition)).getContract().getCost(),
                     ((Ownership) this.boxes.get(actualPosition))).play(this.actualPlayer);
             if (this.actualPlayer.isHuman()) {
-                
-                    this.view.ifPresent(
-                            v -> v.setButton(this.getNextBoxsActions(((Ownership) this.boxes.get(actualPosition)),
-                                    this.actualPlayer)));
-                
+                System.out.println(((Ownership)this.getActualBox()).getOwner());
+                this.view.ifPresent(v -> v.setButton(
+                        this.getNextBoxsActions(((Ownership) this.boxes.get(actualPosition)), this.actualPlayer)));
+
             }
 
         } else {
@@ -203,16 +202,13 @@ public class ControllerImpl implements Controller {
     @Override
     public void sellOwnership() {
 
-        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)),
-                this.actualPlayer);
+        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
         if (actions.contains(Actions.SELL)) {
-            ToSellProperties
-                    .sellAOwnership(((Ownership) this.boxes.get(actualPosition)).getContract().getCost(),
-                            (Ownership) this.boxes.get(actualPosition), this.bank)
-                    .play(this.actualPlayer);
+            ToSellProperties.sellAOwnership(((Ownership) this.boxes.get(actualPosition)).getContract().getCost(),
+                    (Ownership) this.boxes.get(actualPosition), this.bank).play(this.actualPlayer);
 
-            this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions(((Ownership) this.boxes.get(actualPosition)),
-                   this.actualPlayer)));
+            this.view.ifPresent(v -> v.setButton(
+                    this.getNextBoxsActions(((Ownership) this.boxes.get(actualPosition)), this.actualPlayer)));
         } else {
             throw new IllegalArgumentException();
         }
@@ -226,15 +222,13 @@ public class ControllerImpl implements Controller {
     @Override
     public void build() {
 
-        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)),
-                this.actualPlayer);
+        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
         if (actions.contains(Actions.BUILD)) {
-            ToBuyProperties.buyABuilding((Land) this.boxes.get(actualPosition), this.bank)
-                    .play(this.actualPlayer);
+            ToBuyProperties.buyABuilding((Land) this.boxes.get(actualPosition), this.bank).play(this.actualPlayer);
             this.alreadyBuilt = true;
             if (this.actualPlayer.isHuman()) {
-                this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions((Land) this.boxes.get(actualPosition),
-                        this.actualPlayer)));
+                this.view.ifPresent(v -> v
+                        .setButton(this.getNextBoxsActions((Land) this.boxes.get(actualPosition), this.actualPlayer)));
             }
             this.alreadyBuilt = false;
         } else {
@@ -246,14 +240,13 @@ public class ControllerImpl implements Controller {
     @Override
     public void sellBuilding() {
 
-        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)),
-                this.actualPlayer);
+        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
         if (actions.contains(Actions.SELL_BUILDING)) {
             Land land = (Land) this.boxes.get(actualPosition);
             ToSellProperties.sellABuilding(land, ((LandGroup) land.getGroup()).getBuildings().get(0), this.bank)
                     .play(this.actualPlayer);
-            this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions((Land) this.boxes.get(actualPosition),
-                    this.actualPlayer)));
+            this.view.ifPresent(v -> v
+                    .setButton(this.getNextBoxsActions((Land) this.boxes.get(actualPosition), this.actualPlayer)));
         } else {
             throw new IllegalArgumentException();
         }
@@ -262,13 +255,12 @@ public class ControllerImpl implements Controller {
     @Override
     public void mortgageOwnership() {
 
-        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)),
-                this.actualPlayer);
+        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
         if (actions.contains(Actions.MORTGAGE)) {
             new ToMortgage((Ownership) this.boxes.get(actualPosition)).play(this.actualPlayer);
             if (this.actualPlayer.isHuman()) {
-                this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions((Ownership) this.boxes.get(actualPosition),
-                        this.actualPlayer)));
+                this.view.ifPresent(v -> v.setButton(
+                        this.getNextBoxsActions((Ownership) this.boxes.get(actualPosition), this.actualPlayer)));
             }
         } else {
             throw new IllegalArgumentException();
@@ -278,15 +270,13 @@ public class ControllerImpl implements Controller {
     @Override
     public void revokeMortgageOwnership() {
 
-        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)),
-                this.actualPlayer);
+        List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)), this.actualPlayer);
         if (actions.contains(Actions.REVOKE_MORTGAGE)) {
             new ToRevokeMortgage((Ownership) this.boxes.get(actualPosition)).play(this.actualPlayer);
             if (this.actualPlayer.isHuman()) {
                 if (this.view != null) {
-                    this.view.ifPresent(
-                            v -> v.setButton(this.getNextBoxsActions((Ownership) this.boxes.get(actualPosition),
-                                    this.actualPlayer)));
+                    this.view.ifPresent(v -> v.setButton(
+                            this.getNextBoxsActions((Ownership) this.boxes.get(actualPosition), this.actualPlayer)));
                 }
             }
         } else {
@@ -367,8 +357,7 @@ public class ControllerImpl implements Controller {
 
         if (this.boxes.get(this.actualPosition) instanceof Ownership) {
             if (((Ownership) this.boxes.get(this.actualPosition)).isMortgaged()) {
-                if (((Ownership) this.boxes.get(this.actualPosition)).getOwner()
-                        .equals(this.actualPlayer)) {
+                if (((Ownership) this.boxes.get(this.actualPosition)).getOwner().equals(this.actualPlayer)) {
 
                     if ((((Ownership) this.boxes.get(this.actualPosition)).getContract().getCost())
                             / 2 > (this.actualPlayer.getMoney()
@@ -384,10 +373,9 @@ public class ControllerImpl implements Controller {
         if (this.boxes.get(this.actualPosition) instanceof Land) {
             final Land land = ((Land) this.boxes.get(this.actualPosition));
             if (land.getOwner().equals(this.bank)) {
-                if (this.actualPlayer
-                        .getMoney() > ((Land) this.boxes.get(this.actualPosition)).getContract().getCost()
-                                + ((Land) this.boxes.get(this.boxes.size() - 1)).getContract().getIncome(
-                                        new LandIncomeStrategy((Land) this.boxes.get(this.boxes.size() - 1)))) {
+                if (this.actualPlayer.getMoney() > ((Land) this.boxes.get(this.actualPosition)).getContract().getCost()
+                        + ((Land) this.boxes.get(this.boxes.size() - 1)).getContract()
+                                .getIncome(new LandIncomeStrategy((Land) this.boxes.get(this.boxes.size() - 1)))) {
                     this.buyOwnership();
                 } else {
                     // this.auction();
@@ -434,8 +422,7 @@ public class ControllerImpl implements Controller {
                             }
                             new ToMortgage(own).play(this.actualPlayer);
                         } else {
-                            new ToPay(amount, this.actualPlayer)
-                                    .play(this.actualPlayer);
+                            new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
                             new ToBePaid(amount).play((Player) land.getOwner());
 
                             // far perdere
@@ -450,8 +437,8 @@ public class ControllerImpl implements Controller {
         } else if (this.boxes.get(this.actualPosition) instanceof Ownership) {
             final Ownership ownership = ((Ownership) this.boxes.get(this.actualPosition));
             if (ownership.getOwner().equals(this.bank)) {
-                if (this.actualPlayer.getMoney() > ((Ownership) this.boxes.get(this.actualPosition))
-                        .getContract().getCost()) {
+                if (this.actualPlayer.getMoney() > ((Ownership) this.boxes.get(this.actualPosition)).getContract()
+                        .getCost()) {
                     this.buyOwnership();
                 } else {
                     // asta
@@ -480,8 +467,7 @@ public class ControllerImpl implements Controller {
                             }
                             new ToMortgage(own).play(this.actualPlayer);
                         } else {
-                            new ToPay(amount, this.actualPlayer)
-                                    .play(this.actualPlayer);
+                            new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
                             new ToBePaid(amount)
                                     .play((Player) ((Ownership) this.boxes.get(this.actualPosition)).getOwner());
 
@@ -513,8 +499,8 @@ public class ControllerImpl implements Controller {
                                 .play(this.actualPlayer);
             }
             if (this.boxes.get(this.actualPosition) instanceof TaxImpl) {
-                new ToPay(((TaxImpl) this.boxes.get(this.actualPosition)).getCost(),
-                        this.actualPlayer).play(this.actualPlayer);
+                new ToPay(((TaxImpl) this.boxes.get(this.actualPosition)).getCost(), this.actualPlayer)
+                        .play(this.actualPlayer);
             }
 
         }

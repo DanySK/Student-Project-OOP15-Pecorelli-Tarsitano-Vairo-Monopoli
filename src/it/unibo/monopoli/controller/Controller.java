@@ -161,5 +161,6 @@ public interface Controller {
     // int getNewPosition();
 
     Player getActualPlayer();
+    int getActualPosition();
 
 }

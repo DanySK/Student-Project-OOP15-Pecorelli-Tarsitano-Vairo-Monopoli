@@ -172,8 +172,8 @@ public class TestModel {
         assertEquals(decks.get(0).getCards().size(), decks.get(1).getCards().size());
         assertEquals(decks.get(0).getCards().size(), N_OF_CARDS_IN_ONE_DECK);
 
-//        //Tests all the boxes of the game's table
-//        version.getAllBoxes().get(0)
+        //Tests all the boxes of the game's table
+        version.getAllBoxes().get(0)
 
         //Tests MoveUpTo.takeSteps and MoveUpTo.theNearestStation
         final int amount = testPlayer.getMoney();

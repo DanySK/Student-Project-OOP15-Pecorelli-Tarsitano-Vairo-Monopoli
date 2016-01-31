@@ -75,6 +75,10 @@ public class ControllerImpl implements Controller {
         return this.players.get(this.actualPlayer);
     }
 
+    @Override 
+    public int getActualPosition(){
+        return this.actualPosition;
+    }
     @Override
     public void addPlayer(final String name, final ClassicPawn pawn, final boolean isHuman) {
         this.players.add(new ClassicPlayer(name, pawn, isHuman));
@@ -90,6 +94,7 @@ public class ControllerImpl implements Controller {
             break;
         }
         this.bank = this.version.getBank();
+        
         this.boxes = this.version.getAllBoxes();
         this.decks = this.version.getDecks();
         this.players.add(this.actualPlayer, this.version.getNextPlayer());
@@ -129,15 +134,16 @@ public class ControllerImpl implements Controller {
     @Override
     public int toRollDices() {
 
-        this.lastDices = this.version.toRollDices(this.players.get(this.actualPlayer));
+        this.lastDices = this.version.toRollDices();
         this.actualPosition = this.players.get(this.actualPlayer).getPawn().getActualPos();
         System.out.println(this.actualPosition);
+        if (this.view!=null){
         this.boxes.forEach(b -> {
             if (b.getID() == this.actualPosition) {
                 this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions(b, this.players.get(this.actualPlayer))));
             }
         });
-
+        }
         return this.actualPosition;
     }
 
@@ -152,17 +158,13 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void endTurn() {
-
+        if(this.view!=null){
         this.view.ifPresent(v -> v.setButton(
                 this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.players.get(this.actualPlayer))));
-        if (this.actualPlayer == this.players.size()) {
-            this.players.add(0, this.version.endOfTurnAndNextPlayer(this.players.get(this.actualPlayer)));
-        } else {
-            this.players.add(this.actualPlayer + 1,
-                    this.version.endOfTurnAndNextPlayer(this.players.get(this.actualPlayer)));
-
         }
-
+        Player p=this.version.endOfTurnAndNextPlayer();
+        this.actualPlayer=this.players.indexOf(p);
+        
         if (!this.players.get(this.actualPlayer).isHuman()) {
             this.computerPlayer();
         }
@@ -172,7 +174,7 @@ public class ControllerImpl implements Controller {
     public void buyOwnership() {
         List<Actions> actions = this.getNextBoxsActions((this.boxes.get(actualPosition)),
                 this.players.get(this.actualPlayer));
-
+        
         if (actions.contains(Actions.BUY)) {
             ToBuyProperties.buyAOwnership(((Ownership) this.boxes.get(actualPosition)).getContract().getCost(),
                     ((Ownership) this.boxes.get(actualPosition))).play(this.players.get(this.actualPlayer));
@@ -668,7 +670,7 @@ public class ControllerImpl implements Controller {
         }
     }
     
-    @Override
+//    @Override
 //  public List<Action> getNextCardsActions(final Box box, final Card card, final Player player) {
 //      final List<Action> actions = new LinkedList<>();
 //      switch (card.getID()) {
@@ -852,38 +854,38 @@ public class ControllerImpl implements Controller {
 //      System.out.println(v);
 //  }
 
-    public static void main(String[] args) {
-        // LinkedList<Integer> l = new LinkedList<>();
-        // l.add(1);
-        //
-        // // List<Integer> in = new LinkedList<>();
-        //
-        // Optional<Integer> in = l.stream().sorted((s, s1) -> (s -
-        // s1)).reduce((i,
-        // i1) -> i + i1);
-        //
-        // System.out.println(l);
-        // System.out.println(in.get());
-
-        Controller contr = new ControllerImpl();
-        // Player p1=new ClassicPlayer("ciao", new ClassicPawn(5), true);
-        //
-        // Player p1=new ClassicPlayer("ciao1", new ClassicPawn(6), true);
-        //
-        // Player p1=new ClassicPlayer("ciao2", new ClassicPawn(7), true);
-
-        contr.addPlayer("ciao", new ClassicPawn(5), true);
-        contr.addPlayer("ciao1", new ClassicPawn(6), true);
-        contr.addPlayer("ciao2", new ClassicPawn(7), true);
-        contr.getPlayers().forEach(p -> {
-            System.out.println(p.getMoney());
-        });
-
-        GameVersion g = new GameVersionImpl(new ClassicStrategy(contr.getPlayers()));
-        contr.getPlayers().forEach(p -> {
-            System.out.println(p.getOwnerships().get(0).getContract().getCost());
-        });
-
+//    public static void main(String[] args) {
+//        // LinkedList<Integer> l = new LinkedList<>();
+//        // l.add(1);
+//        //
+//        // // List<Integer> in = new LinkedList<>();
+//        //
+//        // Optional<Integer> in = l.stream().sorted((s, s1) -> (s -
+//        // s1)).reduce((i,
+//        // i1) -> i + i1);
+//        //
+//        // System.out.println(l);
+//        // System.out.println(in.get());
+//
+//        Controller contr = new ControllerImpl();
+//        // Player p1=new ClassicPlayer("ciao", new ClassicPawn(5), true);
+//        //
+//        // Player p1=new ClassicPlayer("ciao1", new ClassicPawn(6), true);
+//        //
+//        // Player p1=new ClassicPlayer("ciao2", new ClassicPawn(7), true);
+//
+//        contr.addPlayer("ciao", new ClassicPawn(5), true);
+//        contr.addPlayer("ciao1", new ClassicPawn(6), true);
+//        contr.addPlayer("ciao2", new ClassicPawn(7), true);
+//        contr.getPlayers().forEach(p -> {
+//            System.out.println(p.getMoney());
+//        });
+//
+//        GameVersion g = new GameVersionImpl(new ClassicStrategy(contr.getPlayers()));
+//        contr.getPlayers().forEach(p -> {
+//            System.out.println(p.getOwnerships().get(0).getContract().getCost());
+//        });
+//
+//    }
+//
     }
-
-}

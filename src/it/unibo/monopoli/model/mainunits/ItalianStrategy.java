@@ -9,7 +9,10 @@ import java.util.stream.Collectors;
 
 import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.actions.ClassicAuction;
+import it.unibo.monopoli.model.actions.ClassicDicesStrategy;
+import it.unibo.monopoli.model.actions.ItalianDicesStrategy;
 import it.unibo.monopoli.model.actions.ToAuction;
+import it.unibo.monopoli.model.actions.ToRollDices;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.cards.ImprevistiCards;
 import it.unibo.monopoli.model.cards.ProbabilitaCards;
@@ -516,5 +519,11 @@ public class ItalianStrategy implements GameStrategy {
     @Override
     public AuctionOfOwnership toAuction(final Ownership ownership, final Player player) {
         return ToAuction.ownerships(this.players, new ClassicAuction(), ownership, this.bank).getAuction(player);
+    }
+
+    @Override
+    public List<Integer> toRollDices(Player player) {
+        new ToRollDices(new ItalianDicesStrategy(this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos()))).play(player);
+        return player.lastDicesNumber();
     }
 }

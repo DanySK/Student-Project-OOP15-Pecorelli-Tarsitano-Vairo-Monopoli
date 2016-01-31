@@ -82,6 +82,7 @@ public final class ToBuyProperties extends ToBuyAndSellProperties {
     @Override
     protected void whatToDoWithOwnership(final Player player) {
         player.addOwnership(this.ownership);
+        this.ownership.setOwner(player);
     }
 
 }

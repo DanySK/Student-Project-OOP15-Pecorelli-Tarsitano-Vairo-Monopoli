@@ -1,4 +1,4 @@
-package it.unibo.monopoli.view;
+package it.unibo.monopoli.view.cards;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import it.unibo.monopoli.model.mainunits.Player;
+import it.unibo.monopoli.view.JShape;
+import it.unibo.monopoli.view.RotatedPanel;
 
 /**
  *

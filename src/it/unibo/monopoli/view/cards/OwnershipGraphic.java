@@ -1,4 +1,4 @@
-package it.unibo.monopoli.view;
+package it.unibo.monopoli.view.cards;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,7 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import it.unibo.monopoli.model.table.Ownership;
+import it.unibo.monopoli.view.RotatedPanel;
 import it.unibo.monopoli.view.JShape.Shapes;
+import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
 
 public class OwnershipGraphic extends AbstractGraphicCard {
 
@@ -39,7 +41,6 @@ public class OwnershipGraphic extends AbstractGraphicCard {
         JLabel nameP = new JLabel(own.getName());
         card.add(nameP);
 
-        JPanel emptyP = new JPanel();
         card.add(emptyP);
 
         int i = this.own.getContract().getCost();

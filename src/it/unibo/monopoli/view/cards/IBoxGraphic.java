@@ -1,4 +1,4 @@
-package it.unibo.monopoli.view;
+package it.unibo.monopoli.view.cards;
 
 import javax.swing.JPanel;
 

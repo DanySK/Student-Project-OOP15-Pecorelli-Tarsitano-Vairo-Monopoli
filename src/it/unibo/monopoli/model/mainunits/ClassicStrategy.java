@@ -61,7 +61,8 @@ public class ClassicStrategy implements GameStrategy {
     private static final int N_MAX_OF_HOUSES = 32;
     private static final int N_MAX_OF_HOTELS = 12;
     private static final int AMOUNT_OF_FEES = 10;
-  
+    private static final int MIN_PLAYERS = 2;
+    private static final int  MAX_PLAYERS = 6;
     private static final int CARD_TAX = 50;
 
     private final List<Player> players;

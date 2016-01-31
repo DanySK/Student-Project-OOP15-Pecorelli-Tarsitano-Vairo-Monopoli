@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import it.unibo.monopoli.view.cards.AbstractGraphicCard;
+
 public class CardGraphic extends AbstractGraphicCard {
 
     private String name;

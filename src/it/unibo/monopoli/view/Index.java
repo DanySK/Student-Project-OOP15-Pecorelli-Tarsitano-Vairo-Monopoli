@@ -21,6 +21,7 @@ import it.unibo.monopoli.controller.Actions;
 import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.controller.ControllerImpl;
 import it.unibo.monopoli.model.mainunits.Player;
+import it.unibo.monopoli.view.cards.IBoxGraphic;
 import it.unibo.monopoli.view.listener.StartPlay;
 
 public class Index {
@@ -97,7 +98,7 @@ public class Index {
                 System.out.println("pos: " + pos);
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -149,7 +150,7 @@ public class Index {
                 controller.endTurn();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -167,7 +168,7 @@ public class Index {
                 controller.buyOwnership();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -185,7 +186,7 @@ public class Index {
                 controller.sellOwnership();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -203,7 +204,7 @@ public class Index {
                 controller.auction();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -221,7 +222,7 @@ public class Index {
                 controller.build();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -239,7 +240,7 @@ public class Index {
                 controller.sellBuilding();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -257,7 +258,7 @@ public class Index {
                 controller.mortgageOwnership();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -275,7 +276,7 @@ public class Index {
                 controller.revokeMortgageOwnership();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -293,7 +294,7 @@ public class Index {
                 controller.endGame();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<String> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.equals(but)) {
@@ -323,6 +324,10 @@ public class Index {
     public Controller getController() {
         return this.controller;
 
+    }
+    
+    public static void main(String[] args) {
+        new Index();
     }
 
 }

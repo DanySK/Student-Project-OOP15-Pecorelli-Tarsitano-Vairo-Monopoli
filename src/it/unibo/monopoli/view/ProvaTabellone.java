@@ -20,7 +20,13 @@ import it.unibo.monopoli.model.table.DecksBox;
 import it.unibo.monopoli.model.table.Land;
 import it.unibo.monopoli.model.table.Ownership;
 import it.unibo.monopoli.model.table.TaxImpl;
-import it.unibo.monopoli.view.IBoxGraphic.Position;
+import it.unibo.monopoli.view.cards.BoxGraphic;
+import it.unibo.monopoli.view.cards.DecksGraphic;
+import it.unibo.monopoli.view.cards.IBoxGraphic;
+import it.unibo.monopoli.view.cards.LandGraphic;
+import it.unibo.monopoli.view.cards.OwnershipGraphic;
+import it.unibo.monopoli.view.cards.TaxGraphic;
+import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
 import it.unibo.monopoli.controller.*;
 
 public class ProvaTabellone {

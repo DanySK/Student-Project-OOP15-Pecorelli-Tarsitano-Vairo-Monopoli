@@ -1,4 +1,4 @@
-package it.unibo.monopoli.view;
+package it.unibo.monopoli.view.cards;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,6 +11,7 @@ import javax.swing.border.Border;
 
 import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.view.JShape.Shapes;
+import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
 /**
  * 
  * 
@@ -42,7 +43,6 @@ public class BoxGraphic extends AbstractGraphicCard {
         JLabel nameP = new JLabel(box.getName());
         card.add(nameP);
 
-        JPanel emptyP = new JPanel();
         card.add(emptyP);
 
         card.setBorder(border);

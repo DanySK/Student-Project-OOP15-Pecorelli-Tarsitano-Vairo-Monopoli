@@ -8,7 +8,7 @@ import it.unibo.monopoli.model.actions.Action;
 import it.unibo.monopoli.model.actions.ToBePaid;
 import it.unibo.monopoli.model.table.Start;
 
-public enum ProbabilitàCards {
+public enum ProbabilitaCards {
 
     CARD1("RICEVETE LA PARCELLA DEL DOTTORE: PAGATE $50", 17),
     CARD2("PAGATE LE RETTE SCOLASTICHE DEI VOSTRI FIGLI: VERSATE $50", 18),
@@ -31,7 +31,7 @@ public enum ProbabilitàCards {
     private final int cardId;
     private final Optional<List<Action>> actions;
 
-    ProbabilitàCards(final String description, final int id, final Action... actions) {
+    ProbabilitaCards(final String description, final int id, final Action... actions) {
         this.description = description;
         this.cardId = id;
         this.actions = Optional.of(Arrays.asList(actions));

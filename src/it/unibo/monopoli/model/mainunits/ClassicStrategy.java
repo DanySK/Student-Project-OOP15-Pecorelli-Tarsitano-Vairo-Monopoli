@@ -78,18 +78,17 @@ public class ClassicStrategy implements GameStrategy {
      *            - a {@link List} of all the current {@link Player}s
      */
     public ClassicStrategy(final List<Player> players) {
+        this.homes = new LinkedList<>();
+        this.hotels = new LinkedList<>();
+        this.inizializesBuildings();
+        this.bank = new ClassicBank(this.homes, this.hotels);
         this.ownerships = new LinkedList<>();
         this.inizializesOwnerships();
+        this.bank.setOwnerships(this.ownerships);
         this.groups = new LinkedList<>();
         this.inizializesGroups();
         this.contracts = new LinkedList<>();
         this.inizializesContracts();
-        this.homes = new LinkedList<>();
-        this.hotels = new LinkedList<>();
-        this.inizializesBuildings();
-        final List<Ownership> banksOwnerships = new LinkedList<>();
-        banksOwnerships.addAll(this.ownerships);
-        this.bank = new ClassicBank(banksOwnerships, this.homes, this.hotels);
         this.players = players;
         this.inizializesPlayers(players);
         this.decks = new LinkedList<>();

@@ -13,6 +13,8 @@ import it.unibo.monopoli.model.table.Ownership;
  *
  */
 public interface Bank extends Owner {
+    
+    void setOwnerships(List<Ownership> ownerships);
 
     /**
      * Return a {@link List} of the remained {@link Ownership}s.

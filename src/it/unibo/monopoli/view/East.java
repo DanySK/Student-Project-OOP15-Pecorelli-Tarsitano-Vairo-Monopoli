@@ -25,7 +25,7 @@ public class East extends JPanel {
         panelPlayer.setLayout(new GridLayout(j, 1));
         
         
-        
+        System.out.println("Size.map: " + InizializedPlayer.getMap().size());
         for (int i = 0; i < InizializedPlayer.getMap().size(); i++) {
             panelPlayer.add(new PlayerGraphic(controller.getPlayers(), i).build());
         }

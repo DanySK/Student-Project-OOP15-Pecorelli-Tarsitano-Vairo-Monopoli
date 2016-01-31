@@ -110,12 +110,14 @@ public class InizializedPlayer {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 map.remove(textNome.getText(), isUman);
+                
                 panel.setVisible(false);
                 playerP.remove(panel);
                 Go.addNumPlayers(-1);
                 playerP.revalidate();
                 System.out.println("Remove: " + playerP.getComponentCount());
                 System.out.println("RemoveGet: " + Go.getNumPlayers());
+                System.out.println("Remove: size Map: " + InizializedPlayer.getMap().size());
 
             }
 

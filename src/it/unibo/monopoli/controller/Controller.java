@@ -12,7 +12,6 @@ import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.model.table.Building;
 import it.unibo.monopoli.model.table.Land;
 import it.unibo.monopoli.model.table.Ownership;
-import it.unibo.monopoli.view.EVersion;
 import it.unibo.monopoli.view.InPlay;
 
 /**

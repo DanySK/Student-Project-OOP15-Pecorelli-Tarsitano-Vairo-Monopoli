@@ -9,10 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import it.unibo.monopoli.controller.Controller;
+import it.unibo.monopoli.controller.EVersion;
 import it.unibo.monopoli.model.mainunits.ClassicPawn;
 import it.unibo.monopoli.view.C;
 import it.unibo.monopoli.view.Dialog;
-import it.unibo.monopoli.view.EVersion;
 import it.unibo.monopoli.view.Go;
 import it.unibo.monopoli.view.InPlay;
 import it.unibo.monopoli.view.InPlayImpl;

@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import it.unibo.monopoli.controller.EVersion;
 import it.unibo.monopoli.view.listener.StartPlay;
 import it.unibo.monopoli.view.listener.VersionSelected;
 
@@ -147,7 +148,7 @@ public class Go {
             public void actionPerformed(ActionEvent e) {
 
                 // TODO
-                // Controllo sulla textbox..se è vuota non può aggiungere un
+                // Controllo sulla textbox..se ï¿½ vuota non puï¿½ aggiungere un
                 // nuovo Player
                 if (playerP.getComponentCount() < C.MAX_PLAYERS) {
                     playerP.add(new InizializedPlayer().build(playerP));

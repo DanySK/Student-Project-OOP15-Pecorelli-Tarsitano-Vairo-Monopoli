@@ -531,6 +531,7 @@ public class ItalianStrategy implements GameStrategy {
                 return o1.getID() - o2.getID();
             }
         }).collect(Collectors.toList());
+       
     }
 
     @Override

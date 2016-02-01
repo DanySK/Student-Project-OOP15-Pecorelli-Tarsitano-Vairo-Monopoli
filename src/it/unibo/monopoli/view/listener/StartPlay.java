@@ -54,6 +54,9 @@ public class StartPlay implements ActionListener {
             case "Classic":
                 contr.initializedVersion(EVersion.CLASSIC);
                 break;
+            case "Italian Version":
+                contr.initializedVersion(EVersion.ITALIAN_VERSION);
+                break;
             default:
                 break;
             }

@@ -156,6 +156,6 @@ public interface Player extends Owner {
     
     void setIfIsTheFirstLaunch(boolean isTheFirst);
     
-    boolean isTheFirtsLunch();
+    boolean isTheFirtsLaunch();
 
 }

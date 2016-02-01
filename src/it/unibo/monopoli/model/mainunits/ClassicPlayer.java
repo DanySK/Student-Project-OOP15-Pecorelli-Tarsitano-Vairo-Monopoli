@@ -163,8 +163,8 @@ public class ClassicPlayer implements Player{
     }
 
     @Override
-    public boolean isTheFirtsLunch() {
-        return this.isTheFirtsLunch();
+    public boolean isTheFirtsLaunch() {
+        return this.isTheFirtsLaunch();
     }
 
 }

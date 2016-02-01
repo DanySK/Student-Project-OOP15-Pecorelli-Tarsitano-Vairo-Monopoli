@@ -589,10 +589,13 @@ public class ControllerImpl implements Controller {
     public List<Actions> getNextBoxsActions(final Box box, final Player player) {
         actions = new LinkedList<>();
         actions.clear();
-        if (!player.dicesAlreadyRolled()) {
+        if (!player.dicesAlreadyRolled() && player.isTheFirtsLaunch()) {
             actions.add(Actions.ROLL_DICES);
             return actions;
-        } else if (box instanceof Land) {
+        } else if(!player.dicesAlreadyRolled() && !player.isTheFirtsLaunch()) {
+            actions.add(Actions.ROLL_DICES);
+        }
+        if (box instanceof Land) {
             final Land land = (Land) box;
             if (land.getOwner().equals(this.bank)) {
                 this.toBuyOrToEndOfTurn(land, player, actions);

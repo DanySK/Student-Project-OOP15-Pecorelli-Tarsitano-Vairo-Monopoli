@@ -32,7 +32,7 @@ public class TaxGraphic extends AbstractGraphicCard {
         card.setPreferredSize(new Dimension(card.getDim()));
         card.setLayout(new GridLayout(4, 1));
 
-        JLabel nameP = new JLabel(tax.getName());
+        JLabel nameP = new JLabel("<html>"+tax.getName()+"</html>");
         card.add(nameP);
 
         card.add(emptyP);

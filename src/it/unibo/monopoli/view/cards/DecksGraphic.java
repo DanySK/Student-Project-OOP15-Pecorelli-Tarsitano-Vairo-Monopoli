@@ -33,7 +33,7 @@ public class DecksGraphic extends AbstractGraphicCard {
         card.setPreferredSize(new Dimension(card.getDim()));
         card.setLayout(new GridLayout(2, 1));
 
-        JLabel nameP = new JLabel(deck.getName());
+        JLabel nameP = new JLabel("<html>"+deck.getName()+"</html>");
         card.add(nameP);
 
         card.add(emptyP);

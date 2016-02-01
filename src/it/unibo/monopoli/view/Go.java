@@ -150,10 +150,13 @@ public class Go {
                 // TODO
                 // Controllo sulla textbox..se � vuota non pu� aggiungere un
                 // nuovo Player
-                if (playerP.getComponentCount() < C.MAX_PLAYERS) {
+                if(!InizializedPlayer.isSave()){
+                    new Dialog (new JFrame(),"Error","Error! Before you add do you have to save the player");
+                }else if (playerP.getComponentCount() < C.MAX_PLAYERS) {
                     playerP.add(new InizializedPlayer().build(playerP));
                     playerP.revalidate();
                     addNumPlayers(1);
+                    InizializedPlayer.setSave(false);
                     System.out.println("Add:" + playerP.getComponentCount());
                     System.out.println("AddGet: " + getNumPlayers());
 

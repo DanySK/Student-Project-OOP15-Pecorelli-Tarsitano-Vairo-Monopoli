@@ -21,7 +21,7 @@ public class ClassicPlayer implements Player{
     private boolean debtsPaid;
     private final boolean human;
     private int turnsInPrison;
-    private boolean isTheFirstLaunch = true;
+    private boolean isTheFirst = true;
 
     public ClassicPlayer(final String name, final Pawn pawn, final boolean isHuman) {
         this.name = name;
@@ -158,13 +158,13 @@ public class ClassicPlayer implements Player{
     }
 
     @Override
-    public void setIfIsTheFirstLaunch(boolean isTheFirst) {
-        this.isTheFirstLaunch = isTheFirst;
+    public void setIfIsTheFirstLaunch(final boolean isTheFirst) {
+        this.isTheFirst = isTheFirst;
     }
 
     @Override
     public boolean isTheFirtsLaunch() {
-        return this.isTheFirtsLaunch();
+        return this.isTheFirst;
     }
 
 }

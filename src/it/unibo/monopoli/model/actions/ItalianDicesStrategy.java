@@ -40,7 +40,8 @@ public class ItalianDicesStrategy implements DicesStrategy {
                 player.getPawn().setPos(player.getPawn().getActualPos() + this.sum());
             } else {
                 player.setDicesRoll(false);
-            }
+                player.setIfIsTheFirstLaunch(false);
+           }
         } else {
             if (player.isInPrison() && player.howManyTurnsHasBeenInPrison() < 3) {
                 player.incrementsTurnsInPrison();

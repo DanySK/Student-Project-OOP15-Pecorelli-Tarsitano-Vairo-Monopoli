@@ -35,6 +35,7 @@ public class ClassicDicesStrategy implements DicesStrategy {
                 player.getPawn().setPos(player.getPawn().getActualPos() + player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
             } else {
                 player.setDicesRoll(false);
+                player.setIfIsTheFirstLaunch(false);
             }
         } else {
             if (player.isInPrison() && player.howManyTurnsHasBeenInPrison() < 3) {

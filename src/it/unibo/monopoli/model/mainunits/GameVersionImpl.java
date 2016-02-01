@@ -69,6 +69,7 @@ public class GameVersionImpl implements GameVersion {
     @Override
     public Player endOfTurnAndNextPlayer() {
         this.actualPlayer.setDicesRoll(false);
+        this.actualPlayer.setIfIsTheFirstLaunch(true);        
         return this.getNextPlayer();
     }
 

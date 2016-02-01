@@ -30,7 +30,6 @@ public class Go {
     private static int numPlayer = 0;
     private int cont = 2;
 
-
     public Go() {
         final MyFrame start = new MyFrame("Start - Monopoli", new BorderLayout(), new Dimension(900, 450));
         start.setFont(new Font("Berlin Sans FB", Font.PLAIN, 14));
@@ -150,9 +149,9 @@ public class Go {
                 // TODO
                 // Controllo sulla textbox..se � vuota non pu� aggiungere un
                 // nuovo Player
-                if(!InizializedPlayer.isSave()){
-                    new Dialog (new JFrame(),"Error","Error! Before you add do you have to save the player");
-                }else if (playerP.getComponentCount() < C.MAX_PLAYERS) {
+                if (!InizializedPlayer.isSave()) {
+                    new Dialog(new JFrame(), "Error", "Error! Before you add do you have to save the player");
+                } else if (playerP.getComponentCount() < C.MAX_PLAYERS) {
                     playerP.add(new InizializedPlayer().build(playerP));
                     playerP.revalidate();
                     addNumPlayers(1);
@@ -181,7 +180,7 @@ public class Go {
         GridC.add(btnNewButton, gbc_btnNewButton);
 
         start.setVisible(true);
-       
+
     }
 
     public static void main(String[] args) {

@@ -184,14 +184,15 @@ public class PlayerGraphic extends JPanel {
             l = labels.get(o.getID());
             if (own.getOwner().equals(list.get(i))) {
                 l.setOpaque(true);
+                l.setVisible(true);
                 if (o instanceof Land) {
                     l.setBackground(((Land) o).getColor());
                 } else {
                     l.setBackground(Color.WHITE);
                 }
             } else {
-                System.out.println(list.get(i).toString() + " sold");
-                l.setOpaque(false);
+               l.setOpaque(false);
+               l.setVisible(false);
             }
         });
         // p.getOwnerships().stream().forEach(o -> {

@@ -23,6 +23,7 @@ public class LandGraphic extends AbstractGraphicCard {
     private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
     private Land land;
     private int id;
+    JLabel colorP;
 
     public LandGraphic(Land land, Position pos, int id) {
         super(land, pos);
@@ -36,7 +37,7 @@ public class LandGraphic extends AbstractGraphicCard {
         card.setPreferredSize(new Dimension(card.getDim()));
         card.setLayout(new GridLayout(4, 1));
 
-        JLabel colorP = new JLabel();
+        colorP = new JLabel();
         colorP.setOpaque(true);
         colorP.setBackground(land.getColor());
         card.add(colorP);
@@ -69,13 +70,16 @@ public class LandGraphic extends AbstractGraphicCard {
         JShape house = new JShape(c); // creo la pedina
         
         houses.add(house); // aggiungo pedina alla mappa
+        colorP.add(house);
+        colorP.validate();
 //        pannellocasa.add(house); // disegno la pedina (aggiungendola al pannello)
 //        pannellocasa.validate();
     }
 
     public void removeHouse(Player p) {
         JShape h = houses.getLast();
-        emptyP.remove(h); // rimuovo la pedina dal pannello
+        colorP.remove(h); // rimuovo la pedina dal pannello
         houses.removeLast();
+        colorP.revalidate();
     } 
 }

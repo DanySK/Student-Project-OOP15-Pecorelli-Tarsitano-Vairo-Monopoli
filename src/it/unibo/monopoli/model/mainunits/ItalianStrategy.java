@@ -708,14 +708,14 @@ public class ItalianStrategy implements GameStrategy {
                                   .forEach(o -> {
                                       ((LandGroup) o.getGroup()).getBuildings().forEach(b -> {
                                           if (player.getMoney() <= moneyToPay) {
-                                              ToSellProperties.sellABuilding(((Land) o), b, this.bank);
+                                              ToSellProperties.sellABuilding(((Land) o), b, this.bank).play(player);
                                           }
                                       });
                                     });
         player.getOwnerships().stream()
                               .forEach(o -> {
                                   if (player.getMoney() <= moneyToPay) {
-                                      ToSellProperties.sellAOwnership(o.getContract().getCost(), o, this.bank);
+                                      ToSellProperties.sellAOwnership(o.getContract().getCost(), o, this.bank).play(player);
                                   }
                               });
         }

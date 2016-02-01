@@ -60,7 +60,7 @@ public class ToRollDices implements Action {
         player.setDicesRoll(true);
         this.strategy.nowPlay(player);
         if (this.policePos(player)) {
-            new GoToPrison(this.prison);
+            new GoToPrison(this.prison).play(player);
         }
     }
 

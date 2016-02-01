@@ -56,7 +56,7 @@ public class ControllerImpl implements Controller {
     private static final int FIRST_CHANCE_POSITION = 7;
     private static final int SECOND_CHANCE_POSITION = 22;
     private static final int THIRD_CHANCE_POSITION = 36;
-
+    private static final int AVERAGE_COST=36;
     private final List<Player> players;
     private Player actualPlayer;
     private GameVersion version;
@@ -348,11 +348,7 @@ public class ControllerImpl implements Controller {
         return lastDices.get(0) == lastDices.get(1);
     }
 
-    private int getAverageCost() {
-        return ((Land) this.boxes.get((this.boxes.size() / 2) - 1)).getContract()
-                .getIncome(new LandIncomeStrategy((Land) this.boxes.get((this.boxes.size() / 2) - 1)));
 
-    }
 
     private void computerPlayer() {
         // if (this.actualPlayer.isInPrison()) {
@@ -371,7 +367,7 @@ public class ControllerImpl implements Controller {
                 if (((Ownership) this.boxes.get(this.actualPosition)).getOwner().equals(this.actualPlayer)) {
 
                     if ((((Ownership) this.boxes.get(this.actualPosition)).getContract().getCost())
-                            / 2 < (this.actualPlayer.getMoney() + this.getAverageCost())) {
+                            / 2 < (this.actualPlayer.getMoney() + this.AVERAGE_COST)) {
                         this.revokeMortgageOwnership();
 
                     }
@@ -384,7 +380,7 @@ public class ControllerImpl implements Controller {
             if (land.getOwner().equals(this.bank)) {
                 // ok
                 if (this.actualPlayer.getMoney() > ((Land) this.boxes.get(this.actualPosition)).getContract().getCost()
-                        + getAverageCost()) {
+                        + this.AVERAGE_COST) {
                     this.buyOwnership();
                 } else {
                     // this.auction();
@@ -394,7 +390,7 @@ public class ControllerImpl implements Controller {
                 if (this.actualPlayer.getOwnerships().containsAll(land.getGroup().getMembers())
                         && ((LandGroup) land.getGroup()).canBuiling() && this.bank.getLeftBuilding().size() > 0
                         && this.actualPlayer.getMoney() >= (((LandContract) land.getContract()).getCostForEachBuilding()
-                                + (getAverageCost() * 4))
+                                + (this.AVERAGE_COST * 4))
                         && !this.alreadyBuilt) {
                     this.bank.getLeftBuilding().forEach(b -> {
                         if ((((LandGroup) land.getGroup()).getBuildings().size() < 4 && b instanceof Home)// capire

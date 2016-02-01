@@ -18,6 +18,8 @@ public interface InPlay {
     
     void notifyEndTurnComputer(Player player);
     
+//    void beginComputer(int prePos);
+    
     List<Actions> getButtons();
 
 }

@@ -41,9 +41,16 @@ public class StartPlay implements ActionListener {
             new Dialog(new JFrame(), "Error", "Error! The minimum number of players is two");
         } else {
             Index i = new Index();
+<<<<<<< local
+            inPlay = new InPlayImpl(i);
+            i.addInPlay(inPlay);
+            Controller contr = i.getController();
+            contr.addView(inPlay);
+=======
             this.inPlay = new InPlayImpl(i);
             i.addInPlay(inPlay);
                   Controller contr = i.getController();
+>>>>>>> other
           
             Set<Entry<String, Boolean>> s = InizializedPlayer.getMap().entrySet();
             s.forEach(g -> {
@@ -77,8 +84,14 @@ public class StartPlay implements ActionListener {
 
     }
 
+<<<<<<< local
+    public InPlay getInPlay() {
+        return inPlay;
+    }
+=======
 //    public static InPlay getInPlay() {
 //        return inPlay;
 //    }
+>>>>>>> other
 
 }

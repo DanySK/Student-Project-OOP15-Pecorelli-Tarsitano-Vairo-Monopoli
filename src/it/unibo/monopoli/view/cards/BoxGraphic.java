@@ -37,10 +37,10 @@ public class BoxGraphic extends AbstractGraphicCard {
     @Override
     public JPanel build() {
         JPanel card = getRotatedPanel();
-        card.setPreferredSize(new Dimension(70, 70));
+        card.setPreferredSize(new Dimension(55, 55));
         card.setLayout(new GridLayout(2, 1));
 
-        JLabel nameP = new JLabel(box.getName());
+        JLabel nameP = new JLabel("<html>"+box.getName()+"</html>");
         card.add(nameP);
 
         card.add(emptyP);

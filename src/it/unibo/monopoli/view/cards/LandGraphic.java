@@ -41,7 +41,7 @@ public class LandGraphic extends AbstractGraphicCard {
         colorP.setBackground(land.getColor());
         card.add(colorP);
 
-        JLabel nameP = new JLabel(land.getName());
+        JLabel nameP = new JLabel("<html>"+land.getName()+"</html>");
         nameP.setFont(new Font("Times New Roman", Font.BOLD, 10));
         nameP.setPreferredSize(new Dimension(card.getDimension().width,20));
         card.add(nameP);

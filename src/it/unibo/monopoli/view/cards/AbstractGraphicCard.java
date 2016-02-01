@@ -22,7 +22,7 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
     private Map<Player, JShape> pawns;
     private Position pos = null;
     private Box card;
-    private static final Dimension DIMENSION = new Dimension(50,70);
+    private static final Dimension DIMENSION = new Dimension(60,60);
     /**
      * panel in cui gestisco le pedine, il riferimento a questo pannello si
      * trova qui perchè è in questa classe che gestisco le pedine

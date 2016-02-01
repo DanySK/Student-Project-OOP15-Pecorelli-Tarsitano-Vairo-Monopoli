@@ -385,7 +385,7 @@ public class ControllerImpl implements Controller {
 //        this.notitifyBeginComp(this.actualPosition);
         this.notifyComputer(actualPlayer);
         this.actualPosition = this.toRollDices();
-       // this.actions = this.getNextBoxsActions(this.getActualBox(), this.actualPlayer);
+//        this.actions = this.getNextBoxsActions(this.getActualBox(), this.actualPlayer);
         // perfetta
         if (this.boxes.get(this.actualPosition) instanceof Ownership) {
             if (((Ownership) this.boxes.get(this.actualPosition)).isMortgaged()) {

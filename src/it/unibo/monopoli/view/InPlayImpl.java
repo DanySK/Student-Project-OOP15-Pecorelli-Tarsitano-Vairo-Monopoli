@@ -12,23 +12,11 @@ import it.unibo.monopoli.model.mainunits.Player;
 public class InPlayImpl implements InPlay {
 
     private final List<Actions> buttons;
-<<<<<<< local
     private Index i;
-=======
-    private Index index;
->>>>>>> other
 
-<<<<<<< local
     public InPlayImpl(Index i) {
-=======
-    public InPlayImpl(final Index index) {
->>>>>>> other
      this.buttons = new LinkedList<>();
-<<<<<<< local
      this.i = i;
-=======
-     this.index = index;
->>>>>>> other
     }
 
     @Override
@@ -59,11 +47,7 @@ public class InPlayImpl implements InPlay {
 
     @Override
     public void notifyEndTurnComputer(final Player player) {
-<<<<<<< local
         this.i.computerTurn(player);
-=======
-        this.index.computerTurn(player);
->>>>>>> other
     }
     
 //    @Override

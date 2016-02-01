@@ -27,11 +27,6 @@ import it.unibo.monopoli.model.table.Land;
 import it.unibo.monopoli.model.table.LandGroup;
 import it.unibo.monopoli.model.table.Ownership;
 import it.unibo.monopoli.view.cards.IBoxGraphic;
-<<<<<<< local
-=======
-import it.unibo.monopoli.view.cards.LandGraphic;
-import it.unibo.monopoli.view.listener.StartPlay;
->>>>>>> other
 
 public class Index {
     private static final int FIRST_USEFUL_POSITION = 28;
@@ -40,17 +35,10 @@ public class Index {
     private final Controller controller;
     private final List<JButton> buttonList;
     private East eastP;
-<<<<<<< local
     private int position = 0;
     HashMap<Integer, IBoxGraphic> tessere;
     private InPlay inPlay;
     
-=======
-    private int position;
-    private HashMap<Integer, IBoxGraphic> tessere;
-    private InPlay inPlay;
-
->>>>>>> other
     public Index() {
 
         this.controller = new ControllerImpl();
@@ -68,12 +56,8 @@ public class Index {
         Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 
         ProvaTabellone tabellone = new ProvaTabellone(11, 11, this.controller);
-<<<<<<< local
         tessere = tabellone.getCardsGraphic();
 
-=======
-        tessere = tabellone.getCardsGraphic();
->>>>>>> other
         // JPanelMain South
         final JPanel southP = new JPanel();
         southP.setPreferredSize(new Dimension(frame.getWidth(), 65));
@@ -126,40 +110,22 @@ public class Index {
                 System.out.println("Player Roll Dicies: " + controller.getActualPlayer().getName());
                 System.out.println("Player: " + controller.getActualPlayer());
                 Player p = controller.getActualPlayer();
-<<<<<<< local
                  System.out.println("Playre: Remove: "+controller.getActualPlayer().getPawn()
                         .getActualPos());
-=======
-
->>>>>>> other
                 tessere.get(controller.getActualPlayer().getPawn()
-<<<<<<< local
                         .getActualPos()).removePawn(p);
 
-=======
-                        .getActualPos()/* controller.getActualPosition() */).removePawn(p);
->>>>>>> other
                 int prePos = controller.getActualPlayer().getPawn().getActualPos();
-<<<<<<< local
                 int pos = controller.toRollDices();
                 System.out.println("Player after rollDieces: " + pos);
                 int passi = pos - prePos;
-=======
-                position = controller.toRollDices();
-                int passi = position - prePos;
->>>>>>> other
                 if (isPassedFromStartBox()) {
                     passi = passFromStart();
                 }
                 new Dialog(new JFrame(), "Roll Dieces", "Number: " + (passi));
-<<<<<<< local
                 System.out.println("new pos: " + pos);
                 System.out.println("Add Pawn: " + pos);
                 tessere.get(pos).addPawn(controller.getActualPlayer());
-=======
-                System.out.println("new pos: " + position);
-                tessere.get(position).addPawn(controller.getActualPlayer());
->>>>>>> other
                 final String contratto = controller.getActualBox().getName();
                 new Dialog(new JFrame(), "Actual", "You are in box " + contratto);
                 if (controller.getActualBox() instanceof Ownership
@@ -251,7 +217,6 @@ public class Index {
                 int cost = ((Ownership) controller.getActualBox()).getContract().getCost();
                 new Dialog(new JFrame(), "Sell",
                         "" + nome + " hai venduto " + contratto + " in posizione " + pos + " al costo di: " + cost);
-                updateInfoPlayer();
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
@@ -271,7 +236,6 @@ public class Index {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.build();
-                new Dialog(new JFrame(), "build", "Prova build");
                 List<Building> building = ((LandGroup) ((Land) controller.getActualBox()).getGroup()).getBuildings();
                 String s;
                 if (building.get(building.size() - 1) instanceof Home) {
@@ -279,11 +243,7 @@ public class Index {
                 } else {
                     s = "an Hotel";
                 }
-
                 new Dialog(new JFrame(), "Build", "You bilt: " + s);
-
-                HashMap<Integer, IBoxGraphic> tessere = tabellone.getCardsGraphic();
-                ((LandGraphic) tessere.get(position)).addHouse(controller.getActualPlayer());
 
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = inPlay.getButtons();
@@ -306,11 +266,7 @@ public class Index {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.sellBuilding();
-
-                HashMap<Integer, IBoxGraphic> tessere = tabellone.getCardsGraphic();
-                ((LandGraphic) tessere.get(position)).removeHouse(controller.getActualPlayer());
-
-                new Dialog(new JFrame(), "Build", "You sell biuld: ");
+                
 
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = inPlay.getButtons();
@@ -357,11 +313,7 @@ public class Index {
                 controller.revokeMortgageOwnership();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-<<<<<<< local
                 List<Actions> l =inPlay.getButtons();
-=======
-                List<Actions> l = inPlay.getButtons();
->>>>>>> other
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         // System.out.println("bu.getText: " + bu.getText());
@@ -459,21 +411,6 @@ public class Index {
         System.out.println("Actual computer: " +p.getPawn().getActualPos() );
         tessere.get(position).addPawn(p);
         updateInfoPlayer();
-    }
-
-    public void computerTurn(Player p) {
-
-        tessere.get(p.getPawn().getPreviousPos()).removePawn(p);
-//        int prePos = p.getPawn().getPreviousPos();
-        position = p.getPawn().getActualPos();
-        tessere.get(position).addPawn(p);
-        updateInfoPlayer();
-        
-
-    }
-    
-    public void addInPlay(InPlay inPlay){
-        this.inPlay = inPlay;
     }
 
 }

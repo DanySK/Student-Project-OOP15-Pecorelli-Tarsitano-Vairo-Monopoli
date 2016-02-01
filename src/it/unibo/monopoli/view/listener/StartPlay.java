@@ -22,7 +22,7 @@ import it.unibo.monopoli.view.InizializedPlayer;
 public class StartPlay implements ActionListener {
     int count = 1;
 
-    private static final InPlay inPlay = new InPlayImpl();
+    private InPlay inPlay;
 
     public StartPlay() {
         super();
@@ -38,7 +38,10 @@ public class StartPlay implements ActionListener {
             new Dialog(new JFrame(), "Error", "Error! The minimum number of players is two");
         } else {
             Index i = new Index();
+            inPlay = new InPlayImpl(i);
+            i.addInPlay(inPlay);
             Controller contr = i.getController();
+            contr.addView(inPlay);
           
             Set<Entry<String, Boolean>> s = InizializedPlayer.getMap().entrySet();
             s.forEach(g -> {
@@ -48,6 +51,9 @@ public class StartPlay implements ActionListener {
             switch (VersionSelected.getSelectedItem()) {
             case "Classic":
                 contr.initializedVersion(EVersion.CLASSIC);
+                break;
+            case "Italian Version":
+                contr.initializedVersion(EVersion.ITALIAN_VERSION);
                 break;
             default:
                 break;
@@ -69,7 +75,7 @@ public class StartPlay implements ActionListener {
 
     }
 
-    public static InPlay getInPlay() {
+    public InPlay getInPlay() {
         return inPlay;
     }
 

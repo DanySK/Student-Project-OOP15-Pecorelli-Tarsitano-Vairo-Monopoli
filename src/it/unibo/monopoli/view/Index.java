@@ -27,7 +27,6 @@ import it.unibo.monopoli.model.table.Land;
 import it.unibo.monopoli.model.table.LandGroup;
 import it.unibo.monopoli.model.table.Ownership;
 import it.unibo.monopoli.view.cards.IBoxGraphic;
-import it.unibo.monopoli.view.listener.StartPlay;
 
 public class Index {
     private static final int FIRST_USEFUL_POSITION = 28;
@@ -36,12 +35,18 @@ public class Index {
     private final Controller controller;
     private final List<JButton> buttonList;
     private East eastP;
-
+    private int position = 0;
+    HashMap<Integer, IBoxGraphic> tessere;
+    private InPlay inPlay;
+    
     public Index() {
 
         this.controller = new ControllerImpl();
         this.buttonList = new LinkedList<>();
 
+    }
+    public void addInPlay(InPlay in) {
+        this.inPlay = in;
     }
 
     public void build() {
@@ -51,6 +56,7 @@ public class Index {
         Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 
         ProvaTabellone tabellone = new ProvaTabellone(11, 11, this.controller);
+        tessere = tabellone.getCardsGraphic();
 
         // JPanelMain South
         final JPanel southP = new JPanel();
@@ -102,19 +108,23 @@ public class Index {
             public void actionPerformed(ActionEvent e) {
 
                 System.out.println("Player Roll Dicies: " + controller.getActualPlayer().getName());
+                System.out.println("Player: " + controller.getActualPlayer());
                 Player p = controller.getActualPlayer();
-                HashMap<Integer, IBoxGraphic> tessere = tabellone.getCardsGraphic();
+                 System.out.println("Playre: Remove: "+controller.getActualPlayer().getPawn()
+                        .getActualPos());
                 tessere.get(controller.getActualPlayer().getPawn()
-                        .getActualPos()/* controller.getActualPosition() */).removePawn(p);
+                        .getActualPos()).removePawn(p);
 
                 int prePos = controller.getActualPlayer().getPawn().getActualPos();
                 int pos = controller.toRollDices();
+                System.out.println("Player after rollDieces: " + pos);
                 int passi = pos - prePos;
                 if (isPassedFromStartBox()) {
                     passi = passFromStart();
                 }
                 new Dialog(new JFrame(), "Roll Dieces", "Number: " + (passi));
                 System.out.println("new pos: " + pos);
+                System.out.println("Add Pawn: " + pos);
                 tessere.get(pos).addPawn(controller.getActualPlayer());
                 final String contratto = controller.getActualBox().getName();
                 new Dialog(new JFrame(), "Actual", "You are in box " + contratto);
@@ -127,7 +137,7 @@ public class Index {
                                     + " so you have to pay to him it's income value");
                 }
                 buttonList.forEach(b -> b.setEnabled(false));
-                final List<Actions> l = StartPlay.getInPlay().getButtons();
+                final List<Actions> l = inPlay.getButtons();
                 System.out.println(l);
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
@@ -155,7 +165,7 @@ public class Index {
                 updateLabelTurn();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         // System.out.println("bu.getText: " + bu.getText());
@@ -184,7 +194,7 @@ public class Index {
                         "" + nome + " hai comprato " + contratto + " in posizione " + pos + " al costo di: " + cost);
                 updateInfoPlayer();
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.getText().equals(but.getText())) {
@@ -208,7 +218,7 @@ public class Index {
                 new Dialog(new JFrame(), "Sell",
                         "" + nome + " hai venduto " + contratto + " in posizione " + pos + " al costo di: " + cost);
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
 
@@ -236,7 +246,7 @@ public class Index {
                 new Dialog(new JFrame(), "Build", "You bilt: " + s);
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         // System.out.println("bu.getText: " + bu.getText());
@@ -259,7 +269,7 @@ public class Index {
                 
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         // System.out.println("bu.getText: " + bu.getText());
@@ -281,7 +291,7 @@ public class Index {
                 controller.mortgageOwnership();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         // System.out.println("bu.getText: " + bu.getText());
@@ -303,7 +313,7 @@ public class Index {
                 controller.revokeMortgageOwnership();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l =inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         // System.out.println("bu.getText: " + bu.getText());
@@ -325,7 +335,7 @@ public class Index {
                 controller.endGame();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         // System.out.println("bu.getText: " + bu.getText());
@@ -385,6 +395,22 @@ public class Index {
         int actPos = controller.getActualPlayer().getPawn().getActualPos();
 
         return (39 - prePos) + (actPos + 1);
+    }
+    
+//    public void prevPos(final int prePos) {
+////        this.previousPos = prePos;
+//        System.out.println("È ENTRATOOOO :" + this.position);
+//    }
+    
+    public void computerTurn(Player p) {
+        System.out.println("Pre Remove in: " + this.position);
+        System.out.println("Player: " + p.getName());
+        tessere.get(this.position).removePawn(p);
+        System.out.println("Previous computer: " +p.getPawn().getPreviousPos() );
+        position = p.getPawn().getActualPos();
+        System.out.println("Actual computer: " +p.getPawn().getActualPos() );
+        tessere.get(position).addPawn(p);
+        updateInfoPlayer();
     }
 
 }

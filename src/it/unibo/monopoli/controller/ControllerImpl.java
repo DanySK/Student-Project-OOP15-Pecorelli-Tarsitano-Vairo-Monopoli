@@ -159,6 +159,9 @@ public class ControllerImpl implements Controller {
             }
 
         }
+        if (this.actualPlayer.getPawn().getActualPos() != this.actualPosition) {
+            this.actualPosition = this.actualPlayer.getPawn().getActualPos();
+        }
         return this.actualPosition;
     }
 
@@ -186,6 +189,10 @@ public class ControllerImpl implements Controller {
     public void notifyEndTurnComputer(final Player player) {
         this.view.ifPresent(v -> v.notifyEndTurnComputer(player));              
     }
+//    
+//    public void notitifyBeginComp(int pos) {
+//        this.view.ifPresent(v -> v.beginComputer(pos));                      
+//    }
 
     @Override
     public void endTurn() {
@@ -375,7 +382,8 @@ public class ControllerImpl implements Controller {
         // this.actualPlayer.setPrison(false);
         // }
         // });
-        this.notifyComputer(this.actualPlayer);
+//        this.notitifyBeginComp(this.actualPosition);
+        this.notifyComputer(actualPlayer);
         this.actualPosition = this.toRollDices();
 //        this.actions = this.getNextBoxsActions(this.getActualBox(), this.actualPlayer);
         // perfetta
@@ -566,15 +574,16 @@ public class ControllerImpl implements Controller {
             List<Action> list = card.getActions().get();
             for (Action a : list) {
                 a.play(this.getActualPlayer());
-
+                if (this.actualPlayer.getPawn().getActualPos() != this.actualPosition) {
+                    this.actualPosition = this.actualPlayer.getPawn().getActualPos();
+                }
             }
         }
         this.notifyDrawCard(card);
-        this.actualPosition = this.actualPlayer.getPawn().getActualPos();
+//        this.actualPosition = this.actualPlayer.getPawn().getActualPos();
         if (this.version.getNextCardsAction(this.getActualBox(), card, this.actualPlayer)) {
             this.gameOverPerson(this.actualPlayer);
         }
-        this.notifyEndTurnComputer(this.actualPlayer);
 
     }
     // /**

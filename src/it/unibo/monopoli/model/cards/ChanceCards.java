@@ -18,7 +18,7 @@ import it.unibo.monopoli.model.table.Start;
  */
 public enum ChanceCards {
 
-    CARD1("TAKE 3 STEPS BACK (WITH BEST WISHES)", 1, MoveUpTo.takeSteps(-3)),
+    CARD1("YOU WILL BE PAID $50 FOR YOUR WORK", 1, new ToBePaid(50)),
     CARD2("GO TO PARK LANE: IF PASS FROM 'GO', TAKE $" + Start.getMuchToPick(), 2),
     CARD3("ADVANCE TO THE NEAREST STATION: IF IT'S FREE, YOU CAN BUY IT; IF IT IS OWNED BY ANOTHER PLAYER, PAY HIM TWICE THE PRICE THAT MATTER",
             3, MoveUpTo.theNearestStation()),

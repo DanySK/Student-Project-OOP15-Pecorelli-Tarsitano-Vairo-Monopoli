@@ -37,7 +37,7 @@ public class OwnershipGraphic extends AbstractGraphicCard {
         // colorP.setBackground(Color.white);
         // card.add(colorP);
 
-        JLabel nameP = new JLabel(own.getName());
+        JLabel nameP = new JLabel("<html>"+own.getName()+"</html>");
         card.add(nameP);
 
         card.add(emptyP);

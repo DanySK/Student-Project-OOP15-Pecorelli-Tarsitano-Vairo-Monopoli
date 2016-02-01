@@ -36,6 +36,7 @@ public class InizializedPlayer {
     private JRadioButton rdbtnComputer;
     private JRadioButton rdbtnUman;
     private String positionAndName;
+    private static boolean save;
 /**
  * 
  */
@@ -81,7 +82,7 @@ public class InizializedPlayer {
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-
+                
                 if (textNome.getText().isEmpty()) {
                     new Dialog(new JFrame(), "Error", "Error! You must enter the name of the player");
                 } else {
@@ -96,6 +97,7 @@ public class InizializedPlayer {
                     map.put(positionAndName, isUman);
                     System.out.println("" + textNome.getText());
                     System.out.println("" + isUman);
+                    InizializedPlayer.setSave(true); 
                     save.setVisible(false);
                     remove.setVisible(true);
                     textNome.setEditable(false);
@@ -168,6 +170,16 @@ public class InizializedPlayer {
         panel.setVisible(true);
         return panel;
 
+    }
+
+    protected static void setSave(boolean x) {
+        save = x;
+        
+    }
+    
+    protected static Boolean isSave() {
+        return save;
+        
     }
 
     public static Map<String, Boolean> getMap() {

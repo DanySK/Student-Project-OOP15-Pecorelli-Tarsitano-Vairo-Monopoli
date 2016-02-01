@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -109,7 +110,9 @@ public class Index {
                 Player p = controller.getActualPlayer();
                 HashMap<Integer, IBoxGraphic> tessere = tabellone.getCardsGraphic();
                 tessere.get(controller.getActualPlayer().getPawn().getActualPos()/*controller.getActualPosition()*/).removePawn(p);
+                int prePos = controller.getActualPlayer().getPawn().getActualPos();
                 int pos = controller.toRollDices();
+                new Dialog(new JFrame(), "Roll Dieces", "Number: " + (pos-prePos));
                 System.out.println("new pos: " + pos);
                 tessere.get(pos).addPawn(controller.getActualPlayer());
 
@@ -135,7 +138,7 @@ public class Index {
             public void actionPerformed(ActionEvent e) {
                 controller.endTurn();
                 System.out.println("Player End Turn: " + controller.getActualPlayer().getName());
-                
+                upgradeInfoPlayer();
                 
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = StartPlay.getInPlay().getButtons();
@@ -327,7 +330,8 @@ public class Index {
         centerP.add(tabellone.initialize(), BorderLayout.CENTER);
 
         // East
-        frame.getContentPane().add(new East(this.controller), BorderLayout.EAST);
+        JPanel eastP = new East(this.controller);
+        frame.getContentPane().add(eastP, BorderLayout.EAST);
         frame.getMainPanel().add(centerP, BorderLayout.CENTER);
         frame.getMainPanel().add(southP, BorderLayout.SOUTH);
 
@@ -338,6 +342,12 @@ public class Index {
     public Controller getController() {
         return this.controller;
 
+    }
+    
+    public void upgradeInfoPlayer(){
+        int id =controller.getActualPlayer().getPawn().getID(); //recuper l'id della pedina del prossimo giocatore        
+        PlayerGraphic.getMapPlayers().get(controller.getActualPlayer().getName());
+        
     }
 
 }

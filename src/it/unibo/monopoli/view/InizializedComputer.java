@@ -28,6 +28,8 @@ public class InizializedComputer {
     final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
     private static boolean isUman;
     private static String name;
+    private String positionAndName;
+
 
     // private JTextField textNome;
 
@@ -121,7 +123,8 @@ public class InizializedComputer {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                InizializedPlayer.getMap().remove(1+C.SPLITTOKEN+"Computer");
+                positionAndName = (0 + C.SPLITTOKEN + textNome.getText());
+                InizializedPlayer.getMap().remove(positionAndName);
                 panel.setVisible(false);
                 playerP.remove(panel);
                 Go.addNumPlayers(-1);
@@ -144,7 +147,7 @@ public class InizializedComputer {
         }
         
         InizializedPlayer.getMap().put(Go.getNumPlayers()+C.SPLITTOKEN+textNome.getText(), isUman);
-
+        InizializedPlayer.setSave(true);
         panel.setVisible(true);
         return panel;
 

@@ -18,7 +18,7 @@ public class East extends JPanel {
         final JPanel panelBank = new JPanel();
         // panelBank.setPreferredSize(new Dimension(10, 100));
         panelBank.setLayout(new BorderLayout());
-//        panelBank.add(new PlayerGraphic("Bank", 10000).build(), BorderLayout.CENTER);
+        panelBank.add(new PlayerGraphic(controller).buildBank(controller.getAllBoxes(),controller.getBank()), BorderLayout.CENTER);
         this.add(panelBank, BorderLayout.NORTH);
         int j = InizializedPlayer.getMap().size();
         final JPanel panelPlayer = new JPanel();

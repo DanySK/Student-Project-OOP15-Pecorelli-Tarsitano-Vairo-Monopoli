@@ -38,7 +38,8 @@ public class Index {
     private final List<JButton> buttonList;
     private East eastP;
     private int position;
-    HashMap<Integer, IBoxGraphic> tessere;
+    private HashMap<Integer, IBoxGraphic> tessere;
+    private InPlay inPlay;
 
     public Index() {
 
@@ -129,7 +130,7 @@ public class Index {
                                     + " so you have to pay to him it's income value");
                 }
                 buttonList.forEach(b -> b.setEnabled(false));
-                final List<Actions> l = StartPlay.getInPlay().getButtons();
+                final List<Actions> l = inPlay.getButtons();
                 System.out.println(l);
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
@@ -157,7 +158,7 @@ public class Index {
                 updateLabelTurn();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         // System.out.println("bu.getText: " + bu.getText());
@@ -186,7 +187,7 @@ public class Index {
                         "" + nome + " hai comprato " + contratto + " in posizione " + pos + " al costo di: " + cost);
                 updateInfoPlayer();
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.getText().equals(but.getText())) {
@@ -211,7 +212,7 @@ public class Index {
                         "" + nome + " hai venduto " + contratto + " in posizione " + pos + " al costo di: " + cost);
                 updateInfoPlayer();
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
 
@@ -244,7 +245,7 @@ public class Index {
                 ((LandGraphic) tessere.get(position)).addHouse(controller.getActualPlayer());
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         // System.out.println("bu.getText: " + bu.getText());
@@ -271,7 +272,7 @@ public class Index {
                 new Dialog(new JFrame(), "Build", "You sell biuld: ");
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         // System.out.println("bu.getText: " + bu.getText());
@@ -293,7 +294,7 @@ public class Index {
                 controller.mortgageOwnership();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         // System.out.println("bu.getText: " + bu.getText());
@@ -315,7 +316,7 @@ public class Index {
                 controller.revokeMortgageOwnership();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         // System.out.println("bu.getText: " + bu.getText());
@@ -337,7 +338,7 @@ public class Index {
                 controller.endGame();
 
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         // System.out.println("bu.getText: " + bu.getText());
@@ -405,7 +406,13 @@ public class Index {
 //        int prePos = p.getPawn().getPreviousPos();
         position = p.getPawn().getActualPos();
         tessere.get(position).addPawn(p);
+        updateInfoPlayer();
+        
 
+    }
+    
+    public void addInPlay(InPlay inPlay){
+        this.inPlay = inPlay;
     }
 
 }

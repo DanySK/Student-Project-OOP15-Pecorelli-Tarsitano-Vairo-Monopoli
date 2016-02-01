@@ -12,9 +12,11 @@ import it.unibo.monopoli.model.mainunits.Player;
 public class InPlayImpl implements InPlay {
 
     private final List<Actions> buttons;
+    private Index index;
 
-    public InPlayImpl() {
+    public InPlayImpl(final Index index) {
      this.buttons = new LinkedList<>();
+     this.index = index;
     }
 
     @Override
@@ -45,7 +47,7 @@ public class InPlayImpl implements InPlay {
 
     @Override
     public void notifyEndTurnComputer(final Player player) {
-        
+        this.index.computerTurn(player);
     }
 
 }

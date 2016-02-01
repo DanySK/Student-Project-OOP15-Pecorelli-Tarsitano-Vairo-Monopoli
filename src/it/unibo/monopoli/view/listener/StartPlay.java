@@ -3,14 +3,17 @@ package it.unibo.monopoli.view.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map.Entry;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import it.unibo.monopoli.controller.Actions;
 import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.controller.EVersion;
 import it.unibo.monopoli.model.mainunits.ClassicPawn;
+import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.view.C;
 import it.unibo.monopoli.view.Dialog;
 import it.unibo.monopoli.view.Go;
@@ -22,7 +25,7 @@ import it.unibo.monopoli.view.InizializedPlayer;
 public class StartPlay implements ActionListener {
     int count = 1;
 
-    private static final InPlay inPlay = new InPlayImpl();
+    private InPlay inPlay;
 
     public StartPlay() {
         super();
@@ -38,7 +41,9 @@ public class StartPlay implements ActionListener {
             new Dialog(new JFrame(), "Error", "Error! The minimum number of players is two");
         } else {
             Index i = new Index();
-            Controller contr = i.getController();
+            this.inPlay = new InPlayImpl(i);
+            i.addInPlay(inPlay);
+                  Controller contr = i.getController();
           
             Set<Entry<String, Boolean>> s = InizializedPlayer.getMap().entrySet();
             s.forEach(g -> {
@@ -69,8 +74,8 @@ public class StartPlay implements ActionListener {
 
     }
 
-    public static InPlay getInPlay() {
-        return inPlay;
-    }
+//    public static InPlay getInPlay() {
+//        return inPlay;
+//    }
 
 }

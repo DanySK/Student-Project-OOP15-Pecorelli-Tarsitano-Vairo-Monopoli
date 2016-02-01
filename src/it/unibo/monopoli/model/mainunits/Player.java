@@ -153,5 +153,9 @@ public interface Player extends Owner {
     int howManyTurnsHasBeenInPrison();
 
     void incrementsTurnsInPrison();
+    
+    void setIfIsTheFirstLaunch(boolean isTheFirst);
+    
+    boolean isTheFirtsLunch();
 
 }

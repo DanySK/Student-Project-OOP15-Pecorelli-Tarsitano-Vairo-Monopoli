@@ -29,7 +29,7 @@ public class ClassicLandGroup extends ClassicGroup implements LandGroup {
 
     @Override
     public boolean canBuiling() {
-        return this.buildings.get(0) instanceof Home;
+        return this.buildings.isEmpty()? true : this.buildings.get(0) instanceof Home;
     }
 
 }

@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import it.unibo.monopoli.controller.Actions;
-import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Box;
@@ -52,11 +51,11 @@ public class GameVersionImpl implements GameVersion {
     public List<Deck> getDecks() {
         return this.strategy.getDecks();
     }
-
-    @Override
-    public AuctionOfOwnership toAuction(final Ownership ownership, final Player player) {
-        return this.strategy.toAuction(ownership, player);
-    }
+//
+//    @Override
+//    public AuctionOfOwnership toAuction(final Ownership ownership, final Player player) {
+//        return this.strategy.toAuction(ownership, player);
+//    }
 
     @Override
     public Player getNextPlayer() { //PRIVATO?????????????

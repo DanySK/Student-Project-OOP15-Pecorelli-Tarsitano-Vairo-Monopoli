@@ -13,6 +13,9 @@ import it.unibo.monopoli.model.mainunits.Player;
  */
 public class ClassicDicesStrategy implements DicesStrategy {
 
+    private static final int FIRST_USEFUL_POSITION = 28;
+    private static final int LAST_USEFUL_POSITION = 11;
+
     @Override
     public List<Dice> getDices() {
         final List<Dice> dices = new LinkedList<>();
@@ -33,11 +36,23 @@ public class ClassicDicesStrategy implements DicesStrategy {
             } else {
                 player.setDicesRoll(false);
             }
+        } else {
+            if (player.isInPrison() && player.howManyTurnsHasBeenInPrison() < 3) {
+                player.incrementsTurnsInPrison();
+            }
+        }
+        if (this.isPassedFromStartBox(player)) {
+            new PassFromStar().play(player);
         }
     }
 
     private boolean twice(final Player player) {
         return player.lastDicesNumber().get(0) == player.lastDicesNumber().get(1); 
+    }
+
+    private boolean isPassedFromStartBox(final Player player) {
+        return player.getPawn().getPreviousPos() >= FIRST_USEFUL_POSITION
+                && player.getPawn().getActualPos() <= LAST_USEFUL_POSITION;
     }
 
 }

@@ -7,13 +7,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import it.unibo.monopoli.model.actions.AuctionOfOwnership;
-import it.unibo.monopoli.model.actions.ClassicAuction;
 import it.unibo.monopoli.model.actions.EvadeTaxes;
 import it.unibo.monopoli.model.actions.GoToPrison;
 import it.unibo.monopoli.model.actions.ItalianDicesStrategy;
 import it.unibo.monopoli.model.actions.MoveUpTo;
-import it.unibo.monopoli.model.actions.ToAuction;
 import it.unibo.monopoli.model.actions.ToBePaid;
 import it.unibo.monopoli.model.actions.ToPay;
 import it.unibo.monopoli.model.actions.ToRollDices;
@@ -555,11 +552,11 @@ public class ItalianStrategy implements GameStrategy {
     public List<Deck> getDecks() {
         return Collections.unmodifiableList(this.decks);
     }
-
-    @Override
-    public AuctionOfOwnership toAuction(final Ownership ownership, final Player player) {
-        return ToAuction.ownerships(this.players, new ClassicAuction(), ownership, this.bank).getAuction(player);
-    }
+//
+//    @Override
+//    public AuctionOfOwnership toAuction(final Ownership ownership, final Player player) {
+//        return ToAuction.ownerships(this.players, new ClassicAuction(), ownership, this.bank).getAuction(player);
+//    }
 
     @Override
     public List<Integer> toRollDices(final Player player) {
@@ -596,6 +593,7 @@ public class ItalianStrategy implements GameStrategy {
             break;
         case CARD7:
             new GoToPrison(this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos())).play(player);
+            break;
         case CARD8:
             final List<List<Building>> building = player.getOwnerships().stream().filter(o -> o instanceof Land)
                     .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
@@ -620,8 +618,10 @@ public class ItalianStrategy implements GameStrategy {
             break;
         case CARD10:
             MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.START_POSITION.getPos())).play(player);
+            break;
         case CARD11:
             MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.OWNERSHIP18_POSITION.getPos())).play(player);
+            break;
         case CARD12:
             if (!((Ownership) box).getOwner().equals(player) && !((Ownership) box).getOwner().equals(this.bank)) {
                 final int amount = 2
@@ -634,8 +634,10 @@ public class ItalianStrategy implements GameStrategy {
             break;
         case CARD13:
             MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.OWNERSHIP17_POSITION.getPos())).play(player);
+            break;
         case CARD14:
             MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.OWNERSHIP9_POSITION.getPos())).play(player);
+            break;
         case CARD15:
             if (!((Ownership) box).getOwner().equals(player) && !((Ownership) box).getOwner().equals(this.bank)) {
                 final int amount = (player.lastDicesNumber().stream().reduce((d, d1) -> d + d1).get() * 10);
@@ -665,7 +667,8 @@ public class ItalianStrategy implements GameStrategy {
             break;
         case CARD23:
             new GoToPrison(this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos())).play(player);
-        case CARD24:
+            break;
+    case CARD24:
             final List<List<Building>> buildings = player.getOwnerships().stream().filter(o -> o instanceof Land)
                     .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
                     .map(o -> ((LandGroup) o.getGroup()).getBuildings()).collect(Collectors.toList());
@@ -689,7 +692,8 @@ public class ItalianStrategy implements GameStrategy {
             break;
         case CARD26:
             MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.START_POSITION.getPos())).play(player);
-        default:
+            break;
+     default:
             break;
         }
         return false;

@@ -170,6 +170,22 @@ public class ControllerImpl implements Controller {
     public void setActualPosition(int position) {
         this.actualPosition = position;
     }
+    
+    public void notifyGameOver(Player player) {
+        this.view.ifPresent(v -> v.gameOver(player));
+    }
+    
+    public void notifyComputer(Player player) {
+        this.view.ifPresent(v -> v.computerTurn(player));      
+    }
+    
+    public void notifyDrawCard(Card card) {
+        this.view.ifPresent(v -> v.drawCard(card.getDescription()));              
+    }
+    
+    public void notifyEndTurnComputer(final Player player) {
+        this.view.ifPresent(v -> v.notifyEndTurnComputer(player));              
+    }
 
     @Override
     public void endTurn() {
@@ -335,6 +351,7 @@ public class ControllerImpl implements Controller {
     // }
     //
     private void gameOverPerson(Player player) {
+        this.notifyGameOver(player);
         this.players.remove(this.players.indexOf(player));
 
     }
@@ -358,7 +375,7 @@ public class ControllerImpl implements Controller {
         // this.actualPlayer.setPrison(false);
         // }
         // });
-
+        this.notifyComputer(this.actualPlayer);
         this.actualPosition = this.toRollDices();
         this.actions = this.getNextBoxsActions(this.getActualBox(), this.actualPlayer);
         // perfetta
@@ -507,9 +524,6 @@ public class ControllerImpl implements Controller {
                 }
             }
         } else {
-            if (this.boxes.get(this.actualPosition) instanceof Start) {
-                new ToBePaid(Start.getMuchToPick()).play(this.actualPlayer);
-            }
             // if (box instanceof PrisonOrTransit) { // NON FANNO NULLA; QUINDI
             // OMETTERLI
             // }
@@ -533,8 +547,10 @@ public class ControllerImpl implements Controller {
 
         }
         if (this.isTwiceDices()) {
+            this.notifyEndTurnComputer(this.actualPlayer);
             this.computerPlayer();
         } else {
+            this.notifyEndTurnComputer(this.actualPlayer);
             this.endTurn();
         }
     }
@@ -553,6 +569,8 @@ public class ControllerImpl implements Controller {
 
             }
         }
+        this.notifyDrawCard(card);
+        this.actualPosition = this.actualPlayer.getPawn().getActualPos();
         if (this.version.getNextCardsAction(this.getActualBox(), card, this.actualPlayer)) {
             this.gameOverPerson(this.actualPlayer);
         }
@@ -659,9 +677,6 @@ public class ControllerImpl implements Controller {
                 }
             }
         } else {
-            if (box instanceof Start) {
-                new ToBePaid(Start.getMuchToPick()).play(player);
-            }
             if (box instanceof Police) {
                 new GoToPrison(this.boxes.get(PRISON_POSITION)).play(player);
             }

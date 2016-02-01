@@ -11,7 +11,7 @@ import it.unibo.monopoli.model.mainunits.Player;
 public interface Action {
 
     /**
-     * This is the main method for every {@link Action}: it explains witch
+     * This is the main method for every {@link Action}: it performs witch
      * action the specific class represent.
      * 
      * @param player

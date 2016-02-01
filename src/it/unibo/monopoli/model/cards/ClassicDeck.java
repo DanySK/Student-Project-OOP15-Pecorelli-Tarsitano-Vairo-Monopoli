@@ -39,9 +39,9 @@ public class ClassicDeck implements Deck {
 
     @Override
     public Card getFirstCard() {
-        if (!this.cards.stream().anyMatch(c -> !c.getPlayer().isPresent())) {
-                throw new IllegalArgumentException("No more cards in this deck");
-        }
+//        if (!this.cards.stream().anyMatch(c -> !c.getPlayer().isPresent())) {
+//                throw new IllegalArgumentException("No more cards in this deck");
+//        }
         if (!this.iter.hasNext()) {
             this.iter = this.cards.iterator();
             return this.getFirstCard();

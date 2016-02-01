@@ -21,12 +21,21 @@ import it.unibo.monopoli.controller.Actions;
 import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.controller.ControllerImpl;
 import it.unibo.monopoli.model.mainunits.Player;
+import it.unibo.monopoli.model.table.Building;
+import it.unibo.monopoli.model.table.Home;
+import it.unibo.monopoli.model.table.Land;
+import it.unibo.monopoli.model.table.LandGroup;
+import it.unibo.monopoli.model.table.Ownership;
 import it.unibo.monopoli.view.cards.IBoxGraphic;
 import it.unibo.monopoli.view.listener.StartPlay;
 
 public class Index {
+    private static final int FIRST_USEFUL_POSITION = 28;
+    private static final int LAST_USEFUL_POSITION = 11;
+
     private final Controller controller;
     private final List<JButton> buttonList;
+    private East eastP;
 
     public Index() {
 
@@ -51,7 +60,6 @@ public class Index {
         JButton END_OF_TURN = new JButton(Actions.END_OF_TURN.getText());
         JButton buy = new JButton(Actions.BUY.getText());
         JButton sell = new JButton(Actions.SELL.getText());
-        JButton auction = new JButton(Actions.AUCTION.getText());
         JButton build = new JButton(Actions.BUILD.getText());
         JButton sellBuilding = new JButton(Actions.SELL_BUILDING.getText());
         JButton mortgage = new JButton(Actions.MORTGAGE.getText());
@@ -62,7 +70,6 @@ public class Index {
         southP.add(END_OF_TURN);
         southP.add(buy);
         southP.add(sell);
-        southP.add(auction);
         southP.add(build);
         southP.add(sellBuilding);
         southP.add(mortgage);
@@ -73,7 +80,6 @@ public class Index {
         buttonList.add(END_OF_TURN);
         buttonList.add(buy);
         buttonList.add(sell);
-        buttonList.add(auction);
         buttonList.add(build);
         buttonList.add(sellBuilding);
         buttonList.add(mortgage);
@@ -84,7 +90,6 @@ public class Index {
         END_OF_TURN.setEnabled(false);
         buy.setEnabled(false);
         sell.setEnabled(false);
-        auction.setEnabled(false);
         build.setEnabled(false);
         sellBuilding.setEnabled(false);
         mortgage.setEnabled(false);
@@ -96,36 +101,43 @@ public class Index {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                // TODO
-                /*
-                 * 1 prendere posizione attuale int oldpos =
-                 * actualPlayer.getPawn().getActualPos() prendo la tessera
-                 * corrispondente alla posizione e invoco
-                 * 
-                 * tessera.removePawn(actualPlayer) 2 prendere prossima
-                 * posizione int new pos = controller.toRollDices(); prendo la
-                 * nuova tessera e ivoco tesseta.addPawn(actualPlater)
-                 */
                 System.out.println("Player Roll Dicies: " + controller.getActualPlayer().getName());
                 Player p = controller.getActualPlayer();
                 HashMap<Integer, IBoxGraphic> tessere = tabellone.getCardsGraphic();
-                tessere.get(controller.getActualPlayer().getPawn().getActualPos()/*controller.getActualPosition()*/).removePawn(p);
+                tessere.get(controller.getActualPlayer().getPawn()
+                        .getActualPos()/* controller.getActualPosition() */).removePawn(p);
+
                 int prePos = controller.getActualPlayer().getPawn().getActualPos();
                 int pos = controller.toRollDices();
-                new Dialog(new JFrame(), "Roll Dieces", "Number: " + (pos-prePos));
+                int passi = pos - prePos;
+                if (isPassedFromStartBox()) {
+                    passi = passFromStart();
+                }
+                new Dialog(new JFrame(), "Roll Dieces", "Number: " + (passi));
                 System.out.println("new pos: " + pos);
                 tessere.get(pos).addPawn(controller.getActualPlayer());
-
+                final String contratto = controller.getActualBox().getName();
+                new Dialog(new JFrame(), "Actual", "You are in box " + contratto);
+                if (controller.getActualBox() instanceof Ownership
+                        && !((Ownership) controller.getActualBox()).getOwner().equals(controller.getActualPlayer())
+                        && !((Ownership) controller.getActualBox()).getOwner().equals(controller.getBank())) {
+                    new Dialog(new JFrame(), "Pay",
+                            "This Box is owned by Player "
+                                    + ((Player) ((Ownership) controller.getActualBox()).getOwner()).getName()
+                                    + " so you have to pay to him it's income value");
+                }
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
+                final List<Actions> l = StartPlay.getInPlay().getButtons();
                 System.out.println(l);
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-//                        System.out.println("bu.getText: " + bu.getText());
-//                        System.out.println("but.getName: " + but.getText());
                         if (bu.getText().equals(but.getText())) {
-//                            System.out.println("*****IF******: " + but.getText());
                             but.setEnabled(true);
+                            if (but.getText().equals(Actions.BUY.getText())) {
+                                String nome = controller.getActualPlayer().getName();
+                                int cost = ((Ownership) controller.getActualBox()).getContract().getCost();
+                                new Dialog(new JFrame(), "", "Il contratto " + contratto + " ha un costo di " + cost);
+                            }
                         }
                     });
                 });
@@ -136,21 +148,24 @@ public class Index {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                updateLabelTurn();
+                updateInfoPlayer();
                 controller.endTurn();
-                System.out.println("Player End Turn: " + controller.getActualPlayer().getName());
-                upgradeInfoPlayer();
-                
+                new Dialog(new JFrame(), "Next Player", "Next Player is: " + controller.getActualPlayer().getName());
+                updateLabelTurn();
+
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-//                      System.out.println("bu.getText: " + bu.getText());
-//                      System.out.println("but.getName: " + but.getText());
-                      if (bu.getText().equals(but.getText())) {
-//                          System.out.println("*****IF******: " + but.getText());
-                          but.setEnabled(true);
-                      }
-                  });
+                        // System.out.println("bu.getText: " + bu.getText());
+                        // System.out.println("but.getName: " + but.getText());
+                        if (bu.getText().equals(but.getText())) {
+                            // System.out.println("*****IF******: " +
+                            // but.getText());
+                            but.setEnabled(true);
+                        }
+                    });
                 });
             }
         });
@@ -161,17 +176,21 @@ public class Index {
             public void actionPerformed(ActionEvent e) {
                 controller.buyOwnership();
 
+                String nome = controller.getActualPlayer().getName();
+                String contratto = controller.getActualBox().getName();
+                int pos = controller.getActualBox().getID();
+                int cost = ((Ownership) controller.getActualBox()).getContract().getCost();
+                new Dialog(new JFrame(), "Buy",
+                        "" + nome + " hai comprato " + contratto + " in posizione " + pos + " al costo di: " + cost);
+                updateInfoPlayer();
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-//                      System.out.println("bu.getText: " + bu.getText());
-//                      System.out.println("but.getName: " + but.getText());
-                      if (bu.getText().equals(but.getText())) {
-//                          System.out.println("*****IF******: " + but.getText());
-                          but.setEnabled(true);
-                      }
-                  });
+                        if (bu.getText().equals(but.getText())) {
+                            but.setEnabled(true);
+                        }
+                    });
                 });
             }
         });
@@ -182,38 +201,22 @@ public class Index {
             public void actionPerformed(ActionEvent e) {
                 controller.sellOwnership();
 
+                String nome = controller.getActualPlayer().getName();
+                String contratto = controller.getActualBox().getName();
+                int pos = controller.getActualBox().getID();
+                int cost = ((Ownership) controller.getActualBox()).getContract().getCost();
+                new Dialog(new JFrame(), "Sell",
+                        "" + nome + " hai venduto " + contratto + " in posizione " + pos + " al costo di: " + cost);
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-//                      System.out.println("bu.getText: " + bu.getText());
-//                      System.out.println("but.getName: " + but.getText());
-                      if (bu.getText().equals(but.getText())) {
-//                          System.out.println("*****IF******: " + but.getText());
-                          but.setEnabled(true);
-                      }
-                  });
-                });
-            }
-        });
 
-        auction.addActionListener(new ActionListener() {
+                        if (bu.getText().equals(but.getText())) {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.auction();
-
-                buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = StartPlay.getInPlay().getButtons();
-                l.forEach(bu -> {
-                    buttonList.forEach(but -> {
-//                      System.out.println("bu.getText: " + bu.getText());
-//                      System.out.println("but.getName: " + but.getText());
-                      if (bu.getText().equals(but.getText())) {
-//                          System.out.println("*****IF******: " + but.getText());
-                          but.setEnabled(true);
-                      }
-                  });
+                            but.setEnabled(true);
+                        }
+                    });
                 });
             }
         });
@@ -223,18 +226,27 @@ public class Index {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.build();
+                List<Building> building = ((LandGroup) ((Land) controller.getActualBox()).getGroup()).getBuildings();
+                String s;
+                if (building.get(building.size() - 1) instanceof Home) {
+                    s = "a Home";
+                } else {
+                    s = "an Hotel";
+                }
+                new Dialog(new JFrame(), "Build", "You bilt: " + s);
 
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-//                      System.out.println("bu.getText: " + bu.getText());
-//                      System.out.println("but.getName: " + but.getText());
-                      if (bu.getText().equals(but.getText())) {
-//                          System.out.println("*****IF******: " + but.getText());
-                          but.setEnabled(true);
-                      }
-                  });
+                        // System.out.println("bu.getText: " + bu.getText());
+                        // System.out.println("but.getName: " + but.getText());
+                        if (bu.getText().equals(but.getText())) {
+                            // System.out.println("*****IF******: " +
+                            // but.getText());
+                            but.setEnabled(true);
+                        }
+                    });
                 });
             }
         });
@@ -244,18 +256,20 @@ public class Index {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.sellBuilding();
+                
 
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-//                      System.out.println("bu.getText: " + bu.getText());
-//                      System.out.println("but.getName: " + but.getText());
-                      if (bu.getText().equals(but.getText())) {
-//                          System.out.println("*****IF******: " + but.getText());
-                          but.setEnabled(true);
-                      }
-                  });
+                        // System.out.println("bu.getText: " + bu.getText());
+                        // System.out.println("but.getName: " + but.getText());
+                        if (bu.getText().equals(but.getText())) {
+                            // System.out.println("*****IF******: " +
+                            // but.getText());
+                            but.setEnabled(true);
+                        }
+                    });
                 });
             }
         });
@@ -270,13 +284,14 @@ public class Index {
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-//                      System.out.println("bu.getText: " + bu.getText());
-//                      System.out.println("but.getName: " + but.getText());
-                      if (bu.getText().equals(but.getText())) {
-//                          System.out.println("*****IF******: " + but.getText());
-                          but.setEnabled(true);
-                      }
-                  });
+                        // System.out.println("bu.getText: " + bu.getText());
+                        // System.out.println("but.getName: " + but.getText());
+                        if (bu.getText().equals(but.getText())) {
+                            // System.out.println("*****IF******: " +
+                            // but.getText());
+                            but.setEnabled(true);
+                        }
+                    });
                 });
             }
         });
@@ -291,13 +306,14 @@ public class Index {
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-//                      System.out.println("bu.getText: " + bu.getText());
-//                      System.out.println("but.getName: " + but.getText());
-                      if (bu.getText().equals(but.getText())) {
-//                          System.out.println("*****IF******: " + but.getText());
-                          but.setEnabled(true);
-                      }
-                  });
+                        // System.out.println("bu.getText: " + bu.getText());
+                        // System.out.println("but.getName: " + but.getText());
+                        if (bu.getText().equals(but.getText())) {
+                            // System.out.println("*****IF******: " +
+                            // but.getText());
+                            but.setEnabled(true);
+                        }
+                    });
                 });
             }
         });
@@ -312,25 +328,26 @@ public class Index {
                 List<Actions> l = StartPlay.getInPlay().getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-//                      System.out.println("bu.getText: " + bu.getText());
-//                      System.out.println("but.getName: " + but.getText());
-                      if (bu.getText().equals(but.getText())) {
-//                          System.out.println("*****IF******: " + but.getText());
-                          but.setEnabled(true);
-                      }
-                  });
+                        // System.out.println("bu.getText: " + bu.getText());
+                        // System.out.println("but.getName: " + but.getText());
+                        if (bu.getText().equals(but.getText())) {
+                            // System.out.println("*****IF******: " +
+                            // but.getText());
+                            but.setEnabled(true);
+                        }
+                    });
                 });
             }
         });
 
         Dimension dimSouth = new Dimension(0, 50);
-        // southP.setPreferredSize(dimSouth);
+
         // Center
         JPanel centerP = new JPanel();
         centerP.add(tabellone.initialize(), BorderLayout.CENTER);
 
         // East
-        JPanel eastP = new East(this.controller);
+        eastP = new East(this.controller);
         frame.getContentPane().add(eastP, BorderLayout.EAST);
         frame.getMainPanel().add(centerP, BorderLayout.CENTER);
         frame.getMainPanel().add(southP, BorderLayout.SOUTH);
@@ -343,11 +360,31 @@ public class Index {
         return this.controller;
 
     }
-    
-    public void upgradeInfoPlayer(){
-        int id =controller.getActualPlayer().getPawn().getID(); //recuper l'id della pedina del prossimo giocatore        
-        PlayerGraphic.getMapPlayers().get(controller.getActualPlayer().getName());
-        
+
+    public void updateLabelTurn() {
+        // eastP.getMap().
+        //
+        // PlayerGraphic.getMapPlayers().get(controller.getActualPlayer().getName()).updateLabel();
+
+    }
+
+    public void updateInfoPlayer() {
+        System.out.println("updateInfoPlayer(): ");
+        for (int i = 0; i < eastP.getMap().size(); i++) {
+            eastP.getMap().entrySet().forEach(p -> p.getValue().setLAbelContract());
+        }
+    }
+
+    private boolean isPassedFromStartBox() {
+        return controller.getActualPlayer().getPawn().getPreviousPos() >= FIRST_USEFUL_POSITION
+                && controller.getActualPlayer().getPawn().getActualPos() <= LAST_USEFUL_POSITION;
+    }
+
+    private int passFromStart() {
+        int prePos = controller.getActualPlayer().getPawn().getPreviousPos();
+        int actPos = controller.getActualPlayer().getPawn().getActualPos();
+
+        return (39 - prePos) + (actPos + 1);
     }
 
 }

@@ -32,15 +32,20 @@ public class PlayerGraphic extends JPanel {
     int value;
     Color color;
     private Controller controller;
-    private static HashMap<Integer, JLabel> labels;
-    private static HashMap<String, JPanel> players;
+    private List<Player> list;
+    private int i;
+    private JLabel lblColc;
+    private JLabel lblCol_1;
+    private JLabel l;
+    private JPanel row2;
+    private HashMap<Integer, JLabel> labels;
 
     public PlayerGraphic(String name, int value, Controller controller) {
         this.name = name;
         this.value = value;
         this.controller = controller;
         labels = new HashMap<>();
-        players = new HashMap<>();
+
     }
 
     public PlayerGraphic(Controller controller) {
@@ -54,11 +59,15 @@ public class PlayerGraphic extends JPanel {
      * @return -return a Player's panel
      */
     public JPanel build(List<Box> boxes, List<Player> list, int i) {
-
+        this.list = list;
+        this.i = i;
+        System.out.println("buil i : " + this.i);
         this.name = list.get(i).getName();
         this.value = list.get(i).getMoney();
+        System.out.println(this.name);
         // final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
-        System.out.println("Lista" + i + ":" + list.get(i).getOwnerships().get(0));
+        // System.out.println("Lista" + i + ":" +
+        // list.get(i).getOwnerships().get(0));
 
         final JPanel player = new JPanel();
         player.setBorder(new LineBorder(new Color(0, 0, 0), 1));
@@ -84,17 +93,17 @@ public class PlayerGraphic extends JPanel {
         lblCol.setFont(new Font("Papyrus", Font.BOLD, 18));
         row1.add(lblCol);
 
-        final JLabel lblCol_1 = new JLabel("" + this.value);
+        lblCol_1 = new JLabel("" + this.value);
         lblCol_1.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 14));
         row1.add(lblCol_1);
 
-        final JLabel lblColc = new JLabel();
+        lblColc = new JLabel();
         lblColc.setOpaque(true);
-        lblColc.setBackground(C.COLORS[controller.getActualPlayer().getPawn().getID()]);
+        lblColc.setBackground(C.COLORS[list.get(i).getPawn().getID()]);
         lblColc.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 14));
         row1.add(lblColc);
 
-        final JPanel row2 = new JPanel();
+        row2 = new JPanel();
         row2.setBorder(new LineBorder(new Color(0, 0, 0)));
         final GridBagConstraints gbc_row2 = new GridBagConstraints();
         gbc_row2.insets = new Insets(0, 0, 5, 0);
@@ -111,8 +120,8 @@ public class PlayerGraphic extends JPanel {
         row2.setLayout(gbl_row2);
 
         controller.getAllBoxes().stream().filter(o -> o instanceof Ownership).forEach(o -> {
-            int id = ((Box) o).getID();
-            final JLabel l = new JLabel("" + (id < 10 ? "0" : "") + id);
+            int id = o.getID();
+            l = new JLabel("" + (id < 10 ? "0" : "") + id);
 
             labels.put(id, l);
             // l.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -124,10 +133,9 @@ public class PlayerGraphic extends JPanel {
             gbc_label_1.gridy = id / 15; // una riga ogni 15 caselle
             row2.add(l, gbc_label_1);
         });
-        
-        setLAbelContract(list, i);
 
-        
+        setLAbelContract();
+
         final JPanel row3 = new JPanel();
         final FlowLayout flowLayout = (FlowLayout) row3.getLayout();
         flowLayout.setAlignment(FlowLayout.LEFT);
@@ -159,25 +167,46 @@ public class PlayerGraphic extends JPanel {
         label_33.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
         row3.add(label_33);
 
-        players.put(list.get(i).getName(), player);
-
         player.setVisible(true);
         return player;
 
     }
 
-    private static void setLAbelContract(List<Player> list, int i) {
-        list.get(i).getOwnerships().stream().filter(o -> o instanceof Ownership).forEach(o -> {
-            Box b = ((Box) o);
-            JLabel l = labels.get(b.getID());
+    public void setLAbelContract() {
+        Player p = list.get(i);
+        System.out.println("setLabel i : " + this.i);
+        System.out.println("List.getName: " + list.get(i).getName());
 
-            if (o instanceof Land)
-                l.setBackground(((Land) b).getColor());
-            else
-                l.setBackground(Color.WHITE);
+        lblCol_1.setText(p.getMoney() + "");
+
+        controller.getAllBoxes().stream().filter(o -> o instanceof Ownership).forEach(o -> {
+            Ownership own = (Ownership) o;
+            l = labels.get(o.getID());
+            if (own.getOwner().equals(list.get(i))) {
+                l.setOpaque(true);
+                if (o instanceof Land) {
+                    l.setBackground(((Land) o).getColor());
+                } else {
+                    l.setBackground(Color.WHITE);
+                }
+            } else {
+                System.out.println(list.get(i).toString() + " sold");
+                l.setOpaque(false);
+            }
         });
+        // p.getOwnerships().stream().forEach(o -> {
+        // l = labels.get(o.getID());
+        //
+        // if (o instanceof Land) {
+        // l.setBackground(((Land) o).getColor());
+        //
+        // } else {
+        // l.setBackground(Color.WHITE);
+        //
+        // }
+        //
+        // });
 
-        
     }
 
     public Component buildBank(List<Box> allBoxes, Bank bank) {
@@ -289,8 +318,12 @@ public class PlayerGraphic extends JPanel {
         this.color = color;
     }
 
-    public static HashMap<String, JPanel> getMapPlayers() {
-        return players;
+    public void updateLabel() {
+        // TODO controllare perche nella mappa c'è un solo giocatore
+        // if (controller.getActualPlayer().getPawn().getID() == i)
+        // lblColc.setVisible(true);
+        // else
+        // lblColc.setVisible(false);
     }
 
 }

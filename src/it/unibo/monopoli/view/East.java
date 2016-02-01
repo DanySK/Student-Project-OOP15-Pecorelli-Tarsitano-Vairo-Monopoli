@@ -2,6 +2,8 @@ package it.unibo.monopoli.view;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -9,8 +11,11 @@ import javax.swing.JScrollPane;
 import it.unibo.monopoli.controller.Controller;
 
 public class East extends JPanel {
+    private  Map<String, PlayerGraphic> players;
 
     public East(final Controller controller) {
+        
+        this.players = new HashMap<>();
 
         // setPreferredSize(new Dimension(370, 415));
         this.setLayout(new BorderLayout());
@@ -21,16 +26,25 @@ public class East extends JPanel {
         panelBank.add(new PlayerGraphic(controller).buildBank(controller.getAllBoxes(),controller.getBank()), BorderLayout.CENTER);
         this.add(panelBank, BorderLayout.NORTH);
         int j = InizializedPlayer.getMap().size();
+        System.out.println("j: " + j);
         final JPanel panelPlayer = new JPanel();
         panelPlayer.setLayout(new GridLayout(j, 1));
         
         
         System.out.println("Size.map: " + InizializedPlayer.getMap().size());
         for (int i = 0; i < InizializedPlayer.getMap().size(); i++) {
-            panelPlayer.add(new PlayerGraphic(controller).build(controller.getAllBoxes(),controller.getPlayers(), i));
+            PlayerGraphic graphic = new PlayerGraphic(controller); 
+            panelPlayer.add(graphic.build(controller.getAllBoxes(),controller.getPlayers(), i));
+            this.players.put(controller.getPlayers().get(i).getName(), graphic);
+            System.out.println("***Mappa***" + this.players.get(controller.getPlayers().get(i).getName()));
+
         }
         this.add(new JScrollPane(panelPlayer), BorderLayout.CENTER);
 
+    }
+    
+    public Map<String, PlayerGraphic> getMap(){
+        return this.players;
     }
     
 

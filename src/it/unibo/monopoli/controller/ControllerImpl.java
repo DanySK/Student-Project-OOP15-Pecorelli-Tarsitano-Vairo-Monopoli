@@ -574,6 +574,7 @@ public class ControllerImpl implements Controller {
         if (this.version.getNextCardsAction(this.getActualBox(), card, this.actualPlayer)) {
             this.gameOverPerson(this.actualPlayer);
         }
+        this.notifyEndTurnComputer(this.actualPlayer);
 
     }
     // /**

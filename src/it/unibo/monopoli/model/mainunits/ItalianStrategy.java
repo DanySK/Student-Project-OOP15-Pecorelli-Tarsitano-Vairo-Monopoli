@@ -145,7 +145,7 @@ public class ItalianStrategy implements GameStrategy {
                 Color.CYAN));
         this.ownerships.add(
                 new ClassicLand("VIA ACCADEMIA", BoxesPositions.OWNERSHIP7_POSITION.getPos(), this.bank, Color.MAGENTA));
-        this.ownerships.add(new Company("SOCIETÀ ELETTRICA", BoxesPositions.OWNERSHIP8_POSITION.getPos(), this.bank));
+        this.ownerships.add(new Company("SOCIETA' ELETTRICA", BoxesPositions.OWNERSHIP8_POSITION.getPos(), this.bank));
         this.ownerships.add(
                 new ClassicLand("CORSO ATENEO", BoxesPositions.OWNERSHIP9_POSITION.getPos(), this.bank, Color.MAGENTA));
         this.ownerships.add(new ClassicLand("PIAZZA UNIVERSITÀ", BoxesPositions.OWNERSHIP10_POSITION.getPos(),
@@ -169,7 +169,7 @@ public class ItalianStrategy implements GameStrategy {
                 Color.YELLOW));
         this.ownerships.add(new ClassicLand("VIALE TRAIANO", BoxesPositions.OWNERSHIP20_POSITION.getPos(), this.bank,
                 Color.YELLOW));
-        this.ownerships.add(new Company("SOCIETÀ ACQUA POTABILE", BoxesPositions.OWNERSHIP21_POSITION.getPos(), this.bank));
+        this.ownerships.add(new Company("SOCIETA' ACQUA POTABILE", BoxesPositions.OWNERSHIP21_POSITION.getPos(), this.bank));
         this.ownerships.add(
                 new ClassicLand("PIAZZA GIULIO CESARE", BoxesPositions.OWNERSHIP22_POSITION.getPos(), this.bank, Color.YELLOW));
         this.ownerships.add(
@@ -507,7 +507,7 @@ public class ItalianStrategy implements GameStrategy {
         // boxes[o.getID()] = o;
         // });
         temp.add(new Start("VIA", BoxesPositions.START_POSITION.getPos()));
-        final PrisonOrTransit prison = new PrisonOrTransit("IN JAIL OR JUST VISITING",
+        final PrisonOrTransit prison = new PrisonOrTransit("IN TRANSITO O IN PRIGIONE",
                 BoxesPositions.PRISON_POSITION.getPos());
         temp.add(prison);
         temp.add(new ItalianNeutralArea("PARCHEGGIO GRATUITO", BoxesPositions.NEUTRAL_AREA_POSITION.getPos()));
@@ -734,7 +734,7 @@ public class ItalianStrategy implements GameStrategy {
 
     private boolean tryToEvadeTaxes(final Player player, final int amount) {
         try {
-            new EvadeTaxes(amount, ((ItalianNeutralArea) this.allBoxes.get(BoxesPositions.NEUTRAL_AREA_POSITION.getPos())));
+            new EvadeTaxes(amount, ((ItalianNeutralArea) this.allBoxes.get(BoxesPositions.NEUTRAL_AREA_POSITION.getPos()))).play(player);;
             return true;
         } catch (IllegalArgumentException i) {
             return this.haveEnoughMoney(player, amount) ? this.tryToPay(player, amount) : false;

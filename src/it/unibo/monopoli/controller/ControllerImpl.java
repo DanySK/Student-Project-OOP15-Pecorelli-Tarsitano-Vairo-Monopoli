@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import it.unibo.monopoli.model.actions.Action;
-import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.actions.EvadeTaxes;
 import it.unibo.monopoli.model.actions.GoToPrison;
 import it.unibo.monopoli.model.actions.ToBePaid;
@@ -19,8 +18,6 @@ import it.unibo.monopoli.model.actions.ToRevokeMortgage;
 import it.unibo.monopoli.model.actions.ToSellProperties;
 import it.unibo.monopoli.model.actions.ToStealMoney;
 import it.unibo.monopoli.model.cards.Card;
-import it.unibo.monopoli.model.cards.ChanceCards;
-import it.unibo.monopoli.model.cards.CommunityChestCards;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.mainunits.Bank;
 import it.unibo.monopoli.model.mainunits.BoxesPositions;
@@ -224,10 +221,10 @@ public class ControllerImpl implements Controller {
         }
     }
 
-    @Override
-    public AuctionOfOwnership auction() {
-        return this.version.toAuction((Ownership) this.boxes.get(actualPosition), this.actualPlayer);
-    }
+//    @Override
+//    public AuctionOfOwnership auction() {
+//        return this.version.toAuction((Ownership) this.boxes.get(actualPosition), this.actualPlayer);
+//    }
 
     @Override
     public void build() {

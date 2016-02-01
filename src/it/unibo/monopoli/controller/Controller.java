@@ -2,16 +2,12 @@ package it.unibo.monopoli.controller;
 
 import java.util.List;
 
-import javax.swing.JTextField;
-
-import it.unibo.monopoli.model.actions.AuctionOfOwnership;
 import it.unibo.monopoli.model.mainunits.Bank;
 import it.unibo.monopoli.model.mainunits.ClassicPawn;
+import it.unibo.monopoli.model.mainunits.Pawn;
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Box;
-import it.unibo.monopoli.model.table.Building;
 import it.unibo.monopoli.model.table.Land;
-import it.unibo.monopoli.model.table.Ownership;
 import it.unibo.monopoli.view.InPlay;
 
 /**
@@ -116,7 +112,7 @@ public interface Controller {
      */
     void sellOwnership();
 
-    AuctionOfOwnership auction();
+    //AuctionOfOwnership auction();
 
     /**
      * This method allow to build house or hotel on {@link Land}.

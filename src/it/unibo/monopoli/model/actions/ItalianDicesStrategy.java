@@ -41,6 +41,10 @@ public class ItalianDicesStrategy implements DicesStrategy {
             } else {
                 player.setDicesRoll(false);
             }
+        } else {
+            if (player.isInPrison() && player.howManyTurnsHasBeenInPrison() < 3) {
+                player.incrementsTurnsInPrison();
+            }
         }
     }
 

@@ -3,6 +3,9 @@ package it.unibo.monopoli.model.actions;
 import java.util.LinkedList;
 import java.util.List;
 
+import it.unibo.monopoli.model.cards.Card;
+import it.unibo.monopoli.model.cards.ChanceCards;
+import it.unibo.monopoli.model.cards.CommunityChestCards;
 import it.unibo.monopoli.model.mainunits.Dice;
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Box;
@@ -35,6 +38,19 @@ public class ToRollDices implements Action {
 
     @Override
     public void play(final Player player) {
+        if (player.isInPrison()) {
+            if (player.howManyTurnsHasBeenInPrison() == 3) {
+                player.setPrison(false);
+            } else if (!player.getCards().isEmpty()) {
+                for (final Card c: player.getCards()) {
+                    if (c.getID() == ChanceCards.CARD4.getID() || c.getID() == CommunityChestCards.CARD4.getID()) {
+                        player.setPrison(false);
+                        player.removeCard(c);
+                        break;
+                    }
+                }
+            }
+        }
         final List<Integer> dicesNumbers = new LinkedList<>();
         this.dices.stream()
                   .forEach(d -> {

@@ -20,6 +20,7 @@ public class ClassicPlayer implements Player{
     private int money;
     private boolean debtsPaid;
     private final boolean human;
+    private int turnsInPrison;
 
     public ClassicPlayer(final String name, final Pawn pawn, final boolean isHuman) {
         this.name = name;
@@ -80,6 +81,24 @@ public class ClassicPlayer implements Player{
     }
 
     @Override
+    public void setPrison(final boolean isGoingToPrison) {
+        this.isAPrisoner = isGoingToPrison;
+        if (!isGoingToPrison) {
+            this.turnsInPrison = 0;
+        }
+    }
+
+    @Override
+    public int howManyTurnsHasBeenInPrison() {
+        return this.turnsInPrison;
+    }
+
+    @Override
+    public void incrementsTurnsInPrison() {
+        this.turnsInPrison++;
+    }
+
+    @Override
     public Card lastCardDrew() {
         return this.cardDrew;
     }
@@ -100,11 +119,6 @@ public class ClassicPlayer implements Player{
             this.dicesNumbers.clear();
         }
         this.dicesNumbers.addAll(numbers);
-    }
-
-    @Override
-    public void setPrison(final boolean isGoingToPrison) {
-        this.isAPrisoner = isGoingToPrison;
     }
 
     @Override

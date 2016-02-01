@@ -150,4 +150,8 @@ public interface Player extends Owner {
     
     boolean isHuman();
 
+    int howManyTurnsHasBeenInPrison();
+
+    void incrementsTurnsInPrison();
+
 }

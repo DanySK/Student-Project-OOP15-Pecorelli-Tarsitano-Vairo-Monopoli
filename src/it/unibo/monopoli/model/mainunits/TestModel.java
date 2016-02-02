@@ -199,7 +199,7 @@ public class TestModel {
 
         //Tests ToPay and ToBePaid
         final int money = 40;
-        new ToPay(money, testPlayer).play(testPlayer);
+        new ToPay(money).play(testPlayer);
         assertEquals(testPlayer.getMoney(), newAmount - money);
         new ToBePaid(money).play(testPlayer);
         assertEquals(testPlayer.getMoney(), newAmount);

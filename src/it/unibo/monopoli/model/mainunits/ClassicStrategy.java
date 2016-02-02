@@ -704,7 +704,7 @@ public class ClassicStrategy implements GameStrategy {
 
     private boolean tryToPay(final Player player, final int amount) {
         try {
-            new ToPay(amount, player).play(player);
+            new ToPay(amount).play(player);
             return true;
         } catch (IllegalArgumentException i) {
             return this.haveEnoughMoney(player, amount) ? this.tryToPay(player, amount) : false;

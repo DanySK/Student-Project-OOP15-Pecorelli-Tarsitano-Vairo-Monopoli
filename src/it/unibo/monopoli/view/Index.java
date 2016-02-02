@@ -317,11 +317,12 @@ public class Index {
             public void actionPerformed(final ActionEvent e) {
                 Map<Player, Integer> winner;
                 MyFrame winnerF = new MyFrame("Winner", new BorderLayout(), new Dimension(300, 300));
+                winnerF.setLocation(300,300);
                 winner = controller.endGame();
                 
                 Set<Entry<Player, Integer>> setWinner = winner.entrySet();
                 
-                JPanel winnerEnd = new JPanel(new GridLayout(winner.size(),1));
+                JPanel winnerEnd = new JPanel();
                 winnerF.add(winnerEnd);
 
                 
@@ -350,14 +351,7 @@ public class Index {
 
                 winnerF.setVisible(true);
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l = inPlay.getButtons();
-                l.forEach(bu -> {
-                    buttonList.forEach(but -> {
-                        if (bu.getText().equals(but.getText())) {
-                            but.setEnabled(true);
-                        }
-                    });
-                });
+                
             }
         });
 

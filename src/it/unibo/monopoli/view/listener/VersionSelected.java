@@ -17,7 +17,7 @@ public class VersionSelected implements ItemListener {
             // SelectedItem è l'Item selezionato
             selectedItem = e.getItem();
            
-            
+        }        
 
     }
 /**

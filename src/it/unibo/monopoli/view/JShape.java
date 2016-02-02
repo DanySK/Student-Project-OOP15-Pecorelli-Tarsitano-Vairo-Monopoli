@@ -17,7 +17,8 @@ public class JShape extends JPanel {
      * enum that defines the types of possible forms.
      *
      */
-    public static enum Shapes {
+    public enum Shapes {
+
         TRIANGLE, RECTANGLE, CIRCLE, ROMBO;
     }
 
@@ -124,13 +125,15 @@ public class JShape extends JPanel {
      * method to define the border color.
      * 
      * @param shapeBorderColor
+     *            Border Color
      */
-    public void setShapeBorderColor(Color shapeBorderColor) {
+    public void setShapeBorderColor(final Color shapeBorderColor) {
         this.shapeBorderColor = shapeBorderColor;
     }
 
     /**
      * return Shape.
+     * 
      * @return Shape
      */
     public Shapes getShape() {

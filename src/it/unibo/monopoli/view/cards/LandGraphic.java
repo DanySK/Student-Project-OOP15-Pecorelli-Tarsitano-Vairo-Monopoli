@@ -15,8 +15,7 @@ import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Land;
 import it.unibo.monopoli.view.C;
 import it.unibo.monopoli.view.JShape;
-import it.unibo.monopoli.view.JShape.Shapes;
-import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
+
 /**
  * 
  * class that is the graphic implementation of the LandtBox.
@@ -24,16 +23,23 @@ import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
  */
 public class LandGraphic extends AbstractGraphicCard {
 
-    private  Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-    private  Land land;
+    private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+    private Land land;
     private JPanel colorP;
-/**
- * Builder.
- * @param land
- * @param pos
- * @param id
- */
-    public LandGraphic(Land land, Position pos, int id) {
+    private LinkedList<JShape> houses = new LinkedList<>();
+
+    /**
+     * Builder.
+     * 
+     * @param land
+     * 
+     *            card representing the land
+     * @param pos
+     *            position in the table
+     * @param id
+     *            card id that rappresent the position in the table
+     */
+    public LandGraphic(final Land land, final Position pos, final int id) {
         super(land, pos);
         this.land = land;
         colorP = new JPanel();
@@ -41,16 +47,16 @@ public class LandGraphic extends AbstractGraphicCard {
 
     @Override
     public JPanel build() {
-        JPanel card = new JPanel();
+        final JPanel card = new JPanel();
         card.setPreferredSize(new Dimension(C.DIM));
         card.setLayout(new GridLayout(4, 1));
 
         card.add(colorP);
         colorP.setOpaque(true);
         colorP.setBackground(land.getColor());
-         JLabel nameP = new JLabel("<html>" + land.getName() + "</html>");
+        final JLabel nameP = new JLabel("<html>" + land.getName() + "</html>");
         nameP.setFont(new Font("Times New Roman", Font.BOLD, 10));
-         card.add(nameP);
+        card.add(nameP);
 
         card.add(emptyP);
 
@@ -65,26 +71,34 @@ public class LandGraphic extends AbstractGraphicCard {
 
     }
 
-    private LinkedList<JShape> houses = new LinkedList<>();
+    /**
+     * method that adds the marker of a given in the corresponding paper.
+     * 
+     * @param p
+     *            Player
+     */
     public void addHouse(final Player p) {
-        int id = p.getPawn().getID(); // prendo l'id del colore della pedina
-        Color c = C.cl.get(id);
-        JShape house = new JShape(c); // creo la pedina
-        
-       houses.add(house); // aggiungo pedina alla mappa
+        final int id = p.getPawn().getID();
+        final Color c = C.CL.get(id);
+        final JShape house = new JShape(c);
+
+        houses.add(house);
         colorP.add(house);
         colorP.validate();
     }
-/**
- * 
- * @param p
- */
-    public void removeHouse(Player p) {
-        JShape h = houses.getLast();
+
+    /**
+     * method that removes the marker of a given in the corresponding paper.
+     * 
+     * @param p
+     *            Player
+     */
+    public void removeHouse(final Player p) {
+        final JShape h = houses.getLast();
         colorP.remove(h);
-        h.setVisible(false);// rimuovo la pedina dal pannello
+        h.setVisible(false);
         houses.remove(h);
-      colorP.doLayout();
+        colorP.doLayout();
         colorP.repaint();
-    } 
+    }
 }

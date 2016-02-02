@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -24,7 +23,7 @@ import javax.swing.border.Border;
 
 /**
  * 
- * 
+ * Class that create a panel for information about Player in Frame Go.
  *
  */
 public class InizializedPlayer {
@@ -37,7 +36,6 @@ public class InizializedPlayer {
     private JRadioButton rdbtnUman;
     private String positionAndName;
 
-    private Color c;
     private static boolean save;
 
     /**
@@ -50,6 +48,8 @@ public class InizializedPlayer {
      * Method that build the Player's panel where there are the information
      * about player situation.
      * 
+     * @param playerP
+     *            Player
      * @return JPanel playerP
      */
     public JPanel build(final JPanel playerP) {
@@ -161,11 +161,15 @@ public class InizializedPlayer {
         return panel;
 
     }
-/**
- * 
- * @param x
- */
-    protected static void setSave(boolean x) {
+
+    /**
+     * Method says if the save button is pressed.
+     * 
+     * @param x
+     *            isSave
+     * 
+     */
+    protected static void setSave(final boolean x) {
         save = x;
 
     }
@@ -180,17 +184,21 @@ public class InizializedPlayer {
         return save;
 
     }
-/**
- * returns the HashMap representing the players, their type and their pawn.
- * @return HashMap<>
- */
+
+    /**
+     * returns the HashMap representing the players, their type and their pawn.
+     * 
+     * @return HashMap<>
+     */
     public static Map<String, Boolean> getMap() {
         return map;
     }
-/**
- * return state o Computer RadioButton.
- * @return JRadioButton
- */
+
+    /**
+     * return state o Computer RadioButton.
+     * 
+     * @return JRadioButton
+     */
     public JRadioButton getRdbtnComputer() {
         return rdbtnComputer;
     }

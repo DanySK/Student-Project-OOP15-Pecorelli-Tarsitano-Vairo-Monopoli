@@ -17,8 +17,8 @@ import it.unibo.monopoli.controller.Controller;
  */
 public class East extends JPanel {
 
-    private  Map<String, PlayerGraphic> players;
-     PlayerGraphic playerBank;
+    private Map<String, PlayerGraphic> players;
+    PlayerGraphic playerBank;
 
     /**
      * class constructor East.
@@ -82,6 +82,5 @@ public class East extends JPanel {
     public void setPlayerBank(final PlayerGraphic playerBank) {
         this.playerBank = playerBank;
     }
-    
-   
+
 }

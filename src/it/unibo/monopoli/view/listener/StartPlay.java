@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import it.unibo.monopoli.controller.Controller;
@@ -18,32 +17,34 @@ import it.unibo.monopoli.view.InPlay;
 import it.unibo.monopoli.view.InPlayImpl;
 import it.unibo.monopoli.view.Index;
 import it.unibo.monopoli.view.InizializedPlayer;
-
+/**
+ * 
+ * Inizialized controller and start play.
+ *
+ */
 public class StartPlay implements ActionListener {
-    int count = 1;
-
     private InPlay inPlay;
 
     private int computer;
     private EVersion version;
-
+/**
+ * 
+ */
     public StartPlay() {
         super();
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        JButton button = (JButton) e.getSource();
-        int j = 0;
+    public void actionPerformed(final ActionEvent e) {
+        e.getSource();
         if (VersionSelected.getSelectedItem().equals(C.NOT_SELECTABLE_OPTION)) {
             new Dialog(new JFrame(), "Error", "Error! You have not selected the version");
         } else if (Go.getNumPlayers() <= 1) {
             new Dialog(new JFrame(), "Error", "Error! The minimum number of players is two");
         } else if (!(InizializedPlayer.isSave())) {
             new Dialog(new JFrame(), "Error", "Error! You must first save the player");
-        } else
-        {
-
+        } else {
+            computer = 0;
             InizializedPlayer.getMap().entrySet().forEach(a -> {
                 if (a.getValue().equals(false)) {
                     computer++;
@@ -52,15 +53,15 @@ public class StartPlay implements ActionListener {
             if (Go.getNumPlayers() == computer) {
                 new Dialog(new JFrame(), "Error", "Error! Players can not be all kind of Computers");
             } else {
-                Index i = new Index();
+                final Index i = new Index();
                 inPlay = new InPlayImpl(i);
                 i.addInPlay(inPlay);
-                Controller contr = i.getController();
+                final Controller contr = i.getController();
                 contr.addView(inPlay);
 
-                Set<Entry<String, Boolean>> s = InizializedPlayer.getMap().entrySet();
+                final Set<Entry<String, Boolean>> s = InizializedPlayer.getMap().entrySet();
                 s.forEach(g -> {
-                    String[] values = g.getKey().split(C.SPLITTOKEN);
+                    final String[] values = g.getKey().split(C.SPLITTOKEN);
                     contr.addPlayer(values[1], new ClassicPawn(Integer.parseInt(values[0])), g.getValue());
                 });
                 switch (VersionSelected.getSelectedItem()) {

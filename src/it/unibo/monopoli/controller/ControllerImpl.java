@@ -113,11 +113,14 @@ public class ControllerImpl implements Controller {
         this.boxes = this.version.getAllBoxes();
         this.decks = this.version.getDecks();
         this.actualPlayer = this.version.getNextPlayer();
+        
+    }
+    @Override
+    public void play(){
         if (!this.actualPlayer.isHuman()) {
             this.computerPlayer();
         }
     }
-
     @Override
     public void addView(final InPlay view) {
         this.view = Optional.of(view);
@@ -202,11 +205,18 @@ public class ControllerImpl implements Controller {
     /**
      * This is a notify for the view. Notify the turn of computer .
      * 
-     * @param player
-     *            of looser.
+     * @param player  of looser.
      */
     public void notifyEndTurnComputer(final Player player) {
         this.view.ifPresent(v -> v.notifyEndTurnComputer(player));
+    }
+    /**
+     * This is a notify for the view. Notify the actual position of computer.
+     * @param position
+     */
+    public void notifyPositionComputer(int position){
+
+        this.view.ifPresent(v -> v.beginComputer(position));
     }
 
     @Override
@@ -354,6 +364,9 @@ public class ControllerImpl implements Controller {
     private void gameOverPerson(final Player player) {
         this.notifyGameOver(player);
         this.players.remove(this.players.indexOf(player));
+        if(this.players.size()==1){
+            this.endGame();
+        }
 
     }
 
@@ -370,8 +383,10 @@ public class ControllerImpl implements Controller {
      * This method allow computer to play alone.
      */
     private void computerPlayer() {
-
+        
         this.notifyComputer(actualPlayer);
+
+        notifyPositionComputer(this.actualPlayer.getPawn().getActualPos());
         this.actualPosition = this.toRollDices();
         this.actions = this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.actualPlayer);
         if (this.boxes.get(this.actualPosition) instanceof Ownership) {

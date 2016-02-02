@@ -133,12 +133,6 @@ public interface Controller {
      */
     void revokeMortgageOwnership();
 
-    // /**
-    // * this method allow to accept trade between two player.
-    // */
-    // void trade(Ownership firstOwnership, Ownership seconfOwnership, Player
-    // firstPlayer, Player secondPlayer);
-
     /**
      * Returns the winner!
      * 
@@ -160,5 +154,9 @@ public interface Controller {
      * @return the id of actual position.
      */
     int getActualPosition();
+    /**
+     * This is a method for start the game.
+     */
+    void play();
 
 }

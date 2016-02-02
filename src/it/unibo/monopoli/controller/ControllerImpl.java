@@ -430,7 +430,7 @@ public class ControllerImpl implements Controller {
                                 + (AVERAGE_COST * 4))
                         && !this.alreadyBuilt) {
                     this.bank.getLeftBuilding().forEach(b -> {
-                        if ((((LandGroup) land.getGroup()).getBuildings().size() < 4 && b instanceof Home)// capire
+                        if ((((LandGroup) land.getGroup()).getBuildings().size() < 4 && b instanceof Home)
                                 || (b instanceof Hotel)) {
                             this.build();
 
@@ -759,6 +759,5 @@ public class ControllerImpl implements Controller {
         if (player.getMoney() >= ownership.getContract().getCost()) {
             actions.add(Actions.BUY);
         }
-        actions.add(Actions.END_OF_TURN);
     }
 }

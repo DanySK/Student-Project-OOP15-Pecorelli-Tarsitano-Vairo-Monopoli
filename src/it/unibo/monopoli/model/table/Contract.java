@@ -9,8 +9,7 @@ package it.unibo.monopoli.model.table;
 public interface Contract {
 
     /**
-     * Return the name of this {@link Contract} that is the same of his
-     * {@link Ownership}.
+     * Return the name of this {@link Contract}.
      * 
      * @return {@link Contract}'s name
      */
@@ -27,7 +26,7 @@ public interface Contract {
      * Return the cost to buy the {@link Ownership} to which the
      * {@link Contract} belongs.
      * 
-     * @return the cost to buy the {@link Ownership}
+     * @return the cost of the {@link Ownership}
      */
     int getCost();
 

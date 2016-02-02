@@ -12,7 +12,6 @@ import it.unibo.monopoli.model.mainunits.Player;
 public class ToDrawCards implements Action {
 
     private final Deck deck;
-    private Card card;
 
     /**
      * Constructs a new instance of {@link ToDrawCards}'s {@link Action}. The
@@ -27,20 +26,8 @@ public class ToDrawCards implements Action {
 
     @Override
     public void play(final Player player) {
-        this.card = this.deck.getFirstCard();
-        player.setLastCardDrew(this.card);
-//        this.deck.getCards().remove(this.card);
-//        this.deck.getCards().add(0, this.card);
+        final Card card = this.deck.getFirstCard();
+        player.setLastCardDrew(card);
     }
-
-//    CE L'HA GIÀ IL GIOCATORE
-//    /**
-//     * Returns the last {@link Card} drawn.
-//     * 
-//     * @return the last {@link Card} drawn
-//     */
-//    public Card getLastCardDrawn() {
-//        return this.card;
-//    }
 
 }

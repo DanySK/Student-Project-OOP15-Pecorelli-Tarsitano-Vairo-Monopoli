@@ -8,11 +8,24 @@ import it.unibo.monopoli.model.mainunits.Dice;
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Box;
 
+/**
+ * In this {@link DicesStrategy}, dices are three. If you double and you are not
+ * in prison, you can roll dices again, else, if you are in prison, you can go
+ * out of there. Instead, if you triple, you'll go directly to jail.
+ *
+ */
 public class ItalianDicesStrategy implements DicesStrategy {
 
     private Player player;
     private final Box prison;
 
+    /**
+     * Constructs an instance of this {@link DicesStrategy}.
+     * 
+     * @param prison
+     *            - is the {@link Box} prison, where you have to go if you
+     *            triple with dices
+     */
     public ItalianDicesStrategy(final Box prison) {
         this.prison = prison;
     }
@@ -41,7 +54,7 @@ public class ItalianDicesStrategy implements DicesStrategy {
             } else {
                 player.setDicesRoll(false);
                 player.setIfIsTheFirstLaunch(false);
-           }
+            }
         } else {
             if (player.isInPrison() && player.howManyTurnsHasBeenInPrison() < 3) {
                 player.incrementsTurnsInPrison();
@@ -61,7 +74,8 @@ public class ItalianDicesStrategy implements DicesStrategy {
     }
 
     private int sum() {
-        return this.player.lastDicesNumber().get(0) + this.player.lastDicesNumber().get(1) + this.player.lastDicesNumber().get(2);
+        return this.player.lastDicesNumber().get(0) + this.player.lastDicesNumber().get(1)
+                + this.player.lastDicesNumber().get(2);
     }
 
 }

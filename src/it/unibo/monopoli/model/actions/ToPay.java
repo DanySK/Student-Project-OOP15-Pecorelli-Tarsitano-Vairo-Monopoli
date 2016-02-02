@@ -29,7 +29,7 @@ public class ToPay extends ToPayAndBePaid {
             throw new IllegalArgumentException("Only positive amount different of zero!");
         }
         if (amount > player.getMoney()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("You can't pay if you haven't enought money");
         }
     }
 

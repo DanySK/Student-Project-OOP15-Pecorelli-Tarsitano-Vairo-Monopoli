@@ -9,17 +9,11 @@ import java.util.Random;
 public class ClassicDice implements Dice {
 
     private static final int FACES = 6;
-
- //   private int lastNumber;
+    private static final Random RANDOM = new Random();
 
     @Override
     public int roll() {
-        return new Random().nextInt(FACES) + 1;
+        return RANDOM.nextInt(FACES) + 1;
     }
-
-//    @Override
-//    public int getLastNumberObtained() {
-//        return this.lastNumber;
-//    }
 
 }

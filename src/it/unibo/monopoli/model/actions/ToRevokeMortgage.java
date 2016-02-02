@@ -25,11 +25,6 @@ public class ToRevokeMortgage extends ToMortgageAndRevoke {
         this.ownership = ownership;
     }
 
-    // @Override
-    // protected void strategyOfMortgaging() {
-    // this.ownership.setMortgage(false);
-    // }
-
     @Override
     protected void strategy(final Player player) {
         this.ownership.setMortgage(false);

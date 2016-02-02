@@ -18,6 +18,8 @@ import it.unibo.monopoli.model.table.Box;
 public class ToRollDices implements Action {
 
     private static final int POLICE_POSITION = 30;
+    private static final int FIRST_USEFUL_POSITION = 28;
+    private static final int LAST_USEFUL_POSITION = 11;
 
     private final DicesStrategy strategy;
     private final List<Dice> dices;
@@ -29,6 +31,9 @@ public class ToRollDices implements Action {
      * 
      * @param strategy
      *            - the {@link DicesStrategy} to use
+     * @param prison
+     *            - the {@link Box} prison, where players have to go if they
+     *            stop to the police's {@link Box}
      */
     public ToRollDices(final DicesStrategy strategy, final Box prison) {
         this.strategy = strategy;
@@ -42,7 +47,7 @@ public class ToRollDices implements Action {
             if (player.howManyTurnsHasBeenInPrison() == 3) {
                 player.setPrison(false);
             } else if (!player.getCards().isEmpty()) {
-                for (final Card c: player.getCards()) {
+                for (final Card c : player.getCards()) {
                     if (c.getID() == ChanceCards.CARD4.getID() || c.getID() == CommunityChestCards.CARD4.getID()) {
                         player.setPrison(false);
                         player.removeCard(c);
@@ -52,20 +57,27 @@ public class ToRollDices implements Action {
             }
         }
         final List<Integer> dicesNumbers = new LinkedList<>();
-        this.dices.stream()
-                  .forEach(d -> {
-                      dicesNumbers.add(d.roll());
-                  });
+        this.dices.stream().forEach(d -> {
+            dicesNumbers.add(d.roll());
+        });
         player.setLastDicesNumber(dicesNumbers);
         player.setDicesRoll(true);
         this.strategy.nowPlay(player);
         if (this.policePos(player)) {
             new GoToPrison(this.prison).play(player);
         }
+        if (this.isPassedFromStartBox(player)) {
+            new PassFromStar().play(player);
+        }
     }
 
     private boolean policePos(final Player player) {
-        return player.getPawn().getActualPos() == POLICE_POSITION; 
+        return player.getPawn().getActualPos() == POLICE_POSITION;
+    }
+
+    private boolean isPassedFromStartBox(final Player player) {
+        return player.getPawn().getPreviousPos() >= FIRST_USEFUL_POSITION
+                && player.getPawn().getActualPos() <= LAST_USEFUL_POSITION;
     }
 
 }

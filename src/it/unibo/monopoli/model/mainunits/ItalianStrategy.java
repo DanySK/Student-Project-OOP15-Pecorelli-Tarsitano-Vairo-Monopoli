@@ -92,8 +92,6 @@ public class ItalianStrategy implements GameStrategy {
     private static final int CHEST8_HOME = 40;
     private static final int CHEST8_HOTEL = 115;
 
- 
-
     private final List<Player> players;
     private final List<Ownership> ownerships;
     private final List<Group> groups;
@@ -141,10 +139,10 @@ public class ItalianStrategy implements GameStrategy {
                 this.bank, Color.CYAN));
         this.ownerships.add(
                 new ClassicLand("VIALE MONTEROSA", BoxesPositions.OWNERSHIP5_POSITION.getPos(), this.bank, Color.CYAN));
-        this.ownerships.add(new ClassicLand("VIALE VESUVIO", BoxesPositions.OWNERSHIP6_POSITION.getPos(), this.bank,
-                Color.CYAN));
         this.ownerships.add(
-                new ClassicLand("VIA ACCADEMIA", BoxesPositions.OWNERSHIP7_POSITION.getPos(), this.bank, Color.MAGENTA));
+                new ClassicLand("VIALE VESUVIO", BoxesPositions.OWNERSHIP6_POSITION.getPos(), this.bank, Color.CYAN));
+        this.ownerships.add(new ClassicLand("VIA ACCADEMIA", BoxesPositions.OWNERSHIP7_POSITION.getPos(), this.bank,
+                Color.MAGENTA));
         this.ownerships.add(new Company("SOCIETA' ELETTRICA", BoxesPositions.OWNERSHIP8_POSITION.getPos(), this.bank));
         this.ownerships.add(
                 new ClassicLand("CORSO ATENEO", BoxesPositions.OWNERSHIP9_POSITION.getPos(), this.bank, Color.MAGENTA));
@@ -153,37 +151,36 @@ public class ItalianStrategy implements GameStrategy {
         this.ownerships.add(new Station("STAZIONE OVEST", BoxesPositions.OWNERSHIP11_POSITION.getPos(), this.bank));
         this.ownerships.add(
                 new ClassicLand("VIA VERDI", BoxesPositions.OWNERSHIP12_POSITION.getPos(), this.bank, Color.ORANGE));
-        this.ownerships.add(new ClassicLand("CORSO RAFFAELLO", BoxesPositions.OWNERSHIP13_POSITION.getPos(),
-                this.bank, Color.ORANGE));
+        this.ownerships.add(new ClassicLand("CORSO RAFFAELLO", BoxesPositions.OWNERSHIP13_POSITION.getPos(), this.bank,
+                Color.ORANGE));
         this.ownerships.add(
                 new ClassicLand("PIAZZA DANTE", BoxesPositions.OWNERSHIP14_POSITION.getPos(), this.bank, Color.ORANGE));
-        this.ownerships
-                .add(new ClassicLand("VIA MARCO POLO", BoxesPositions.OWNERSHIP15_POSITION.getPos(), this.bank, Color.RED));
+        this.ownerships.add(
+                new ClassicLand("VIA MARCO POLO", BoxesPositions.OWNERSHIP15_POSITION.getPos(), this.bank, Color.RED));
         this.ownerships.add(
                 new ClassicLand("CORSO MAGELLANO", BoxesPositions.OWNERSHIP16_POSITION.getPos(), this.bank, Color.RED));
-        this.ownerships.add(new ClassicLand("LARGO COLOMBO", BoxesPositions.OWNERSHIP17_POSITION.getPos(), this.bank,
-                Color.RED));
-        this.ownerships
-                .add(new Station("STAZIONE NORD", BoxesPositions.OWNERSHIP18_POSITION.getPos(), this.bank));
+        this.ownerships.add(
+                new ClassicLand("LARGO COLOMBO", BoxesPositions.OWNERSHIP17_POSITION.getPos(), this.bank, Color.RED));
+        this.ownerships.add(new Station("STAZIONE NORD", BoxesPositions.OWNERSHIP18_POSITION.getPos(), this.bank));
         this.ownerships.add(new ClassicLand("VIALE COSTANTINO", BoxesPositions.OWNERSHIP19_POSITION.getPos(), this.bank,
                 Color.YELLOW));
         this.ownerships.add(new ClassicLand("VIALE TRAIANO", BoxesPositions.OWNERSHIP20_POSITION.getPos(), this.bank,
                 Color.YELLOW));
-        this.ownerships.add(new Company("SOCIETA' ACQUA POTABILE", BoxesPositions.OWNERSHIP21_POSITION.getPos(), this.bank));
-        this.ownerships.add(
-                new ClassicLand("PIAZZA GIULIO CESARE", BoxesPositions.OWNERSHIP22_POSITION.getPos(), this.bank, Color.YELLOW));
-        this.ownerships.add(
-                new ClassicLand("VIA ROMA", BoxesPositions.OWNERSHIP23_POSITION.getPos(), this.bank, Color.GREEN));
+        this.ownerships
+                .add(new Company("SOCIETA' ACQUA POTABILE", BoxesPositions.OWNERSHIP21_POSITION.getPos(), this.bank));
+        this.ownerships.add(new ClassicLand("PIAZZA GIULIO CESARE", BoxesPositions.OWNERSHIP22_POSITION.getPos(),
+                this.bank, Color.YELLOW));
+        this.ownerships
+                .add(new ClassicLand("VIA ROMA", BoxesPositions.OWNERSHIP23_POSITION.getPos(), this.bank, Color.GREEN));
         this.ownerships.add(
                 new ClassicLand("CORSO IMPERO", BoxesPositions.OWNERSHIP24_POSITION.getPos(), this.bank, Color.GREEN));
         this.ownerships.add(
                 new ClassicLand("LARGO AUGUSTO", BoxesPositions.OWNERSHIP25_POSITION.getPos(), this.bank, Color.GREEN));
-        this.ownerships
-                .add(new Station("STAZIONE EST", BoxesPositions.OWNERSHIP26_POSITION.getPos(), this.bank));
-        this.ownerships
-                .add(new ClassicLand("VIALE DEI GIARDINI", BoxesPositions.OWNERSHIP27_POSITION.getPos(), this.bank, Color.BLUE));
-        this.ownerships
-                .add(new ClassicLand("PARCO DELLA VITTORIA", BoxesPositions.OWNERSHIP28_POSITION.getPos(), this.bank, Color.BLUE));
+        this.ownerships.add(new Station("STAZIONE EST", BoxesPositions.OWNERSHIP26_POSITION.getPos(), this.bank));
+        this.ownerships.add(new ClassicLand("VIALE DEI GIARDINI", BoxesPositions.OWNERSHIP27_POSITION.getPos(),
+                this.bank, Color.BLUE));
+        this.ownerships.add(new ClassicLand("PARCO DELLA VITTORIA", BoxesPositions.OWNERSHIP28_POSITION.getPos(),
+                this.bank, Color.BLUE));
     }
 
     private void inizializesGroups() {
@@ -202,8 +199,7 @@ public class ItalianStrategy implements GameStrategy {
                 this.ownerships.get(BoxesPositions.INDEX_9.getPos())));
         this.ownerships.get(BoxesPositions.INDEX_6.getPos()).setGroup(this.groups.get(BoxesPositions.GROUP_2.getPos()));
         this.ownerships.get(BoxesPositions.INDEX_8.getPos()).setGroup(this.groups.get(BoxesPositions.GROUP_2.getPos()));
-        this.ownerships.get(BoxesPositions.INDEX_9.getPos())
-                .setGroup(this.groups.get(BoxesPositions.GROUP_2.getPos()));
+        this.ownerships.get(BoxesPositions.INDEX_9.getPos()).setGroup(this.groups.get(BoxesPositions.GROUP_2.getPos()));
         this.groups.add(new ClassicLandGroup("Arancione", this.ownerships.get(BoxesPositions.INDEX_11.getPos()),
                 this.ownerships.get(BoxesPositions.INDEX_12.getPos()),
                 this.ownerships.get(BoxesPositions.INDEX_13.getPos())));
@@ -266,137 +262,137 @@ public class ItalianStrategy implements GameStrategy {
 
     private void inizializesContracts() {
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_0.getPos()))
-                        .landCost(Ownerships.OWNERSHIP1.getCost()).landIncome(Ownerships.OWNERSHIP1.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP1.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP1.getCost()).landIncome(Ownerships.OWNERSHIP1.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP1.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_0.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_0.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_1.getPos()))
-                        .landCost(Ownerships.OWNERSHIP2.getCost()).landIncome(Ownerships.OWNERSHIP2.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP2.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP2.getCost()).landIncome(Ownerships.OWNERSHIP2.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP2.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_1.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_1.getPos()));
-        this.contracts.add(new ClassicContract.Builder().ownership(this.ownerships.get(BoxesPositions.INDEX_2.getPos()))
-                        .ownershipsCost(Ownerships.OWNERSHIP3.getCost()).build());
+        this.contracts.add(new ClassicContract(this.ownerships.get(BoxesPositions.INDEX_2.getPos()),
+                Ownerships.OWNERSHIP3.getCost()));
         this.ownerships.get(BoxesPositions.INDEX_2.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_2.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_3.getPos()))
-                        .landCost(Ownerships.OWNERSHIP4.getCost()).landIncome(Ownerships.OWNERSHIP4.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP4.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP4.getCost()).landIncome(Ownerships.OWNERSHIP4.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP4.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_3.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_3.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_4.getPos()))
-                        .landCost(Ownerships.OWNERSHIP5.getCost()).landIncome(Ownerships.OWNERSHIP5.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP5.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP5.getCost()).landIncome(Ownerships.OWNERSHIP5.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP5.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_4.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_4.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_5.getPos()))
-                        .landCost(Ownerships.OWNERSHIP6.getCost()).landIncome(Ownerships.OWNERSHIP6.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP6.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP6.getCost()).landIncome(Ownerships.OWNERSHIP6.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP6.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_5.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_5.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_6.getPos()))
-                        .landCost(Ownerships.OWNERSHIP7.getCost()).landIncome(Ownerships.OWNERSHIP7.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP7.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP7.getCost()).landIncome(Ownerships.OWNERSHIP7.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP7.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_6.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_6.getPos()));
-        this.contracts.add(new ClassicContract.Builder().ownership(this.ownerships.get(BoxesPositions.INDEX_7.getPos()))
-                        .ownershipsCost(Ownerships.OWNERSHIP8.getCost()).build());
+        this.contracts.add(new ClassicContract(this.ownerships.get(BoxesPositions.INDEX_7.getPos()),
+                Ownerships.OWNERSHIP8.getCost()));
         this.ownerships.get(BoxesPositions.INDEX_7.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_7.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_8.getPos()))
-                        .landCost(Ownerships.OWNERSHIP9.getCost()).landIncome(Ownerships.OWNERSHIP9.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP9.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP9.getCost()).landIncome(Ownerships.OWNERSHIP9.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP9.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_8.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_8.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_9.getPos()))
-                        .landCost(Ownerships.OWNERSHIP10.getCost()).landIncome(Ownerships.OWNERSHIP10.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP10.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP10.getCost()).landIncome(Ownerships.OWNERSHIP10.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP10.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_9.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_9.getPos()));
-        this.contracts.add(new ClassicContract.Builder().ownership(this.ownerships.get(BoxesPositions.INDEX_10.getPos()))
-                        .ownershipsCost(Ownerships.OWNERSHIP11.getCost()).build());
+        this.contracts.add(new ClassicContract(this.ownerships.get(BoxesPositions.INDEX_10.getPos()),
+                Ownerships.OWNERSHIP11.getCost()));
         this.ownerships.get(BoxesPositions.INDEX_10.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_10.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_11.getPos()))
-                        .landCost(Ownerships.OWNERSHIP12.getCost()).landIncome(Ownerships.OWNERSHIP12.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP12.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP12.getCost()).landIncome(Ownerships.OWNERSHIP12.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP12.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_11.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_11.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_12.getPos()))
-                        .landCost(Ownerships.OWNERSHIP13.getCost()).landIncome(Ownerships.OWNERSHIP13.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP13.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP13.getCost()).landIncome(Ownerships.OWNERSHIP13.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP13.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_12.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_12.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_13.getPos()))
-                        .landCost(Ownerships.OWNERSHIP14.getCost()).landIncome(Ownerships.OWNERSHIP14.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP14.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP14.getCost()).landIncome(Ownerships.OWNERSHIP14.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP14.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_13.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_13.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_14.getPos()))
-                        .landCost(Ownerships.OWNERSHIP15.getCost()).landIncome(Ownerships.OWNERSHIP15.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP15.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP15.getCost()).landIncome(Ownerships.OWNERSHIP15.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP15.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_14.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_14.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_15.getPos()))
-                        .landCost(Ownerships.OWNERSHIP16.getCost()).landIncome(Ownerships.OWNERSHIP16.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP16.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP16.getCost()).landIncome(Ownerships.OWNERSHIP16.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP16.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_15.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_15.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_16.getPos()))
-                        .landCost(Ownerships.OWNERSHIP17.getCost()).landIncome(Ownerships.OWNERSHIP17.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP17.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP17.getCost()).landIncome(Ownerships.OWNERSHIP17.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP17.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_16.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_16.getPos()));
-        this.contracts.add(new ClassicContract.Builder().ownership(this.ownerships.get(BoxesPositions.INDEX_17.getPos()))
-                        .ownershipsCost(Ownerships.OWNERSHIP18.getCost()).build());
+        this.contracts.add(new ClassicContract(this.ownerships.get(BoxesPositions.INDEX_17.getPos()),
+                Ownerships.OWNERSHIP18.getCost()));
         this.ownerships.get(BoxesPositions.INDEX_17.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_17.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_18.getPos()))
-                        .landCost(Ownerships.OWNERSHIP19.getCost()).landIncome(Ownerships.OWNERSHIP19.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP19.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP19.getCost()).landIncome(Ownerships.OWNERSHIP19.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP19.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_18.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_18.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_19.getPos()))
-                        .landCost(Ownerships.OWNERSHIP20.getCost()).landIncome(Ownerships.OWNERSHIP20.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP20.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP20.getCost()).landIncome(Ownerships.OWNERSHIP20.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP20.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_19.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_19.getPos()));
-        this.contracts.add(new ClassicContract.Builder().ownership(this.ownerships.get(BoxesPositions.INDEX_20.getPos()))
-                        .ownershipsCost(Ownerships.OWNERSHIP21.getCost()).build());
+        this.contracts.add(new ClassicContract(this.ownerships.get(BoxesPositions.INDEX_20.getPos()),
+                Ownerships.OWNERSHIP21.getCost()));
         this.ownerships.get(BoxesPositions.INDEX_20.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_20.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_21.getPos()))
-                        .landCost(Ownerships.OWNERSHIP22.getCost()).landIncome(Ownerships.OWNERSHIP22.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP22.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP22.getCost()).landIncome(Ownerships.OWNERSHIP22.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP22.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_21.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_21.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_22.getPos()))
-                        .landCost(Ownerships.OWNERSHIP23.getCost()).landIncome(Ownerships.OWNERSHIP23.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP23.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP23.getCost()).landIncome(Ownerships.OWNERSHIP23.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP23.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_22.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_22.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_23.getPos()))
-                        .landCost(Ownerships.OWNERSHIP24.getCost()).landIncome(Ownerships.OWNERSHIP24.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP24.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP24.getCost()).landIncome(Ownerships.OWNERSHIP24.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP24.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_23.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_23.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_24.getPos()))
-                        .landCost(Ownerships.OWNERSHIP25.getCost()).landIncome(Ownerships.OWNERSHIP25.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP25.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP25.getCost()).landIncome(Ownerships.OWNERSHIP25.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP25.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_24.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_24.getPos()));
-        this.contracts.add(new ClassicContract.Builder().ownership(this.ownerships.get(BoxesPositions.INDEX_25.getPos()))
-                        .ownershipsCost(Ownerships.OWNERSHIP26.getCost()).build());
+        this.contracts.add(new ClassicContract(this.ownerships.get(BoxesPositions.INDEX_25.getPos()),
+                Ownerships.OWNERSHIP26.getCost()));
         this.ownerships.get(BoxesPositions.INDEX_25.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_25.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_26.getPos()))
-                        .landCost(Ownerships.OWNERSHIP27.getCost()).landIncome(Ownerships.OWNERSHIP27.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP27.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP27.getCost()).landIncome(Ownerships.OWNERSHIP27.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP27.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_26.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_26.getPos()));
         this.contracts.add(new ClassicLandContract.Builder().land(this.ownerships.get(BoxesPositions.INDEX_27.getPos()))
-                        .landCost(Ownerships.OWNERSHIP28.getCost()).landIncome(Ownerships.OWNERSHIP28.getIncome().get())
-                        .buildingCost(Ownerships.OWNERSHIP28.getBuildingCost().get()).build());
+                .landCost(Ownerships.OWNERSHIP28.getCost()).landIncome(Ownerships.OWNERSHIP28.getIncome().get())
+                .buildingCost(Ownerships.OWNERSHIP28.getBuildingCost().get()).build());
         this.ownerships.get(BoxesPositions.INDEX_27.getPos())
                 .setContract(this.contracts.get(BoxesPositions.INDEX_27.getPos()));
     }
@@ -502,25 +498,18 @@ public class ItalianStrategy implements GameStrategy {
 
     private void inizializesBoxes() {
         final List<Box> temp = new LinkedList<>();
-        // final Box[] boxes = new Box[40];
-        // this.ownerships.stream().forEach(o -> {
-        // boxes[o.getID()] = o;
-        // });
         temp.add(new Start("VIA", BoxesPositions.START_POSITION.getPos()));
         final PrisonOrTransit prison = new PrisonOrTransit("IN TRANSITO O IN PRIGIONE",
                 BoxesPositions.PRISON_POSITION.getPos());
         temp.add(prison);
         temp.add(new ItalianNeutralArea("PARCHEGGIO GRATUITO", BoxesPositions.NEUTRAL_AREA_POSITION.getPos()));
-        temp.add(new Police("IN PRIGIONE!", BoxesPositions.POLICE_POSITION.getPos(), prison));
-        temp.add(new DecksBox("IMPREVISTI", BoxesPositions.FIRST_CHANCE_POSITION.getPos(), this.decks.get(0)));
-        temp.add(new DecksBox("IMPREVISTI", BoxesPositions.SECOND_CHANCE_POSITION.getPos(), this.decks.get(0)));
-        temp.add(new DecksBox("IMPREVISTI", BoxesPositions.THIRD_CHANCE_POSITION.getPos(), this.decks.get(0)));
-        temp.add(new DecksBox("PROBABILITÀ", BoxesPositions.FIRST_COMMUNITY_CHEST_POSITION.getPos(),
-                this.decks.get(1)));
-        temp.add(new DecksBox("PROBABILITÀ", BoxesPositions.SECOND_COMMUNITY_CHEST_POSITION.getPos(),
-                this.decks.get(1)));
-        temp.add(new DecksBox("PROBABILITÀ", BoxesPositions.THIRD_COMMUNITY_CHEST_POSITION.getPos(),
-                this.decks.get(1)));
+        temp.add(new Police("IN PRIGIONE!", BoxesPositions.POLICE_POSITION.getPos()));
+        temp.add(new DecksBox("IMPREVISTI", BoxesPositions.FIRST_CHANCE_POSITION.getPos()));
+        temp.add(new DecksBox("IMPREVISTI", BoxesPositions.SECOND_CHANCE_POSITION.getPos()));
+        temp.add(new DecksBox("IMPREVISTI", BoxesPositions.THIRD_CHANCE_POSITION.getPos()));
+        temp.add(new DecksBox("PROBABILITÀ", BoxesPositions.FIRST_COMMUNITY_CHEST_POSITION.getPos()));
+        temp.add(new DecksBox("PROBABILITÀ", BoxesPositions.SECOND_COMMUNITY_CHEST_POSITION.getPos()));
+        temp.add(new DecksBox("PROBABILITÀ", BoxesPositions.THIRD_COMMUNITY_CHEST_POSITION.getPos()));
         temp.add(new TaxImpl("TASSA PATRIMONIALE", BoxesPositions.INCOME_TAX_POSITION.getPos(), AMOUNT_OF_FEES));
         temp.add(new TaxImpl("TASSA DI LUSSO", BoxesPositions.SUPER_TAX_POSITION.getPos(), AMOUNT_OF_FEES));
         temp.addAll(this.ownerships);
@@ -531,7 +520,7 @@ public class ItalianStrategy implements GameStrategy {
                 return o1.getID() - o2.getID();
             }
         }).collect(Collectors.toList());
-       
+
     }
 
     @Override
@@ -553,11 +542,6 @@ public class ItalianStrategy implements GameStrategy {
     public List<Deck> getDecks() {
         return Collections.unmodifiableList(this.decks);
     }
-//
-//    @Override
-//    public AuctionOfOwnership toAuction(final Ownership ownership, final Player player) {
-//        return ToAuction.ownerships(this.players, new ClassicAuction(), ownership, this.bank).getAuction(player);
-//    }
 
     @Override
     public List<Integer> toRollDices(final Player player) {
@@ -568,7 +552,8 @@ public class ItalianStrategy implements GameStrategy {
 
     @Override
     public boolean getNextCardsActions(final Box box, final Card card, final Player player) {
-        final ItalianNeutralArea neutral = ((ItalianNeutralArea) this.allBoxes.get(BoxesPositions.NEUTRAL_AREA_POSITION.getPos()));
+        final ItalianNeutralArea neutral = ((ItalianNeutralArea) this.allBoxes
+                .get(BoxesPositions.NEUTRAL_AREA_POSITION.getPos()));
         switch (card.getID()) {
         case CARD2:
             MoveUpTo.moveUpToBox(this.allBoxes.get(CHANCE2_STEPS)).play(player);
@@ -577,7 +562,8 @@ public class ItalianStrategy implements GameStrategy {
             if (!((Ownership) box).getOwner().equals(player) && !((Ownership) box).getOwner().equals(this.bank)) {
                 final int amount = 2
                         * ((Ownership) box).getContract().getIncome(new StationIncomeStrategy(((Ownership) box)));
-                new ToBePaid(amount).play(player); //IL GIOCATORE DEVE ESSERE COMUNQUE PAGATO
+                new ToBePaid(amount).play(player); // IL GIOCATORE DEVE ESSERE
+                                                   // COMUNQUE PAGATO
                 if (!this.tryToPay(player, amount)) {
                     return true;
                 }
@@ -599,8 +585,8 @@ public class ItalianStrategy implements GameStrategy {
             final List<List<Building>> building = player.getOwnerships().stream().filter(o -> o instanceof Land)
                     .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
                     .map(o -> ((LandGroup) o.getGroup()).getBuildings()).collect(Collectors.toList());
-            for (final List<Building> l: building) {
-                for (final Building b: l) {
+            for (final List<Building> l : building) {
+                for (final Building b : l) {
                     if (!this.tryToEvadeTaxes(player, b instanceof Home ? CHANCE8_HOME : CHANCE8_HOTEL)) {
                         return true;
                     }
@@ -608,7 +594,7 @@ public class ItalianStrategy implements GameStrategy {
             }
             break;
         case CARD9:
-            for (final Player p: this.players) {
+            for (final Player p : this.players) {
                 if (!p.equals(player)) {
                     new ToBePaid(CHANCE9_TAX).play(player);
                     if (!this.tryToPay(p, CHANCE9_TAX)) {
@@ -669,12 +655,12 @@ public class ItalianStrategy implements GameStrategy {
         case CARD23:
             new GoToPrison(this.allBoxes.get(BoxesPositions.PRISON_POSITION.getPos())).play(player);
             break;
-    case CARD24:
+        case CARD24:
             final List<List<Building>> buildings = player.getOwnerships().stream().filter(o -> o instanceof Land)
                     .filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
                     .map(o -> ((LandGroup) o.getGroup()).getBuildings()).collect(Collectors.toList());
-            for (final List<Building> l: buildings) {
-                for (final Building b: l) {
+            for (final List<Building> l : buildings) {
+                for (final Building b : l) {
                     if (!this.tryToEvadeTaxes(player, b instanceof Home ? CHEST8_HOME : CHEST8_HOTEL)) {
                         return true;
                     }
@@ -682,7 +668,7 @@ public class ItalianStrategy implements GameStrategy {
             }
             break;
         case CARD25:
-            for (final Player p: this.players) {
+            for (final Player p : this.players) {
                 if (!p.equals(player)) {
                     new ToBePaid(10).play(player);
                     if (!this.tryToPay(p, 10)) {
@@ -694,7 +680,7 @@ public class ItalianStrategy implements GameStrategy {
         case CARD26:
             MoveUpTo.moveUpToBox(this.allBoxes.get(BoxesPositions.START_POSITION.getPos())).play(player);
             break;
-     default:
+        default:
             break;
         }
         return false;
@@ -703,25 +689,22 @@ public class ItalianStrategy implements GameStrategy {
     @Override
     public boolean haveEnoughMoney(final Player player, final int moneyToPay) {
         if (!player.getOwnerships().isEmpty()) {
-            player.getOwnerships().stream()
-                                  .filter(o -> o.getGroup() instanceof LandGroup)
-                                  .filter(o -> ((LandGroup) o.getGroup()).getBuildings().size() > 0)
-                                  .forEach(o -> {
-                                      ((LandGroup) o.getGroup()).getBuildings().forEach(b -> {
-                                          if (player.getMoney() <= moneyToPay) {
-                                              ToSellProperties.sellABuilding(((Land) o), b, this.bank).play(player);
-                                          }
-                                      });
-                                    });
-        player.getOwnerships().stream()
-                              .forEach(o -> {
-                                  if (player.getMoney() <= moneyToPay) {
-                                      ToSellProperties.sellAOwnership(o.getContract().getCost(), o, this.bank).play(player);
-                                  }
-                              });
+            player.getOwnerships().stream().filter(o -> o.getGroup() instanceof LandGroup)
+                    .filter(o -> ((LandGroup) o.getGroup()).getBuildings().size() > 0).forEach(o -> {
+                        ((LandGroup) o.getGroup()).getBuildings().forEach(b -> {
+                            if (player.getMoney() <= moneyToPay) {
+                                ToSellProperties.sellABuilding(((Land) o), b, this.bank).play(player);
+                            }
+                        });
+                    });
+            player.getOwnerships().stream().forEach(o -> {
+                if (player.getMoney() <= moneyToPay) {
+                    ToSellProperties.sellAOwnership(o.getContract().getCost(), o, this.bank).play(player);
+                }
+            });
         }
         return player.getMoney() > moneyToPay;
-     }
+    }
 
     private boolean tryToPay(final Player player, final int amoun) {
         try {
@@ -734,7 +717,9 @@ public class ItalianStrategy implements GameStrategy {
 
     private boolean tryToEvadeTaxes(final Player player, final int amount) {
         try {
-            new EvadeTaxes(amount, ((ItalianNeutralArea) this.allBoxes.get(BoxesPositions.NEUTRAL_AREA_POSITION.getPos()))).play(player);;
+            final ItalianNeutralArea neutral = ((ItalianNeutralArea) this.allBoxes
+                    .get(BoxesPositions.NEUTRAL_AREA_POSITION.getPos()));
+            new EvadeTaxes(amount, neutral).play(player);
             return true;
         } catch (IllegalArgumentException i) {
             return this.haveEnoughMoney(player, amount) ? this.tryToPay(player, amount) : false;

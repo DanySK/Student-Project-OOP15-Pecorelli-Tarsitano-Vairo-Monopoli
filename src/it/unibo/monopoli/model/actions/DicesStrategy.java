@@ -23,8 +23,6 @@ public interface DicesStrategy {
      * When you roll {@link Dice}s, sometimes you also want to take another
      * action. This method allows to do it.
      * 
-     * @param dices
-     *            - the rolled {@link Dice}s
      * @param player
      *            - the {@link Player} who rolled
      */

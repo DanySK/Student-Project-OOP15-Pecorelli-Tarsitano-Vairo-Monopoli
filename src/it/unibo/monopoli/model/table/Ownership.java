@@ -12,12 +12,12 @@ public interface Ownership extends Box {
     /**
      * Return the {@link Contract} to which has to fulfill.
      * 
-     * @return the {@link Contract} to fulfill
+     * @return the its {@link Contract}
      */
     Contract getContract();
 
     /**
-     * Return the {@link Owner} that own this {@link Ownership}.
+     * Return the {@link Owner} of this {@link Ownership}.
      * 
      * @return the {@link Owner} of this {@link Ownership}
      */

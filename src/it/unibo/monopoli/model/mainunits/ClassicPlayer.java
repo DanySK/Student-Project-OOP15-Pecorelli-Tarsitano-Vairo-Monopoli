@@ -7,7 +7,12 @@ import java.util.List;
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.table.Ownership;
 
-public class ClassicPlayer implements Player{
+/**
+ * This class represents the {@link Player} used in the classic version of
+ * Monopoly.
+ *
+ */
+public class ClassicPlayer implements Player {
 
     private final String name;
     private final Pawn pawn;
@@ -23,6 +28,17 @@ public class ClassicPlayer implements Player{
     private int turnsInPrison;
     private boolean isTheFirst = true;
 
+    /**
+     * Constructs an instance of {@link ClassicPlayer}. It needs a name and a
+     * {@link Pawn}. He can be a Human or a computer.
+     * 
+     * @param name
+     *            - {@link Player}'s name
+     * @param pawn
+     *            - {@link Player}'s {@link Pawn}
+     * @param isHuman
+     *            - true if the {@link Player} is human
+     */
     public ClassicPlayer(final String name, final Pawn pawn, final boolean isHuman) {
         this.name = name;
         this.pawn = pawn;

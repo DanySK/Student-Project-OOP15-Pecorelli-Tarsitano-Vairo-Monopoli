@@ -14,11 +14,4 @@ public interface Dice {
      */
     int roll();
 
-    // /**
-    // * Returns the last number obtained from the {@link Dice}.
-    // *
-    // * @return - the last number obtained
-    // */
-    // int getLastNumberObtained();
-
 }

@@ -17,7 +17,6 @@ import it.unibo.monopoli.model.table.Ownership;
  */
 public class ClassicBank implements Bank {
 
-//    private static final int N_MAX_OF_OWNERSHIP = 28;
     private static final Random RANDOM = new Random();
 
     private final List<Ownership> ownerships;
@@ -27,6 +26,7 @@ public class ClassicBank implements Bank {
 
     /**
      * Constructs an instance of a {@link ClassicBank}.
+     * 
      * @param homes
      *            - a {@link List} of the {@link Home}s used in the game
      * @param hotels
@@ -73,7 +73,8 @@ public class ClassicBank implements Bank {
                 return this.ownerships.remove(i);
             }
         }
-        throw new IllegalArgumentException(this.ownerships.isEmpty() ? "There are no more ownership in the bank" : "The ownership with the ID in input is not contained in the bank");
+        throw new IllegalArgumentException(this.ownerships.isEmpty() ? "There are no more ownership in the bank"
+                : "The ownership with the ID in input is not contained in the bank");
     }
 
     @Override

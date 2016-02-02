@@ -8,13 +8,12 @@ import it.unibo.monopoli.model.mainunits.Dice;
 import it.unibo.monopoli.model.mainunits.Player;
 
 /**
- * This is an implementation of a classic {@link DicesStrategy} for this game.
+ * In this {@link DicesStrategy}, dices are two. If you double and you are not
+ * in prison, you can roll dices again, else, if you are in prison, you can go
+ * out of there.
  *
  */
 public class ClassicDicesStrategy implements DicesStrategy {
-
-    private static final int FIRST_USEFUL_POSITION = 28;
-    private static final int LAST_USEFUL_POSITION = 11;
 
     @Override
     public List<Dice> getDices() {
@@ -27,12 +26,14 @@ public class ClassicDicesStrategy implements DicesStrategy {
     @Override
     public void nowPlay(final Player player) {
         if (!player.isInPrison()) {
-            player.getPawn().setPos(player.getPawn().getActualPos() + player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
+            player.getPawn().setPos(player.getPawn().getActualPos() + player.lastDicesNumber().get(0)
+                    + player.lastDicesNumber().get(1));
         }
         if (this.twice(player)) {
             if (player.isInPrison()) {
                 player.setPrison(false);
-                player.getPawn().setPos(player.getPawn().getActualPos() + player.lastDicesNumber().get(0) + player.lastDicesNumber().get(1));
+                player.getPawn().setPos(player.getPawn().getActualPos() + player.lastDicesNumber().get(0)
+                        + player.lastDicesNumber().get(1));
             } else {
                 player.setDicesRoll(false);
                 player.setIfIsTheFirstLaunch(false);
@@ -42,18 +43,10 @@ public class ClassicDicesStrategy implements DicesStrategy {
                 player.incrementsTurnsInPrison();
             }
         }
-        if (this.isPassedFromStartBox(player)) {
-            new PassFromStar().play(player);
-        }
     }
 
     private boolean twice(final Player player) {
-        return player.lastDicesNumber().get(0) == player.lastDicesNumber().get(1); 
-    }
-
-    private boolean isPassedFromStartBox(final Player player) {
-        return player.getPawn().getPreviousPos() >= FIRST_USEFUL_POSITION
-                && player.getPawn().getActualPos() <= LAST_USEFUL_POSITION;
+        return player.lastDicesNumber().get(0) == player.lastDicesNumber().get(1);
     }
 
 }

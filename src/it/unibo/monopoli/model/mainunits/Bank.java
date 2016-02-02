@@ -3,17 +3,23 @@ package it.unibo.monopoli.model.mainunits;
 import java.util.List;
 
 import it.unibo.monopoli.model.table.Building;
-import it.unibo.monopoli.model.table.Contract;
 import it.unibo.monopoli.model.table.Ownership;
 
 /**
  * This interface represent the game's bank. Usually is here that are kept all
- * the money, {@link Building}s and {@link Contract}s at the beginning of the
+ * the money, {@link Building}s and {@link Ownership}s at the beginning of the
  * game.
  *
  */
 public interface Bank extends Owner {
-    
+
+    /**
+     * Sets the {@link Ownership}s belonging to the {@link Bank}.
+     * 
+     * @param ownerships
+     *            - the {@link List} of {@link Ownership}s belonging to the
+     *            {@link Bank}
+     */
     void setOwnerships(List<Ownership> ownerships);
 
     /**

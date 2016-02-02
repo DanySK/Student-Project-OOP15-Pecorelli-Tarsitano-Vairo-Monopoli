@@ -1,25 +1,27 @@
 package it.unibo.monopoli.model.table;
 
-
 /**
- * This class represents an implementation of {@link Box}. More
- * specifically it represents the {@link PrisonOrTransit}'s {@link Box} of
- * Monopoly.
+ * This class represents an implementation of {@link Box}. More specifically it
+ * represents the {@link PrisonOrTransit}'s {@link Box} of Monopoly.
  *
  */
 public class PrisonOrTransit implements Box {
 
     private final String name;
-    private final int ID;
-//    private final Set<Action> allowedActions;
-//    private final Set<Action> obligatoryActions;
+    private final int id;
 
-    public PrisonOrTransit(final String name, final int ID) {
+    /**
+     * Constructs an implementation of {@link PrisonOrTransit} that needs a name
+     * and an ID.
+     * 
+     * @param name
+     *            - of this {@link Box}
+     * @param id
+     *            - of this {@link Box}
+     */
+    public PrisonOrTransit(final String name, final int id) {
         this.name = name;
-        this.ID = ID;
-//        this.allowedActions = new HashSet<>();
-//        this.obligatoryActions = new HashSet<>();
-//        this.obligatoryActions.add(new ToRollDices(new ClassicDicesStrategy()));
+        this.id = id;
     }
 
     @Override
@@ -29,27 +31,7 @@ public class PrisonOrTransit implements Box {
 
     @Override
     public int getID() {
-        return this.ID;
+        return this.id;
     }
-
-//    @Override
-//    public Set<Action> getAllowedActions() {
-//        return this.allowedActions;
-//    }
-//
-//    @Override
-//    public void setAllowedActions(Set<Action> actions) {
-//        this.allowedActions.addAll(actions);
-//    }
-//
-//    @Override
-//    public Set<Action> getObligatoryActions() {
-//        return this.obligatoryActions;
-//    }
-//
-//    @Override
-//    public void setObligatoryActions(Set<Action> actions) {
-//        this.obligatoryActions.addAll(actions);
-//    }
 
 }

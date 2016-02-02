@@ -34,8 +34,7 @@ public class Dialog extends JDialog implements ActionListener {
         messagePane.add(new JLabel(message));
         getContentPane().add(messagePane);
         final JPanel buttonPane = new JPanel();
-        final 
-        JButton button = new JButton("OK");
+        final JButton button = new JButton("OK");
         buttonPane.add(button);
         button.addActionListener(this);
         getContentPane().add(buttonPane, BorderLayout.SOUTH);

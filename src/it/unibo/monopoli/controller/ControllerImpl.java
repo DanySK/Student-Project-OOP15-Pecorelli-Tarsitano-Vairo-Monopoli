@@ -340,8 +340,7 @@ public class ControllerImpl implements Controller {
     @Override
     public Map<Player, Integer> endGame() {
         Map<Player, Integer> map = new HashMap<>();
-        final List<Player> pl = this.players.stream().filter(p -> !p.equals(this.players.get(0)))
-                .sorted((p, p1) -> this.patrimony(p1) - this.patrimony(p)).collect(Collectors.toList());
+        final List<Player> pl = this.players.stream().sorted((p, p1) -> this.patrimony(p1) - this.patrimony(p)).collect(Collectors.toList());
         for (Player p : pl) {
             map.put(p, this.patrimony(p));
         }
@@ -428,10 +427,10 @@ public class ControllerImpl implements Controller {
                 if (this.actualPlayer.getOwnerships().containsAll(land.getGroup().getMembers())
                         && ((LandGroup) land.getGroup()).canBuiling() && this.bank.getLeftBuilding().size() > 0
                         && this.actualPlayer.getMoney() >= (((LandContract) land.getContract()).getCostForEachBuilding()
-                                + (AVERAGE_COST * 4))
+                                + (AVERAGE_COST * 8))
                         && !this.alreadyBuilt) {
                     this.bank.getLeftBuilding().forEach(b -> {
-                        if ((((LandGroup) land.getGroup()).getBuildings().size() < 4 && b instanceof Home)// capire
+                        if ((((LandGroup) land.getGroup()).getBuildings().size() < 4 && b instanceof Home)
                                 || (b instanceof Hotel)) {
                             this.build();
 
@@ -730,7 +729,7 @@ public class ControllerImpl implements Controller {
                 }
             }
         }
-        if (player.dicesAlreadyRolled()) {
+        if (player.dicesAlreadyRolled() && !this.isTwiceDices()) {
             actions.add(Actions.END_OF_TURN);
         }
         if ((box instanceof Ownership) && !((Ownership) box).isMortgaged()
@@ -760,6 +759,5 @@ public class ControllerImpl implements Controller {
         if (player.getMoney() >= ownership.getContract().getCost()) {
             actions.add(Actions.BUY);
         }
-        actions.add(Actions.END_OF_TURN);
     }
 }

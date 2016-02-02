@@ -158,9 +158,7 @@ public class Go {
                     
                     addNumPlayers(1);
                     InizializedPlayer.setSave(false);
-                    System.out.println("Add:" + playerPanel.getComponentCount());
-                    System.out.println("AddGet: " + getNumPlayers());
-
+  
                 } else {
                     new Dialog(new JFrame(), "Error", "Error! You can not enter more than 6 players");
                 }

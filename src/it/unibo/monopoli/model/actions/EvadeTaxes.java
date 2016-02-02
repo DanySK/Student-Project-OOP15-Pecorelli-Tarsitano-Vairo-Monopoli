@@ -37,9 +37,6 @@ public class EvadeTaxes implements Action {
 
     @Override
     public void play(final Player player) {
-        if (this.amount > player.getMoney()) {
-            throw new IllegalArgumentException();
-        }
         player.setMoney(player.getMoney() - amount);
         this.neutralArea.setDirtyMoney(this.neutralArea.getDirtyMoney() + this.amount);
     }

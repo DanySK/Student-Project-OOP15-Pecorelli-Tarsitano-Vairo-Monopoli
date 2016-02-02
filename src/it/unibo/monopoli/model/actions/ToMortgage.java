@@ -27,9 +27,6 @@ public class ToMortgage extends ToMortgageAndRevoke {
      */
     public ToMortgage(final Ownership ownership) {
         super(ownership.getContract().getMortgageValue());
-        if (ownership instanceof Land && !((LandGroup) ownership.getGroup()).getBuildings().isEmpty()) {
-            throw new IllegalArgumentException("Can't mortgage a land with buildings. Before, sell all buildings");
-        }
         this.ownership = ownership;
     }
 

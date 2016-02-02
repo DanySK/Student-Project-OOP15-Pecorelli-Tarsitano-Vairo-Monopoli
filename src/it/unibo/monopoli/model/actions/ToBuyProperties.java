@@ -68,9 +68,6 @@ public final class ToBuyProperties extends ToBuyAndSellProperties {
      *             are some null
      */
     public static ToBuyProperties buyABuilding(final Land land, final Bank bank) {
-        if (land.isMortgaged()) {
-            throw new IllegalArgumentException("Can't build in a mortgaged land");
-        }
         return new ToBuyProperties(-((LandContract) land.getContract()).getCostForEachBuilding(),
                 Objects.requireNonNull(land),
                 bank.getBuilding(((LandGroup) land.getGroup()).getBuildings().size() < 4 ? new Home() : new Hotel()));

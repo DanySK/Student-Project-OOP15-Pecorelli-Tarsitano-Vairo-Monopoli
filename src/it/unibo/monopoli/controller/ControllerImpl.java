@@ -344,9 +344,6 @@ public class ControllerImpl implements Controller {
         for (Player p : pl) {
             map.put(p, this.patrimony(p));
         }
-        map.entrySet().forEach(p -> {
-            System.out.println(p.getKey().getName() + " have " + p.getValue());
-        });
         if (!this.view.isPresent()) {
             map.entrySet().forEach(p -> {
                 System.out.println(p.getKey().getName() + " have " + p.getValue());

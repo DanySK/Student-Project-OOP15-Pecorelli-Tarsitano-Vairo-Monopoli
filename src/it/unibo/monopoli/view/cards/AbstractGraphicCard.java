@@ -50,29 +50,8 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
         return pos;
     }
 
-    /**
-     * method that controls the position of the card 
-     * and according to what returns the degrees of rotation of the skirt.
-     * 
-     * @return RotatedPanel
-     */
-    protected RotatedPanel getRotatedPanel() {
-        Dimension dim = new Dimension(C.DIM);
-        if (pos == Position.NORTH) {
-            dim = new Dimension(C.DIM);
-            return new RotatedPanel(180, DIMENSION, dim);
-        } else if (pos == Position.EAST) {
-            dim = new Dimension(C.DIM);
-            return new RotatedPanel(-90, DIMENSION, dim);
-        } else if (pos == Position.WEST) {
-            dim = new Dimension(C.DIM);
-            return new RotatedPanel(90, DIMENSION, dim);
-        } else {
-            dim = new Dimension(C.DIM);
-            return new RotatedPanel(0, DIMENSION, dim);
-
-        }
-    }
+  
+    
 
     @Override
     public void addPawn(final Player p) {

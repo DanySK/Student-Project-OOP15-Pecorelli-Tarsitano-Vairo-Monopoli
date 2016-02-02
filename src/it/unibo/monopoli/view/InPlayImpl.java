@@ -62,7 +62,8 @@ public class InPlayImpl implements InPlay {
     @Override
     public void finish(Player p){
 
-        new Dialog(new JFrame(), "Winner", "The winner is " + p.getName());
+        new Dialog(new JFrame(), "Winner", "The winner is " + p.getName()); 
+        
         System.exit(0);
     }
 

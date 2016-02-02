@@ -142,14 +142,14 @@ public class ControllerImpl implements Controller {
         this.lastDices = this.version.toRollDices();
 
         this.actualPosition = this.actualPlayer.getPawn().getActualPos();
-        if (this.actualPlayer.isHuman()) {
-            for (Box b : this.boxes) {
-                if (b.getID() == this.actualPosition) {
 
+        for (Box b : this.boxes) {
+            if (b.getID() == this.actualPosition) {
+                if (this.actualPlayer.isHuman()) {
                     this.view.ifPresent(v -> v.setButton(this.getNextBoxsActions(b, this.actualPlayer)));
                 }
-
             }
+
         }
         if (this.actualPlayer.getPawn().getActualPos() != this.actualPosition) {
             this.actualPosition = this.actualPlayer.getPawn().getActualPos();
@@ -330,22 +330,28 @@ public class ControllerImpl implements Controller {
         }
         return player.getMoney() + (res.isPresent() ? res.get() : 0);
     }
+
     /**
      * This method remove from List of {@link Player}s looser person.
-     * @param player -the looser.
+     * 
+     * @param player
+     *            -the looser.
      */
     private void gameOverPerson(final Player player) {
         this.notifyGameOver(player);
         this.players.remove(this.players.indexOf(player));
 
     }
+
     /**
      * This method is used for say if was twice or not.
+     * 
      * @return -return true if last throw of dice have two equal value.
      */
     public boolean isTwiceDices() {
         return lastDices.get(0) == lastDices.get(1);
     }
+
     /**
      * This method allow computer to play alone.
      */
@@ -463,9 +469,12 @@ public class ControllerImpl implements Controller {
             this.endTurn();
         }
     }
+
     /**
      * This method draw {@link Card} from a {@link Deck}.
-     * @param deck -{@link Deck} with all {@link Card}.
+     * 
+     * @param deck
+     *            -{@link Deck} with all {@link Card}.
      */
     public void drawCard(final Deck deck) {
         new ToDrawCards(deck).play(this.actualPlayer);
@@ -485,10 +494,13 @@ public class ControllerImpl implements Controller {
         }
 
     }
+
     @Override
     public List<Actions> getNextBoxsActions(final Box box, final Player player) {
         actions = new LinkedList<>();
         actions.clear();
+
+        actions.add(Actions.END_OF_THE_GAME);
         if (!player.dicesAlreadyRolled() && player.isTheFirtsLaunch()) {
             actions.add(Actions.ROLL_DICES);
             return actions;
@@ -609,15 +621,19 @@ public class ControllerImpl implements Controller {
         if (this.actions.contains(Actions.SELL_BUILDING) && this.actions.contains(Actions.MORTGAGE)) {
             this.actions.remove(this.actions.indexOf(Actions.MORTGAGE));
         }
-
-        actions.add(Actions.END_OF_THE_GAME);
         return actions;
     }
+
     /**
-     * This is a method for choose if {@link Player} can buy an {@link Ownership}.
-     * @param ownership -actual {@link Ownership}.
-     * @param player -actual {@link Player}.
-     * @param actions -List of {@link Actions}.
+     * This is a method for choose if {@link Player} can buy an
+     * {@link Ownership}.
+     * 
+     * @param ownership
+     *            -actual {@link Ownership}.
+     * @param player
+     *            -actual {@link Player}.
+     * @param actions
+     *            -List of {@link Actions}.
      */
     private void toBuyOrToEndOfTurn(final Ownership ownership, final Player player, final List<Actions> actions) {
         if (player.getMoney() >= ownership.getContract().getCost()) {

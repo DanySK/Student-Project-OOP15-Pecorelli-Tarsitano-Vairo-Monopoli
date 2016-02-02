@@ -341,9 +341,14 @@ public class ControllerImpl implements Controller {
     public Map<Player, Integer> endGame() {
         Map<Player, Integer> map = new HashMap<>();
         final List<Player> pl = this.players.stream().filter(p -> !p.equals(this.players.get(0)))
-                .sorted((p, p1) -> this.patrimony(p) - this.patrimony(p1)).collect(Collectors.toList());
+                .sorted((p, p1) -> this.patrimony(p1) - this.patrimony(p)).collect(Collectors.toList());
         for (Player p : pl) {
             map.put(p, this.patrimony(p));
+        }
+        if (!this.view.isPresent()) {
+            map.entrySet().forEach(p -> {
+                System.out.println(p.getKey().getName() + " have " + p.getValue());
+            });
         }
         return map;
     }
@@ -438,12 +443,12 @@ public class ControllerImpl implements Controller {
                 final int amount = ((ClassicLandContract) land.getContract()).getIncome(new LandIncomeStrategy(land));
                 if (amount <= this.actualPlayer.getMoney()) {
 
-                    new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
+                    new ToPay(amount).play(this.actualPlayer);
                     new ToBePaid(amount).play((Player) land.getOwner());
 
                 } else {
                     if (this.version.haveEnoughMoney(this.actualPlayer, amount)) {
-                        new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
+                        new ToPay(amount).play(this.actualPlayer);
                         new ToBePaid(amount).play((Player) land.getOwner());
 
                     } else {
@@ -473,11 +478,11 @@ public class ControllerImpl implements Controller {
                                 : new CompanysIncomeStrategy(ownership, this.actualPlayer));
 
                 if (amount <= this.actualPlayer.getMoney()) {
-                    new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
+                    new ToPay(amount).play(this.actualPlayer);
                     new ToBePaid(amount).play((Player) ((Ownership) this.boxes.get(this.actualPosition)).getOwner());
                 } else {
                     if (version.haveEnoughMoney(this.actualPlayer, amount)) {
-                        new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
+                        new ToPay(amount).play(this.actualPlayer);
                         new ToBePaid(amount)
                                 .play((Player) ((Ownership) this.boxes.get(this.actualPosition)).getOwner());
 
@@ -511,7 +516,7 @@ public class ControllerImpl implements Controller {
                 if (this.strategy instanceof ClassicStrategy) {
                     if (this.version.haveEnoughMoney(this.actualPlayer,
                             ((TaxImpl) this.boxes.get(this.actualPosition)).getCost())) {
-                        new ToPay(((TaxImpl) this.boxes.get(this.actualPosition)).getCost(), this.actualPlayer)
+                        new ToPay(((TaxImpl) this.boxes.get(this.actualPosition)).getCost())
                                 .play(this.actualPlayer);
                     } else {
                         if (!this.actualPlayer.getOwnerships().isEmpty()) {
@@ -622,12 +627,12 @@ public class ControllerImpl implements Controller {
                     final int amount = ((ClassicLandContract) land.getContract())
                             .getIncome(new LandIncomeStrategy(land));
                     if (amount <= player.getMoney()) {
-                        new ToPay(amount, player).play(player);
+                        new ToPay(amount).play(player);
                         new ToBePaid(amount).play((Player) land.getOwner());
                         player.setDebts(true);
                     } else {
                         if (version.haveEnoughMoney(this.actualPlayer, amount)) {
-                            new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
+                            new ToPay(amount).play(this.actualPlayer);
                             new ToBePaid(amount).play((Player) land.getOwner());
 
                         } else {
@@ -652,12 +657,12 @@ public class ControllerImpl implements Controller {
                     final int amount = ownership.getContract().getIncome(ownership instanceof Station
                             ? new StationIncomeStrategy(ownership) : new CompanysIncomeStrategy(ownership, player));
                     if (amount <= player.getMoney()) {
-                        new ToPay(amount, player).play(player);
+                        new ToPay(amount).play(player);
                         new ToBePaid(amount).play((Player) ownership.getOwner());
                         player.setDebts(true);
                     } else {
                         if (version.haveEnoughMoney(this.actualPlayer, amount)) {
-                            new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
+                            new ToPay(amount).play(this.actualPlayer);
                             new ToBePaid(amount).play((Player) ownership.getOwner());
 
                         } else {
@@ -695,7 +700,7 @@ public class ControllerImpl implements Controller {
                 if (box instanceof TaxImpl) {
                     if (this.strategy instanceof ClassicStrategy) {
                         if (this.version.haveEnoughMoney(this.actualPlayer, ((TaxImpl) box).getCost())) {
-                            new ToPay(((TaxImpl) box).getCost(), player).play(player);
+                            new ToPay(((TaxImpl) box).getCost()).play(player);
                         } else {
                             if (!this.actualPlayer.getOwnerships().isEmpty()) {
                                 for (Ownership o : this.getActualPlayer().getOwnerships()) {

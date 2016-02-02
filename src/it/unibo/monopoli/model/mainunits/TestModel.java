@@ -199,7 +199,7 @@ public class TestModel {
 
         //Tests ToPay and ToBePaid
         final int money = 40;
-        new ToPay(money, testPlayer).play(testPlayer);
+        new ToPay(money).play(testPlayer);
         assertEquals(testPlayer.getMoney(), newAmount - money);
         new ToBePaid(money).play(testPlayer);
         assertEquals(testPlayer.getMoney(), newAmount);
@@ -225,11 +225,6 @@ public class TestModel {
                     fail();
                 }
                 try {
-                    new ToMortgage(land).play(testPlayer);
-                    fail();
-                } catch (IllegalArgumentException i) {
-                }
-                try {
                     ToSellProperties.sellABuilding(land, ((LandGroup) land.getGroup()).getBuildings().get(0), bank).play(testPlayer);
                     ToSellProperties.sellABuilding(land, ((LandGroup) land.getGroup()).getBuildings().get(0), bank).play(testPlayer);
                 } catch (IllegalArgumentException i) {
@@ -243,11 +238,6 @@ public class TestModel {
                 }
                 assertEquals(amount2, testPlayer.getMoney() - ((LandContract) land.getContract()).getMortgageValue());
                 assertTrue(land.isMortgaged());
-                try {
-                    ToBuyProperties.buyABuilding(land, bank).play(testPlayer);
-                    fail();
-                } catch (IllegalArgumentException i) {
-                }
                 try {
                     ToSellProperties.sellAOwnership(land.getContract().getCost(), land, bank).play(testPlayer);
                     fail();
@@ -271,18 +261,8 @@ public class TestModel {
         assertFalse(testPlayer.getOwnerships().contains(ow));
 
         //Tests ToDrawCard
-        final Card oneToPick = decks.get(0).getCards().get(0);
         new ToDrawCards(decks.get(0)).play(testPlayer);
-        assertEquals(oneToPick, testPlayer.lastCardDrew());
-        for (int i = 0; i < N_OF_CARDS_IN_ONE_DECK - 1; i++) {
-            new ToDrawCards(decks.get(0)).play(testPlayer);
-        }
-        final Card lastToPick = decks.get(0).getCards().get(N_OF_CARDS_IN_ONE_DECK - 1);
-        assertEquals(lastToPick, testPlayer.lastCardDrew());
-        new ToDrawCards(decks.get(0)).play(testPlayer);
-        assertEquals(oneToPick, testPlayer.lastCardDrew());
-
-        //Tests ClassicCard
+        final Card oneToPick = testPlayer.lastCardDrew();
         try {
             oneToPick.getPlayer().get();
             fail();
@@ -292,13 +272,6 @@ public class TestModel {
         assertEquals(oneToPick.getPlayer().get(), testPlayer);
         assertEquals(1, testPlayer.getCards().size());
         assertEquals(oneToPick, testPlayer.getCards().get(0));
-        for (int i = 0; i < N_OF_CARDS_IN_ONE_DECK - 1; i++) {
-            new ToDrawCards(decks.get(0)).play(testPlayer);
-        }
-        assertEquals(decks.get(0).getCards().get(N_OF_CARDS_IN_ONE_DECK - 1), testPlayer.lastCardDrew());
-        new ToDrawCards(decks.get(0)).play(testPlayer);
-        assertFalse(oneToPick.equals(testPlayer.lastCardDrew()));
-        assertEquals(decks.get(0).getCards().get(1), testPlayer.lastCardDrew());
         testPlayer.removeCard(oneToPick);
         try {
             oneToPick.getPlayer().get();

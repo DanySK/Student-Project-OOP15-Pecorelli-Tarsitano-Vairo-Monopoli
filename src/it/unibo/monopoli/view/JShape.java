@@ -6,8 +6,17 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+/**
+ * 
+ * Class to create and draw pictures to be used as pawns and houses.
+ *
+ */
 public class JShape extends JPanel {
-
+    /**
+     * 
+     * enum that defines the types of possible forms.
+     *
+     */
     public static enum Shapes {
         TRIANGLE, RECTANGLE, CIRCLE, ROMBO;
     }
@@ -16,18 +25,29 @@ public class JShape extends JPanel {
     private Color shapeFillColor = Color.GREEN;
     private Color shapeBorderColor = Color.BLACK;
 
+    /**
+     * builder.
+     * 
+     * @param color
+     */
     public JShape(Color color) {
         this(Shapes.ROMBO, color);
     }
-    
-    public JShape(Shapes shape, Color color) {
+
+    /**
+     * builder.
+     * 
+     * @param shape
+     * @param color
+     */
+    public JShape(final Shapes shape, Color color) {
         this.shape = shape;
         this.shapeFillColor = color;
         this.setPreferredSize(new Dimension(C.JSHAPE_PREFERRED_SIZE, C.JSHAPE_PREFERRED_SIZE));
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
         int[] xs;
@@ -65,26 +85,54 @@ public class JShape extends JPanel {
             g.setColor(shapeBorderColor);
             g.drawPolygon(xs, ys, 4);
             break;
+        default:
+            break;
         }
 
     }
 
+    /**
+     * return Shape fill color.
+     * 
+     * @return Color
+     */
     public Color getShapeFillColor() {
         return shapeFillColor;
     }
 
+    /**
+     * 
+     * method to define the fill color.
+     * 
+     * @param Color
+     */
     public void setShapeFillColor(Color shapeFillColor) {
         this.shapeFillColor = shapeFillColor;
     }
 
+    /**
+     * return Shape border color.
+     * 
+     * @return Color
+     */
     public Color getShapeBorderColor() {
         return shapeBorderColor;
     }
 
+    /**
+     * 
+     * method to define the border color.
+     * 
+     * @param shapeBorderColor
+     */
     public void setShapeBorderColor(Color shapeBorderColor) {
         this.shapeBorderColor = shapeBorderColor;
     }
 
+    /**
+     * return Shape.
+     * @return Shape
+     */
     public Shapes getShape() {
         return shape;
     }

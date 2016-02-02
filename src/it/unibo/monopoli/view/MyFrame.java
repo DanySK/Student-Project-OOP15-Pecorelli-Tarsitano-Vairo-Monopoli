@@ -3,10 +3,22 @@ package it.unibo.monopoli.view;
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * 
+ * class used to create the frames needed for the game.
+ *
+ */
 public class MyFrame extends JFrame {
-    private JPanel content;
+    private final JPanel content;
 
-    public MyFrame(String title, LayoutManager lm, Dimension dim) {
+    /**
+     * builder.
+     * 
+     * @param title
+     * @param lm
+     * @param dim
+     */
+    public MyFrame(final String title, final LayoutManager lm, final Dimension dim) {
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         content = new JPanel();
@@ -14,10 +26,11 @@ public class MyFrame extends JFrame {
         this.getContentPane().add(content);
         this.setBackground(Color.RED);
 
-        if (dim == null)
+        if (dim == null) {
             pack();
-        else
+        } else {
             this.setSize(dim);
+        }
     }
 
     public JPanel getMainPanel() {

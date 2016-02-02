@@ -1,33 +1,35 @@
 package it.unibo.monopoli.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-
 import it.unibo.monopoli.controller.Actions;
 import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.controller.ControllerImpl;
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Building;
 import it.unibo.monopoli.model.table.Home;
-import it.unibo.monopoli.model.table.Land;
+import it.unibo.monopoli.model.table.Hotel;
 import it.unibo.monopoli.model.table.LandGroup;
 import it.unibo.monopoli.model.table.Ownership;
 import it.unibo.monopoli.view.cards.IBoxGraphic;
+import it.unibo.monopoli.view.cards.LandGraphic;
 
+/**
+ * 
+ * main class for the game board.
+ *
+ */
 public class Index {
     private static final int FIRST_USEFUL_POSITION = 28;
     private static final int LAST_USEFUL_POSITION = 11;
@@ -38,23 +40,31 @@ public class Index {
     private int position = 0;
     HashMap<Integer, IBoxGraphic> tessere;
     private InPlay inPlay;
-    
+    JPanel winnerP = new JPanel();
+    String winners;
+    String winners2;
+    String temp;
+
+    /**
+     * Builder.
+     */
     public Index() {
 
         this.controller = new ControllerImpl();
         this.buttonList = new LinkedList<>();
 
     }
+
     public void addInPlay(InPlay in) {
         this.inPlay = in;
     }
 
+    /**
+     * method that builds the panel to be inserted in the main frame.
+     */
     public void build() {
 
         final MyFrame frame = new MyFrame("Monopoli", new BorderLayout(), new Dimension(1200, 720));
-        List<Player> player = new ArrayList();
-        Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-
         ProvaTabellone tabellone = new ProvaTabellone(11, 11, this.controller);
         tessere = tabellone.getCardsGraphic();
 
@@ -62,18 +72,18 @@ public class Index {
         final JPanel southP = new JPanel();
         southP.setPreferredSize(new Dimension(frame.getWidth(), 65));
         southP.setLayout(new FlowLayout());
-        JButton rollDices = new JButton(Actions.ROLL_DICES.getText());
-        JButton END_OF_TURN = new JButton(Actions.END_OF_TURN.getText());
-        JButton buy = new JButton(Actions.BUY.getText());
-        JButton sell = new JButton(Actions.SELL.getText());
-        JButton build = new JButton(Actions.BUILD.getText());
-        JButton sellBuilding = new JButton(Actions.SELL_BUILDING.getText());
-        JButton mortgage = new JButton(Actions.MORTGAGE.getText());
-        JButton revoke = new JButton(Actions.REVOKE_MORTGAGE.getText());
-        JButton endGame = new JButton(Actions.END_OF_THE_GAME.getText());
+        final JButton rollDices = new JButton(Actions.ROLL_DICES.getText());
+        final JButton endOfTurn = new JButton(Actions.END_OF_TURN.getText());
+        final JButton buy = new JButton(Actions.BUY.getText());
+        final JButton sell = new JButton(Actions.SELL.getText());
+        final JButton build = new JButton(Actions.BUILD.getText());
+        final JButton sellBuilding = new JButton(Actions.SELL_BUILDING.getText());
+        final JButton mortgage = new JButton(Actions.MORTGAGE.getText());
+        final JButton revoke = new JButton(Actions.REVOKE_MORTGAGE.getText());
+        final JButton endGame = new JButton(Actions.END_OF_THE_GAME.getText());
 
         southP.add(rollDices);
-        southP.add(END_OF_TURN);
+        southP.add(endOfTurn);
         southP.add(buy);
         southP.add(sell);
         southP.add(build);
@@ -83,7 +93,7 @@ public class Index {
         southP.add(endGame);
 
         buttonList.add(rollDices);
-        buttonList.add(END_OF_TURN);
+        buttonList.add(endOfTurn);
         buttonList.add(buy);
         buttonList.add(sell);
         buttonList.add(build);
@@ -93,7 +103,7 @@ public class Index {
         buttonList.add(endGame);
 
         rollDices.setEnabled(true);
-        END_OF_TURN.setEnabled(false);
+        endOfTurn.setEnabled(false);
         buy.setEnabled(false);
         sell.setEnabled(false);
         build.setEnabled(false);
@@ -102,18 +112,18 @@ public class Index {
         revoke.setEnabled(false);
         endGame.setEnabled(false);
 
+
+
         rollDices.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
 
                 System.out.println("Player Roll Dicies: " + controller.getActualPlayer().getName());
                 System.out.println("Player: " + controller.getActualPlayer());
                 Player p = controller.getActualPlayer();
-                 System.out.println("Playre: Remove: "+controller.getActualPlayer().getPawn()
-                        .getActualPos());
-                tessere.get(controller.getActualPlayer().getPawn()
-                        .getActualPos()).removePawn(p);
+                System.out.println("Playre: Remove: " + controller.getActualPlayer().getPawn().getActualPos());
+                tessere.get(controller.getActualPlayer().getPawn().getActualPos()).removePawn(p);
 
                 int prePos = controller.getActualPlayer().getPawn().getActualPos();
                 int pos = controller.toRollDices();
@@ -144,7 +154,6 @@ public class Index {
                         if (bu.getText().equals(but.getText())) {
                             but.setEnabled(true);
                             if (but.getText().equals(Actions.BUY.getText())) {
-                                String nome = controller.getActualPlayer().getName();
                                 int cost = ((Ownership) controller.getActualBox()).getContract().getCost();
                                 new Dialog(new JFrame(), "", "Il contratto " + contratto + " ha un costo di " + cost);
                             }
@@ -154,25 +163,22 @@ public class Index {
             }
         });
 
-        END_OF_TURN.addActionListener(new ActionListener() {
+        endOfTurn.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
-                updateLabelTurn();
+            public void actionPerformed(final ActionEvent e) {
+
                 updateInfoPlayer();
+
                 controller.endTurn();
                 new Dialog(new JFrame(), "Next Player", "Next Player is: " + controller.getActualPlayer().getName());
-                updateLabelTurn();
 
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        // System.out.println("bu.getText: " + bu.getText());
-                        // System.out.println("but.getName: " + but.getText());
+
                         if (bu.getText().equals(but.getText())) {
-                            // System.out.println("*****IF******: " +
-                            // but.getText());
                             but.setEnabled(true);
                         }
                     });
@@ -183,7 +189,7 @@ public class Index {
         buy.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 controller.buyOwnership();
 
                 String nome = controller.getActualPlayer().getName();
@@ -208,7 +214,7 @@ public class Index {
         sell.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 controller.sellOwnership();
 
                 String nome = controller.getActualPlayer().getName();
@@ -217,6 +223,7 @@ public class Index {
                 int cost = ((Ownership) controller.getActualBox()).getContract().getCost();
                 new Dialog(new JFrame(), "Sell",
                         "" + nome + " hai venduto " + contratto + " in posizione " + pos + " al costo di: " + cost);
+                updateInfoPlayer();
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
@@ -234,26 +241,19 @@ public class Index {
         build.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.build();
-                List<Building> building = ((LandGroup) ((Land) controller.getActualBox()).getGroup()).getBuildings();
-                String s;
-                if (building.get(building.size() - 1) instanceof Home) {
-                    s = "a Home";
-                } else {
-                    s = "an Hotel";
-                }
-                new Dialog(new JFrame(), "Build", "You bilt: " + s);
+            public void actionPerformed(final ActionEvent e) {
 
+                int pos = controller.getActualPlayer().getPawn().getActualPos();
+                ((LandGraphic) tessere.get(pos)).addHouse(controller.getActualPlayer());
+
+                controller.build();
+
+                updateInfoPlayer();
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        // System.out.println("bu.getText: " + bu.getText());
-                        // System.out.println("but.getName: " + but.getText());
                         if (bu.getText().equals(but.getText())) {
-                            // System.out.println("*****IF******: " +
-                            // but.getText());
                             but.setEnabled(true);
                         }
                     });
@@ -264,19 +264,17 @@ public class Index {
         sellBuilding.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.sellBuilding();
-                
+            public void actionPerformed(final ActionEvent e) {
+                int pos = controller.getActualPlayer().getPawn().getActualPos();
+                ((LandGraphic) tessere.get(pos)).removeHouse(controller.getActualPlayer());
 
+                controller.sellBuilding();
+                updateInfoPlayer();
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        // System.out.println("bu.getText: " + bu.getText());
-                        // System.out.println("but.getName: " + but.getText());
                         if (bu.getText().equals(but.getText())) {
-                            // System.out.println("*****IF******: " +
-                            // but.getText());
                             but.setEnabled(true);
                         }
                     });
@@ -287,18 +285,16 @@ public class Index {
         mortgage.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 controller.mortgageOwnership();
-
+                updateInfoPlayer();
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        // System.out.println("bu.getText: " + bu.getText());
-                        // System.out.println("but.getName: " + but.getText());
+
                         if (bu.getText().equals(but.getText())) {
-                            // System.out.println("*****IF******: " +
-                            // but.getText());
+
                             but.setEnabled(true);
                         }
                     });
@@ -309,18 +305,14 @@ public class Index {
         revoke.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 controller.revokeMortgageOwnership();
-
+                updateInfoPlayer();
                 buttonList.forEach(b -> b.setEnabled(false));
-                List<Actions> l =inPlay.getButtons();
+                List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        // System.out.println("bu.getText: " + bu.getText());
-                        // System.out.println("but.getName: " + but.getText());
                         if (bu.getText().equals(but.getText())) {
-                            // System.out.println("*****IF******: " +
-                            // but.getText());
                             but.setEnabled(true);
                         }
                     });
@@ -329,20 +321,34 @@ public class Index {
         });
 
         endGame.addActionListener(new ActionListener() {
-
             @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.endGame();
+            public void actionPerformed(final ActionEvent e) {
+                List<Player> winner = new LinkedList<>();
+                JLabel winnerL = new JLabel();
+                winnerP.add(winnerL, BorderLayout.CENTER);
+
+                winner = controller.endGame();
+                if (winner.size() == 1) {
+                    winners = "The winner is: " + "" + winner.get(0).getName() + " " + winner.get(0).getMoney();
+
+                } else {
+                    temp = "";
+                    System.out.println("size:" + winner.size());
+                    for (int i = 0; i <= winner.size() - 1; i++) {
+                        winners2 = " Name: " + winner.get(i).getName() + " " + "Money: " + winner.get(i).getMoney();
+                        temp += winners2;
+                        System.out.println("For: winners2: " + winners2);
+                        System.out.println("For: temp: " + temp);
+                    }
+                    System.out.println("La classifica dei giocatori e': : " + winners2);
+                    new Dialog(new JFrame(), "The winner is", "The ranking of player is :" + temp);
+                }
 
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
-                        // System.out.println("bu.getText: " + bu.getText());
-                        // System.out.println("but.getName: " + but.getText());
                         if (bu.getText().equals(but.getText())) {
-                            // System.out.println("*****IF******: " +
-                            // but.getText());
                             but.setEnabled(true);
                         }
                     });
@@ -350,10 +356,8 @@ public class Index {
             }
         });
 
-        Dimension dimSouth = new Dimension(0, 50);
-
         // Center
-        JPanel centerP = new JPanel();
+        final JPanel centerP = new JPanel();
         centerP.add(tabellone.initialize(), BorderLayout.CENTER);
 
         // East
@@ -366,23 +370,28 @@ public class Index {
 
     }
 
+    /**
+     * 
+     * method that returns the controls.
+     * 
+     * @return Controller
+     */
     public Controller getController() {
         return this.controller;
 
     }
 
-    public void updateLabelTurn() {
-        // eastP.getMap().
-        //
-        // PlayerGraphic.getMapPlayers().get(controller.getActualPlayer().getName()).updateLabel();
-
-    }
-
+    /**
+     * method that updates all the information of the bank and players.
+     * 
+     */
     public void updateInfoPlayer() {
         System.out.println("updateInfoPlayer(): ");
+        eastP.playerBank.setLabelBank();
         for (int i = 0; i < eastP.getMap().size(); i++) {
             eastP.getMap().entrySet().forEach(p -> p.getValue().setLAbelContract());
         }
+
     }
 
     private boolean isPassedFromStartBox() {
@@ -396,21 +405,25 @@ public class Index {
 
         return (39 - prePos) + (actPos + 1);
     }
-    
-//    public void prevPos(final int prePos) {
-////        this.previousPos = prePos;
-//        System.out.println("È ENTRATOOOO :" + this.position);
-//    }
-    
-    public void computerTurn(Player p) {
-        System.out.println("Pre Remove in: " + this.position);
-        System.out.println("Player: " + p.getName());
+
+     /**
+     * the computer communicates its position and this method moves his pawn.
+     * 
+     * @param p
+     */
+    public void computerTurn(final Player p) {
         tessere.get(this.position).removePawn(p);
-        System.out.println("Previous computer: " +p.getPawn().getPreviousPos() );
         position = p.getPawn().getActualPos();
-        System.out.println("Actual computer: " +p.getPawn().getActualPos() );
         tessere.get(position).addPawn(p);
         updateInfoPlayer();
+    }
+    /**
+     * This method saved the computer previous position.
+     * @param pos  
+     *
+     */
+    public void prevPos(final int pos) {
+        this.position = pos;
     }
 
 }

@@ -394,6 +394,7 @@ public class ControllerImpl implements Controller {
         notifyPositionComputer(this.actualPlayer.getPawn().getActualPos());
         this.actualPosition = this.toRollDices();
         this.actions = this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.actualPlayer);
+        // this.actualPlayer);
         if (this.boxes.get(this.actualPosition) instanceof Ownership) {
             if (((Ownership) this.boxes.get(this.actualPosition)).isMortgaged()) {
                 if (((Ownership) this.boxes.get(this.actualPosition)).getOwner().equals(this.actualPlayer)) {

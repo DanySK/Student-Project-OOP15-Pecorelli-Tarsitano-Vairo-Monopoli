@@ -10,40 +10,46 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import it.unibo.monopoli.model.table.Ownership;
+import it.unibo.monopoli.view.C;
 import it.unibo.monopoli.view.JShape.Shapes;
 import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
 
+/**
+ * 
+ * class that is the graphic implementation of the OwnershipBox.
+ *
+ */
 public class OwnershipGraphic extends AbstractGraphicCard {
 
-    private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-    private Ownership own;
-    private int id;
+    private  Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+    private  Ownership own;
 
+    /**
+     * builder.
+     * 
+     * @param own
+     * @param pos
+     * @param id
+     */
     public OwnershipGraphic(Ownership own, Position pos, int id) {
         super(own, pos);
         this.own = own;
-        this.id = id;
 
     }
 
     @Override
     public JPanel build() {
-        RotatedPanel card = getRotatedPanel();
-        card.setPreferredSize(new Dimension(card.getDim()));
+        JPanel card = new JPanel();
+        card.setPreferredSize(new Dimension(C.DIM));
         card.setLayout(new GridLayout(4, 1));
 
-        // JLabel colorP = new JLabel();
-        // colorP.setOpaque(true);
-        // colorP.setBackground(Color.white);
-        // card.add(colorP);
-
-        JLabel nameP = new JLabel("<html>"+own.getName()+"</html>");
+        JLabel nameP = new JLabel("<html>" + own.getName() + "</html>");
         card.add(nameP);
 
         card.add(emptyP);
 
-        int i = this.own.getContract().getCost();
-        JLabel valueP = new JLabel("" + i);
+         int i = this.own.getContract().getCost();
+         JLabel valueP = new JLabel("" + i);
         card.add(valueP);
 
         card.setBorder(border);

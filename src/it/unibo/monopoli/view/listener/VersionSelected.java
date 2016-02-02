@@ -2,24 +2,31 @@ package it.unibo.monopoli.view.listener;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-
+/**
+ * 
+ * class notification which version was chosen.
+ *
+ */
 public class VersionSelected implements ItemListener {
 
-	private static Object selectedItem;
-	
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		if(e.getStateChange() == ItemEvent.SELECTED){
-			//SelectedItem è l'Item selezionato
-			selectedItem = e.getItem();
-			System.out.println("Hai selezionato: " + selectedItem);
-			System.out.println("get: " + getSelectedItem());
-		}
+    private static Object selectedItem;
 
-	}
-	
-	public static String getSelectedItem(){
-		return (String)selectedItem;
-	}
+    @Override
+    public void itemStateChanged(final ItemEvent e) {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+            // SelectedItem è l'Item selezionato
+            selectedItem = e.getItem();
+            System.out.println("Hai selezionato: " + selectedItem);
+            System.out.println("get: " + getSelectedItem());
+        }
+
+    }
+/**
+ * method that returns the selected version.
+ * @return String
+ */
+    public static String getSelectedItem() {
+        return (String) selectedItem;
+    }
 
 }

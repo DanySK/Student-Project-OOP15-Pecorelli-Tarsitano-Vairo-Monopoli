@@ -30,30 +30,31 @@ import javax.swing.border.Border;
 public class InizializedPlayer {
     private final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 
-    private static Map<String,Boolean> map = new HashMap<>();
+    private static Map<String, Boolean> map = new HashMap<>();
     private JTextField textNome;
     private boolean isUman;
     private JRadioButton rdbtnComputer;
     private JRadioButton rdbtnUman;
     private String positionAndName;
+
+    private Color c;
     private static boolean save;
-/**
- * 
- */
+
+    /**
+     * 
+     */
     public InizializedPlayer() {
-        
-        
     }
 
     /**
      * Method that build the Player's panel where there are the information
-     * about player situation
+     * about player situation.
      * 
      * @return JPanel playerP
      */
     public JPanel build(final JPanel playerP) {
         final JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(120, 150));
+        panel.setPreferredSize(new Dimension(C.DIM_PLAYER));
 
         panel.setBorder(border);
         panel.setLayout(new BorderLayout(0, 0));
@@ -82,7 +83,6 @@ public class InizializedPlayer {
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-                
                 if (textNome.getText().isEmpty()) {
                     new Dialog(new JFrame(), "Error", "Error! You must enter the name of the player");
                 } else {
@@ -91,13 +91,11 @@ public class InizializedPlayer {
                     } else {
                         isUman = false;
                     }
-
-                    // alla mappa passo N?NOMEGIOCATORE, MI E' UTILE PER DECIDERE IL COLORE DELLE PEDINE
+                    // alla mappa passo N?NOMEGIOCATORE, MI E' UTILE PER
+                    // DECIDERE IL COLORE DELLE PEDINE
                     positionAndName = (Go.getNumPlayers() - 1) + C.SPLITTOKEN + textNome.getText();
                     map.put(positionAndName, isUman);
-                    System.out.println("" + textNome.getText());
-                    System.out.println("" + isUman);
-                    InizializedPlayer.setSave(true); 
+                    InizializedPlayer.setSave(true);
                     save.setVisible(false);
                     remove.setVisible(true);
                     textNome.setEditable(false);
@@ -116,12 +114,9 @@ public class InizializedPlayer {
                 map.remove(positionAndName);
                 panel.setVisible(false);
                 playerP.remove(panel);
+                C.cl.addLast(c);
                 Go.addNumPlayers(-1);
                 playerP.revalidate();
-                System.out.println("Remove: " + playerP.getComponentCount());
-                System.out.println("RemoveGet: " + Go.getNumPlayers());
-                System.out.println("Remove: size Map: " + InizializedPlayer.getMap().size());
-
             }
 
         });
@@ -132,58 +127,72 @@ public class InizializedPlayer {
         final JPanel centerP = new JPanel();
         panel.add(centerP, BorderLayout.CENTER);
         centerP.setLayout(new BorderLayout());
-        
-        final JPanel centerP_row1 = new JPanel();
-        centerP.add(centerP_row1,BorderLayout.NORTH);
+
+        final JPanel centerPRow1 = new JPanel();
+        centerP.add(centerPRow1, BorderLayout.NORTH);
 
         final JLabel lblNome = new JLabel("Nome:");
         lblNome.setFont(new Font("Berlin Sans FB", Font.PLAIN, 13));
         northP.add(lblNome);
 
         textNome = new JTextField();
-        textNome.setPreferredSize(new Dimension(0,30));
+        textNome.setPreferredSize(new Dimension(0, 30));
         textNome.setHorizontalAlignment(SwingConstants.CENTER);
-        centerP.add(textNome,BorderLayout.NORTH);
+        centerP.add(textNome, BorderLayout.NORTH);
         textNome.setColumns(10);
 
-        final JPanel centerP_row2 = new JPanel();
-        
-        
+        final JPanel centerPRow2 = new JPanel();
+
         rdbtnUman = new JRadioButton("Umano");
         rdbtnUman.setSelected(true);
         rdbtnUman.setHorizontalAlignment(SwingConstants.LEFT);
         rdbtnUman.setAlignmentY(Component.TOP_ALIGNMENT);
-        centerP_row2.add(rdbtnUman);
+        centerPRow2.add(rdbtnUman);
 
         rdbtnComputer = new JRadioButton("Computer");
-        centerP_row2.add(rdbtnComputer);
-        centerP.add(centerP_row2,BorderLayout.CENTER);
+        centerPRow2.add(rdbtnComputer);
+        centerP.add(centerPRow2, BorderLayout.CENTER);
         final ButtonGroup group = new ButtonGroup();
         group.add(rdbtnComputer);
         group.add(rdbtnUman);
         rdbtnUman.setSelected(true);
 
-        final JPanel color = new JPanel();
-        color.setBackground(C.COLORS[Go.getNumPlayers()]);
-        centerP.add(color,BorderLayout.SOUTH);
-        
         panel.setVisible(true);
         return panel;
 
     }
-
+/**
+ * 
+ * @param x
+ */
     protected static void setSave(boolean x) {
         save = x;
-        
-    }
-    
-    protected static Boolean isSave() {
-        return save;
-        
+
     }
 
+    /**
+     * returns the status of the panel of the player. Returns true if it is
+     * saved, false otherwise.
+     * 
+     * @return Boolean
+     */
+    public static Boolean isSave() {
+        return save;
+
+    }
+/**
+ * returns the HashMap representing the players, their type and their pawn.
+ * @return HashMap<>
+ */
     public static Map<String, Boolean> getMap() {
         return map;
+    }
+/**
+ * return state o Computer RadioButton.
+ * @return JRadioButton
+ */
+    public JRadioButton getRdbtnComputer() {
+        return rdbtnComputer;
     }
 
 }

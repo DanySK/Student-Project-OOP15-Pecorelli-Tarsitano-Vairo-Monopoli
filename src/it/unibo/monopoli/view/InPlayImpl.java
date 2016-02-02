@@ -8,15 +8,19 @@ import javax.swing.JFrame;
 import it.unibo.monopoli.controller.Actions;
 import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.model.mainunits.Player;
-
+/**
+ * class that implementing interface InPlay.
+ * 
+ *
+ */
 public class InPlayImpl implements InPlay {
 
     private final List<Actions> buttons;
     private Index i;
 
     public InPlayImpl(Index i) {
-     this.buttons = new LinkedList<>();
-     this.i = i;
+        this.buttons = new LinkedList<>();
+        this.i = i;
     }
 
     @Override
@@ -26,7 +30,7 @@ public class InPlayImpl implements InPlay {
 
     }
 
-    public List<Actions> getButtons(){
+    public List<Actions> getButtons() {
         return this.buttons;
     }
 
@@ -49,10 +53,12 @@ public class InPlayImpl implements InPlay {
     public void notifyEndTurnComputer(final Player player) {
         this.i.computerTurn(player);
     }
-    
-//    @Override
-//    public void beginComputer(int prePos){
-//        this.i.prevPos(prePos);
-//    }
 
+    @Override
+    public void beginComputer(int i) {
+        this.i.prevPos(i);
+        
+    }
+
+   
 }

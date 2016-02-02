@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -23,9 +22,18 @@ import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.model.mainunits.Bank;
 import it.unibo.monopoli.model.mainunits.Player;
 import it.unibo.monopoli.model.table.Box;
+import it.unibo.monopoli.model.table.Building;
+import it.unibo.monopoli.model.table.Home;
+import it.unibo.monopoli.model.table.Hotel;
 import it.unibo.monopoli.model.table.Land;
+import it.unibo.monopoli.model.table.LandGroup;
 import it.unibo.monopoli.model.table.Ownership;
 
+/**
+ * 
+ * @author LauraT
+ *
+ */
 public class PlayerGraphic extends JPanel {
 
     private String name;
@@ -39,6 +47,11 @@ public class PlayerGraphic extends JPanel {
     private JLabel l;
     private JPanel row2;
     private HashMap<Integer, JLabel> labels;
+    private int house;
+    private int hotel;
+    private JLabel lblHouse;
+    private JLabel lblHotel;
+    private Bank bank;
 
     public PlayerGraphic(String name, int value, Controller controller) {
         this.name = name;
@@ -61,13 +74,11 @@ public class PlayerGraphic extends JPanel {
     public JPanel build(List<Box> boxes, List<Player> list, int i) {
         this.list = list;
         this.i = i;
+
         System.out.println("buil i : " + this.i);
         this.name = list.get(i).getName();
         this.value = list.get(i).getMoney();
         System.out.println(this.name);
-        // final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
-        // System.out.println("Lista" + i + ":" +
-        // list.get(i).getOwnerships().get(0));
 
         final JPanel player = new JPanel();
         player.setBorder(new LineBorder(new Color(0, 0, 0), 1));
@@ -99,7 +110,7 @@ public class PlayerGraphic extends JPanel {
 
         lblColc = new JLabel();
         lblColc.setOpaque(true);
-        lblColc.setBackground(C.COLORS[list.get(i).getPawn().getID()]);
+        lblColc.setBackground(C.cl.get(list.get(i).getPawn().getID()));
         lblColc.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 14));
         row1.add(lblColc);
 
@@ -124,7 +135,7 @@ public class PlayerGraphic extends JPanel {
             l = new JLabel("" + (id < 10 ? "0" : "") + id);
 
             labels.put(id, l);
-            // l.setBorder(new LineBorder(new Color(0, 0, 0)));
+            l.setBorder(new LineBorder(new Color(0, 0, 0)));
             l.setPreferredSize(new Dimension(20, 20));
             l.setOpaque(true);
             final GridBagConstraints gbc_label_1 = new GridBagConstraints();
@@ -133,8 +144,6 @@ public class PlayerGraphic extends JPanel {
             gbc_label_1.gridy = id / 15; // una riga ogni 15 caselle
             row2.add(l, gbc_label_1);
         });
-
-        setLAbelContract();
 
         final JPanel row3 = new JPanel();
         final FlowLayout flowLayout = (FlowLayout) row3.getLayout();
@@ -147,25 +156,44 @@ public class PlayerGraphic extends JPanel {
         gbc_row3.gridy = 2;
         player.add(row3, gbc_row3);
 
-        final JLabel lblNewLabel = new JLabel("New label");
-        lblNewLabel.setIcon(new ImageIcon("C:\\Users\\LauraT\\Desktop\\casadim.png"));
+        final JLabel lblNewLabel = new JLabel("N. Case: ");
+        lblNewLabel.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
         lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0), 0));
-        lblNewLabel.setPreferredSize(new Dimension(30, 25));
         row3.add(lblNewLabel);
 
-        final JLabel lblNewLabel_1 = new JLabel("X");
-        lblNewLabel_1.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
-        row3.add(lblNewLabel_1);
+        for (int j = 0; j <= list.get(i).getOwnerships().size() - 1; j++) {
+            house += ((LandGroup) list.get(i).getOwnerships().get(i).getGroup()).getBuildings().size();
+        }
+        lblHouse = new JLabel("" + house);
+        lblHouse.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
+        row3.add(lblHouse);
 
-        final JLabel label_32 = new JLabel("");
-        label_32.setIcon(new ImageIcon("C:\\Users\\LauraT\\Desktop\\hoteldim.png"));
-        label_32.setPreferredSize(new Dimension(30, 25));
+        final JLabel label_32 = new JLabel("N. Hotel: ");
+        label_32.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
         label_32.setBorder(new LineBorder(new Color(0, 0, 0), 0));
         row3.add(label_32);
 
-        final JLabel label_33 = new JLabel("X");
-        label_33.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
-        row3.add(label_33);
+        for (int j = 0; j <= list.get(i).getOwnerships().size() - 1; j++) {
+            hotel += ((LandGroup) list.get(i).getOwnerships().get(j).getGroup()).getBuildings().size();
+        }
+
+        lblHotel = new JLabel("" + hotel);
+        lblHotel.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
+        row3.add(lblHotel);
+
+        list.get(i).getOwnerships().stream().filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
+                .forEach(ow -> {
+                    ((LandGroup) ow.getGroup()).getBuildings().forEach(b -> {
+                        if (b instanceof Home) {
+                            house++;
+                        } else {
+                            hotel++;
+                        }
+                    });
+
+                });
+
+        setLAbelContract();
 
         player.setVisible(true);
         return player;
@@ -181,37 +209,45 @@ public class PlayerGraphic extends JPanel {
 
         controller.getAllBoxes().stream().filter(o -> o instanceof Ownership).forEach(o -> {
             Ownership own = (Ownership) o;
+
             l = labels.get(o.getID());
-            if (own.getOwner().equals(list.get(i))) {
+            if (own.getOwner().equals(p)) {
                 l.setOpaque(true);
                 l.setVisible(true);
+
                 if (o instanceof Land) {
                     l.setBackground(((Land) o).getColor());
+                    if (((Ownership) o).isMortgaged()) {
+                        l.setEnabled(false);
+                    } else {
+                        l.setEnabled(true);
+                    }
                 } else {
                     l.setBackground(Color.WHITE);
                 }
+                // TODO
+                // dIE SE èISMORTGAGE colorarla di un altro modo
+                // così il contrario
             } else {
-               l.setOpaque(false);
-               l.setVisible(false);
+                l.setOpaque(false);
+                l.setVisible(false);
             }
         });
-        // p.getOwnerships().stream().forEach(o -> {
-        // l = labels.get(o.getID());
-        //
-        // if (o instanceof Land) {
-        // l.setBackground(((Land) o).getColor());
-        //
-        // } else {
-        // l.setBackground(Color.WHITE);
-        //
-        // }
-        //
-        // });
+        list.get(i).getOwnerships().stream().filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
+                .forEach(ow -> {
+                    ((LandGroup) ow.getGroup()).getBuildings().forEach(b -> {
+                        if (b instanceof Home) {
+                            house++;
+                        } else {
+                            hotel++;
+                        }
+                    });
 
+                });
     }
 
     public Component buildBank(List<Box> allBoxes, Bank bank) {
-
+        this.bank = bank;
         this.name = "Bank";
         final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 
@@ -239,7 +275,7 @@ public class PlayerGraphic extends JPanel {
         lblCol.setFont(new Font("Papyrus", Font.BOLD, 18));
         row1.add(lblCol);
 
-        final JPanel row2 = new JPanel();
+        row2 = new JPanel();
         row2.setBorder(new LineBorder(new Color(0, 0, 0)));
         final GridBagConstraints gbc_row2 = new GridBagConstraints();
         gbc_row2.insets = new Insets(0, 0, 5, 0);
@@ -269,15 +305,6 @@ public class PlayerGraphic extends JPanel {
             gbc_label_1.gridy = id / 15; // una riga ogni 15 caselle
             row2.add(l, gbc_label_1);
         });
-        bank.getLeftOwnership().stream().forEach(p -> {
-            Box b = ((Box) p);
-            JLabel l = labels.get(b.getID());
-
-            if (p instanceof Land)
-                l.setBackground(((Land) b).getColor());
-            else
-                l.setBackground(Color.WHITE);
-        });
 
         final JPanel row3 = new JPanel();
         final FlowLayout flowLayout = (FlowLayout) row3.getLayout();
@@ -290,41 +317,37 @@ public class PlayerGraphic extends JPanel {
         gbc_row3.gridy = 2;
         player.add(row3, gbc_row3);
 
-        final JLabel lblNewLabel = new JLabel("New label");
-        lblNewLabel.setIcon(new ImageIcon("C:\\Users\\LauraT\\Desktop\\casadim.png"));
-        lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0), 0));
-        lblNewLabel.setPreferredSize(new Dimension(30, 25));
-        row3.add(lblNewLabel);
-
-        final JLabel lblNewLabel_1 = new JLabel("X");
-        lblNewLabel_1.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
-        row3.add(lblNewLabel_1);
-
-        final JLabel label_32 = new JLabel("");
-        label_32.setIcon(new ImageIcon("C:\\Users\\LauraT\\Desktop\\hoteldim.png"));
-        label_32.setPreferredSize(new Dimension(30, 25));
-        label_32.setBorder(new LineBorder(new Color(0, 0, 0), 0));
-        row3.add(label_32);
-
-        final JLabel label_33 = new JLabel("X");
-        label_33.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
-        row3.add(label_33);
+        setLabelBank();
 
         player.setVisible(true);
         return player;
 
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setLabelBank() {
+        Bank p = controller.getBank();
+
+        controller.getAllBoxes().stream().filter(o -> o instanceof Ownership).forEach(o -> {
+            Ownership own = (Ownership) o;
+            l = labels.get(o.getID());
+            if (own.getOwner().equals(p)) {
+                l.setOpaque(true);
+                l.setVisible(true);
+                if (o instanceof Land) {
+                    l.setBackground(((Land) o).getColor());
+                } else {
+                    l.setBackground(Color.WHITE);
+                }
+            } else {
+                l.setOpaque(false);
+                l.setVisible(false);
+            }
+        });
+
     }
 
-    public void updateLabel() {
-        // TODO controllare perche nella mappa c'è un solo giocatore
-        // if (controller.getActualPlayer().getPawn().getID() == i)
-        // lblColc.setVisible(true);
-        // else
-        // lblColc.setVisible(false);
+    public void setColor(Color color) {
+        this.color = color;
     }
 
 }

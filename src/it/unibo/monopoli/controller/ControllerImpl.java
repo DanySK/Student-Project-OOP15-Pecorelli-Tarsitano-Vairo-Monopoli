@@ -56,7 +56,7 @@ public class ControllerImpl implements Controller {
     private static final int FIRST_CHANCE_POSITION = 7;
     private static final int SECOND_CHANCE_POSITION = 22;
     private static final int THIRD_CHANCE_POSITION = 36;
-    private static final int AVERAGE_COST=36;
+    private static final int AVERAGE_COST = 36;
     private final List<Player> players;
     private Player actualPlayer;
     private GameVersion version;
@@ -173,26 +173,26 @@ public class ControllerImpl implements Controller {
     public void setActualPosition(int position) {
         this.actualPosition = position;
     }
-    
+
     public void notifyGameOver(Player player) {
         this.view.ifPresent(v -> v.gameOver(player));
     }
-    
+
     public void notifyComputer(Player player) {
-        this.view.ifPresent(v -> v.computerTurn(player));      
+        this.view.ifPresent(v -> v.computerTurn(player));
     }
-    
+
     public void notifyDrawCard(Card card) {
-        this.view.ifPresent(v -> v.drawCard(card.getDescription()));              
+        this.view.ifPresent(v -> v.drawCard(card.getDescription()));
     }
-    
+
     public void notifyEndTurnComputer(final Player player) {
-        this.view.ifPresent(v -> v.notifyEndTurnComputer(player));              
+        this.view.ifPresent(v -> v.notifyEndTurnComputer(player));
     }
-//    
-//    public void notitifyBeginComp(int pos) {
-//        this.view.ifPresent(v -> v.beginComputer(pos));                      
-//    }
+    //
+    // public void notitifyBeginComp(int pos) {
+    // this.view.ifPresent(v -> v.beginComputer(pos));
+    // }
 
     @Override
     public void endTurn() {
@@ -372,8 +372,6 @@ public class ControllerImpl implements Controller {
         return lastDices.get(0) == lastDices.get(1);
     }
 
-
-
     private void computerPlayer() {
         // if (this.actualPlayer.isInPrison()) {
         // this.actualPlayer.getCards().forEach(c->{
@@ -382,10 +380,11 @@ public class ControllerImpl implements Controller {
         // this.actualPlayer.setPrison(false);
         // }
         // });
-//        this.notitifyBeginComp(this.actualPosition);
+        // this.notitifyBeginComp(this.actualPosition);
         this.notifyComputer(actualPlayer);
         this.actualPosition = this.toRollDices();
-//        this.actions = this.getNextBoxsActions(this.getActualBox(), this.actualPlayer);
+        // this.actions = this.getNextBoxsActions(this.getActualBox(),
+        // this.actualPlayer);
         // perfetta
         if (this.boxes.get(this.actualPosition) instanceof Ownership) {
             if (((Ownership) this.boxes.get(this.actualPosition)).isMortgaged()) {
@@ -580,7 +579,7 @@ public class ControllerImpl implements Controller {
             }
         }
         this.notifyDrawCard(card);
-//        this.actualPosition = this.actualPlayer.getPawn().getActualPos();
+        // this.actualPosition = this.actualPlayer.getPawn().getActualPos();
         if (this.version.getNextCardsAction(this.getActualBox(), card, this.actualPlayer)) {
             this.gameOverPerson(this.actualPlayer);
         }
@@ -616,7 +615,7 @@ public class ControllerImpl implements Controller {
         if (!player.dicesAlreadyRolled() && player.isTheFirtsLaunch()) {
             actions.add(Actions.ROLL_DICES);
             return actions;
-        } else if(!player.dicesAlreadyRolled() && !player.isTheFirtsLaunch()) {
+        } else if (!player.dicesAlreadyRolled() && !player.isTheFirtsLaunch()) {
             actions.add(Actions.ROLL_DICES);
         }
         if (box instanceof Land) {

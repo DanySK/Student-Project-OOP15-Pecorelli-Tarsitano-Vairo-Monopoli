@@ -1,18 +1,80 @@
 package it.unibo.monopoli.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.util.LinkedList;
 
+/**
+ * 
+ * class that contains all the magic number used in the view.
+ *
+ */
 public class C {
+
+    /**
+     * true if you have to carry out tests to test the result.
+     */
     public static final boolean DEBUG = false;
+
+    /**
+     * 
+     */
     public static final int JTAB_PREFERRED_HEIGHT = 32;
-    public static final int BOX_WIDTH = 55;
-    public static final int BOX_HEIGHT = 55;
+
+    /**
+     * JShape Preferrred size.
+     */
     public static final int JSHAPE_PREFERRED_SIZE = 8;
 
+    /**
+     * String to check if it is initialized some version.
+     */
     public static final String NOT_SELECTABLE_OPTION = " - Select an Option - ";
-    public static final int MAXPLAYER = 6;
-    public static final int MAX_PLAYERS = 6;
-    public static final String SPLITTOKEN = ":";
-    public static final Color COLORS[] = { Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.GRAY };
 
+    /**
+     * 
+     * maximum number of players.
+     */
+    public static final int MAX_PLAYERS = 6;
+
+    /**
+     * separator character in a map.
+     */
+    public static final String SPLITTOKEN = ":";
+
+    /**
+     * array that contains the colors to be associated with players.
+     */
+    private static Color[] COLORS = { Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.GRAY };
+    /**
+     * list to keep track of the colors chosen by users.
+     */
+    public static final LinkedList<Color> cl;
+
+    static {
+        cl = new LinkedList<Color>();
+        for (int i = 0; i <= COLORS.length - 1; i++) {
+            cl.add(COLORS[i]);
+        }
+    }
+
+    /**
+     * X Location JDilaog.
+     */
+    public static final int X_LOCATION_JDIALOG = 500;
+    
+    /**
+     * Y Location JDialog.
+     */
+    public static final int Y_LOCATION_JDIALOG = 300;
+    
+    /**
+     * PreferredSize for card.
+     */
+    public static final Dimension DIM = new Dimension(55, 55);
+    
+    /**
+     * PreferredSize for panelPlayer.
+     */
+    public static final Dimension DIM_PLAYER = new Dimension(120, 150);
 }

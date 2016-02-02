@@ -12,28 +12,36 @@ import javax.swing.border.Border;
 import it.unibo.monopoli.model.table.DecksBox;
 import it.unibo.monopoli.model.table.Land;
 import it.unibo.monopoli.model.table.Ownership;
+import it.unibo.monopoli.view.C;
 import it.unibo.monopoli.view.JShape.Shapes;
 import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
-
+/**
+ * 
+ * class that is the graphic implementation of the DecksBox.
+ *
+ */
 public class DecksGraphic extends AbstractGraphicCard {
 
     private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
     private DecksBox deck;
-    private int id;
-
+    /**
+ * Builder.
+ * @param deck
+ * @param pos
+ * @param id
+ */
     public DecksGraphic(DecksBox deck, Position pos, int id) {
         super(deck, pos);
         this.deck = deck;
-        this.id = id;
     }
 
     @Override
     public JPanel build() {
-        RotatedPanel card = getRotatedPanel();
-        card.setPreferredSize(new Dimension(card.getDim()));
+        JPanel card = new JPanel();
+        card.setPreferredSize(new Dimension(C.DIM));
         card.setLayout(new GridLayout(2, 1));
 
-        JLabel nameP = new JLabel("<html>"+deck.getName()+"</html>");
+        JLabel nameP = new JLabel("<html>" + deck.getName() + "</html>");
         card.add(nameP);
 
         card.add(emptyP);

@@ -217,9 +217,9 @@ public class ControllerImpl implements Controller {
     /**
      * This is a notify for the view. Notify the actual position of computer.
      * 
-     * @param position
+     * @param position - the position of actual player.
      */
-    public void notifyPositionComputer(int position) {
+    public void notifyPositionComputer(final int position) {
 
          this.view.ifPresent(v -> v.beginComputer(position));
     }
@@ -394,7 +394,6 @@ public class ControllerImpl implements Controller {
         notifyPositionComputer(this.actualPlayer.getPawn().getActualPos());
         this.actualPosition = this.toRollDices();
         this.actions = this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.actualPlayer);
-        // this.actualPlayer);
         if (this.boxes.get(this.actualPosition) instanceof Ownership) {
             if (((Ownership) this.boxes.get(this.actualPosition)).isMortgaged()) {
                 if (((Ownership) this.boxes.get(this.actualPosition)).getOwner().equals(this.actualPlayer)) {

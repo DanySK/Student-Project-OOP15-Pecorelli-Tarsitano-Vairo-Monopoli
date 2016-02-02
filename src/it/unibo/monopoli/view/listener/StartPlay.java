@@ -25,6 +25,7 @@ public class StartPlay implements ActionListener {
     private InPlay inPlay;
 
     private int computer;
+    private EVersion version;
 
     public StartPlay() {
         super();
@@ -64,9 +65,12 @@ public class StartPlay implements ActionListener {
                 });
                 switch (VersionSelected.getSelectedItem()) {
                 case "Classic":
+                    version = EVersion.CLASSIC;
                     contr.initializedVersion(EVersion.CLASSIC);
+                    
                     break;
                 case "Italian Version":
+                    version = EVersion.ITALIAN_VERSION;
                     contr.initializedVersion(EVersion.ITALIAN_VERSION);
                     break;
                 default:
@@ -74,7 +78,7 @@ public class StartPlay implements ActionListener {
                 }
                 contr.addView(inPlay);
                 i.build();
-                //contr.play();
+                contr.play(version);
                 contr.endTurn();
 
             }

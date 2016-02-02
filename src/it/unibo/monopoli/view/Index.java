@@ -8,19 +8,19 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import it.unibo.monopoli.controller.Actions;
 import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.controller.ControllerImpl;
 import it.unibo.monopoli.model.mainunits.Player;
-import it.unibo.monopoli.model.table.Building;
-import it.unibo.monopoli.model.table.Home;
-import it.unibo.monopoli.model.table.Hotel;
-import it.unibo.monopoli.model.table.LandGroup;
 import it.unibo.monopoli.model.table.Ownership;
 import it.unibo.monopoli.view.cards.IBoxGraphic;
 import it.unibo.monopoli.view.cards.LandGraphic;
@@ -323,19 +323,25 @@ public class Index {
         endGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                List<Player> winner = new LinkedList<>();
+                Map<Player,Integer> winner;
                 JLabel winnerL = new JLabel();
                 winnerP.add(winnerL, BorderLayout.CENTER);
 
                 winner = controller.endGame();
                 if (winner.size() == 1) {
-                    winners = "The winner is: " + "" + winner.get(0).getName() + " " + winner.get(0).getMoney();
+                    Set<Entry<Player,Integer>> setWinner = winner.entrySet();
+                    setWinner.forEach(w -> {
+                        
+                        
+                        System.out.println("Winner: " + w.getKey().getName()+", Money : " + w.getKey().getMoney() );
+                        
+                    });
 
                 } else {
                     temp = "";
                     System.out.println("size:" + winner.size());
                     for (int i = 0; i <= winner.size() - 1; i++) {
-                        winners2 = " Name: " + winner.get(i).getName() + " " + "Money: " + winner.get(i).getMoney();
+//                        winners2 = " Name: " + winners.(i).getName() + " " + "Money: " + winner.get(i).getMoney();
                         temp += winners2;
                         System.out.println("For: winners2: " + winners2);
                         System.out.println("For: temp: " + temp);

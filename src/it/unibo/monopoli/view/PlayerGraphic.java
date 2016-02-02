@@ -156,43 +156,6 @@ public class PlayerGraphic extends JPanel {
         gbc_row3.gridy = 2;
         player.add(row3, gbc_row3);
 
-        final JLabel lblNewLabel = new JLabel("N. Case: ");
-        lblNewLabel.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
-        lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0), 0));
-        row3.add(lblNewLabel);
-
-        for (int j = 0; j <= list.get(i).getOwnerships().size() - 1; j++) {
-            house += ((LandGroup) list.get(i).getOwnerships().get(i).getGroup()).getBuildings().size();
-        }
-        lblHouse = new JLabel("" + house);
-        lblHouse.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
-        row3.add(lblHouse);
-
-        final JLabel label_32 = new JLabel("N. Hotel: ");
-        label_32.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
-        label_32.setBorder(new LineBorder(new Color(0, 0, 0), 0));
-        row3.add(label_32);
-
-        for (int j = 0; j <= list.get(i).getOwnerships().size() - 1; j++) {
-            hotel += ((LandGroup) list.get(i).getOwnerships().get(j).getGroup()).getBuildings().size();
-        }
-
-        lblHotel = new JLabel("" + hotel);
-        lblHotel.setFont(new Font("Berlin Sans FB Demi", Font.BOLD, 17));
-        row3.add(lblHotel);
-
-        list.get(i).getOwnerships().stream().filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
-                .forEach(ow -> {
-                    ((LandGroup) ow.getGroup()).getBuildings().forEach(b -> {
-                        if (b instanceof Home) {
-                            house++;
-                        } else {
-                            hotel++;
-                        }
-                    });
-
-                });
-
         setLAbelContract();
 
         player.setVisible(true);
@@ -233,24 +196,12 @@ public class PlayerGraphic extends JPanel {
                 l.setVisible(false);
             }
         });
-        list.get(i).getOwnerships().stream().filter(o -> !((LandGroup) o.getGroup()).getBuildings().isEmpty())
-                .forEach(ow -> {
-                    ((LandGroup) ow.getGroup()).getBuildings().forEach(b -> {
-                        if (b instanceof Home) {
-                            house++;
-                        } else {
-                            hotel++;
-                        }
-                    });
-
-                });
     }
 
     public Component buildBank(List<Box> allBoxes, Bank bank) {
         this.bank = bank;
         this.name = "Bank";
-        final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
-
+        
         final JPanel player = new JPanel();
         player.setBorder(new LineBorder(new Color(0, 0, 0), 1));
         final GridBagLayout gridBagLayout = new GridBagLayout();
@@ -263,12 +214,12 @@ public class PlayerGraphic extends JPanel {
 
         final JPanel row1 = new JPanel();
         row1.setBorder(new LineBorder(new Color(0, 0, 0)));
-        final GridBagConstraints gbc_row1 = new GridBagConstraints();
-        gbc_row1.insets = new Insets(0, 0, 5, 0);
-        gbc_row1.fill = GridBagConstraints.BOTH;
-        gbc_row1.gridx = 0;
-        gbc_row1.gridy = 0;
-        player.add(row1, gbc_row1);
+        final GridBagConstraints gcbRow1 = new GridBagConstraints();
+        gcbRow1.insets = new Insets(0, 0, 5, 0);
+        gcbRow1.fill = GridBagConstraints.BOTH;
+        gcbRow1.gridx = 0;
+        gcbRow1.gridy = 0;
+        player.add(row1, gcbRow1);
         row1.setLayout(new GridLayout(1, 2, 0, 0));
 
         final JLabel lblCol = new JLabel(this.name);
@@ -277,19 +228,20 @@ public class PlayerGraphic extends JPanel {
 
         row2 = new JPanel();
         row2.setBorder(new LineBorder(new Color(0, 0, 0)));
-        final GridBagConstraints gbc_row2 = new GridBagConstraints();
-        gbc_row2.insets = new Insets(0, 0, 5, 0);
-        gbc_row2.fill = GridBagConstraints.BOTH;
-        gbc_row2.gridx = 0;
-        gbc_row2.gridy = 1;
-        player.add(row2, gbc_row2);
-        final GridBagLayout gbl_row2 = new GridBagLayout();
-        gbl_row2.columnWidths = new int[] { 0, 25, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        gbl_row2.rowHeights = new int[] { 16, 22, 0, 10, 9, 0, 0 };
-        gbl_row2.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+        final GridBagConstraints gbcRow2 = new GridBagConstraints();
+        gbcRow2.insets = new Insets(0, 0, 5, 0);
+        gbcRow2.fill = GridBagConstraints.BOTH;
+        gbcRow2.gridx = 0;
+        gbcRow2.gridy = 1;
+        player.add(row2, gbcRow2);
+        
+        final GridBagLayout gblRow2 = new GridBagLayout();
+        gblRow2.columnWidths = new int[] { 0, 25, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        gblRow2.rowHeights = new int[] { 16, 22, 0, 10, 9, 0, 0 };
+        gblRow2.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-        gbl_row2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-        row2.setLayout(gbl_row2);
+        gblRow2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+        row2.setLayout(gblRow2);
 
         controller.getAllBoxes().stream().filter(o -> o instanceof Ownership).forEach(o -> {
             int id = ((Box) o).getID();
@@ -299,11 +251,11 @@ public class PlayerGraphic extends JPanel {
             l.setBorder(new LineBorder(new Color(0, 0, 0)));
             l.setPreferredSize(new Dimension(20, 20));
             l.setOpaque(true);
-            final GridBagConstraints gbc_label_1 = new GridBagConstraints();
-            gbc_label_1.insets = new Insets(0, 0, 5, 5);
-            gbc_label_1.gridx = id % 15; // 15 caselle per riga
-            gbc_label_1.gridy = id / 15; // una riga ogni 15 caselle
-            row2.add(l, gbc_label_1);
+            final GridBagConstraints gbcLabels = new GridBagConstraints();
+            gbcLabels.insets = new Insets(0, 0, 5, 5);
+            gbcLabels.gridx = id % 15; // 15 caselle per riga
+            gbcLabels.gridy = id / 15; // una riga ogni 15 caselle
+            row2.add(l, gbcLabels);
         });
 
         final JPanel row3 = new JPanel();
@@ -311,11 +263,11 @@ public class PlayerGraphic extends JPanel {
         flowLayout.setAlignment(FlowLayout.LEFT);
         flowLayout.setAlignOnBaseline(true);
         row3.setBorder(new LineBorder(new Color(0, 0, 0)));
-        final GridBagConstraints gbc_row3 = new GridBagConstraints();
-        gbc_row3.fill = GridBagConstraints.BOTH;
-        gbc_row3.gridx = 0;
-        gbc_row3.gridy = 2;
-        player.add(row3, gbc_row3);
+        final GridBagConstraints gbcRow3 = new GridBagConstraints();
+        gbcRow3.fill = GridBagConstraints.BOTH;
+        gbcRow3.gridx = 0;
+        gbcRow3.gridy = 2;
+        player.add(row3, gbcRow3);
 
         setLabelBank();
 

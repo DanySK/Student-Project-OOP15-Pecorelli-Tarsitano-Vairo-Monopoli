@@ -79,4 +79,9 @@ public class GameVersionImpl implements GameVersion {
         return this.strategy.haveEnoughMoney(player, moneyToPay);
     }
 
+    @Override
+    public void removePlayer(final Player player) {
+        this.iter.remove();
+    }
+
 }

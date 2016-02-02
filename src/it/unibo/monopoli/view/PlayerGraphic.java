@@ -75,10 +75,8 @@ public class PlayerGraphic extends JPanel {
         this.list = list;
         this.i = i;
 
-        System.out.println("buil i : " + this.i);
         this.name = list.get(i).getName();
         this.value = list.get(i).getMoney();
-        System.out.println(this.name);
 
         final JPanel player = new JPanel();
         player.setBorder(new LineBorder(new Color(0, 0, 0), 1));
@@ -165,9 +163,7 @@ public class PlayerGraphic extends JPanel {
 
     public void setLAbelContract() {
         Player p = list.get(i);
-        System.out.println("setLabel i : " + this.i);
-        System.out.println("List.getName: " + list.get(i).getName());
-
+    
         lblCol_1.setText(p.getMoney() + "");
 
         controller.getAllBoxes().stream().filter(o -> o instanceof Ownership).forEach(o -> {

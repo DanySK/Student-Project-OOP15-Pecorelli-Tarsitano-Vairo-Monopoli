@@ -3,6 +3,7 @@ package it.unibo.monopoli.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -40,7 +41,7 @@ public class Index {
     private int position = 0;
     HashMap<Integer, IBoxGraphic> tessere;
     private InPlay inPlay;
-    JPanel winnerP = new JPanel();
+    
     String winners;
     String winners2;
     String temp;
@@ -112,30 +113,22 @@ public class Index {
         revoke.setEnabled(false);
         endGame.setEnabled(false);
 
-
-
         rollDices.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(final ActionEvent e) {
 
-                System.out.println("Player Roll Dicies: " + controller.getActualPlayer().getName());
-                System.out.println("Player: " + controller.getActualPlayer());
-                Player p = controller.getActualPlayer();
-                System.out.println("Playre: Remove: " + controller.getActualPlayer().getPawn().getActualPos());
+               Player p = controller.getActualPlayer();
                 tessere.get(controller.getActualPlayer().getPawn().getActualPos()).removePawn(p);
 
                 int prePos = controller.getActualPlayer().getPawn().getActualPos();
                 int pos = controller.toRollDices();
-                System.out.println("Player after rollDieces: " + pos);
                 int passi = pos - prePos;
                 if (isPassedFromStartBox()) {
                     passi = passFromStart();
                 }
                 new Dialog(new JFrame(), "Roll Dieces", "Number: " + (passi));
-                System.out.println("new pos: " + pos);
-                System.out.println("Add Pawn: " + pos);
-                tessere.get(pos).addPawn(controller.getActualPlayer());
+               tessere.get(pos).addPawn(controller.getActualPlayer());
                 final String contratto = controller.getActualBox().getName();
                 new Dialog(new JFrame(), "Actual", "You are in box " + contratto);
                 if (controller.getActualBox() instanceof Ownership
@@ -148,7 +141,6 @@ public class Index {
                 }
                 buttonList.forEach(b -> b.setEnabled(false));
                 final List<Actions> l = inPlay.getButtons();
-                System.out.println(l);
                 l.forEach(bu -> {
                     buttonList.forEach(but -> {
                         if (bu.getText().equals(but.getText())) {
@@ -323,33 +315,40 @@ public class Index {
         endGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                Map<Player,Integer> winner;
-                JLabel winnerL = new JLabel();
-                winnerP.add(winnerL, BorderLayout.CENTER);
-
+                Map<Player, Integer> winner;
+                MyFrame winnerF = new MyFrame("Winner", new BorderLayout(), new Dimension(300, 300));
                 winner = controller.endGame();
-                if (winner.size() == 1) {
-                    Set<Entry<Player,Integer>> setWinner = winner.entrySet();
-                    setWinner.forEach(w -> {
-                        
-                        
-                        System.out.println("Winner: " + w.getKey().getName()+", Money : " + w.getKey().getMoney() );
-                        
-                    });
+                
+                Set<Entry<Player, Integer>> setWinner = winner.entrySet();
+                
+                JPanel winnerEnd = new JPanel(new GridLayout(winner.size(),1));
+                winnerF.add(winnerEnd);
 
-                } else {
-                    temp = "";
-                    System.out.println("size:" + winner.size());
-                    for (int i = 0; i <= winner.size() - 1; i++) {
-//                        winners2 = " Name: " + winners.(i).getName() + " " + "Money: " + winner.get(i).getMoney();
-                        temp += winners2;
-                        System.out.println("For: winners2: " + winners2);
-                        System.out.println("For: temp: " + temp);
-                    }
-                    System.out.println("La classifica dei giocatori e': : " + winners2);
-                    new Dialog(new JFrame(), "The winner is", "The ranking of player is :" + temp);
-                }
+                
+                JLabel winnerL = new JLabel();
+                winnerEnd.add(winnerL);
 
+               
+                temp = "";
+
+                
+                
+                setWinner.forEach(w -> {
+
+                    winners2 = " Name: " + w.getKey().getName() + ", Money: " + w.getValue() + ";\n";
+
+                    temp += winners2;
+                    winnerEnd.add(new JLabel(winners2), BorderLayout.CENTER);
+                    System.out.println("Winner: " + winners2);
+                    System.out.println("Name: " + w.getKey().getName());
+                    
+                    System.out.println("Size: " + winner.size());
+                    System.out.println("Set: " + setWinner.size());
+                });
+
+              
+
+                winnerF.setVisible(true);
                 buttonList.forEach(b -> b.setEnabled(false));
                 List<Actions> l = inPlay.getButtons();
                 l.forEach(bu -> {
@@ -392,7 +391,6 @@ public class Index {
      * 
      */
     public void updateInfoPlayer() {
-        System.out.println("updateInfoPlayer(): ");
         eastP.playerBank.setLabelBank();
         for (int i = 0; i < eastP.getMap().size(); i++) {
             eastP.getMap().entrySet().forEach(p -> p.getValue().setLAbelContract());
@@ -412,7 +410,7 @@ public class Index {
         return (39 - prePos) + (actPos + 1);
     }
 
-     /**
+    /**
      * the computer communicates its position and this method moves his pawn.
      * 
      * @param p
@@ -423,9 +421,11 @@ public class Index {
         tessere.get(position).addPawn(p);
         updateInfoPlayer();
     }
+
     /**
      * This method saved the computer previous position.
-     * @param pos  
+     * 
+     * @param pos
      *
      */
     public void prevPos(final int pos) {

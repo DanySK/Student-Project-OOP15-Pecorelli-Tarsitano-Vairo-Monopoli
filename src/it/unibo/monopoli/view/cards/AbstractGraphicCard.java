@@ -61,9 +61,7 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
         pawns.put(p, pawn); // aggiungo pedina alla mappa
         emptyP.add(pawn); // disegno la pedina (aggiungendola al pannello)
         emptyP.validate();
-        // System.out.println(p.getName());
-        // System.out.println("AddPawn: " + pawns.pawns.keySet());
-        // System.out.println("Key: " + pawns.get(p).getName());
+  
     }
 
     @Override

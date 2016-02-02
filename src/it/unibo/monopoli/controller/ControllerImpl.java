@@ -427,7 +427,7 @@ public class ControllerImpl implements Controller {
                 if (this.actualPlayer.getOwnerships().containsAll(land.getGroup().getMembers())
                         && ((LandGroup) land.getGroup()).canBuiling() && this.bank.getLeftBuilding().size() > 0
                         && this.actualPlayer.getMoney() >= (((LandContract) land.getContract()).getCostForEachBuilding()
-                                + (AVERAGE_COST * 4))
+                                + (AVERAGE_COST * 8))
                         && !this.alreadyBuilt) {
                     this.bank.getLeftBuilding().forEach(b -> {
                         if ((((LandGroup) land.getGroup()).getBuildings().size() < 4 && b instanceof Home)

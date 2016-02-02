@@ -83,7 +83,6 @@ public class TestController {
         } catch (IllegalArgumentException i) {
             System.out.println("You can't revoke mortgage on other player\'s ownerships");
         }
-        contro.endGame();
 
     }
     /**

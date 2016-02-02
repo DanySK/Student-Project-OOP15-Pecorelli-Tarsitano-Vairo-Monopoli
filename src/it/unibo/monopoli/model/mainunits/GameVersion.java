@@ -54,6 +54,15 @@ public interface GameVersion {
     Player endOfTurnAndNextPlayer();
 
     /**
+     * Removes the specific {@link Player} from the list of the game's
+     * {@link Player}.
+     * 
+     * @param player
+     *            - the {@link Player} to remove
+     */
+    void removePlayer(Player player);
+
+    /**
      * Returns a {@link List} with the numbers obtained with the roll of dices
      * and moves the {@link Player}'s {@link Pawn}.
      * 

@@ -13,8 +13,6 @@ public class ClassicOwnership implements Ownership {
     private final int id;
     private Contract contract;
     private Owner owner;
-//    private final Set<Action> allowedActions;
-//    private final Set<Action> obligatoryActions;
     private boolean mortgaged;
     private Group group;
 
@@ -27,14 +25,12 @@ public class ClassicOwnership implements Ownership {
      * @param id
      *            - of the {@link ClassicOwnership}
      * @param owner
-     *            - {@link Owner} of the {@link ClassicOwnership}
+     *            - of the {@link ClassicOwnership}
      */
     public ClassicOwnership(final String name, final int id, final Owner owner) {
         this.name = name;
         this.id = id;
         this.owner = owner;
-//        this.allowedActions = new HashSet<>();
-//        this.obligatoryActions = new HashSet<>();
     }
 
     @Override
@@ -46,16 +42,6 @@ public class ClassicOwnership implements Ownership {
     public int getID() {
         return this.id;
     }
-
-//    @Override
-//    public Set<Action> getAllowedActions() {
-//        return this.allowedActions;
-//    }
-//
-//    @Override
-//    public Set<Action> getObligatoryActions() {
-//        return this.obligatoryActions;
-//    }
 
     @Override
     public Contract getContract() {
@@ -81,16 +67,6 @@ public class ClassicOwnership implements Ownership {
     public void setMortgage(final boolean mortgage) {
         this.mortgaged = mortgage;
     }
-
-//    @Override
-//    public void setAllowedActions(final Set<Action> actions) {
-//        this.allowedActions.addAll(actions);
-//    }
-//
-//    @Override
-//    public void setObligatoryActions(final Set<Action> actions) {
-//        this.obligatoryActions.addAll(actions);
-//    }
 
     @Override
     public void setOwner(final Owner owner) {

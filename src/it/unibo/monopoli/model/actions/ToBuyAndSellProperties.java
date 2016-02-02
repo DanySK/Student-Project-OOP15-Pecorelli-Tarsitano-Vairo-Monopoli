@@ -28,7 +28,7 @@ public abstract class ToBuyAndSellProperties extends MoneyAction {
 
     /**
      * This constructor serves to get the amount of the {@link Building} to
-     * buy/sell.
+     * buy/sell and the building itself.
      * 
      * @param amount
      *            - of the {@link Building}

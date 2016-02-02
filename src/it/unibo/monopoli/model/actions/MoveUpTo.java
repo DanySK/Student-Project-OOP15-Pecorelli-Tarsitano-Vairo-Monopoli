@@ -77,8 +77,8 @@ public final class MoveUpTo implements Action {
     }
 
     /**
-     * Constructs an instance of this specific {@link Action}. It send you to
-     * the nearest {@link Station}.
+     * Constructs an instance of this specific {@link Action}. It send the
+     * {@link Player}'s {@link Pawn} to the nearest {@link Station}.
      * 
      * @return an instance of {@link MoveUpTo}
      */

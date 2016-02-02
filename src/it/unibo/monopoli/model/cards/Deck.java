@@ -40,8 +40,7 @@ public interface Deck {
     void removeCard(Card card);
 
     /**
-     * Return the topmost {@link Card} of the {@link Deck}, that is the one in
-     * the last position.
+     * Return the topmost {@link Card} of the {@link Deck}.
      * 
      * @return the topmost {@link Card}
      */

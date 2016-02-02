@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.Deck;
+import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.model.table.Ownership;
 
 /**
@@ -22,17 +23,11 @@ public interface Player extends Owner {
     String getName();
 
     /**
-     * Return the {@link Pawn} of the {@link Player}. Each {@link Player} can
-     * have only one {@link Pawn}.
+     * Return the {@link Pawn} of the {@link Player}.
      * 
      * @return the {@link Pawn} of the {@link Player}
      */
     Pawn getPawn();
-
-    // /**
-    // * Set the {@link Pawn} that will belong to the {@link Player}.
-    // */
-    // void setPawn();
 
     /**
      * Return the {@link List} of {@link Ownership} belonging to the
@@ -40,16 +35,22 @@ public interface Player extends Owner {
      * 
      * @return a {@link List} of {@link Ownership}
      */
-    List<Ownership>  getOwnerships();
+    List<Ownership> getOwnerships();
 
     /**
-     * Adds a {@link Card} to the {@link Player}'s {@link Deck}.
+     * Adds a {@link Card} to the {@link Player}.
      * 
      * @param card
      *            - the {@link Card} to add
      */
     void addCard(Card card);
-    
+
+    /**
+     * Removes a {@link Card} from the {@link Player}.
+     * 
+     * @param card
+     *            - the {@link Card} to remove
+     */
     void removeCard(Card card);
 
     /**
@@ -84,20 +85,53 @@ public interface Player extends Owner {
     boolean isInPrison();
 
     /**
-     * Returns the last card the the {@link Player} drew from a {@link Deck}
-     * @return
-     * @throws NullPointerException - if no {@link Card} was draw.
+     * Returns the last {@link Card} that the {@link Player} drew from a
+     * {@link Deck}.
+     * 
+     * @return the last {@link Card} drew from a {@link Deck}
+     * @throws NullPointerException
+     *             - if no {@link Card} was draw.
      */
     Card lastCardDrew();
-    
+
+    /**
+     * Sets the {@link Card} that the {@link Player} drew from a {@link Deck}.
+     * 
+     * @param lastCard
+     *            - the {@link Card} drew from a {@link Deck}
+     */
     void setLastCardDrew(Card lastCard);
-    
+
+    /**
+     * Returns the last numbers obtained with the roll of {@link Dice}s.
+     * 
+     * @return the last numbers obtained with the roll of {@link Dice}s.
+     */
     List<Integer> lastDicesNumber();
-    
+
+    /**
+     * Sets the last numbers obtained with the roll of {@link Dice}s.
+     * 
+     * @param numbers
+     *            - the last numbers obtained with the roll of {@link Dice}s.
+     */
     void setLastDicesNumber(List<Integer> numbers);
-    
+
+    /**
+     * Returns true if the {@link Player} had paid all his debts, otherwise
+     * false.
+     * 
+     * @return true if the {@link Player} had paid all his debts
+     */
     boolean areDebtsPaid();
-    
+
+    /**
+     * Sets true if the {@link Player} had paid all his debts, otherwise false.
+     * 
+     * @param arePaid
+     *            - a boolean that is true if the {@link Player} had paid all
+     *            his debts, otherwise false
+     */
     void setDebts(boolean arePaid);
 
     /**
@@ -107,15 +141,6 @@ public interface Player extends Owner {
      *            - true if {@link Player} is going to prison, otherwise, false
      */
     void setPrison(boolean isGoingToPrison);
-
-    // /**
-    // * If the {@link Ownership} request belongs to the {@link Player},
-    // * the method returns an {@link Optional} of {@link Ownership}, else return
-    // * an {@link Optional} of null.
-    // * @return an {@link Optional} of {@link Ownership}
-    // * @param ownership - the {@link Ownership} to find the return
-    // */
-    // Optional<Ownership> getOwnership(Ownership ownership);
 
     /**
      * Add a new {@link Ownership}.
@@ -147,15 +172,42 @@ public interface Player extends Owner {
      *            - the amount of money to set
      */
     void setMoney(int amount);
-    
+
+    /**
+     * Returns true if the {@link Player} is human, otherwise false.
+     * 
+     * @return true if the {@link Player} is human
+     */
     boolean isHuman();
 
+    /**
+     * Returns how many turns the {@link Player} has been in prison's
+     * {@link Box}.
+     * 
+     * @return how many turns the {@link Player} has been in prison
+     */
     int howManyTurnsHasBeenInPrison();
 
+    /**
+     * Increments the turns that the {@link Player} passed in prison.
+     */
     void incrementsTurnsInPrison();
-    
+
+    /**
+     * Sets if next one will be the first launch (true) or not (false).
+     * 
+     * @param isTheFirst
+     *            - true if next one will be the first launch, otherwise false
+     */
     void setIfIsTheFirstLaunch(boolean isTheFirst);
-    
+
+    /**
+     * Returns if the launch is the first one of the {@link Player}'s turn
+     * (true) or not (false).
+     * 
+     * @return if the launch is the first one of the {@link Player}'s turn
+     *         (true)
+     */
     boolean isTheFirtsLaunch();
 
 }

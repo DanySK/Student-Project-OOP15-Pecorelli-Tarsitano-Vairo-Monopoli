@@ -10,7 +10,6 @@ import it.unibo.monopoli.model.table.Ownership;
  */
 public abstract class ToMortgageAndRevoke extends MoneyAction {
 
-
     /**
      * This constructor serves to get the amount of the mortgage or the revoke.
      * 
@@ -23,12 +22,5 @@ public abstract class ToMortgageAndRevoke extends MoneyAction {
 
     @Override
     protected abstract void strategy(final Player player);
-
-//    /**
-//     * This is an abstract method that the specifics sub-classes have to
-//     * implements depending on the strategy. This method represent how to
-//     * operate with the mortgaging.
-//     */
-//    protected abstract void strategyOfMortgaging();
 
 }

@@ -24,7 +24,12 @@ public interface Pawn {
      * @return the actual position of the {@link Pawn}
      */
     int getActualPos();
-    
+
+    /**
+     * Returns the previous position of the {@link Pawn} in the table of play.
+     * 
+     * @return {@link Pawn}'s previous position
+     */
     int getPreviousPos();
 
     /**

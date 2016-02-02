@@ -3,11 +3,9 @@ package it.unibo.monopoli.model.mainunits;
 import java.util.Iterator;
 import java.util.List;
 
-import it.unibo.monopoli.controller.Actions;
 import it.unibo.monopoli.model.cards.Card;
 import it.unibo.monopoli.model.cards.Deck;
 import it.unibo.monopoli.model.table.Box;
-import it.unibo.monopoli.model.table.Ownership;
 
 /**
  * This class implements the contract of {@link GameVersion} to bring back the
@@ -20,7 +18,6 @@ public class GameVersionImpl implements GameVersion {
     private final List<Player> players;
     private Iterator<Player> iter;
     private Player actualPlayer;
-//    private final List<Box> allBoxes;
 
     /**
      * Constructs an instance that will be able to give back the right version
@@ -34,7 +31,6 @@ public class GameVersionImpl implements GameVersion {
         this.strategy = strategy;
         this.players = strategy.getPlayers();
         this.iter = this.players.iterator();
-//        this.allBoxes = strategy.getBoxes();
     }
 
     @Override
@@ -51,14 +47,9 @@ public class GameVersionImpl implements GameVersion {
     public List<Deck> getDecks() {
         return this.strategy.getDecks();
     }
-//
-//    @Override
-//    public AuctionOfOwnership toAuction(final Ownership ownership, final Player player) {
-//        return this.strategy.toAuction(ownership, player);
-//    }
 
     @Override
-    public Player getNextPlayer() { //PRIVATO?????????????
+    public Player getNextPlayer() {
         if (!this.iter.hasNext()) {
             this.iter = this.players.iterator();
         }
@@ -69,7 +60,7 @@ public class GameVersionImpl implements GameVersion {
     @Override
     public Player endOfTurnAndNextPlayer() {
         this.actualPlayer.setDicesRoll(false);
-        this.actualPlayer.setIfIsTheFirstLaunch(true);        
+        this.actualPlayer.setIfIsTheFirstLaunch(true);
         return this.getNextPlayer();
     }
 
@@ -78,21 +69,14 @@ public class GameVersionImpl implements GameVersion {
         return this.strategy.toRollDices(this.actualPlayer);
     }
 
-    // @Override
-    // public Action getNextBoxsAction(final Box box, final Player player) {
-    // // TODO Auto-generated method stub
-    // return null;
-    // }
-
-     @Override
-     public boolean getNextCardsAction(final Box box, final Card card, final Player player) {
+    @Override
+    public boolean getNextCardsAction(final Box box, final Card card, final Player player) {
         return this.strategy.getNextCardsActions(box, card, player);
-     }
+    }
 
-     @Override
-     public boolean haveEnoughMoney(final Player player, final int moneyToPay) {
-         return this.strategy.haveEnoughMoney(player, moneyToPay);
-     }
-
+    @Override
+    public boolean haveEnoughMoney(final Player player, final int moneyToPay) {
+        return this.strategy.haveEnoughMoney(player, moneyToPay);
+    }
 
 }

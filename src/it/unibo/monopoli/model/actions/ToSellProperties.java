@@ -33,8 +33,8 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
     }
 
     /**
-     * This is a static method that can be used to create a new instance of this
-     * class. It serves for selling an {@link Ownership}.
+     * This method that creates a new instance of this class. It serves for
+     * selling an {@link Ownership}.
      * 
      * @param amount
      *            - the amount of the {@link Ownership}.
@@ -52,8 +52,8 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
     }
 
     /**
-     * This is a static method that can be used to create a new instance of this
-     * class. It serves for selling a {@link Building}.
+     * This method that creates a new instance of this class. It serves for
+     * selling a {@link Building}.
      * 
      * @param land
      *            - the {@link Land} on which the {@link Building} was built
@@ -66,10 +66,9 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
      *             - if instead of {@link Land} and/or {@link Building} and/or
      *             {@link Bank} there are some null
      */
-    public static ToSellProperties sellABuilding(final Land land, final Building building,
-            final Bank bank) {
-        return new ToSellProperties(((LandContract) land.getContract()).getCostForEachBuilding(), Objects.requireNonNull(land), Objects.requireNonNull(building),
-                Objects.requireNonNull(bank));
+    public static ToSellProperties sellABuilding(final Land land, final Building building, final Bank bank) {
+        return new ToSellProperties(((LandContract) land.getContract()).getCostForEachBuilding(),
+                Objects.requireNonNull(land), Objects.requireNonNull(building), Objects.requireNonNull(bank));
     }
 
     @Override
@@ -78,15 +77,15 @@ public final class ToSellProperties extends ToBuyAndSellProperties {
             ((LandGroup) this.ownership.getGroup()).removeBuilding(building);
             this.bank.addBuilding(building);
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("You can't sell a building tht you don't have");
         }
     }
 
     @Override
     protected void whatToDoWithOwnership(final Player player) {
         if (this.ownership.getGroup() instanceof LandGroup
-                    && !((LandGroup) this.ownership.getGroup()).getBuildings().isEmpty()) {
-                throw new IllegalArgumentException("You can't sell an ownership if in its group there are buildings");
+                && !((LandGroup) this.ownership.getGroup()).getBuildings().isEmpty()) {
+            throw new IllegalArgumentException("You can't sell an ownership if in its group there are buildings");
         } else if (this.ownership.isMortgaged()) {
             throw new IllegalArgumentException("You can't sell a mortgaged ownership");
         }

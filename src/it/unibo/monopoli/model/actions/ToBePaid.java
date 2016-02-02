@@ -14,8 +14,7 @@ public class ToBePaid extends ToPayAndBePaid {
      * amount with which the {@link Player} is paid.
      * 
      * @param amount
-     *            - the amount with which the {@link Player} is paid. It can be
-     *            only positive
+     *            - the amount with which the {@link Player} is paid.
      * @throws IllegalArgumentException
      *             - if the amount is less than or equal to zero
      */

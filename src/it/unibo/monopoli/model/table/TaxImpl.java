@@ -1,6 +1,5 @@
 package it.unibo.monopoli.model.table;
 
-
 /**
  * This class represents an implementation of {@link Tax}. More specifically it
  * represents the {@link Tax}'s {@link Box} of Monopoly.
@@ -9,10 +8,8 @@ package it.unibo.monopoli.model.table;
 public class TaxImpl implements Tax {
 
     private final String name;
-    private final int ID;
+    private final int id;
     private final int cost;
-//    private final Set<Action> allowedActions;
-//    private final Set<Action> obligatoryActions;
 
     /**
      * Constructs an implementation of {@link TaxImpl} that needs a name, an ID
@@ -20,18 +17,15 @@ public class TaxImpl implements Tax {
      * 
      * @param name
      *            - of this {@link Box}
-     * @param ID
+     * @param id
      *            - of this {@link Box}
      * @param cost
      *            - of this {@link Box}
      */
-    public TaxImpl(final String name, final int ID, final int cost) {
+    public TaxImpl(final String name, final int id, final int cost) {
         this.name = name;
-        this.ID = ID;
+        this.id = id;
         this.cost = cost;
-//        this.allowedActions = new HashSet<>();
-//        this.obligatoryActions = new HashSet<>();
-//        this.obligatoryActions.add(new ToPay(this.cost));
     }
 
     @Override
@@ -41,28 +35,8 @@ public class TaxImpl implements Tax {
 
     @Override
     public int getID() {
-        return this.ID;
+        return this.id;
     }
-
-//    @Override
-//    public Set<Action> getAllowedActions() {
-//        return this.allowedActions;
-//    }
-//
-//    @Override
-//    public Set<Action> getObligatoryActions() {
-//        return this.obligatoryActions;
-//    }
-//
-//    @Override
-//    public void setAllowedActions(final Set<Action> actions) {
-//        this.allowedActions.addAll(actions);
-//    }
-//
-//    @Override
-//    public void setObligatoryActions(final Set<Action> actions) {
-//        this.obligatoryActions.addAll(actions);
-//    }
 
     @Override
     public int getCost() {

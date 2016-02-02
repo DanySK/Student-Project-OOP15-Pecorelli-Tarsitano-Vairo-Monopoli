@@ -1,5 +1,10 @@
 package it.unibo.monopoli.model.mainunits;
 
+/**
+ * This class represents the {@link Pawn} used in the classic version of
+ * Monopoly.
+ *
+ */
 public class ClassicPawn implements Pawn {
 
     private static final int LAST_POSITION = 39;
@@ -8,6 +13,12 @@ public class ClassicPawn implements Pawn {
     private int actualPos;
     private int previousPos;
 
+    /**
+     * Constructs an instance of {@link ClassicPawn}. It needs a specific ID
+     * 
+     * @param id
+     *            - {@link Pawn}'s ID
+     */
     public ClassicPawn(final int id) {
         this.id = id;
         this.actualPos = 0;

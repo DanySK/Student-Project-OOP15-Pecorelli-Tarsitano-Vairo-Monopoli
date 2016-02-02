@@ -339,7 +339,6 @@ public class TestModel {
         players.remove(PAWN_ID_AND_N_PLAYER_6);
         version = new GameVersionImpl(new ItalianStrategy(players));
         assertEquals(players.size(), PLAYERS_5);
-//        final Bank bank = version.getBank();
 
         //Tests players' money and ownerships
         players.forEach(p -> {

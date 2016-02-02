@@ -1,8 +1,8 @@
 package it.unibo.monopoli.model.mainunits;
 
 /**
- * this interface represents all the all entities that may be {@link Owner}s of
- * somethings.
+ * This interface represents all the entities that may be {@link Owner}s of
+ * something.
  *
  */
 public interface Owner {

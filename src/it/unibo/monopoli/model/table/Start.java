@@ -13,11 +13,9 @@ public class Start implements Box {
 
     private final String name;
     private final int id;
-//    private final Set<Action> allowedActions;
-//    private final Set<Action> obligatoryActions;
 
     /**
-     * Constructs an implementation of {@link Start} that needs a name and a ID.
+     * Constructs an implementation of {@link Start} that needs a name and an ID.
      * 
      * @param name
      *            - of this {@link Box}
@@ -27,9 +25,6 @@ public class Start implements Box {
     public Start(final String name, final int id) {
         this.name = name;
         this.id = id;
-//        this.allowedActions = new HashSet<>();
-//        this.obligatoryActions = new HashSet<>();
-//        this.obligatoryActions.add(new ToBePaid(MONEY_TO_PICK_UP));
     }
 
     @Override
@@ -42,26 +37,6 @@ public class Start implements Box {
         return this.id;
     }
 
-//    @Override
-//    public Set<Action> getAllowedActions() {
-//        return this.allowedActions;
-//    }
-//
-//    @Override
-//    public Set<Action> getObligatoryActions() {
-//        return this.obligatoryActions;
-//    }
-//
-//    @Override
-//    public void setAllowedActions(final Set<Action> actions) {
-//        this.allowedActions.addAll(actions);
-//    }
-//
-//    @Override
-//    public void setObligatoryActions(final Set<Action> actions) {
-//        this.obligatoryActions.addAll(actions);
-//    }
-
     /**
      * Returns the values of the money to pick up when some {@link Player} pass
      * from this {@link Box}.
@@ -72,4 +47,4 @@ public class Start implements Box {
         return MONEY_TO_PICK_UP;
     }
 
- }
+}

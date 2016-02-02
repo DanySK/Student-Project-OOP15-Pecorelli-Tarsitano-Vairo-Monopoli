@@ -14,13 +14,6 @@ import it.unibo.monopoli.model.mainunits.Player;
  */
 public interface Card {
 
-    // /**
-    // * Return the {@link Deck} to which the {@link Card} belongs.
-    // *
-    // * @return {@link Card}'s {@link Deck}
-    // */
-    // Deck getDeck();
-
     /**
      * Returns the ID of the {@link Card}.
      * 
@@ -46,15 +39,15 @@ public interface Card {
     /**
      * Returns the {@link Optional} {@link Player} owner of this {@link Card}.
      * 
-     * @return the {@link Player} owner of this {@link Card}
+     * @return the {@link Optional} {@link Player} owner of this {@link Card}
      */
     Optional<Player> getPlayer();
 
     /**
-     * Sets the {@link Player} who draw the {@link Card}.
+     * Sets the {@link Player} owner of the {@link Card}.
      * 
      * @param player
-     *            - the {@link Player} who draw the {@link Card}.
+     *            - the {@link Player} owner of the {@link Card}.
      */
     void setPlayer(Player player);
 

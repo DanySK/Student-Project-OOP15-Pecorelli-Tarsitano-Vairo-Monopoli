@@ -28,9 +28,6 @@ public class ToPay extends ToPayAndBePaid {
         if (amount <= 0) {
             throw new IllegalArgumentException("Only positive amount different of zero!");
         }
-        if (amount > player.getMoney()) {
-            throw new IllegalArgumentException();
-        }
     }
 
 }

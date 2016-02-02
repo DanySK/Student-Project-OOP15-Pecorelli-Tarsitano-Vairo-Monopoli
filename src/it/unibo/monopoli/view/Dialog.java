@@ -1,8 +1,6 @@
 package it.unibo.monopoli.view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,10 +20,13 @@ public class Dialog extends JDialog implements ActionListener {
      * Dialog class constructor.
      * 
      * @param parent
+     *            -frame parent
      * @param title
+     *            -frame title
      * @param message
+     *            -message to be displayed
      */
-    public Dialog(JFrame parent, String title, final String message) {
+    public Dialog(final JFrame parent, final String title, final String message) {
         super(parent, title, true);
         if (parent != null) {
             setLocation(C.X_LOCATION_JDIALOG, C.Y_LOCATION_JDIALOG);
@@ -43,11 +44,12 @@ public class Dialog extends JDialog implements ActionListener {
         setVisible(true);
     }
 
-/**
- * listener su botton JDialog.
- * 
- * @param e
- */
+    /**
+     * listener su botton JDialog.
+     * 
+     * @param e
+     * 
+     */
     public void actionPerformed(final ActionEvent e) {
         setVisible(false);
         dispose();

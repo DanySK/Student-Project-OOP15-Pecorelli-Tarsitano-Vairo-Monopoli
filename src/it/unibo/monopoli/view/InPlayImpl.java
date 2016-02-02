@@ -6,8 +6,8 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import it.unibo.monopoli.controller.Actions;
-import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.model.mainunits.Player;
+
 /**
  * class that implementing interface InPlay.
  * 
@@ -16,9 +16,16 @@ import it.unibo.monopoli.model.mainunits.Player;
 public class InPlayImpl implements InPlay {
 
     private final List<Actions> buttons;
-    private Index i;
+    private final Index i;
 
-    public InPlayImpl(Index i) {
+    /**
+     * link to controller.
+     * 
+     * @param i
+     *            Index
+     * 
+     */
+    public InPlayImpl(final Index i) {
         this.buttons = new LinkedList<>();
         this.i = i;
     }
@@ -30,6 +37,9 @@ public class InPlayImpl implements InPlay {
 
     }
 
+    /**
+     * @return List<Action>
+     */
     public List<Actions> getButtons() {
         return this.buttons;
     }
@@ -55,9 +65,8 @@ public class InPlayImpl implements InPlay {
     }
 
     @Override
-    public void beginComputer(int i) {
+    public void beginComputer(final int i) {
         this.i.prevPos(i);
-        
     }
     @Override
     public void finish(Player p){
@@ -66,5 +75,4 @@ public class InPlayImpl implements InPlay {
         System.exit(0);
     }
 
-   
 }

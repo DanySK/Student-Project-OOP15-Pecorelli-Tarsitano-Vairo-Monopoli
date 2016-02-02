@@ -10,11 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import it.unibo.monopoli.model.table.DecksBox;
-import it.unibo.monopoli.model.table.Land;
-import it.unibo.monopoli.model.table.Ownership;
 import it.unibo.monopoli.view.C;
-import it.unibo.monopoli.view.JShape.Shapes;
-import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
+
 /**
  * 
  * class that is the graphic implementation of the DecksBox.
@@ -23,25 +20,30 @@ import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
 public class DecksGraphic extends AbstractGraphicCard {
 
     private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-    private DecksBox deck;
+    private final DecksBox deck;
+
     /**
- * Builder.
- * @param deck
- * @param pos
- * @param id
- */
-    public DecksGraphic(DecksBox deck, Position pos, int id) {
+     * Builder.
+     * 
+     * @param deck
+     *            card
+     * @param pos
+     *            card pos
+     * @param id
+     *            card id
+     */
+    public DecksGraphic(final DecksBox deck, final Position pos, final int id) {
         super(deck, pos);
         this.deck = deck;
     }
 
     @Override
     public JPanel build() {
-        JPanel card = new JPanel();
+        final JPanel card = new JPanel();
         card.setPreferredSize(new Dimension(C.DIM));
         card.setLayout(new GridLayout(2, 1));
 
-        JLabel nameP = new JLabel("<html>" + deck.getName() + "</html>");
+        final JLabel nameP = new JLabel("<html>" + deck.getName() + "</html>");
         card.add(nameP);
 
         card.add(emptyP);

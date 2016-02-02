@@ -729,7 +729,7 @@ public class ControllerImpl implements Controller {
                 }
             }
         }
-        if (player.dicesAlreadyRolled()) {
+        if (player.dicesAlreadyRolled() && !this.isTwiceDices()) {
             actions.add(Actions.END_OF_TURN);
         }
         if ((box instanceof Ownership) && !((Ownership) box).isMortgaged()

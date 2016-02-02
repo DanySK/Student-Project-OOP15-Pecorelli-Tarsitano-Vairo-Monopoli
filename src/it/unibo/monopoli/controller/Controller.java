@@ -154,9 +154,11 @@ public interface Controller {
      * @return the id of actual position.
      */
     int getActualPosition();
+
     /**
      * This is a method for start the game.
+     * @param version -the version of the game.
      */
-    void play();
+    void play(EVersion version);
 
 }

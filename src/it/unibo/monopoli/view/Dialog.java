@@ -12,18 +12,29 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * class that creates JDialog used during the game.
+ *
+ */
 public class Dialog extends JDialog implements ActionListener {
-    public Dialog(JFrame parent, String title, String message) {
+    /**
+     * Dialog class constructor.
+     * 
+     * @param parent
+     * @param title
+     * @param message
+     */
+    public Dialog(JFrame parent, String title, final String message) {
         super(parent, title, true);
         if (parent != null) {
-            Dimension parentSize = parent.getSize();
-            Point p = parent.getLocation();
-            setLocation(650, 300);
+            setLocation(C.X_LOCATION_JDIALOG, C.Y_LOCATION_JDIALOG);
         }
-        JPanel messagePane = new JPanel();
+        final JPanel messagePane = new JPanel();
         messagePane.add(new JLabel(message));
         getContentPane().add(messagePane);
-        JPanel buttonPane = new JPanel();
+        final JPanel buttonPane = new JPanel();
+        final 
         JButton button = new JButton("OK");
         buttonPane.add(button);
         button.addActionListener(this);
@@ -33,12 +44,14 @@ public class Dialog extends JDialog implements ActionListener {
         setVisible(true);
     }
 
-    public void actionPerformed(ActionEvent e) {
+/**
+ * listener su botton JDialog.
+ * 
+ * @param e
+ */
+    public void actionPerformed(final ActionEvent e) {
         setVisible(false);
         dispose();
     }
-    // public static void main(String[] a) {
-    // Dialog dlg = new Dialog(new JFrame(), "title", "message");
-    // }
 
 }

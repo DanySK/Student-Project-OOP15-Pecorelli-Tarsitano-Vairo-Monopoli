@@ -17,42 +17,45 @@ import it.unibo.monopoli.view.C;
 import it.unibo.monopoli.view.JShape;
 import it.unibo.monopoli.view.JShape.Shapes;
 import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
-
+/**
+ * 
+ * class that is the graphic implementation of the LandtBox.
+ *
+ */
 public class LandGraphic extends AbstractGraphicCard {
 
-    private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-    private Land land;
-    private int id;
-    JLabel colorP;
-
+    private  Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+    private  Land land;
+    private JPanel colorP;
+/**
+ * Builder.
+ * @param land
+ * @param pos
+ * @param id
+ */
     public LandGraphic(Land land, Position pos, int id) {
         super(land, pos);
         this.land = land;
-        this.id = id;
+        colorP = new JPanel();
     }
 
     @Override
     public JPanel build() {
-        RotatedPanel card = getRotatedPanel();
-        card.setPreferredSize(new Dimension(card.getDim()));
+        JPanel card = new JPanel();
+        card.setPreferredSize(new Dimension(C.DIM));
         card.setLayout(new GridLayout(4, 1));
 
-        colorP = new JLabel();
+        card.add(colorP);
         colorP.setOpaque(true);
         colorP.setBackground(land.getColor());
-        card.add(colorP);
-
-        JLabel nameP = new JLabel("<html>"+land.getName()+"</html>");
+         JLabel nameP = new JLabel("<html>" + land.getName() + "</html>");
         nameP.setFont(new Font("Times New Roman", Font.BOLD, 10));
-        nameP.setPreferredSize(new Dimension(card.getDimension().width,20));
-        card.add(nameP);
+         card.add(nameP);
 
         card.add(emptyP);
 
         JLabel valueP = new JLabel("" + land.getContract().getCost());
         card.add(valueP);
-
-        
 
         card.setBorder(border);
         card.setVisible(true);
@@ -62,24 +65,28 @@ public class LandGraphic extends AbstractGraphicCard {
 
     }
 
-    // non ho bisogno della mappa perchè tolgo sempre l'ultima
     private LinkedList<JShape> houses = new LinkedList<>();
     public void addHouse(final Player p) {
+        System.out.println(p.getName() + "AddHouse");
         int id = p.getPawn().getID(); // prendo l'id del colore della pedina
-        Color c = C.COLORS[id];
+        System.out.println("AddHouse id: " + p.getPawn().getID());
+        Color c = C.cl.get(id);
         JShape house = new JShape(c); // creo la pedina
         
-        houses.add(house); // aggiungo pedina alla mappa
+       houses.add(house); // aggiungo pedina alla mappa
         colorP.add(house);
         colorP.validate();
-//        pannellocasa.add(house); // disegno la pedina (aggiungendola al pannello)
-//        pannellocasa.validate();
     }
-
+/**
+ * 
+ * @param p
+ */
     public void removeHouse(Player p) {
         JShape h = houses.getLast();
-        colorP.remove(h); // rimuovo la pedina dal pannello
-        houses.removeLast();
-        colorP.revalidate();
+        colorP.remove(h);
+        h.setVisible(false);// rimuovo la pedina dal pannello
+        houses.remove(h);
+      colorP.doLayout();
+        colorP.repaint();
     } 
 }

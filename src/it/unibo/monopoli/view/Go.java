@@ -26,10 +26,17 @@ import it.unibo.monopoli.controller.EVersion;
 import it.unibo.monopoli.view.listener.StartPlay;
 import it.unibo.monopoli.view.listener.VersionSelected;
 
+/**
+ * 
+ * This class represents the frame of starting the game.
+ *
+ */
 public class Go {
     private static int numPlayer = 0;
-    private int cont = 2;
-
+    /**
+     * class constructor Go. Create the main frame, with its components: version
+     * and information very players and typology.
+     */
     public Go() {
         final MyFrame start = new MyFrame("Start - Monopoli", new BorderLayout(), new Dimension(900, 450));
         start.setFont(new Font("Berlin Sans FB", Font.PLAIN, 14));
@@ -44,48 +51,47 @@ public class Go {
         lblMonopoliBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
         lblMonopoliBenvenuto.setFont(new Font("Berlin Sans FB", Font.BOLD, 50));
 
-        final JPanel GridC = new JPanel();
-        panel.add(GridC);
-        final GridBagLayout gbl_GridC = new GridBagLayout();
-        gbl_GridC.columnWidths = new int[] { 81, 237, 157, 104, 0, 0, 63, 0, 1 };
-        gbl_GridC.rowHeights = new int[] { 24, 53, 0, 166, 31, 36, -17, 2 };
-        gbl_GridC.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
-        gbl_GridC.rowWeights = new double[] { 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
-        GridC.setLayout(gbl_GridC);
+        final JPanel gridC = new JPanel();
+        panel.add(gridC);
+        final GridBagLayout gbcGridC = new GridBagLayout();
+        gbcGridC.columnWidths = new int[] { 81, 237, 157, 104, 0, 0, 63, 0, 1 };
+        gbcGridC.rowHeights = new int[] { 24, 53, 0, 166, 31, 36, -17, 2 };
+        gbcGridC.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
+        gbcGridC.rowWeights = new double[] { 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
+        gridC.setLayout(gbcGridC);
 
         final JPanel firstRow = new JPanel();
-        final FlowLayout flowLayout = (FlowLayout) firstRow.getLayout();
-        final GridBagConstraints gbc_firstRow = new GridBagConstraints();
-        gbc_firstRow.anchor = GridBagConstraints.WEST;
-        gbc_firstRow.insets = new Insets(0, 0, 5, 5);
-        gbc_firstRow.fill = GridBagConstraints.VERTICAL;
-        gbc_firstRow.gridx = 1;
-        gbc_firstRow.gridy = 1;
-        GridC.add(firstRow, gbc_firstRow);
+        final GridBagConstraints gbcRow1 = new GridBagConstraints();
+        gbcRow1.anchor = GridBagConstraints.WEST;
+        gbcRow1.insets = new Insets(0, 0, 5, 5);
+        gbcRow1.fill = GridBagConstraints.VERTICAL;
+        gbcRow1.gridx = 1;
+        gbcRow1.gridy = 1;
+        gridC.add(firstRow, gbcRow1);
 
-        final JLabel lblScegliLaVersione = new JLabel("Choose version: ");
-        lblScegliLaVersione.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblScegliLaVersione.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
-        firstRow.add(lblScegliLaVersione);
+        final JLabel lblChooseVersion = new JLabel("Choose version: ");
+        lblChooseVersion.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblChooseVersion.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
+        firstRow.add(lblChooseVersion);
 
         final JPanel panelComboBox = new JPanel();
-        final GridBagConstraints gbc_panelComboBox = new GridBagConstraints();
-        gbc_panelComboBox.insets = new Insets(0, 0, 5, 5);
-        gbc_panelComboBox.fill = GridBagConstraints.BOTH;
-        gbc_panelComboBox.gridx = 2;
-        gbc_panelComboBox.gridy = 1;
-        GridC.add(panelComboBox, gbc_panelComboBox);
+        final GridBagConstraints gcbPanelComboBox = new GridBagConstraints();
+        gcbPanelComboBox.insets = new Insets(0, 0, 5, 5);
+        gcbPanelComboBox.fill = GridBagConstraints.BOTH;
+        gcbPanelComboBox.gridx = 2;
+        gcbPanelComboBox.gridy = 1;
+        gridC.add(panelComboBox, gcbPanelComboBox);
 
         final JComboBox<String> comboBoxVersion = new JComboBox<String>();
-        lblScegliLaVersione.setLabelFor(comboBoxVersion);
+        lblChooseVersion.setLabelFor(comboBoxVersion);
         comboBoxVersion.addItemListener(new VersionSelected());
         panelComboBox.add(comboBoxVersion);
         comboBoxVersion.setModel(new DefaultComboBoxModel<String>() {
 
-            boolean selectionAllowed = true;
+            private boolean selectionAllowed = true;
 
             @Override
-            public void setSelectedItem(Object anObject) {
+            public void setSelectedItem(final Object anObject) {
                 if (!C.NOT_SELECTABLE_OPTION.equals(anObject)) {
                     super.setSelectedItem(anObject);
                 } else if (selectionAllowed) {
@@ -100,70 +106,64 @@ public class Go {
         Arrays.asList(EVersion.values()).forEach(v -> comboBoxVersion.addItem(v.getName()));
 
         final JPanel secondRow = new JPanel();
-        final GridBagConstraints gbc_secondRow = new GridBagConstraints();
-        gbc_secondRow.gridwidth = 2;
-        gbc_secondRow.anchor = GridBagConstraints.WEST;
-        gbc_secondRow.insets = new Insets(0, 0, 5, 5);
-        gbc_secondRow.fill = GridBagConstraints.VERTICAL;
-        gbc_secondRow.gridx = 1;
-        gbc_secondRow.gridy = 2;
-        GridC.add(secondRow, gbc_secondRow);
+        final GridBagConstraints gcbRow2 = new GridBagConstraints();
+        gcbRow2.gridwidth = 2;
+        gcbRow2.anchor = GridBagConstraints.WEST;
+        gcbRow2.insets = new Insets(0, 0, 5, 5);
+        gcbRow2.fill = GridBagConstraints.VERTICAL;
+        gcbRow2.gridx = 1;
+        gcbRow2.gridy = 2;
+        gridC.add(secondRow, gcbRow2);
 
-        final JLabel lblScegliIlNumero = new JLabel("Choose number of players, their type and color of the pawn: ");
-        lblScegliIlNumero.setVerticalAlignment(SwingConstants.TOP);
-        lblScegliIlNumero.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblScegliIlNumero.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
-        secondRow.add(lblScegliIlNumero);
+        final JLabel lblChooseNumber = new JLabel("Choose number of players, their type and color of the pawn: ");
+        lblChooseNumber.setVerticalAlignment(SwingConstants.TOP);
+        lblChooseNumber.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblChooseNumber.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
+        secondRow.add(lblChooseNumber);
 
         final JPanel panelBtnAddPlayer = new JPanel();
-        final GridBagConstraints gbc_panelBtnAddPlayer = new GridBagConstraints();
-        gbc_panelBtnAddPlayer.insets = new Insets(0, 0, 5, 5);
-        gbc_panelBtnAddPlayer.fill = GridBagConstraints.BOTH;
-        gbc_panelBtnAddPlayer.gridx = 3;
-        gbc_panelBtnAddPlayer.gridy = 2;
-        GridC.add(panelBtnAddPlayer, gbc_panelBtnAddPlayer);
+        final GridBagConstraints gbcPanelBtnAddPlayer = new GridBagConstraints();
+        gbcPanelBtnAddPlayer.insets = new Insets(0, 0, 5, 5);
+        gbcPanelBtnAddPlayer.fill = GridBagConstraints.BOTH;
+        gbcPanelBtnAddPlayer.gridx = 3;
+        gbcPanelBtnAddPlayer.gridy = 2;
+        gridC.add(panelBtnAddPlayer, gbcPanelBtnAddPlayer);
 
-        final JPanel playerP = new JPanel();
-        final GridBagConstraints gbc_playerP = new GridBagConstraints();
-        gbc_playerP.insets = new Insets(0, 0, 5, 5);
-        gbc_playerP.gridwidth = 6;
-        gbc_playerP.fill = GridBagConstraints.BOTH;
-        gbc_playerP.gridx = 1;
-        gbc_playerP.gridy = 3;
-        GridC.add(playerP, gbc_playerP);
-        final FlowLayout fl_playerP = new FlowLayout();
-        playerP.setLayout(fl_playerP/* (FlowLayout.CENTER, 5, 5) */);
+        final JPanel playerPanel = new JPanel();
+        final GridBagConstraints gbcPlayerPanel = new GridBagConstraints();
+        gbcPlayerPanel.insets = new Insets(0, 0, 5, 5);
+        gbcPlayerPanel.gridwidth = 6;
+        gbcPlayerPanel.fill = GridBagConstraints.BOTH;
+        gbcPlayerPanel.gridx = 1;
+        gbcPlayerPanel.gridy = 3;
+        gridC.add(playerPanel, gbcPlayerPanel);
+        playerPanel.setLayout(new FlowLayout());
 
-        JPanel computer = new InizializedComputer().build(playerP);
-        playerP.add(computer);
+        final JPanel computer = new InizializedComputer().build(playerPanel);
+        playerPanel.add(computer);
         addNumPlayers(1);
-        System.out.println("" + getNumPlayers());
-
+        
         final JButton btnAddPlayer = new JButton("Add Player");
 
         btnAddPlayer.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
 
-                // TODO
-                // Controllo sulla textbox..se � vuota non pu� aggiungere un
-                // nuovo Player
                 if (!InizializedPlayer.isSave()) {
                     new Dialog(new JFrame(), "Error", "Error! Before you add do you have to save the player");
-                } else if (playerP.getComponentCount() < C.MAX_PLAYERS) {
-                    playerP.add(new InizializedPlayer().build(playerP));
-                    playerP.revalidate();
+                } else if (playerPanel.getComponentCount() < C.MAX_PLAYERS) {
+                    playerPanel.add(new InizializedPlayer().build(playerPanel));
+                    playerPanel.revalidate();
+                    
                     addNumPlayers(1);
                     InizializedPlayer.setSave(false);
-                    System.out.println("Add:" + playerP.getComponentCount());
+                    System.out.println("Add:" + playerPanel.getComponentCount());
                     System.out.println("AddGet: " + getNumPlayers());
 
                 } else {
                     new Dialog(new JFrame(), "Error", "Error! You can not enter more than 6 players");
                 }
-                // System.out.println("" + playerP.getComponentCount());
-                // System.out.println("Add Player");
             }
         });
 
@@ -172,29 +172,26 @@ public class Go {
         final JButton btnNewButton = new JButton("AVVIA PARTITA");
         btnNewButton.addActionListener(new StartPlay());
         btnNewButton.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 16));
-        final GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-        gbc_btnNewButton.gridheight = 2;
-        gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-        gbc_btnNewButton.gridx = 3;
-        gbc_btnNewButton.gridy = 4;
-        GridC.add(btnNewButton, gbc_btnNewButton);
+        final GridBagConstraints gbcBtnNewButton = new GridBagConstraints();
+        gbcBtnNewButton.gridheight = 2;
+        gbcBtnNewButton.insets = new Insets(0, 0, 5, 5);
+        gbcBtnNewButton.gridx = 3;
+        gbcBtnNewButton.gridy = 4;
+        gridC.add(btnNewButton, gbcBtnNewButton);
 
         start.setVisible(true);
 
     }
 
-    public static void main(String[] args) {
+    /**
+     * main method.
+     * 
+     * @param args.
+     */
+    public static void main(final String[] args) {
 
         new Go();
 
-    }
-
-    public int Prova() {
-        return this.cont;
-    }
-
-    public void Prova2() {
-        this.cont++;
     }
 
     /**

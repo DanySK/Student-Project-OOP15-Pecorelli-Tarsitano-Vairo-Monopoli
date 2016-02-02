@@ -24,6 +24,9 @@ public class StartPlay implements ActionListener {
 
     private InPlay inPlay;
 
+    private int computer;
+    private EVersion version;
+
     public StartPlay() {
         super();
     }
@@ -36,43 +39,51 @@ public class StartPlay implements ActionListener {
             new Dialog(new JFrame(), "Error", "Error! You have not selected the version");
         } else if (Go.getNumPlayers() <= 1) {
             new Dialog(new JFrame(), "Error", "Error! The minimum number of players is two");
-        } else {
-            Index i = new Index();
-            inPlay = new InPlayImpl(i);
-            i.addInPlay(inPlay);
-            Controller contr = i.getController();
-            contr.addView(inPlay);
-          
-            Set<Entry<String, Boolean>> s = InizializedPlayer.getMap().entrySet();
-            s.forEach(g -> {
-                String[] values = g.getKey().split(C.SPLITTOKEN);
-                contr.addPlayer(values[1], new ClassicPawn(Integer.parseInt(values[0])), g.getValue());
+        } else if (!(InizializedPlayer.isSave())) {
+            new Dialog(new JFrame(), "Error", "Error! You must first save the player");
+        } else
+        {
+
+            InizializedPlayer.getMap().entrySet().forEach(a -> {
+                if (a.getValue().equals(false)) {
+                    computer++;
+                }
             });
-            switch (VersionSelected.getSelectedItem()) {
-            case "Classic":
-                contr.initializedVersion(EVersion.CLASSIC);
-                break;
-            case "Italian Version":
-                contr.initializedVersion(EVersion.ITALIAN_VERSION);
-                break;
-            default:
-                break;
+            if (Go.getNumPlayers() == computer) {
+                new Dialog(new JFrame(), "Error", "Error! Players can not be all kind of Computers");
+            } else {
+                Index i = new Index();
+                inPlay = new InPlayImpl(i);
+                i.addInPlay(inPlay);
+                Controller contr = i.getController();
+                contr.addView(inPlay);
+
+                Set<Entry<String, Boolean>> s = InizializedPlayer.getMap().entrySet();
+                s.forEach(g -> {
+                    String[] values = g.getKey().split(C.SPLITTOKEN);
+                    contr.addPlayer(values[1], new ClassicPawn(Integer.parseInt(values[0])), g.getValue());
+                });
+                switch (VersionSelected.getSelectedItem()) {
+                case "Classic":
+                    version = EVersion.CLASSIC;
+                    contr.initializedVersion(EVersion.CLASSIC);
+                    
+                    break;
+                case "Italian Version":
+                    version = EVersion.ITALIAN_VERSION;
+                    contr.initializedVersion(EVersion.ITALIAN_VERSION);
+                    break;
+                default:
+                    break;
+                }
+                contr.addView(inPlay);
+                i.build();
+                contr.play(version);
+                contr.endTurn();
+
             }
-            contr.addView(inPlay);
-            i.build();
-            contr.getPlayers().forEach(p -> {
-                System.out.println(p.getName());
-                System.out.println("" + p.isHuman());
-                System.out.println("" + p.getPawn().getID());
-
-            });
-            System.out.println("Tocca a : "+contr.getActualPlayer().getName());
-            contr.endTurn();
-
+            System.out.println("Version: " + VersionSelected.getSelectedItem());
         }
-        System.out.println("Version: " + VersionSelected.getSelectedItem());
-        
-
     }
 
     public InPlay getInPlay() {

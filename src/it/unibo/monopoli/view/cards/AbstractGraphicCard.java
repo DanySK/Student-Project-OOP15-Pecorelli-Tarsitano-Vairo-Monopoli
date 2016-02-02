@@ -19,19 +19,21 @@ import it.unibo.monopoli.view.JShape;
  *
  */
 public abstract class AbstractGraphicCard implements IBoxGraphic {
-    private Map<Player, JShape> pawns;
-    private Position pos = null;
-    private Box card;
-    private static final Dimension DIMENSION = new Dimension(60,60);
+    private   Map<Player, JShape> pawns;
+    private  Position pos;
+    private  Box card;
+    private static final Dimension DIMENSION = new Dimension(60, 60);
+
     /**
-     * panel in cui gestisco le pedine, il riferimento a questo pannello si
-     * trova qui perchè è in questa classe che gestisco le pedine
+     * panel in which I manage the checkers, the reference to this panel Here
+     * because it is in this class that I manage the pieces.
      */
     protected JPanel emptyP;
 
     /**
-     * 
+     *Builder. 
      * @param pos
+     * @param card
      */
     public AbstractGraphicCard(Box card, Position pos) {
         this.pos = pos;
@@ -47,23 +49,26 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
     public Position getPosition() {
         return pos;
     }
-/**
- * 
- * @return
- */
+
+    /**
+     * method that controls the position of the card 
+     * and according to what returns the degrees of rotation of the skirt.
+     * 
+     * @return RotatedPanel
+     */
     protected RotatedPanel getRotatedPanel() {
-        Dimension dim = new Dimension(C.BOX_WIDTH, C.BOX_HEIGHT);
+        Dimension dim = new Dimension(C.DIM);
         if (pos == Position.NORTH) {
-            dim = new Dimension(C.BOX_WIDTH, C.BOX_HEIGHT);
+            dim = new Dimension(C.DIM);
             return new RotatedPanel(180, DIMENSION, dim);
         } else if (pos == Position.EAST) {
-            dim = new Dimension(C.BOX_HEIGHT, C.BOX_WIDTH);
+            dim = new Dimension(C.DIM);
             return new RotatedPanel(-90, DIMENSION, dim);
         } else if (pos == Position.WEST) {
-            dim = new Dimension(C.BOX_HEIGHT, C.BOX_WIDTH);
+            dim = new Dimension(C.DIM);
             return new RotatedPanel(90, DIMENSION, dim);
         } else {
-            dim = new Dimension(C.BOX_WIDTH, C.BOX_HEIGHT);
+            dim = new Dimension(C.DIM);
             return new RotatedPanel(0, DIMENSION, dim);
 
         }
@@ -72,29 +77,26 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
     @Override
     public void addPawn(final Player p) {
         int id = p.getPawn().getID(); // prendo l'id del colore della pedina
-        Color c = C.COLORS[id];
+        Color c = C.cl.get(id);
         JShape pawn = new JShape(c); // creo la pedina
         pawns.put(p, pawn); // aggiungo pedina alla mappa
         emptyP.add(pawn); // disegno la pedina (aggiungendola al pannello)
         emptyP.validate();
-//        System.out.println(p.getName());
-//        System.out.println("AddPawn: " + pawns.pawns.keySet());
-//        System.out.println("Key: " + pawns.get(p).getName());
+        // System.out.println(p.getName());
+        // System.out.println("AddPawn: " + pawns.pawns.keySet());
+        // System.out.println("Key: " + pawns.get(p).getName());
     }
 
     @Override
     public void removePawn(Player p) {
         JShape pawn = pawns.get(p); // prendo la pedina corrispondente al
-        pawn.setVisible(false);                            // giocatore
+        pawn.setVisible(false); // giocatore
         emptyP.remove(pawn); // rimuovo la pedina dal pannello
-        pawns.remove(p); // rimuovo il riferimento alla pedina dalla mappa di quel giocatore
+        pawns.remove(p); // rimuovo il riferimento alla pedina dalla mappa di
+                         // quel giocatore
         emptyP.validate();
-        System.out.println(p.getName());
-        System.out.println("RemovePawn: " + pawns.keySet());
-        System.out.println("Key: " + pawns.get(p.getName()));
 
     }
-    
 
     @Override
     public String getName() {

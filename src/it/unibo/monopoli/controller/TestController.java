@@ -83,6 +83,7 @@ public class TestController {
         } catch (IllegalArgumentException i) {
             System.out.println("You can't revoke mortgage on other player\'s ownerships");
         }
+        contro.endGame();
 
     }
     /**
@@ -147,7 +148,6 @@ public class TestController {
         } catch (IllegalArgumentException i) {
             System.out.println("You can't revoke mortgage on other player\'s ownerships");
         }
-        
 
     }
     // //Tests if players are humans or computers and their pawn's ID

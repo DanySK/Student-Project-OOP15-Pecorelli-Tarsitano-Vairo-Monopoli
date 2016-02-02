@@ -117,10 +117,14 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void play() {
+    public void play(final EVersion version) {
         if (!this.actualPlayer.isHuman()) {
             this.computerPlayer();
         }
+        if (!this.view.isPresent()) {
+            this.initializedVersion(version);
+        }
+
     }
 
     @Override
@@ -218,10 +222,11 @@ public class ControllerImpl implements Controller {
      * This is a notify for the view. Notify the actual position of computer.
      * 
      * @param position
+     *            - the position of actual player.
      */
-    public void notifyPositionComputer(int position) {
+    public void notifyPositionComputer(final int position) {
 
-         this.view.ifPresent(v -> v.beginComputer(position));
+        this.view.ifPresent(v -> v.beginComputer(position));
     }
 
     @Override
@@ -336,9 +341,14 @@ public class ControllerImpl implements Controller {
     public Map<Player, Integer> endGame() {
         Map<Player, Integer> map = new HashMap<>();
         final List<Player> pl = this.players.stream().filter(p -> !p.equals(this.players.get(0)))
-                .sorted((p, p1) -> this.patrimony(p) - this.patrimony(p1)).collect(Collectors.toList());
+                .sorted((p, p1) -> this.patrimony(p1) - this.patrimony(p)).collect(Collectors.toList());
         for (Player p : pl) {
             map.put(p, this.patrimony(p));
+        }
+        if (!this.view.isPresent()) {
+            map.entrySet().forEach(p -> {
+                System.out.println(p.getKey().getName() + " have " + p.getValue());
+            });
         }
         return map;
     }

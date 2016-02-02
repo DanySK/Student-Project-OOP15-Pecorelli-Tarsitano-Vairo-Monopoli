@@ -70,6 +70,7 @@ public class ControllerImpl implements Controller {
     private boolean alreadyBuilt;
     private List<Actions> actions;
     private GameStrategy strategy;
+    private int playerSize;
 
     /**
      * Constructor a new instance for list of {@link Player} and set the and set
@@ -109,6 +110,7 @@ public class ControllerImpl implements Controller {
         default:
             break;
         }
+        this.playerSize=this.players.size();
         this.bank = this.version.getBank();
         this.boxes = this.version.getAllBoxes();
         this.decks = this.version.getDecks();
@@ -238,7 +240,12 @@ public class ControllerImpl implements Controller {
     }
     @Override
     public void endTurn() {
+       if(this.playerSize<this.players.size()){
+           this.playerSize=this.players.size();
+           this.actualPlayer=this.version.getNextPlayer();
+       }else{
         this.actualPlayer = this.version.endOfTurnAndNextPlayer();
+       }
         if (!this.actualPlayer.isHuman()) {
             this.computerPlayer();
         } else {
@@ -384,12 +391,13 @@ public class ControllerImpl implements Controller {
      */
     private void gameOverPerson(final Player player) {
         this.notifyGameOver(player);
+        this.version.removePlayer(player);
         this.players.remove(this.players.indexOf(player));
         if (this.players.size() == 1) {
             this.notifyFinish(this.players.get(0));
             this.endGame();
         }
-
+        this.endTurn();
     }
 
     /**

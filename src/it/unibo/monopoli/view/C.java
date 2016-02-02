@@ -14,7 +14,7 @@ public class C {
     /**
      * true if you have to carry out tests to test the result.
      */
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
     /**
      * 

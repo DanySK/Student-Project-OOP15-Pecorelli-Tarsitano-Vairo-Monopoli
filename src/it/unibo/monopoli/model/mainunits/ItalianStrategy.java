@@ -12,6 +12,7 @@ import it.unibo.monopoli.model.actions.GoToPrison;
 import it.unibo.monopoli.model.actions.ItalianDicesStrategy;
 import it.unibo.monopoli.model.actions.MoveUpTo;
 import it.unibo.monopoli.model.actions.ToBePaid;
+import it.unibo.monopoli.model.actions.ToMortgage;
 import it.unibo.monopoli.model.actions.ToPay;
 import it.unibo.monopoli.model.actions.ToRollDices;
 import it.unibo.monopoli.model.actions.ToSellProperties;
@@ -54,7 +55,7 @@ public class ItalianStrategy implements GameStrategy {
 
     private static final int N_MAX_OF_HOUSES = 32;
     private static final int N_MAX_OF_HOTELS = 12;
-    private static final int AMOUNT_OF_FEES = 10;
+    private static final int AMOUNT_OF_FEES = 150;
 
     private static final int MIN_PLAYERS = 2;
     private static final int MAX_PLAYERS = 6;
@@ -697,9 +698,9 @@ public class ItalianStrategy implements GameStrategy {
                             }
                         });
                     });
-            player.getOwnerships().stream().forEach(o -> {
-                if (player.getMoney() <= moneyToPay) {
-                    ToSellProperties.sellAOwnership(o.getContract().getCost(), o, this.bank).play(player);
+            player.getOwnerships().forEach(o -> {
+                if (player.getMoney() <= moneyToPay && !o.isMortgaged()) {
+                    new ToMortgage(o).play(player);
                 }
             });
         }

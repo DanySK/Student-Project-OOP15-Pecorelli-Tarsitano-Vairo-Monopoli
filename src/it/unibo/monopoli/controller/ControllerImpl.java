@@ -341,9 +341,14 @@ public class ControllerImpl implements Controller {
     public Map<Player, Integer> endGame() {
         Map<Player, Integer> map = new HashMap<>();
         final List<Player> pl = this.players.stream().filter(p -> !p.equals(this.players.get(0)))
-                .sorted((p, p1) -> this.patrimony(p) - this.patrimony(p1)).collect(Collectors.toList());
+                .sorted((p, p1) -> this.patrimony(p1) - this.patrimony(p)).collect(Collectors.toList());
         for (Player p : pl) {
             map.put(p, this.patrimony(p));
+        }
+        if (!this.view.isPresent()) {
+            map.entrySet().forEach(p -> {
+                System.out.println(p.getKey().getName() + " have " + p.getValue());
+            });
         }
         return map;
     }

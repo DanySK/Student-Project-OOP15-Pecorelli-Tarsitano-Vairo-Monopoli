@@ -708,7 +708,7 @@ public class ItalianStrategy implements GameStrategy {
 
     private boolean tryToPay(final Player player, final int amoun) {
         try {
-            new ToPay(10).play(player);
+            new ToPay(1).play(player);
             return true;
         } catch (IllegalArgumentException i) {
             return this.haveEnoughMoney(player, amoun) ? this.tryToPay(player, amoun) : false;

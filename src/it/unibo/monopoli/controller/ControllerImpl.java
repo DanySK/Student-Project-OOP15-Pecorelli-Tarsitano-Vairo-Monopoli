@@ -117,10 +117,14 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void play() {
+    public void play(final EVersion version) {
         if (!this.actualPlayer.isHuman()) {
             this.computerPlayer();
         }
+        if (!this.view.isPresent()) {
+            this.initializedVersion(version);
+        }
+
     }
 
     @Override
@@ -217,11 +221,12 @@ public class ControllerImpl implements Controller {
     /**
      * This is a notify for the view. Notify the actual position of computer.
      * 
-     * @param position - the position of actual player.
+     * @param position
+     *            - the position of actual player.
      */
     public void notifyPositionComputer(final int position) {
 
-         this.view.ifPresent(v -> v.beginComputer(position));
+        this.view.ifPresent(v -> v.beginComputer(position));
     }
 
     @Override

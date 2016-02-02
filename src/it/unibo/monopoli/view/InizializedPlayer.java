@@ -111,10 +111,10 @@ public class InizializedPlayer {
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-                map.remove(positionAndName);
+                positionAndName = (0 + C.SPLITTOKEN + textNome.getText());
+                InizializedPlayer.getMap().remove(positionAndName);
                 panel.setVisible(false);
                 playerP.remove(panel);
-                C.cl.addLast(c);
                 Go.addNumPlayers(-1);
                 playerP.revalidate();
             }

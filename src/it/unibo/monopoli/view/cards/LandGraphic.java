@@ -67,9 +67,7 @@ public class LandGraphic extends AbstractGraphicCard {
 
     private LinkedList<JShape> houses = new LinkedList<>();
     public void addHouse(final Player p) {
-        System.out.println(p.getName() + "AddHouse");
         int id = p.getPawn().getID(); // prendo l'id del colore della pedina
-        System.out.println("AddHouse id: " + p.getPawn().getID());
         Color c = C.cl.get(id);
         JShape house = new JShape(c); // creo la pedina
         

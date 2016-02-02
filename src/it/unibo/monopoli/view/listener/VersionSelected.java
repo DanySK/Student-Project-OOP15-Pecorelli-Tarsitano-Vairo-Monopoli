@@ -16,9 +16,8 @@ public class VersionSelected implements ItemListener {
         if (e.getStateChange() == ItemEvent.SELECTED) {
             // SelectedItem è l'Item selezionato
             selectedItem = e.getItem();
-            System.out.println("Hai selezionato: " + selectedItem);
-            System.out.println("get: " + getSelectedItem());
-        }
+           
+            
 
     }
 /**

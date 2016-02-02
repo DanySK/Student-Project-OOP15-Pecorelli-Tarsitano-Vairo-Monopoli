@@ -67,7 +67,6 @@ public class StartPlay implements ActionListener {
                 case "Classic":
                     version = EVersion.CLASSIC;
                     contr.initializedVersion(EVersion.CLASSIC);
-                    
                     break;
                 case "Italian Version":
                     version = EVersion.ITALIAN_VERSION;
@@ -82,7 +81,6 @@ public class StartPlay implements ActionListener {
                 contr.endTurn();
 
             }
-            System.out.println("Version: " + VersionSelected.getSelectedItem());
         }
     }
 

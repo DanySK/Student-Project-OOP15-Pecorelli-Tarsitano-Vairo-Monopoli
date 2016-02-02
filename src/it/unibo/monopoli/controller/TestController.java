@@ -9,6 +9,7 @@ import org.junit.Test;
 import it.unibo.monopoli.model.mainunits.ClassicPawn;
 import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.model.table.Ownership;
+
 /**
  * Is Used for do jUnit test on controller .
  *
@@ -27,7 +28,7 @@ public class TestController {
         Controller contro = new ControllerImpl();
 
         contro.addPlayer("Margherita", new ClassicPawn(PAWN_ID_AND_N_PLAYER_1), true);
-        contro.addPlayer("Laura", new ClassicPawn(PAWN_ID_AND_N_PLAYER_2), false);
+        contro.addPlayer("Laura", new ClassicPawn(PAWN_ID_AND_N_PLAYER_2), true);
         contro.addPlayer("Giuseppe", new ClassicPawn(PAWN_ID_AND_N_PLAYER_3), false);
         contro.addPlayer("Computer1", new ClassicPawn(PAWN_ID_AND_N_PLAYER_4), false);
         contro.initializedVersion(EVersion.CLASSIC);
@@ -37,39 +38,116 @@ public class TestController {
         Ownership o = ((Ownership) boxes.get(1));
         o.setOwner(contro.getBank());
         contro.toRollDices();
-        contro.getNextBoxsActions(boxes.get(1), contro.getActualPlayer());
+
         // test new owner is player and if let buy an ownership
+        contro.getNextBoxsActions(boxes.get(1), contro.getActualPlayer());
         try {
             contro.setActualPosition(1);
             contro.buyOwnership();
+
             assertEquals(((Ownership) contro.getActualBox()).getOwner(), contro.getActualPlayer());
         } catch (IllegalArgumentException i) {
-            System.out.println("Non puoi comprare questa proprieta\'");
+            System.out.println("You can\'t buy this ownership");
         }
+        // test if let mortgage an ownership
+        contro.getNextBoxsActions(boxes.get(1), contro.getActualPlayer());
+        try {
+            contro.setActualPosition(1);
+
+            ((Ownership) contro.getActualBox()).setMortgage(false);
+
+            contro.mortgageOwnership();
+
+            assertEquals(((Ownership) contro.getActualBox()).getOwner(), contro.getActualPlayer());
+        } catch (IllegalArgumentException i) {
+            System.out.println("You can\'t mortgage this ownership'");
+        }
+        // test if let revoke mortgage of ownership
 
         contro.getNextBoxsActions(boxes.get(1), contro.getActualPlayer());
+        try {
+            contro.setActualPosition(1);
+
+            contro.revokeMortgageOwnership();
+
+            assertEquals(((Ownership) contro.getActualBox()).getOwner(), contro.getActualPlayer());
+        } catch (IllegalArgumentException i) {
+            System.out.println("Non puoi togliere l\'ipoteca da questa proprieta\'");
+        }
         // test new owner is bank and if let sell an ownership
+        contro.getNextBoxsActions(boxes.get(1), contro.getActualPlayer());
         try {
             contro.setActualPosition(1);
             contro.sellOwnership();
             assertEquals(((Ownership) contro.getActualBox()).getOwner(), contro.getBank());
         } catch (IllegalArgumentException i) {
-            System.out.println("Non vendere questa proprieta\'");
+            System.out.println("You can't revoke mortgage on other player\'s ownerships");
         }
 
-        contro.getNextBoxsActions(boxes.get(1), contro.getActualPlayer());
+    }
+    /**
+     * Test if player want do action on other player's ownerships.
+     */
+    @Test
+    public void testActionNegative() {
+        Controller contro = new ControllerImpl();
 
-        // players.remove(SEVENTH_PLAYER);
-        // players.remove(PAWN_ID_AND_N_PLAYER_6);
-        // version = new GameVersionImpl(new ClassicStrategy(players));
-        // assertEquals(players.size(), PLAYERS_5);
-        // final Bank bank = version.getBank();
-        //
-        // //Tests players' money and ownerships
-        // players.forEach(p -> {
-        // assertEquals(p.getMoney(), MONEYS_FOR_5_PLAYERS);
-        // assertEquals(p.getOwnerships().size(), OWNERSHIPS_FOR_5_PLAYERS);
-        // });
+        contro.addPlayer("Margherita", new ClassicPawn(PAWN_ID_AND_N_PLAYER_1), true);
+        contro.addPlayer("Laura", new ClassicPawn(PAWN_ID_AND_N_PLAYER_2), true);
+        contro.addPlayer("Giuseppe", new ClassicPawn(PAWN_ID_AND_N_PLAYER_3), false);
+        contro.addPlayer("Computer1", new ClassicPawn(PAWN_ID_AND_N_PLAYER_4), false);
+        contro.initializedVersion(EVersion.CLASSIC);
+        List<Box> boxes = contro.getAllBoxes();
+        contro.endTurn();
+        // Test the number of players
+        Ownership o = ((Ownership) boxes.get(1));
+        o.setOwner(contro.getPlayers().get((contro.getPlayers().indexOf(contro.getActualPlayer()) + 1)));
+        contro.toRollDices();
+
+        // control if let buy the ownerships of other player
+
+        contro.getNextBoxsActions(boxes.get(1), contro.getActualPlayer());
+        try {
+            contro.setActualPosition(1);
+            contro.buyOwnership();
+            assertEquals(((Ownership) contro.getActualBox()).getOwner(), contro.getActualPlayer());
+        } catch (IllegalArgumentException i) {
+            System.out.println("You can\'t buy this ownership'");
+        }
+
+        // control if sell mortgage the ownerships of other player
+        contro.getNextBoxsActions(boxes.get(1), contro.getActualPlayer());
+        try {
+            contro.setActualPosition(1);
+            contro.sellOwnership();
+            assertEquals(((Ownership) contro.getActualBox()).getOwner(), contro.getBank());
+        } catch (IllegalArgumentException i) {
+            System.out.println("You can\'t sell this ownership");
+        }
+
+        // control if let mortgage the ownerships of other player
+        contro.getNextBoxsActions(boxes.get(1), contro.getActualPlayer());
+        try {
+            contro.setActualPosition(1);
+            ((Ownership) contro.getActualBox()).setMortgage(false);
+            contro.mortgageOwnership();
+            contro.sellOwnership();
+            assertEquals(((Ownership) contro.getActualBox()).getOwner(), contro.getBank());
+        } catch (IllegalArgumentException i) {
+            System.out.println("You cant mortgage this ownership'");
+        }
+        // Control if let revoke mortgage on other player\'s ownerships
+        contro.getNextBoxsActions(boxes.get(1), contro.getActualPlayer());
+        try {
+            contro.setActualPosition(1);
+
+            contro.revokeMortgageOwnership();
+
+            assertEquals(((Ownership) contro.getActualBox()).getOwner(), contro.getActualPlayer());
+        } catch (IllegalArgumentException i) {
+            System.out.println("You can't revoke mortgage on other player\'s ownerships");
+        }
+
     }
     // //Tests if players are humans or computers and their pawn's ID
     // assertTrue(players.get(PAWN_ID_AND_N_PLAYER_1).isHuman());

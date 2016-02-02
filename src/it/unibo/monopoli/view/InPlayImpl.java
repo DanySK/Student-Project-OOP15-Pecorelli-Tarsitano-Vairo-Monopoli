@@ -59,6 +59,12 @@ public class InPlayImpl implements InPlay {
         this.i.prevPos(i);
         
     }
+    @Override
+    public void finish(Player p){
+
+        new Dialog(new JFrame(), "Winner", "The winner is " + p.getName());
+        System.exit(0);
+    }
 
    
 }

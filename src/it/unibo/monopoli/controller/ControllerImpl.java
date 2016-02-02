@@ -228,7 +228,14 @@ public class ControllerImpl implements Controller {
 
         this.view.ifPresent(v -> v.beginComputer(position));
     }
+    /**
+     * This is a notify for the view.Notify the actual player winner.
+     * @param player winner
+     */
+    public void notifyFinish(final Player player) {
 
+        this.view.ifPresent(v -> v.finish(player));
+    }
     @Override
     public void endTurn() {
         this.actualPlayer = this.version.endOfTurnAndNextPlayer();
@@ -379,6 +386,7 @@ public class ControllerImpl implements Controller {
         this.notifyGameOver(player);
         this.players.remove(this.players.indexOf(player));
         if (this.players.size() == 1) {
+            this.notifyFinish(this.players.get(0));
             this.endGame();
         }
 

@@ -54,5 +54,7 @@ public interface InPlay {
      * @param i
      */
     void beginComputer(int i);
+    
+    void finish(final Player player);
 
 }

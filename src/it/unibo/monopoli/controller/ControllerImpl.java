@@ -47,7 +47,8 @@ import it.unibo.monopoli.model.table.TaxImpl;
 import it.unibo.monopoli.view.InPlay;
 
 /**
- * */
+ * This is a class with all method for communicate between view and model .
+ */
 public class ControllerImpl implements Controller {
 
     private static final int PRISON_POSITION = 10;

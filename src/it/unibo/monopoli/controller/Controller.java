@@ -1,6 +1,7 @@
 package it.unibo.monopoli.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import it.unibo.monopoli.model.mainunits.Bank;
 import it.unibo.monopoli.model.mainunits.ClassicPawn;
@@ -141,10 +142,10 @@ public interface Controller {
     /**
      * Returns the winner!
      * 
-     * @return - the ordered {@link List} of {@link Player}s from the richest to
-     *         the poorest.
+     * @return - map with {@link Player} as key and money of all property as
+     *         value.
      */
-    List<Player> endGame();
+    Map<Player, Integer> endGame();
 
     /**
      * This method is a getter of actual {@link Player}.

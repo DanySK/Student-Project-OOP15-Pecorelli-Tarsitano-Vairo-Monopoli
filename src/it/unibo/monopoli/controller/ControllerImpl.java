@@ -1,7 +1,9 @@
 package it.unibo.monopoli.controller;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -221,7 +223,7 @@ public class ControllerImpl implements Controller {
     @Override
     public void buyOwnership() {
 
-        if (actions.contains(Actions.BUY) || !this.actualPlayer.isHuman()) {
+        if ((!actions.isEmpty() && actions.contains(Actions.BUY)) || !this.actualPlayer.isHuman()) {
             ToBuyProperties.buyAOwnership(((Ownership) this.boxes.get(actualPosition)).getContract().getCost(),
                     ((Ownership) this.boxes.get(actualPosition))).play(this.actualPlayer);
             if (this.actualPlayer.isHuman()) {
@@ -316,12 +318,24 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public List<Player> endGame() {
+    public Map<Player, Integer> endGame() {
+        Map<Player, Integer> map = new HashMap<>();
         final List<Player> pl = this.players.stream().filter(p -> !p.equals(this.players.get(0)))
                 .sorted((p, p1) -> this.patrimony(p) - this.patrimony(p1)).collect(Collectors.toList());
-        return pl;
+        for (Player p : pl) {
+            map.put(p, this.patrimony(p));
+        }
+        return map;
     }
 
+    /**
+     * This method calculate the money and the ownership cost of each
+     * {@link Player}.
+     * 
+     * @param player
+     *            -actual {@link Player}
+     * @return the amount of money and property.
+     */
     private int patrimony(final Player player) {
         Optional<Integer> res = Optional.empty();
         if (!player.getOwnerships().isEmpty()) {
@@ -359,6 +373,7 @@ public class ControllerImpl implements Controller {
 
         this.notifyComputer(actualPlayer);
         this.actualPosition = this.toRollDices();
+        this.actions = this.getNextBoxsActions(this.boxes.get(this.actualPosition), this.actualPlayer);
         if (this.boxes.get(this.actualPosition) instanceof Ownership) {
             if (((Ownership) this.boxes.get(this.actualPosition)).isMortgaged()) {
                 if (((Ownership) this.boxes.get(this.actualPosition)).getOwner().equals(this.actualPlayer)) {
@@ -409,6 +424,12 @@ public class ControllerImpl implements Controller {
                     } else {
 
                         new ToBePaid(amount).play((Player) land.getOwner());
+                        if (!this.actualPlayer.getOwnerships().isEmpty()) {
+                            for (Ownership o : this.getActualPlayer().getOwnerships()) {
+                                o.setOwner(this.bank);
+
+                            }
+                        }
                         this.gameOverPerson(this.actualPlayer);
                     }
                 }
@@ -438,6 +459,12 @@ public class ControllerImpl implements Controller {
                     } else {
                         new ToBePaid(amount)
                                 .play((Player) ((Ownership) this.boxes.get(this.actualPosition)).getOwner());
+                        if (!this.actualPlayer.getOwnerships().isEmpty()) {
+                            for (Ownership o : this.getActualPlayer().getOwnerships()) {
+                                o.setOwner(this.bank);
+
+                            }
+                        }
                         this.gameOverPerson(this.actualPlayer);
                     }
 
@@ -456,8 +483,43 @@ public class ControllerImpl implements Controller {
 
             }
             if (this.boxes.get(this.actualPosition) instanceof TaxImpl) {
-                new ToPay(((TaxImpl) this.boxes.get(this.actualPosition)).getCost(), this.actualPlayer)
-                        .play(this.actualPlayer);
+                if (this.strategy instanceof ClassicStrategy) {
+                    if (this.version.haveEnoughMoney(this.actualPlayer,
+                            ((TaxImpl) this.boxes.get(this.actualPosition)).getCost())) {
+                        new ToPay(((TaxImpl) this.boxes.get(this.actualPosition)).getCost(), this.actualPlayer)
+                                .play(this.actualPlayer);
+                    } else {
+                        if (!this.actualPlayer.getOwnerships().isEmpty()) {
+                            for (Ownership o : this.getActualPlayer().getOwnerships()) {
+                                o.setOwner(this.bank);
+
+                            }
+                        }
+                        this.gameOverPerson(this.actualPlayer);
+                    }
+
+                } else {
+
+                    if (this.version.haveEnoughMoney(this.actualPlayer,
+                            ((TaxImpl) this.boxes.get(this.actualPosition)).getCost())) {
+                        new EvadeTaxes(((TaxImpl) this.boxes.get(this.actualPosition)).getCost(),
+                                ((ItalianNeutralArea) this.boxes.get(BoxesPositions.NEUTRAL_AREA_POSITION.getPos())))
+                                        .play(this.actualPlayer);
+                    } else {
+                        if (!this.actualPlayer.getOwnerships().isEmpty()) {
+                            for (Ownership o : this.getActualPlayer().getOwnerships()) {
+                                o.setOwner(this.bank);
+
+                            }
+                        }
+                        this.gameOverPerson(this.actualPlayer);
+                    }
+
+                }
+            }
+            if (this.strategy instanceof ItalianStrategy
+                    && this.boxes.get(this.actualPosition) instanceof ItalianNeutralArea) {
+                new ToStealMoney((ItalianNeutralArea) this.boxes.get(this.actualPosition));
             }
 
         }
@@ -531,20 +593,28 @@ public class ControllerImpl implements Controller {
                 }
 
             } else {
-                final int amount = ((ClassicLandContract) land.getContract()).getIncome(new LandIncomeStrategy(land));
-                if (amount <= player.getMoney()) {
-                    new ToPay(amount, player).play(player);
-                    new ToBePaid(amount).play((Player) land.getOwner());
-                    player.setDebts(true);
-                } else {
-                    if (version.haveEnoughMoney(this.actualPlayer, amount)) {
-                        new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
+                if (this.actualPlayer.isHuman()) {
+                    final int amount = ((ClassicLandContract) land.getContract())
+                            .getIncome(new LandIncomeStrategy(land));
+                    if (amount <= player.getMoney()) {
+                        new ToPay(amount, player).play(player);
                         new ToBePaid(amount).play((Player) land.getOwner());
-
+                        player.setDebts(true);
                     } else {
+                        if (version.haveEnoughMoney(this.actualPlayer, amount)) {
+                            new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
+                            new ToBePaid(amount).play((Player) land.getOwner());
 
-                        new ToBePaid(amount).play((Player) land.getOwner());
-                        this.gameOverPerson(this.actualPlayer);
+                        } else {
+                            new ToBePaid(amount).play((Player) land.getOwner());
+                            if (!this.actualPlayer.getOwnerships().isEmpty()) {
+                                for (Ownership o : this.getActualPlayer().getOwnerships()) {
+                                    o.setOwner(this.bank);
+
+                                }
+                            }
+                            this.gameOverPerson(this.actualPlayer);
+                        }
                     }
                 }
             }
@@ -553,21 +623,28 @@ public class ControllerImpl implements Controller {
             if (ownership.getOwner().equals(this.bank)) {
                 this.toBuyOrToEndOfTurn(ownership, player, actions);
             } else if (!ownership.getOwner().equals(player)) {
-
-                final int amount = ownership.getContract().getIncome(ownership instanceof Station
-                        ? new StationIncomeStrategy(ownership) : new CompanysIncomeStrategy(ownership, player));
-                if (amount <= player.getMoney()) {
-                    new ToPay(amount, player).play(player);
-                    new ToBePaid(amount).play((Player) ownership.getOwner());
-                    player.setDebts(true);
-                } else {
-                    if (version.haveEnoughMoney(this.actualPlayer, amount)) {
-                        new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
+                if (this.actualPlayer.isHuman()) {
+                    final int amount = ownership.getContract().getIncome(ownership instanceof Station
+                            ? new StationIncomeStrategy(ownership) : new CompanysIncomeStrategy(ownership, player));
+                    if (amount <= player.getMoney()) {
+                        new ToPay(amount, player).play(player);
                         new ToBePaid(amount).play((Player) ownership.getOwner());
-
+                        player.setDebts(true);
                     } else {
-                        new ToBePaid(amount).play((Player) ownership.getOwner());
-                        this.gameOverPerson(this.actualPlayer);
+                        if (version.haveEnoughMoney(this.actualPlayer, amount)) {
+                            new ToPay(amount, this.actualPlayer).play(this.actualPlayer);
+                            new ToBePaid(amount).play((Player) ownership.getOwner());
+
+                        } else {
+                            new ToBePaid(amount).play((Player) ownership.getOwner());
+                            if (!this.actualPlayer.getOwnerships().isEmpty()) {
+                                for (Ownership o : this.getActualPlayer().getOwnerships()) {
+                                    o.setOwner(this.bank);
+
+                                }
+                            }
+                            this.gameOverPerson(this.actualPlayer);
+                        }
                     }
                 }
             } else {
@@ -576,37 +653,50 @@ public class ControllerImpl implements Controller {
                 }
             }
         } else {
-            if (box instanceof Police) {
-                new GoToPrison(this.boxes.get(PRISON_POSITION)).play(player);
-            }
-            if (box instanceof DecksBox) {
+            if (this.actualPlayer.isHuman()) {
+                if (box instanceof Police) {
+                    new GoToPrison(this.boxes.get(PRISON_POSITION)).play(player);
+                }
+                if (box instanceof DecksBox) {
 
-                this.drawCard((this.decks.get(box.getID() == FIRST_CHANCE_POSITION
-                        || box.getID() == SECOND_CHANCE_POSITION || box.getID() == THIRD_CHANCE_POSITION ? 0 : 1)));
+                    this.drawCard((this.decks.get(box.getID() == FIRST_CHANCE_POSITION
+                            || box.getID() == SECOND_CHANCE_POSITION || box.getID() == THIRD_CHANCE_POSITION ? 0 : 1)));
 
-            }
-            if (this.strategy instanceof ItalianStrategy && box instanceof ItalianNeutralArea) {
-                new ToStealMoney((ItalianNeutralArea) box);
-            }
+                }
+                if (this.strategy instanceof ItalianStrategy && box instanceof ItalianNeutralArea) {
+                    new ToStealMoney((ItalianNeutralArea) box);
+                }
 
-            if (box instanceof TaxImpl) {
-                if (this.strategy instanceof ClassicStrategy) {
-                    if (this.version.haveEnoughMoney(this.actualPlayer, ((TaxImpl) box).getCost())) {
-                        new ToPay(((TaxImpl) box).getCost(), player).play(player);
+                if (box instanceof TaxImpl) {
+                    if (this.strategy instanceof ClassicStrategy) {
+                        if (this.version.haveEnoughMoney(this.actualPlayer, ((TaxImpl) box).getCost())) {
+                            new ToPay(((TaxImpl) box).getCost(), player).play(player);
+                        } else {
+                            if (!this.actualPlayer.getOwnerships().isEmpty()) {
+                                for (Ownership o : this.getActualPlayer().getOwnerships()) {
+                                    o.setOwner(this.bank);
+
+                                }
+                            }
+                            this.gameOverPerson(this.actualPlayer);
+                        }
+
                     } else {
-                        this.gameOverPerson(this.actualPlayer);
+
+                        if (this.version.haveEnoughMoney(this.actualPlayer, ((TaxImpl) box).getCost())) {
+                            new EvadeTaxes(((TaxImpl) box).getCost(), ((ItalianNeutralArea) this.boxes
+                                    .get(BoxesPositions.NEUTRAL_AREA_POSITION.getPos()))).play(player);
+                        } else {
+                            if (!this.actualPlayer.getOwnerships().isEmpty()) {
+                                for (Ownership o : this.getActualPlayer().getOwnerships()) {
+                                    o.setOwner(this.bank);
+
+                                }
+                            }
+                            this.gameOverPerson(this.actualPlayer);
+                        }
+
                     }
-
-                } else {
-
-                    if (this.version.haveEnoughMoney(this.actualPlayer, ((TaxImpl) box).getCost())) {
-                        new EvadeTaxes(((TaxImpl) box).getCost(),
-                                ((ItalianNeutralArea) this.boxes.get(BoxesPositions.NEUTRAL_AREA_POSITION.getPos())))
-                                        .play(player);
-                    } else {
-                        this.gameOverPerson(this.actualPlayer);
-                    }
-
                 }
             }
         }

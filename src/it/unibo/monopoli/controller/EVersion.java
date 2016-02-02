@@ -15,7 +15,7 @@ public enum EVersion {
      * 
      * @param text
      */
-    private EVersion(final String name) {
+    EVersion(final String name) {
         this.name = name;
 
     }

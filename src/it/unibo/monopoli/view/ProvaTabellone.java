@@ -6,13 +6,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-
 import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.model.table.Box;
 import it.unibo.monopoli.model.table.DecksBox;

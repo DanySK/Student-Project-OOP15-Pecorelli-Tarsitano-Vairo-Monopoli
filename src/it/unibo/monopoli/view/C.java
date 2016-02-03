@@ -22,7 +22,7 @@ public class C {
     public static final int JTAB_PREFERRED_HEIGHT = 32;
 
     /**
-     * JShape Preferrred size.
+     * JShape Preferred size.
      */
     public static final int JSHAPE_PREFERRED_SIZE = 8;
 
@@ -45,16 +45,16 @@ public class C {
     /**
      * array that contains the colors to be associated with players.
      */
-    private static Color[] COLORS = { Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.GRAY };
+    private static Color[] colors = { Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.GRAY };
     /**
      * list to keep track of the colors chosen by users.
      */
-    public static final LinkedList<Color> cl;
+    public static final LinkedList<Color> CL;
 
     static {
-        cl = new LinkedList<Color>();
-        for (int i = 0; i <= COLORS.length - 1; i++) {
-            cl.add(COLORS[i]);
+        CL = new LinkedList<Color>();
+        for (int i = 0; i <= colors.length - 1; i++) {
+            CL.add(colors[i]);
         }
     }
 
@@ -62,17 +62,17 @@ public class C {
      * X Location JDilaog.
      */
     public static final int X_LOCATION_JDIALOG = 500;
-    
+
     /**
      * Y Location JDialog.
      */
     public static final int Y_LOCATION_JDIALOG = 300;
-    
+
     /**
      * PreferredSize for card.
      */
     public static final Dimension DIM = new Dimension(55, 55);
-    
+
     /**
      * PreferredSize for panelPlayer.
      */

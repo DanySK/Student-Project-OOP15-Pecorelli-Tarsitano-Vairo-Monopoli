@@ -28,10 +28,13 @@ public class TaxGraphic extends AbstractGraphicCard {
      * builder.
      * 
      * @param tax
+     *            card
      * @param pos
+     *            card pos
      * @param id
+     *            card id
      */
-    public TaxGraphic(Tax tax, Position pos, int id) {
+    public TaxGraphic(final Tax tax, final Position pos, final int id) {
         super(tax, pos);
         this.tax = tax;
 
@@ -39,9 +42,8 @@ public class TaxGraphic extends AbstractGraphicCard {
 
     @Override
     public JPanel build() {
-        JPanel card = new JPanel();
-        card.setPreferredSize(new Dimension(C.DIM)
-                );
+        final JPanel card = new JPanel();
+        card.setPreferredSize(new Dimension(C.DIM));
         card.setLayout(new GridLayout(4, 1));
 
         JLabel nameP = new JLabel("<html>" + tax.getName() + "</html>");

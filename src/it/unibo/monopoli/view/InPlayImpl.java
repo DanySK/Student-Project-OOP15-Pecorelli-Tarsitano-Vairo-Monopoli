@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import it.unibo.monopoli.controller.Actions;
 import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.model.mainunits.Player;
+
 /**
  * class that implementing interface InPlay.
  * 
@@ -16,11 +17,21 @@ import it.unibo.monopoli.model.mainunits.Player;
 public class InPlayImpl implements InPlay {
 
     private final List<Actions> buttons;
-    private Index i;
+    private final Index i;
+    Controller controller;
+    private Object positionAndName;
 
-    public InPlayImpl(Index i) {
+    /**
+     * link to controller.
+     * 
+     * @param i
+     *            Index
+     * 
+     */
+    public InPlayImpl(final Index i) {
         this.buttons = new LinkedList<>();
         this.i = i;
+        i.getController();
     }
 
     @Override
@@ -30,6 +41,9 @@ public class InPlayImpl implements InPlay {
 
     }
 
+    /**
+     * @return List<Action>
+     */
     public List<Actions> getButtons() {
         return this.buttons;
     }
@@ -37,6 +51,8 @@ public class InPlayImpl implements InPlay {
     @Override
     public void gameOver(final Player player) {
         new Dialog(new JFrame(), "Game over", "The player" + player.getName() + "has lost");
+        positionAndName = (controller.getActualPlayer().getPawn().getID() + C.SPLITTOKEN + controller.getActualPlayer().getName());
+        InizializedPlayer.getMap().remove(positionAndName);
     }
 
     @Override
@@ -55,17 +71,12 @@ public class InPlayImpl implements InPlay {
     }
 
     @Override
-    public void beginComputer(int i) {
+    public void beginComputer(final int i) {
         this.i.prevPos(i);
-        
-    }
-    @Override
-    public void finish(Player p){
-
-        new Dialog(new JFrame(), "Winner", "The winner is " + p.getName()); 
-        
-        System.exit(0);
     }
 
-   
+    public void finish(final Player p) {
+        new Dialog(new JFrame(), "Winner", "The winner is " + p.getName());
+    }
+
 }

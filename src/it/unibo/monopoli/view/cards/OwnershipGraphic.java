@@ -11,8 +11,6 @@ import javax.swing.border.Border;
 
 import it.unibo.monopoli.model.table.Ownership;
 import it.unibo.monopoli.view.C;
-import it.unibo.monopoli.view.JShape.Shapes;
-import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
 
 /**
  * 
@@ -21,17 +19,20 @@ import it.unibo.monopoli.view.cards.IBoxGraphic.Position;
  */
 public class OwnershipGraphic extends AbstractGraphicCard {
 
-    private  Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-    private  Ownership own;
+    private Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+    private Ownership own;
 
     /**
      * builder.
      * 
      * @param own
+     *            card
      * @param pos
+     *            card pos
      * @param id
+     *            card id
      */
-    public OwnershipGraphic(Ownership own, Position pos, int id) {
+    public OwnershipGraphic(final Ownership own, final Position pos, final int id) {
         super(own, pos);
         this.own = own;
 
@@ -48,8 +49,8 @@ public class OwnershipGraphic extends AbstractGraphicCard {
 
         card.add(emptyP);
 
-         int i = this.own.getContract().getCost();
-         JLabel valueP = new JLabel("" + i);
+        int i = this.own.getContract().getCost();
+        JLabel valueP = new JLabel("" + i);
         card.add(valueP);
 
         card.setBorder(border);

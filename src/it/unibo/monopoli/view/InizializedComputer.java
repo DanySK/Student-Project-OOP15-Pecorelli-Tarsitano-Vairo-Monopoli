@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,19 +26,18 @@ import javax.swing.border.Border;
 public class InizializedComputer {
     private final Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
     private static boolean isUman;
-    private static String name;
     private String positionAndName;
 
     /**
      * Builder.
      * 
      * @param name
+     *            computer's name
      * @param isUman
+     *            player type
      */
-    public InizializedComputer(String name, boolean isUman) {
-        this.name = name;
+    public InizializedComputer(final String name, final boolean isUman) {
         this.isUman = isUman;
-        // build();
     }
 
     /**
@@ -53,6 +51,8 @@ public class InizializedComputer {
      * Method that build the Player's panel where there are the information
      * about player situation.
      * 
+     * @param playerP
+     *            Player
      * @return -return a Player's panel
      */
     public JPanel build(final JPanel playerP) {

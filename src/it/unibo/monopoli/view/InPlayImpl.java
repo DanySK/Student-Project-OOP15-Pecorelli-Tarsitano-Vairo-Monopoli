@@ -47,6 +47,7 @@ public class InPlayImpl implements InPlay {
     @Override
     public void gameOver(final Player player) {
         new Dialog(new JFrame(), "Game over", "The player" + player.getName() + "has lost");
+        
     }
 
     @Override
@@ -67,12 +68,6 @@ public class InPlayImpl implements InPlay {
     @Override
     public void beginComputer(final int i) {
         this.i.prevPos(i);
-    }
-    @Override
-    public void finish(Player p){
-
-        new Dialog(new JFrame(), "Winner", "The winner is " + p.getName());
-        System.exit(0);
     }
 
 }

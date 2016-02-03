@@ -412,7 +412,7 @@ public class Index {
         tessere.get(this.position).removePawn(p);
         position = p.getPawn().getActualPos();
         tessere.get(position).addPawn(p);
-        updateInfoPlayer();
+        updateInfoPlayer(); 
     }
 
     /**

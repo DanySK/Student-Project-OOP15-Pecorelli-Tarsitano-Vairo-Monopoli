@@ -244,11 +244,13 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void endTurn() {
-        if (this.playerSize < this.players.size()) {
+        if (this.playerSize > this.players.size()) {
             this.playerSize = this.players.size();
         } else {
             this.actualPlayer = this.version.endOfTurnAndNextPlayer();
         }
+
+//        this.actualPosition = this.actualPlayer.getPawn().getActualPos();
         if (!this.actualPlayer.isHuman()) {
             this.computerPlayer();
         } else {
@@ -370,14 +372,6 @@ public class ControllerImpl implements Controller {
         return map;
     }
 
-    /**
-     * This method calculate the money and the ownership cost of each
-     * {@link Player}.
-     * 
-     * @param player
-     *            -actual {@link Player}
-     * @return the amount of money and property.
-     */
     private int patrimony(final Player player) {
         Optional<Integer> res = Optional.empty();
         if (!player.getOwnerships().isEmpty()) {
@@ -387,16 +381,11 @@ public class ControllerImpl implements Controller {
         return player.getMoney() + (res.isPresent() ? res.get() : 0);
     }
 
-    /**
-     * This method remove from List of {@link Player}s looser person.
-     * 
-     * @param player
-     *            -the looser.
-     */
     private void gameOverPerson(final Player player) {
         this.notifyGameOver(player);
-        this.actualPlayer=this.version.removePlayer(player);
+        this.actualPlayer = this.version.removePlayer(player);
         this.players.remove(this.players.indexOf(player));
+        
         if (this.players.size() == 1) {
             this.notifyFinish(this.players.get(0));
             this.endGame();
@@ -413,10 +402,7 @@ public class ControllerImpl implements Controller {
         return lastDices.get(0) == lastDices.get(1);
     }
 
-    /**
-     * This method allow computer to play alone.
-     */
-    private void computerPlayer() {
+    private boolean computerPlayer() {
 
         this.notifyComputer(actualPlayer);
 
@@ -480,6 +466,7 @@ public class ControllerImpl implements Controller {
                             }
                         }
                         this.gameOverPerson(this.actualPlayer);
+                        return true;
                     }
                 }
             }
@@ -515,6 +502,7 @@ public class ControllerImpl implements Controller {
                             }
                         }
                         this.gameOverPerson(this.actualPlayer);
+                        return true;
                     }
 
                 }
@@ -544,6 +532,7 @@ public class ControllerImpl implements Controller {
                             }
                         }
                         this.gameOverPerson(this.actualPlayer);
+                        return true;
                     }
 
                 } else {
@@ -561,6 +550,7 @@ public class ControllerImpl implements Controller {
                             }
                         }
                         this.gameOverPerson(this.actualPlayer);
+                        return true;
                     }
 
                 }
@@ -578,6 +568,7 @@ public class ControllerImpl implements Controller {
             this.notifyEndTurnComputer(this.actualPlayer);
             this.endTurn();
         }
+        return false;
     }
 
     /**
@@ -763,17 +754,6 @@ public class ControllerImpl implements Controller {
         return actions;
     }
 
-    /**
-     * This is a method for choose if {@link Player} can buy an
-     * {@link Ownership}.
-     * 
-     * @param ownership
-     *            -actual {@link Ownership}.
-     * @param player
-     *            -actual {@link Player}.
-     * @param actions
-     *            -List of {@link Actions}.
-     */
     private void toBuyOrToEndOfTurn(final Ownership ownership, final Player player, final List<Actions> actions) {
         if (player.getMoney() >= ownership.getContract().getCost()) {
             actions.add(Actions.BUY);

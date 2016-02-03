@@ -118,10 +118,13 @@ public class Index {
             public void actionPerformed(final ActionEvent e) {
 
                Player p = controller.getActualPlayer();
+               System.out.println(p.getName());
                 tessere.get(controller.getActualPlayer().getPawn().getActualPos()).removePawn(p);
 
                 int prePos = controller.getActualPlayer().getPawn().getActualPos();
+                System.out.println("Pawn: " + controller.getActualPlayer().getPawn().getID());
                 int pos = controller.toRollDices();
+                System.out.println(pos);
                 int passi = pos - prePos;
                 if (isPassedFromStartBox()) {
                     passi = passFromStart();

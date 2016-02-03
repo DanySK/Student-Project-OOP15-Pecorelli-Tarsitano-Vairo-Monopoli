@@ -1,10 +1,7 @@
 package it.unibo.monopoli.view.cards;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.JPanel;
@@ -19,11 +16,9 @@ import it.unibo.monopoli.view.JShape;
  *
  */
 public abstract class AbstractGraphicCard implements IBoxGraphic {
-    private   Map<Player, JShape> pawns;
-    private  Position pos;
-    private  Box card;
-    private static final Dimension DIMENSION = new Dimension(60, 60);
-
+    private final Map<Player, JShape> pawns;
+    private final Position pos;
+    private final Box card;
     /**
      * panel in which I manage the checkers, the reference to this panel Here
      * because it is in this class that I manage the pieces.
@@ -31,11 +26,15 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
     protected JPanel emptyP;
 
     /**
-     *Builder. 
+     * Builder.
+     * 
      * @param pos
+     *            id card
+     * 
      * @param card
+     *            card
      */
-    public AbstractGraphicCard(Box card, Position pos) {
+    public AbstractGraphicCard(final Box card, final Position pos) {
         this.pos = pos;
         pawns = new HashMap<Player, JShape>();
         emptyP = new JPanel();
@@ -50,29 +49,24 @@ public abstract class AbstractGraphicCard implements IBoxGraphic {
         return pos;
     }
 
-  
-    
-
     @Override
     public void addPawn(final Player p) {
-        int id = p.getPawn().getID(); // prendo l'id del colore della pedina
-        Color c = C.cl.get(id);
-        JShape pawn = new JShape(c); // creo la pedina
-        pawns.put(p, pawn); // aggiungo pedina alla mappa
-        emptyP.add(pawn); // disegno la pedina (aggiungendola al pannello)
+        int id = p.getPawn().getID();
+        Color c = C.CL.get(id);
+        JShape pawn = new JShape(c);
+        pawns.put(p, pawn);
+        emptyP.add(pawn);
         emptyP.validate();
-  
+
     }
 
     @Override
-    public void removePawn(Player p) {
-        JShape pawn = pawns.get(p); // prendo la pedina corrispondente al
-        pawn.setVisible(false); // giocatore
-        emptyP.remove(pawn); // rimuovo la pedina dal pannello
-        pawns.remove(p); // rimuovo il riferimento alla pedina dalla mappa di
-                         // quel giocatore
+    public void removePawn(final Player p) {
+        JShape pawn = pawns.get(p);
+        pawn.setVisible(false);
+        emptyP.remove(pawn);
+        pawns.remove(p);
         emptyP.validate();
-
     }
 
     @Override

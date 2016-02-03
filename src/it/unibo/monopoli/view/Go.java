@@ -11,9 +11,6 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -33,6 +30,7 @@ import it.unibo.monopoli.view.listener.VersionSelected;
  */
 public class Go {
     private static int numPlayer = 0;
+
     /**
      * class constructor Go. Create the main frame, with its components: version
      * and information very players and typology.
@@ -102,7 +100,6 @@ public class Go {
             }
 
         });
-        // comboBoxVersion.addItem(EVersion.NOT_SELECTABLE_OPTION.getName());
         Arrays.asList(EVersion.values()).forEach(v -> comboBoxVersion.addItem(v.getName()));
 
         final JPanel secondRow = new JPanel();
@@ -142,7 +139,7 @@ public class Go {
         final JPanel computer = new InizializedComputer().build(playerPanel);
         playerPanel.add(computer);
         addNumPlayers(1);
-        
+
         final JButton btnAddPlayer = new JButton("Add Player");
 
         btnAddPlayer.addActionListener(new ActionListener() {
@@ -155,10 +152,10 @@ public class Go {
                 } else if (playerPanel.getComponentCount() < C.MAX_PLAYERS) {
                     playerPanel.add(new InizializedPlayer().build(playerPanel));
                     playerPanel.revalidate();
-                    
+
                     addNumPlayers(1);
                     InizializedPlayer.setSave(false);
-  
+
                 } else {
                     new Dialog(new JFrame(), "Error", "Error! You can not enter more than 6 players");
                 }
@@ -184,7 +181,8 @@ public class Go {
     /**
      * main method.
      * 
-     * @param args.
+     * @param args
+     *            -main args
      */
     public static void main(final String[] args) {
 
@@ -203,7 +201,7 @@ public class Go {
      * @param numPlayers
      *            the numPlayers to set
      */
-    public static void addNumPlayers(int numPlayers) {
+    public static void addNumPlayers(final int numPlayers) {
         numPlayer += numPlayers;
     }
 }

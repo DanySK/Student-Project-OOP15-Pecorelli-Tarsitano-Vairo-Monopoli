@@ -44,11 +44,6 @@ public enum Actions {
 
     private final String text;
 
-    /**
-     * Set text of Enumeration.
-     * 
-     * @param text
-     */
     Actions(final String text) {
         this.text = text;
     }

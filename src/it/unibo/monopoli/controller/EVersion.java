@@ -10,11 +10,7 @@ public enum EVersion {
     NOT_SELECTABLE_OPTION(" - Select an Option - "), CLASSIC("Classic"), ITALIAN_VERSION("Italian Version");
 
     private String name; 
-    /**
-     * Set text of Enumeration.
-     * 
-     * @param text
-     */
+
     EVersion(final String name) {
         this.name = name;
 

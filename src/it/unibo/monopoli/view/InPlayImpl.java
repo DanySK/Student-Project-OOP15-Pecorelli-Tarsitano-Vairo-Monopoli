@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import it.unibo.monopoli.controller.Actions;
+import it.unibo.monopoli.controller.Controller;
 import it.unibo.monopoli.model.mainunits.Player;
 
 /**
@@ -17,6 +18,8 @@ public class InPlayImpl implements InPlay {
 
     private final List<Actions> buttons;
     private final Index i;
+    Controller controller;
+    private Object positionAndName;
 
     /**
      * link to controller.
@@ -28,6 +31,7 @@ public class InPlayImpl implements InPlay {
     public InPlayImpl(final Index i) {
         this.buttons = new LinkedList<>();
         this.i = i;
+        i.getController();
     }
 
     @Override
@@ -47,7 +51,8 @@ public class InPlayImpl implements InPlay {
     @Override
     public void gameOver(final Player player) {
         new Dialog(new JFrame(), "Game over", "The player" + player.getName() + "has lost");
-        
+        positionAndName = (controller.getActualPlayer().getPawn().getID() + C.SPLITTOKEN + controller.getActualPlayer().getName());
+        InizializedPlayer.getMap().remove(positionAndName);
     }
 
     @Override
@@ -69,7 +74,9 @@ public class InPlayImpl implements InPlay {
     public void beginComputer(final int i) {
         this.i.prevPos(i);
     }
-        new Dialog(new JFrame(), "Winner", "The winner is " + p.getName()); 
-        
+
+    public void finish(final Player p) {
+        new Dialog(new JFrame(), "Winner", "The winner is " + p.getName());
+    }
 
 }

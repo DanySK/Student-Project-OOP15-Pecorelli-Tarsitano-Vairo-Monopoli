@@ -59,8 +59,9 @@ public interface GameVersion {
      * 
      * @param player
      *            - the {@link Player} to remove
+     * @return - the next {@link Player} 
      */
-    void removePlayer(Player player);
+    Player removePlayer(Player player);
 
     /**
      * Returns a {@link List} with the numbers obtained with the roll of dices

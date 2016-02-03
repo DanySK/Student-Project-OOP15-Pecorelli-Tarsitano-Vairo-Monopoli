@@ -80,8 +80,15 @@ public class GameVersionImpl implements GameVersion {
     }
 
     @Override
-    public void removePlayer(final Player player) {
-        this.iter.remove();
+    public Player removePlayer(final Player player) {
+        final int position = this.players.indexOf(player);
+        this.iter = null;
+        if (position == 0) {
+            this.iter = this.players.listIterator(this.players.size() - 1);
+        } else {
+            this.iter = this.players.listIterator(position - 1);
+        }
+        return this.iter.next();
     }
 
 }

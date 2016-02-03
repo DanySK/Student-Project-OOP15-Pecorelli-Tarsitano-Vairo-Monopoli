@@ -110,7 +110,7 @@ public class ControllerImpl implements Controller {
         default:
             break;
         }
-        this.playerSize=this.players.size();
+        this.playerSize = this.players.size();
         this.bank = this.version.getBank();
         this.boxes = this.version.getAllBoxes();
         this.decks = this.version.getDecks();
@@ -230,22 +230,25 @@ public class ControllerImpl implements Controller {
 
         this.view.ifPresent(v -> v.beginComputer(position));
     }
+
     /**
      * This is a notify for the view.Notify the actual player winner.
-     * @param player winner
+     * 
+     * @param player
+     *            winner
      */
     public void notifyFinish(final Player player) {
 
         this.view.ifPresent(v -> v.finish(player));
     }
+
     @Override
     public void endTurn() {
-       if(this.playerSize<this.players.size()){
-           this.playerSize=this.players.size();
-           this.actualPlayer=this.version.getNextPlayer();
-       }else{
-        this.actualPlayer = this.version.endOfTurnAndNextPlayer();
-       }
+        if (this.playerSize < this.players.size()) {
+            this.playerSize = this.players.size();
+        } else {
+            this.actualPlayer = this.version.endOfTurnAndNextPlayer();
+        }
         if (!this.actualPlayer.isHuman()) {
             this.computerPlayer();
         } else {
@@ -354,7 +357,8 @@ public class ControllerImpl implements Controller {
     @Override
     public Map<Player, Integer> endGame() {
         Map<Player, Integer> map = new HashMap<>();
-        final List<Player> pl = this.players.stream().sorted((p, p1) -> this.patrimony(p1) - this.patrimony(p)).collect(Collectors.toList());
+        final List<Player> pl = this.players.stream().sorted((p, p1) -> this.patrimony(p1) - this.patrimony(p))
+                .collect(Collectors.toList());
         for (Player p : pl) {
             map.put(p, this.patrimony(p));
         }
@@ -391,7 +395,7 @@ public class ControllerImpl implements Controller {
      */
     private void gameOverPerson(final Player player) {
         this.notifyGameOver(player);
-        this.version.removePlayer(player);
+        this.actualPlayer=this.version.removePlayer(player);
         this.players.remove(this.players.indexOf(player));
         if (this.players.size() == 1) {
             this.notifyFinish(this.players.get(0));
@@ -531,8 +535,7 @@ public class ControllerImpl implements Controller {
                 if (this.strategy instanceof ClassicStrategy) {
                     if (this.version.haveEnoughMoney(this.actualPlayer,
                             ((TaxImpl) this.boxes.get(this.actualPosition)).getCost())) {
-                        new ToPay(((TaxImpl) this.boxes.get(this.actualPosition)).getCost())
-                                .play(this.actualPlayer);
+                        new ToPay(((TaxImpl) this.boxes.get(this.actualPosition)).getCost()).play(this.actualPlayer);
                     } else {
                         if (!this.actualPlayer.getOwnerships().isEmpty()) {
                             for (Ownership o : this.getActualPlayer().getOwnerships()) {

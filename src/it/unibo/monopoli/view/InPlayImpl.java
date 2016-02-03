@@ -49,10 +49,11 @@ public class InPlayImpl implements InPlay {
     }
 
     @Override
-    public void gameOver(final Player player) {
+    public void gameOver(final Player player, final int pos) {
         new Dialog(new JFrame(), "Game over", "The player" + player.getName() + "has lost");
         InizializedPlayer.getMap().remove(player.getName());
         i.getEast().getMap().remove(player.getName());
+        i.getEast().getMap().values().forEach(v -> v.setPosDeath(pos));
     }
 
     @Override

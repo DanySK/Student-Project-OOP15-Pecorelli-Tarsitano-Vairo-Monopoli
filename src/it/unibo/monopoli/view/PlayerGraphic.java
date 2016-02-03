@@ -47,7 +47,7 @@ public class PlayerGraphic extends JPanel {
     private JLabel l;
     private JPanel row2;
     private HashMap<Integer, JLabel> labels;
-    private int listSize;
+    private int pos;
 
     /**
      * Builder.
@@ -94,8 +94,8 @@ public class PlayerGraphic extends JPanel {
      */
     public JPanel build(final List<Box> boxes, final List<Player> list, final int i) {
         this.list = list;
-        this.listSize = list.size();
         this.i = i;
+        this.pos =i;
 
         this.name = list.get(i).getName();
         this.value = list.get(i).getMoney();
@@ -184,12 +184,18 @@ public class PlayerGraphic extends JPanel {
         return player;
 
     }
+    
+    public void setPosDeath(final int pos){
+        if(this.pos > pos){
+            this.pos--;
+            }
+    }
 
     /**
      * Update Player information.
      */
     public void setLAbelContract() {
-        Player p = list.get(i);
+        Player p = list.get(pos);
 
         lblColBank.setText(p.getMoney() + "");
 

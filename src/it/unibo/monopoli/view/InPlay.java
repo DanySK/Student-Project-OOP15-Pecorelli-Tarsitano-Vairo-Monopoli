@@ -24,7 +24,7 @@ public interface InPlay {
      * @param player
      *            Player
      */
-    void gameOver(Player player);
+    void gameOver(Player player, int pos);
 
     /**
      * 

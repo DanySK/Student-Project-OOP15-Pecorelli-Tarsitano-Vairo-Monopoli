@@ -164,10 +164,6 @@ public class ControllerImpl implements Controller {
             }
 
         }
-//        if (this.actualPlayer.getPawn().getActualPos() != this.actualPosition) {
-//            this.actualPosition = this.actualPlayer.getPawn().getActualPos();
-//        }
-        System.out.println(this.actualPosition);
         return this.actualPosition;
     }
 
@@ -188,7 +184,7 @@ public class ControllerImpl implements Controller {
      *            of looser.
      */
     public void notifyGameOver(final Player player) {
-        this.view.ifPresent(v -> v.gameOver(player));
+        this.view.ifPresent(v -> v.gameOver(player, this.players.indexOf(player)));
     }
 
     /**
@@ -252,7 +248,6 @@ public class ControllerImpl implements Controller {
             this.actualPlayer = this.version.endOfTurnAndNextPlayer();
         }
 
-//        this.actualPosition = this.actualPlayer.getPawn().getActualPos();
         if (!this.actualPlayer.isHuman()) {
             this.computerPlayer();
         } else {
@@ -386,8 +381,6 @@ public class ControllerImpl implements Controller {
     private void gameOverPerson(final Player player) {
         this.notifyGameOver(player);
         this.actualPlayer = this.version.removePlayer(player);
-//        this.players.remove(this.players.indexOf(player));
-        
         if (this.players.size() == 1) {
             this.notifyFinish(this.players.get(0));
             this.endGame();

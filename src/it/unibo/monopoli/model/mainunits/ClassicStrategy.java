@@ -525,7 +525,7 @@ public class ClassicStrategy implements GameStrategy {
 
     @Override
     public List<Player> getPlayers() {
-        return Collections.unmodifiableList(this.players);
+        return this.players;
     }
 
     @Override

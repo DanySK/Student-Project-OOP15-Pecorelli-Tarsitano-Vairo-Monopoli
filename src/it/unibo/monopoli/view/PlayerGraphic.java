@@ -47,6 +47,7 @@ public class PlayerGraphic extends JPanel {
     private JLabel l;
     private JPanel row2;
     private HashMap<Integer, JLabel> labels;
+    private int listSize;
 
     /**
      * Builder.
@@ -93,6 +94,7 @@ public class PlayerGraphic extends JPanel {
      */
     public JPanel build(final List<Box> boxes, final List<Player> list, final int i) {
         this.list = list;
+        this.listSize = list.size();
         this.i = i;
 
         this.name = list.get(i).getName();

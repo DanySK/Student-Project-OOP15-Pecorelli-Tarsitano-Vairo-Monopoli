@@ -164,9 +164,10 @@ public class ControllerImpl implements Controller {
             }
 
         }
-        if (this.actualPlayer.getPawn().getActualPos() != this.actualPosition) {
-            this.actualPosition = this.actualPlayer.getPawn().getActualPos();
-        }
+//        if (this.actualPlayer.getPawn().getActualPos() != this.actualPosition) {
+//            this.actualPosition = this.actualPlayer.getPawn().getActualPos();
+//        }
+        System.out.println(this.actualPosition);
         return this.actualPosition;
     }
 
@@ -245,6 +246,7 @@ public class ControllerImpl implements Controller {
     @Override
     public void endTurn() {
         if (this.playerSize > this.players.size()) {
+            System.out.println("l'ha rimosso");
             this.playerSize = this.players.size();
         } else {
             this.actualPlayer = this.version.endOfTurnAndNextPlayer();
@@ -384,7 +386,7 @@ public class ControllerImpl implements Controller {
     private void gameOverPerson(final Player player) {
         this.notifyGameOver(player);
         this.actualPlayer = this.version.removePlayer(player);
-        this.players.remove(this.players.indexOf(player));
+//        this.players.remove(this.players.indexOf(player));
         
         if (this.players.size() == 1) {
             this.notifyFinish(this.players.get(0));

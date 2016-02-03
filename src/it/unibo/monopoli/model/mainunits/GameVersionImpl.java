@@ -83,12 +83,15 @@ public class GameVersionImpl implements GameVersion {
     public Player removePlayer(final Player player) {
         final int position = this.players.indexOf(player);
         this.iter = null;
-        if (position == 0) {
-            this.iter = this.players.listIterator(this.players.size() - 1);
+        if (position == this.players.size() - 1) {
+            this.players.remove(position);
+            this.iter = this.players.listIterator(0);
         } else {
-            this.iter = this.players.listIterator(position - 1);
+            this.players.remove(position);
+            this.iter = this.players.listIterator(position);
         }
-        return this.iter.next();
+        this.actualPlayer = this.iter.next();
+        return this.actualPlayer;
     }
 
 }

@@ -427,5 +427,9 @@ public class Index {
     public void prevPos(final int pos) {
         this.position = pos;
     }
+    
+    public East getEast() {
+        return this.eastP;
+    }
 
 }

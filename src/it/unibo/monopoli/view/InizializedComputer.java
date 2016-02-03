@@ -123,12 +123,13 @@ public class InizializedComputer {
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-                positionAndName = (0 + C.SPLITTOKEN + textNome.getText());
+                positionAndName = (textNome.getText());
                 InizializedPlayer.getMap().remove(positionAndName);
                 panel.setVisible(false);
                 playerP.remove(panel);
                 Go.addNumPlayers(-1);
                 playerP.revalidate();
+                System.out.println("Name RemoveC: " + positionAndName);
             }
 
         });
@@ -139,7 +140,7 @@ public class InizializedComputer {
             isUman = true;
         }
 
-        InizializedPlayer.getMap().put(Go.getNumPlayers() + C.SPLITTOKEN + textNome.getText(), isUman);
+        InizializedPlayer.getMap().put(textNome.getText(), isUman);
         InizializedPlayer.setSave(true);
         panel.setVisible(true);
         return panel;

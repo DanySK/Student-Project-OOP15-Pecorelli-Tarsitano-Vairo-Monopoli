@@ -129,6 +129,8 @@ public class PlayerGraphic extends JPanel {
         lblColc = new JLabel();
         lblColc.setOpaque(true);
         lblColc.setBackground(C.CL.get(list.get(i).getPawn().getID()));
+        System.out.println("Name: " + list.get(i).getName());
+        System.out.println("ID: " + list.get(i).getPawn().getID());
         lblColc.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 14));
         row1.add(lblColc);
 

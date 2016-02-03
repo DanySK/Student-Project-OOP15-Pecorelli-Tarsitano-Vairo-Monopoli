@@ -2,6 +2,7 @@ package it.unibo.monopoli.view.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ import it.unibo.monopoli.view.InPlay;
 import it.unibo.monopoli.view.InPlayImpl;
 import it.unibo.monopoli.view.Index;
 import it.unibo.monopoli.view.InizializedPlayer;
+
 /**
  * 
  * Inizialized controller and start play.
@@ -27,9 +29,10 @@ public class StartPlay implements ActionListener {
 
     private int computer;
     private EVersion version;
-/**
- * 
- */
+
+    /**
+     * 
+     */
     public StartPlay() {
         super();
     }
@@ -60,10 +63,17 @@ public class StartPlay implements ActionListener {
                 contr.addView(inPlay);
 
                 final Set<Entry<String, Boolean>> s = InizializedPlayer.getMap().entrySet();
-                s.forEach(g -> {
-                    final String[] values = g.getKey().split(C.SPLITTOKEN);
-                    contr.addPlayer(values[1], new ClassicPawn(Integer.parseInt(values[0])), g.getValue());
-                });
+                Iterator iter = s.iterator();
+                for (int x = 0; x < InizializedPlayer.getMap().size(); x++) {
+
+                    
+                    Entry<String, Boolean> f = (Entry<String, Boolean>) iter.next();
+                    String name = f.getKey();
+                    Boolean b = f.getValue();
+                    contr.addPlayer(name, new ClassicPawn(x), b);
+                    System.out.println("Contr: name: "+ name + "id: " + x + "isman: " + b);
+
+                }
                 switch (VersionSelected.getSelectedItem()) {
                 case "Classic":
                     version = EVersion.CLASSIC;

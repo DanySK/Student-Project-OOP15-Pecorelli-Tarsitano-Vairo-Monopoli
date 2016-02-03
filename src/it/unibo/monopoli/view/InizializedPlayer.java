@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -93,7 +96,7 @@ public class InizializedPlayer {
                     }
                     // alla mappa passo N?NOMEGIOCATORE, MI E' UTILE PER
                     // DECIDERE IL COLORE DELLE PEDINE
-                    positionAndName = (Go.getNumPlayers() - 1) + C.SPLITTOKEN + textNome.getText();
+                    positionAndName = (textNome.getText());
                     map.put(positionAndName, isUman);
                     InizializedPlayer.setSave(true);
                     save.setVisible(false);
@@ -101,6 +104,7 @@ public class InizializedPlayer {
                     textNome.setEditable(false);
                     rdbtnComputer.setEnabled(false);
                     rdbtnUman.setEnabled(false);
+                    System.out.println("Name Save: " + positionAndName);
 
                 }
 
@@ -111,12 +115,14 @@ public class InizializedPlayer {
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-                positionAndName = (0 + C.SPLITTOKEN + textNome.getText());
+                //TODO
+                positionAndName = textNome.getText();
                 InizializedPlayer.getMap().remove(positionAndName);
                 panel.setVisible(false);
                 playerP.remove(panel);
                 Go.addNumPlayers(-1);
                 playerP.revalidate();
+                System.out.println("Name RemoveP: " + positionAndName);
             }
 
         });

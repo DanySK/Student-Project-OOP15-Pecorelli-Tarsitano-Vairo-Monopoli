@@ -164,6 +164,9 @@ public class ControllerImpl implements Controller {
             }
 
         }
+        if (this.actualPlayer.getPawn().getActualPos() != this.actualPosition) {
+            this.actualPosition = this.actualPlayer.getPawn().getActualPos();
+        }
         return this.actualPosition;
     }
 

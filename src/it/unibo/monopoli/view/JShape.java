@@ -30,8 +30,9 @@ public class JShape extends JPanel {
      * builder.
      * 
      * @param color
+     *            Color
      */
-    public JShape(Color color) {
+    public JShape(final Color color) {
         this(Shapes.ROMBO, color);
     }
 
@@ -39,9 +40,11 @@ public class JShape extends JPanel {
      * builder.
      * 
      * @param shape
+     *            Shapes
      * @param color
+     *            Color
      */
-    public JShape(final Shapes shape, Color color) {
+    public JShape(final Shapes shape, final Color color) {
         this.shape = shape;
         this.shapeFillColor = color;
         this.setPreferredSize(new Dimension(C.JSHAPE_PREFERRED_SIZE, C.JSHAPE_PREFERRED_SIZE));
@@ -105,9 +108,10 @@ public class JShape extends JPanel {
      * 
      * method to define the fill color.
      * 
-     * @param Color
+     * @param shapeFillColor
+     *            Color
      */
-    public void setShapeFillColor(Color shapeFillColor) {
+    public void setShapeFillColor(final Color shapeFillColor) {
         this.shapeFillColor = shapeFillColor;
     }
 

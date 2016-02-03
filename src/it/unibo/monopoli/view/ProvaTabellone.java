@@ -41,10 +41,13 @@ public class ProvaTabellone {
      * builder.
      * 
      * @param col
+     * int
      * @param row
+     * int
      * @param controller
+     * Controller
      */
-    public ProvaTabellone(final int col, int row, final Controller controller) {
+    public ProvaTabellone(final int col, final int row, final Controller controller) {
         BorderFactory.createLineBorder(Color.BLACK, 2);
         this.col = col;
         this.row = row;

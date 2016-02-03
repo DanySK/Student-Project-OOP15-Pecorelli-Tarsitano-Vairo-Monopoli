@@ -41,7 +41,6 @@ public class PlayerGraphic extends JPanel {
     private int value;
     private Controller controller;
     private List<Player> list;
-    private int i;
     private JLabel lblColc;
     private JLabel lblColBank;
     private JLabel l;
@@ -94,8 +93,7 @@ public class PlayerGraphic extends JPanel {
      */
     public JPanel build(final List<Box> boxes, final List<Player> list, final int i) {
         this.list = list;
-        this.i = i;
-        this.pos =i;
+        this.pos = i;
 
         this.name = list.get(i).getName();
         this.value = list.get(i).getMoney();
@@ -184,11 +182,17 @@ public class PlayerGraphic extends JPanel {
         return player;
 
     }
-    
-    public void setPosDeath(final int pos){
-        if(this.pos > pos){
+
+    /**
+     * Set pos looser.
+     * 
+     * @param pos
+     *            int
+     */
+    public void setPosDeath(final int pos) {
+        if (this.pos > pos) {
             this.pos--;
-            }
+        }
     }
 
     /**

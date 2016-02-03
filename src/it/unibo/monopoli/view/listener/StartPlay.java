@@ -66,12 +66,11 @@ public class StartPlay implements ActionListener {
                 Iterator iter = s.iterator();
                 for (int x = 0; x < InizializedPlayer.getMap().size(); x++) {
 
-                    
                     Entry<String, Boolean> f = (Entry<String, Boolean>) iter.next();
                     String name = f.getKey();
                     Boolean b = f.getValue();
                     contr.addPlayer(name, new ClassicPawn(x), b);
-                    System.out.println("Contr: name: "+ name + "id: " + x + "isman: " + b);
+                    System.out.println("Contr: name: " + name + "id: " + x + "isman: " + b);
 
                 }
                 switch (VersionSelected.getSelectedItem()) {

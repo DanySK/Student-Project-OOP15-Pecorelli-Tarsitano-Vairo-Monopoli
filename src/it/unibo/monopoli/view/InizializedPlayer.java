@@ -115,7 +115,6 @@ public class InizializedPlayer {
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-                //TODO
                 positionAndName = textNome.getText();
                 InizializedPlayer.getMap().remove(positionAndName);
                 panel.setVisible(false);

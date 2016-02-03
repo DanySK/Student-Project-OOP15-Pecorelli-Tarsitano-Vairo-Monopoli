@@ -18,9 +18,6 @@ public class InPlayImpl implements InPlay {
 
     private final List<Actions> buttons;
     private final Index i;
-    Controller controller;
-    private Object positionAndName;
-
     /**
      * link to controller.
      * 
@@ -75,7 +72,10 @@ public class InPlayImpl implements InPlay {
     public void beginComputer(final int i) {
         this.i.prevPos(i);
     }
-
+/**
+ * @param p
+ * Player
+ */
     public void finish(final Player p) {
         new Dialog(new JFrame(), "Winner", "The winner is " + p.getName());
         System.exit(0);

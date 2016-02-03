@@ -20,6 +20,9 @@ public interface InPlay {
     void setButton(List<Actions> name);
 
     /**
+     * Game Over
+     * 
+     * @pos pos int
      * 
      * @param player
      *            Player
@@ -43,23 +46,31 @@ public interface InPlay {
     /**
      * 
      * @param player
-     * Player
+     *            Player
      */
     void notifyEndTurnComputer(Player player);
 
     /**
      * 
      * returns a list of buttons to activate.
+     * 
      * @return List<Action>
      */
     List<Actions> getButtons();
 
     /**
      * 
+     * 
      * @param i
+     *            int
      */
     void beginComputer(int i);
-    
+
+    /**
+     * 
+     * @param player
+     *            Player
+     */
     void finish(final Player player);
 
 }

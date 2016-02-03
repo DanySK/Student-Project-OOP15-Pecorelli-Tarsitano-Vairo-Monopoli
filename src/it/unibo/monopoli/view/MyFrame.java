@@ -15,8 +15,11 @@ public class MyFrame extends JFrame {
      * builder.
      * 
      * @param title
+     *            String
      * @param lm
+     *            LayoutManager
      * @param dim
+     *            Dimension
      */
     public MyFrame(final String title, final LayoutManager lm, final Dimension dim) {
         super(title);
@@ -32,7 +35,10 @@ public class MyFrame extends JFrame {
             this.setSize(dim);
         }
     }
-
+/**
+ * 
+ * @return content
+ */
     public JPanel getMainPanel() {
         return content;
     }

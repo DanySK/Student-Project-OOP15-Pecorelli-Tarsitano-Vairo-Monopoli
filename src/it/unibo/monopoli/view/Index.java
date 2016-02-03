@@ -38,12 +38,10 @@ public class Index {
     private final List<JButton> buttonList;
     private East eastP;
     private int position = 0;
-    HashMap<Integer, IBoxGraphic> tessere;
+    private HashMap<Integer, IBoxGraphic> tessere;
     private InPlay inPlay;
-    
-    String winners;
-    String winners2;
-    String temp;
+    private String winners2;
+    private String temp;
 
     /**
      * Builder.
@@ -55,7 +53,14 @@ public class Index {
 
     }
 
-    public void addInPlay(InPlay in) {
+    /**
+     * add InPlay.
+     * 
+     * @param in
+     *            InPlay
+     * 
+     */
+    public void addInPlay(final InPlay in) {
         this.inPlay = in;
     }
 
@@ -117,20 +122,17 @@ public class Index {
             @Override
             public void actionPerformed(final ActionEvent e) {
 
-               Player p = controller.getActualPlayer();
-               System.out.println(p.getName());
+                final Player p = controller.getActualPlayer();
                 tessere.get(controller.getActualPlayer().getPawn().getActualPos()).removePawn(p);
 
-                int prePos = controller.getActualPlayer().getPawn().getActualPos();
-                System.out.println("Pawn: " + controller.getActualPlayer().getPawn().getID());
-                int pos = controller.toRollDices();
-                System.out.println(pos);
+                final int prePos = controller.getActualPlayer().getPawn().getActualPos();
+                final int pos = controller.toRollDices();
                 int passi = pos - prePos;
                 if (isPassedFromStartBox()) {
                     passi = passFromStart();
                 }
                 new Dialog(new JFrame(), "Roll Dieces", "Number: " + (passi));
-               tessere.get(pos).addPawn(controller.getActualPlayer());
+                tessere.get(pos).addPawn(controller.getActualPlayer());
                 final String contratto = controller.getActualBox().getName();
                 new Dialog(new JFrame(), "Actual", "You are in box " + contratto);
                 if (controller.getActualBox() instanceof Ownership
@@ -148,7 +150,7 @@ public class Index {
                         if (bu.getText().equals(but.getText())) {
                             but.setEnabled(true);
                             if (but.getText().equals(Actions.BUY.getText())) {
-                                int cost = ((Ownership) controller.getActualBox()).getContract().getCost();
+                                final int cost = ((Ownership) controller.getActualBox()).getContract().getCost();
                                 new Dialog(new JFrame(), "", "Il contratto " + contratto + " ha un costo di " + cost);
                             }
                         }
@@ -186,10 +188,10 @@ public class Index {
             public void actionPerformed(final ActionEvent e) {
                 controller.buyOwnership();
 
-                String nome = controller.getActualPlayer().getName();
-                String contratto = controller.getActualBox().getName();
-                int pos = controller.getActualBox().getID();
-                int cost = ((Ownership) controller.getActualBox()).getContract().getCost();
+                final String nome = controller.getActualPlayer().getName();
+                final String contratto = controller.getActualBox().getName();
+                final int pos = controller.getActualBox().getID();
+                final int cost = ((Ownership) controller.getActualBox()).getContract().getCost();
                 new Dialog(new JFrame(), "Buy",
                         "" + nome + " hai comprato " + contratto + " in posizione " + pos + " al costo di: " + cost);
                 updateInfoPlayer();
@@ -211,10 +213,10 @@ public class Index {
             public void actionPerformed(final ActionEvent e) {
                 controller.sellOwnership();
 
-                String nome = controller.getActualPlayer().getName();
-                String contratto = controller.getActualBox().getName();
-                int pos = controller.getActualBox().getID();
-                int cost = ((Ownership) controller.getActualBox()).getContract().getCost();
+                final String nome = controller.getActualPlayer().getName();
+                final String contratto = controller.getActualBox().getName();
+                final int pos = controller.getActualBox().getID();
+                final int cost = ((Ownership) controller.getActualBox()).getContract().getCost();
                 new Dialog(new JFrame(), "Sell",
                         "" + nome + " hai venduto " + contratto + " in posizione " + pos + " al costo di: " + cost);
                 updateInfoPlayer();
@@ -237,7 +239,7 @@ public class Index {
             @Override
             public void actionPerformed(final ActionEvent e) {
 
-                int pos = controller.getActualPlayer().getPawn().getActualPos();
+                final int pos = controller.getActualPlayer().getPawn().getActualPos();
                 ((LandGraphic) tessere.get(pos)).addHouse(controller.getActualPlayer());
 
                 controller.build();
@@ -259,7 +261,7 @@ public class Index {
 
             @Override
             public void actionPerformed(final ActionEvent e) {
-                int pos = controller.getActualPlayer().getPawn().getActualPos();
+                final int pos = controller.getActualPlayer().getPawn().getActualPos();
                 ((LandGraphic) tessere.get(pos)).removeHouse(controller.getActualPlayer());
 
                 controller.sellBuilding();
@@ -319,41 +321,31 @@ public class Index {
             public void actionPerformed(final ActionEvent e) {
                 Map<Player, Integer> winner;
                 MyFrame winnerF = new MyFrame("Winner", new BorderLayout(), new Dimension(300, 300));
-                winnerF.setLocation(300,300);
+                winnerF.setLocation(300, 300);
                 winner = controller.endGame();
-                
+
                 Set<Entry<Player, Integer>> setWinner = winner.entrySet();
-                
+
                 JPanel winnerEnd = new JPanel();
                 winnerF.add(winnerEnd);
 
-                
                 JLabel winnerL = new JLabel();
                 winnerEnd.add(winnerL);
 
-               
                 temp = "";
 
-                
-                
                 setWinner.forEach(w -> {
 
                     winners2 = " Name: " + w.getKey().getName() + ", Money: " + w.getValue() + ";\n";
 
                     temp += winners2;
                     winnerEnd.add(new JLabel(winners2), BorderLayout.CENTER);
-                    System.out.println("Winner: " + winners2);
-                    System.out.println("Name: " + w.getKey().getName());
-                    
-                    System.out.println("Size: " + winner.size());
-                    System.out.println("Set: " + setWinner.size());
-                });
 
-              
+                });
 
                 winnerF.setVisible(true);
                 buttonList.forEach(b -> b.setEnabled(false));
-                
+
             }
         });
 
@@ -410,24 +402,29 @@ public class Index {
      * the computer communicates its position and this method moves his pawn.
      * 
      * @param p
+     * Player
      */
     public void computerTurn(final Player p) {
         tessere.get(this.position).removePawn(p);
         position = p.getPawn().getActualPos();
         tessere.get(position).addPawn(p);
-        updateInfoPlayer(); 
+        updateInfoPlayer();
     }
 
     /**
      * This method saved the computer previous position.
      * 
      * @param pos
+     * position
      *
      */
     public void prevPos(final int pos) {
         this.position = pos;
     }
-    
+/**
+ * return panel Est.
+ * @return East
+ */
     public East getEast() {
         return this.eastP;
     }

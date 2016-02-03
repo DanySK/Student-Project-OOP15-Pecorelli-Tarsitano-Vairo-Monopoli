@@ -24,6 +24,7 @@ public class East extends JPanel {
      * class constructor East.
      * 
      * @param controller
+     *  Controller
      */
     public East(final Controller controller) {
 
@@ -35,7 +36,7 @@ public class East extends JPanel {
         playerBank.add(playerBank.buildBank(controller.getAllBoxes(), controller.getBank()), BorderLayout.CENTER);
         this.add(playerBank, BorderLayout.NORTH);
 
-        int j = InizializedPlayer.getMap().size();
+        final int j = InizializedPlayer.getMap().size();
 
         final JPanel panelPlayer = new JPanel();
         panelPlayer.setLayout(new GridLayout(j, 1));

@@ -51,8 +51,7 @@ public class InPlayImpl implements InPlay {
     @Override
     public void gameOver(final Player player) {
         new Dialog(new JFrame(), "Game over", "The player" + player.getName() + "has lost");
-        positionAndName = (controller.getActualPlayer().getPawn().getID() + C.SPLITTOKEN + controller.getActualPlayer().getName());
-        InizializedPlayer.getMap().remove(positionAndName);
+        InizializedPlayer.getMap().remove(player.getPawn().getID()+C.SPLITTOKEN+player.getName());
     }
 
     @Override
